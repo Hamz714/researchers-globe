@@ -1,0 +1,48 @@
+# Researcher's Globe. Run `make help`. Windows: use Git Bash or WSL, or the raw commands in README.
+PYTHON ?= python3.11
+VENV   := .venv
+PY     := $(VENV)/bin/python
+ifeq ($(OS),Windows_NT)
+PY     := $(VENV)/Scripts/python.exe
+endif
+
+.PHONY: help setup backend frontend test fetch-sample eval graph pipeline-query
+
+help:
+	@echo "setup         create .venv, install Python + frontend deps, copy .env.example"
+	@echo "backend       FastAPI on http://localhost:8000 (mock data unless USE_PIPELINE=1)"
+	@echo "frontend      Vite dev server on http://localhost:5173"
+	@echo "test          pytest + frontend type check"
+	@echo "fetch-sample  one cached GDELT call and one Wikipedia call"
+	@echo "eval          compute evaluation tables into eval/results.json"
+	@echo "graph         build the mock entity graph into data/graph/"
+
+setup:
+	$(PYTHON) -m venv $(VENV)
+	$(PY) -m pip install --upgrade pip
+	$(PY) -m pip install -r requirements.txt
+	cd frontend && npm ci
+	@test -f .env || cp .env.example .env
+
+backend:
+	$(PY) -m uvicorn backend.app:app --reload --port 8000
+
+frontend:
+	cd frontend && npm run dev
+
+test:
+	$(PY) -m pytest
+	cd frontend && npm run typecheck
+
+fetch-sample:
+	GLOBE_OFFLINE=0 $(PY) -m pipeline.fetch_gdelt
+	GLOBE_OFFLINE=0 $(PY) -m pipeline.fetch_wiki
+
+eval:
+	GLOBE_OFFLINE=1 $(PY) -m eval.metrics
+
+graph:
+	$(PY) -m pipeline.graph --mock
+
+pipeline-query:
+	GLOBE_OFFLINE=1 $(PY) -m reasoning.run_query

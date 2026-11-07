@@ -1,0 +1,73 @@
+{
+  "_comment": "Prepared queries (plan: Presets). 'criteria', 'channels' and 'touches' are used as the parser/channel fallback and for precomputing cached results. Presets 2-4 have TODO events: pick the real storm/strike on the day.",
+  "presets": [
+    {
+      "id": "hero_midterms",
+      "kind": "hero",
+      "label": "Iron ore mines exposed to the 2026 US midterms",
+      "query": "Which iron ore mines are exposed to the 2026 US midterms?",
+      "criteria": {
+        "asset_type": "iron_ore_mine",
+        "event": {"name": "2026 US midterm elections", "date": "2026-11-03", "terms": ["midterm", "midterms", "Congress"]},
+        "window": {"baseline_days": 60, "recent_days": 7},
+        "status": ["operating"],
+        "region": "global"
+      },
+      "channels": [
+        {"id": "tariffs", "reason": "A new Congress can change steel and Section 232 tariff policy."},
+        {"id": "infrastructure", "reason": "Infrastructure spending drives US steel and iron ore demand."},
+        {"id": "permits", "reason": "Federal mining permits depend on the administration and Congress."}
+      ],
+      "touches": {
+        "tariffs": [["country_US", 1.0], ["country_CN", 0.6]],
+        "infrastructure": [["country_US", 1.0]],
+        "permits": [["country_US", 1.0]]
+      }
+    },
+    {
+      "id": "weather_ports",
+      "kind": "weather",
+      "label": "Mines whose export ports face a storm warning",
+      "query": "Which iron ore mines export through ports under an active storm warning?",
+      "criteria": {
+        "asset_type": "iron_ore_mine",
+        "event": {"name": "TODO: name the active storm on the day", "date": "2026-11-07", "terms": ["cyclone", "storm", "port closure"]},
+        "window": {"baseline_days": 60, "recent_days": 7},
+        "status": ["operating"],
+        "region": "global"
+      },
+      "channels": [{"id": "weather", "reason": "Storms close export ports and halt shipments."}],
+      "touches": {"weather": [["TODO_port_id", 1.0]]}
+    },
+    {
+      "id": "labour_protest",
+      "kind": "labour",
+      "label": "Mines exposed to strikes and protests",
+      "query": "Which iron ore mines are exposed to labour strikes and protests?",
+      "criteria": {
+        "asset_type": "iron_ore_mine",
+        "event": {"name": "TODO: name the strike or protest on the day", "date": "2026-11-07", "terms": ["strike", "protest", "union"]},
+        "window": {"baseline_days": 60, "recent_days": 7},
+        "status": ["operating"],
+        "region": "global"
+      },
+      "channels": [{"id": "labour", "reason": "Strikes and blockades stop mines and railways."}],
+      "touches": {"labour": [["TODO_country_or_company_id", 1.0]]}
+    },
+    {
+      "id": "negative_control",
+      "kind": "negative_control",
+      "label": "Negative control: should stay dark",
+      "query": "Which iron ore mines are exposed to the Premier League title race?",
+      "criteria": {
+        "asset_type": "iron_ore_mine",
+        "event": {"name": "Premier League title race", "date": "2026-11-07", "terms": ["Premier League"]},
+        "window": {"baseline_days": 60, "recent_days": 7},
+        "status": ["operating"],
+        "region": "global"
+      },
+      "channels": [],
+      "touches": {}
+    }
+  ]
+}

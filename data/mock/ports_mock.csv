@@ -1,0 +1,14 @@
+port_id,name,country_iso2,lat,lon,commodity,source_url
+port_ponta_da_madeira,Ponta da Madeira,BR,-2.57,-44.37,iron_ore,MOCK
+port_tubarao,Tubarao,BR,-20.29,-40.24,iron_ore,MOCK
+port_acu,Acu,BR,-21.83,-41.00,iron_ore,MOCK
+port_hedland,Port Hedland,AU,-20.31,118.58,iron_ore,MOCK
+port_dampier,Dampier,AU,-20.66,116.71,iron_ore,MOCK
+port_narvik,Narvik,NO,68.43,17.43,iron_ore,MOCK
+port_lulea,Lulea,SE,65.58,22.15,iron_ore,MOCK
+port_saldanha,Saldanha Bay,ZA,-33.03,17.95,iron_ore,MOCK
+port_duluth,Duluth-Superior,US,46.78,-92.10,iron_ore,MOCK
+port_cartier,Port-Cartier,CA,50.03,-66.87,iron_ore,MOCK
+port_sept_iles,Sept-Iles,CA,50.20,-66.38,iron_ore,MOCK
+port_milne_inlet,Milne Inlet,CA,71.88,-80.90,iron_ore,MOCK
+port_visakhapatnam,Visakhapatnam,IN,17.69,83.29,iron_ore,MOCK

@@ -1,0 +1,74 @@
+{
+  "criteria": {
+    "asset_type": "iron_ore_mine",
+    "event": {"name": "2026 US midterm elections", "date": "2026-11-03", "terms": ["midterm", "midterms", "Congress"]},
+    "window": {"baseline_days": 60, "recent_days": 7},
+    "status": ["operating"],
+    "region": "global"
+  },
+  "channels": [
+    {"id": "tariffs", "reason": "MOCK: a new Congress can change steel and Section 232 tariff policy."},
+    {"id": "infrastructure", "reason": "MOCK: infrastructure spending bills drive US steel demand."},
+    {"id": "permits", "reason": "MOCK: mining permits on federal land depend on the administration and Congress."}
+  ],
+  "results": [
+    {
+      "id": "mine_014", "name": "Hibbing Taconite", "lat": 47.47, "lon": -92.97,
+      "tier": "high", "score": 0.81,
+      "components": {"exposure": 0.9, "news_z": 4.1, "tone_shift": -1.3, "attention_z": 2.2, "relevant_articles": 6},
+      "paths": [["mine_014", "country_US", "channel_tariffs"], ["mine_014", "company_cleveland_cliffs", "country_US", "channel_infrastructure"]],
+      "reason": "MOCK: located in the US, which the tariffs channel touches; owner Cleveland-Cliffs is US-listed. News volume is 4.1 robust deviations above its own normal, with 6 relevant articles.",
+      "evidence": [
+        {"title": "MOCK: Minnesota iron range watches new Congress on steel tariffs", "url": "https://example.com/mock/article-1", "date": "2026-11-05", "judge": "relevant", "confidence": 0.92},
+        {"title": "MOCK: Cleveland-Cliffs comments on midterm results", "url": "https://example.com/mock/article-2", "date": "2026-11-04", "judge": "relevant", "confidence": 0.88}
+      ]
+    },
+    {
+      "id": "mine_015", "name": "Minntac", "lat": 47.53, "lon": -92.57,
+      "tier": "high", "score": 0.68,
+      "components": {"exposure": 0.9, "news_z": 2.8, "tone_shift": -0.6, "attention_z": 0.0, "relevant_articles": 3},
+      "paths": [["mine_015", "country_US", "channel_tariffs"]],
+      "reason": "MOCK: located in the US; tariffs channel. News volume 2.8 robust deviations above normal, 3 relevant articles.",
+      "evidence": [
+        {"title": "MOCK: Steel tariffs back on the agenda after midterms", "url": "https://example.com/mock/article-3", "date": "2026-11-05", "judge": "relevant", "confidence": 0.81}
+      ]
+    },
+    {
+      "id": "mine_017", "name": "Carol Lake", "lat": 52.95, "lon": -66.92,
+      "tier": "medium", "score": 0.44,
+      "components": {"exposure": 0.55, "news_z": 1.9, "tone_shift": 0.0, "attention_z": 0.4, "relevant_articles": 1},
+      "paths": [["mine_017", "port_sept_iles", "country_CA", "country_US", "channel_tariffs"]],
+      "reason": "MOCK: exports via Sept-Iles; Canada sends part of its iron ore to the US, which the tariffs channel touches.",
+      "evidence": [
+        {"title": "MOCK: Canadian ore shippers eye US trade policy", "url": "https://example.com/mock/article-4", "date": "2026-11-06", "judge": "relevant", "confidence": 0.7}
+      ]
+    },
+    {
+      "id": "mine_001", "name": "Carajas Serra Norte", "lat": -6.07, "lon": -50.17,
+      "tier": "medium", "score": 0.37,
+      "components": {"exposure": 0.48, "news_z": 1.2, "tone_shift": -0.2, "attention_z": 0.9, "relevant_articles": 2},
+      "paths": [["mine_001", "port_ponta_da_madeira", "country_BR", "country_CN", "channel_tariffs"]],
+      "reason": "MOCK: exports via Ponta da Madeira; Brazil sends most of its ore to China, which US tariff policy touches.",
+      "evidence": [
+        {"title": "MOCK: Vale shares move as US-China tariff talk returns", "url": "https://example.com/mock/article-5", "date": "2026-11-05", "judge": "relevant", "confidence": 0.66}
+      ]
+    },
+    {
+      "id": "mine_005", "name": "Mount Whaleback", "lat": -23.36, "lon": 119.73,
+      "tier": "low", "score": 0.2,
+      "components": {"exposure": 0.48, "news_z": 0.3, "tone_shift": 0.0, "attention_z": 0.0, "relevant_articles": 0},
+      "paths": [["mine_005", "port_hedland", "country_AU", "country_CN", "channel_tariffs"]],
+      "reason": "MOCK: exposed through Australia's exports to China, but no unusual news or attention.",
+      "evidence": []
+    },
+    {
+      "id": "mine_012", "name": "Sishen", "lat": -27.78, "lon": 23.00,
+      "tier": "low", "score": 0.16,
+      "components": {"exposure": 0.36, "news_z": 0.0, "tone_shift": 0.0, "attention_z": 0.0, "relevant_articles": 0},
+      "paths": [["mine_012", "port_saldanha", "country_ZA", "country_CN", "channel_tariffs"]],
+      "reason": "MOCK: exposed through South Africa's exports to China; no current evidence.",
+      "evidence": []
+    }
+  ],
+  "dark_count": 14
+}

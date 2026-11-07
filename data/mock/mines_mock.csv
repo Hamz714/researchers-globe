@@ -1,0 +1,21 @@
+id,name,lat,lon,country_iso2,status,capacity_mtpa,owner_id,owner_name,owner_share,owner_listed_iso2,export_port_id,wiki_title,search_terms
+mine_001,Carajas Serra Norte,-6.07,-50.17,BR,operating,,company_vale,Vale,1.0,BR,port_ponta_da_madeira,,Carajas|Serra Norte
+mine_002,S11D,-6.40,-50.35,BR,operating,,company_vale,Vale,1.0,BR,port_ponta_da_madeira,,S11D|Serra Sul
+mine_003,Brucutu,-19.88,-43.40,BR,operating,,company_vale,Vale,1.0,BR,port_tubarao,,Brucutu
+mine_004,Minas-Rio,-18.95,-43.40,BR,operating,,company_anglo_american,Anglo American,1.0,GB,port_acu,,Minas-Rio
+mine_005,Mount Whaleback,-23.36,119.73,AU,operating,,company_bhp,BHP,0.85,AU,port_hedland,,Mount Whaleback|Newman
+mine_006,Yandi,-22.75,119.10,AU,operating,,company_bhp,BHP,0.85,AU,port_hedland,,Yandi|Yandicoogina
+mine_007,Tom Price,-22.69,117.79,AU,operating,,company_rio_tinto,Rio Tinto,1.0,GB,port_dampier,,Tom Price
+mine_008,Hope Downs,-23.10,119.55,AU,operating,,company_rio_tinto,Rio Tinto,0.5,GB,port_dampier,,Hope Downs
+mine_009,Cloudbreak,-22.30,119.40,AU,operating,,company_fortescue,Fortescue,1.0,AU,port_hedland,,Cloudbreak
+mine_010,Kiruna,67.85,20.20,SE,operating,,company_lkab,LKAB,1.0,SE,port_narvik,,Kiruna
+mine_011,Malmberget,67.18,20.67,SE,operating,,company_lkab,LKAB,1.0,SE,port_lulea,,Malmberget
+mine_012,Sishen,-27.78,23.00,ZA,operating,,company_kumba,Kumba Iron Ore,1.0,ZA,port_saldanha,,Sishen
+mine_013,Kolomela,-28.36,22.98,ZA,operating,,company_kumba,Kumba Iron Ore,1.0,ZA,port_saldanha,,Kolomela
+mine_014,Hibbing Taconite,47.47,-92.97,US,operating,,company_cleveland_cliffs,Cleveland-Cliffs,1.0,US,port_duluth,,Hibbing Taconite|Hibbing
+mine_015,Minntac,47.53,-92.57,US,operating,,company_us_steel,U.S. Steel,1.0,US,port_duluth,,Minntac|Mountain Iron
+mine_016,Mont-Wright,52.76,-67.33,CA,operating,,company_arcelormittal,ArcelorMittal,0.85,LU,port_cartier,,Mont-Wright
+mine_017,Carol Lake,52.95,-66.92,CA,operating,,company_rio_tinto,Rio Tinto,0.59,GB,port_sept_iles,,Carol Lake|Labrador City
+mine_018,Mary River,71.30,-79.30,CA,operating,,company_baffinland,Baffinland,1.0,CA,port_milne_inlet,,Mary River|Baffinland
+mine_019,Lebedinsky,51.27,37.67,RU,operating,,company_metalloinvest,Metalloinvest,1.0,RU,,,Lebedinsky
+mine_020,Bailadila,18.70,81.25,IN,operating,,company_nmdc,NMDC,1.0,IN,port_visakhapatnam,,Bailadila

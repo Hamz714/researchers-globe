@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Researcher's Globe</title>
+  </head>
+  <body>
+    <header id="top">
+      <div class="brand">Researcher's Globe</div>
+      <form id="ask">
+        <input id="question" type="text" autocomplete="off"
+               placeholder="Ask a question, e.g. which iron ore mines are exposed to the 2026 US midterms?" />
+        <button type="submit">Ask</button>
+      </form>
+      <div id="presets" class="chips"></div>
+      <nav class="tabs">
+        <button data-tab="globe" class="active">Globe</button>
+        <button data-tab="results">Results</button>
+      </nav>
+    </header>
+    <main>
+      <div id="map"></div>
+      <div id="legend"></div>
+      <div id="status"></div>
+      <aside id="panel" hidden></aside>
+      <section id="results" hidden></section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

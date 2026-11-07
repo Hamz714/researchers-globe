@@ -1,0 +1,138 @@
+"""run_query(text) -> result JSON (plan: Person B publishes this).
+
+Wires the six steps together. Steps 1, 2 and 5 call the decision model; 3, 4 and 6
+are plain code. Output is validated against backend.schemas.QueryResult before it
+is returned, so a contract break fails here, not in the browser.
+
+Offline (GLOBE_OFFLINE=1, the default here) step 4 only reads the cache, so with an
+empty cache every asset gets zero signals and no articles, i.e. exposure-only scores.
+"""
+from __future__ import annotations
+
+import os
+from datetime import date, timedelta
+
+from backend.schemas import QueryResult
+from pipeline.graph import Graph, default_graph
+from reasoning import exposure as exp
+from reasoning import scoring
+from reasoning.judge import judge_article
+from reasoning.parser import choose_channels, load_channels, parse_question
+
+TOP_K = 50
+MAX_ARTICLES = 20
+CONTROL_TERMS = ["copper"]  # placebo term (plan); TODO(Person A): pick a better control per query
+
+
+def _terms(node: dict) -> list[str]:
+    return [t for t in str(node.get("search_terms") or node["name"]).split("|") if t]
+
+
+def _path_words(graph: Graph, path: list[str]) -> str:
+    names = []
+    for nid in path:
+        try:
+            names.append(graph.node(nid)["name"])
+        except KeyError:
+            names.append(nid)
+    return " → ".join(names)
+
+
+def _asset_context(graph: Graph, asset_id: str) -> dict:
+    node = graph.node(asset_id)
+    e = graph.edges
+    owners = e[(e["src"] == asset_id) & (e["type"] == "OWNED_BY")]["dst"].tolist()
+    owner = graph.node(owners[0])["name"] if owners else None
+    country = graph.node(f"country_{node['country']}")["name"] if node.get("country") else None
+    return {"name": node["name"], "owner": owner, "country": country, "terms": _terms(node),
+            "wiki_title": node.get("wiki_title") or ""}
+
+
+def _gather(asset: dict, channel_terms: list[str], criteria: dict, end: date) -> tuple[dict, list[dict]]:
+    """Step 4: signals + recent articles for one asset. Imported lazily so tests stay offline."""
+    from pipeline import fetch_gdelt
+    from pipeline.signals import signals
+
+    asset_terms = asset["terms"] + [t for t in [asset["owner"]] if t]
+    win = criteria["window"]
+    sig = signals(asset["name"], {
+        "asset_terms": asset_terms, "channel_terms": channel_terms, "control_terms": CONTROL_TERMS,
+        "wiki_titles": [asset["wiki_title"]] if asset["wiki_title"] else [],
+        "baseline_days": win["baseline_days"], "recent_days": win["recent_days"], "end": end,
+    })
+    arts = fetch_gdelt.articles(asset_terms, channel_terms, end - timedelta(days=win["recent_days"]), end,
+                                max_records=MAX_ARTICLES)
+    return sig.to_dict(), arts
+
+
+def run_query(text: str, graph: Graph | None = None, end: date | None = None,
+              backends: list | None = None) -> dict:
+    os.environ.setdefault("GLOBE_OFFLINE", "1")
+    end = end or date.today()
+    library = load_channels()
+
+    # 1-2. parse and choose channels (decision model, validated)
+    criteria, preset = parse_question(text, backends=backends)
+    channels = choose_channels(text, criteria, preset, backends=backends)
+    chosen = [c["id"] for c in channels]
+
+    # 3. exposure (deterministic)
+    touches = (preset or {}).get("touches") or {c: library[c].get("default_touches", []) for c in chosen}
+    g = (graph or default_graph()).with_edges(exp.touches_edges(chosen, touches))
+    top, dark = exp.propagate(g, {c: library[c]["weight"] for c in chosen}, top_k=TOP_K)
+
+    channel_terms = sorted({t for c in chosen for t in library[c]["search_terms"]} | set(criteria["event"]["terms"]))
+    results = []
+    for ex in top:
+        node = g.node(ex.asset_id)
+        asset = _asset_context(g, ex.asset_id)
+
+        # 4. evidence (cached fetches)
+        sig, articles = _gather(asset, channel_terms, criteria, end)
+
+        # 5. judge each article against the channel on its strongest path
+        best_channel = library[ex.paths[0][-1].removeprefix("channel_")]
+        evidence = []
+        for a in articles[:MAX_ARTICLES]:
+            art = {"title": a.get("title", ""), "url": a.get("url", ""), "date": str(a.get("seendate", ""))[:10],
+                   "domain": a.get("domain", ""), "snippet": a.get("snippet", "")}
+            j = judge_article(art, asset, best_channel, criteria["event"], backends=backends)
+            evidence.append({"title": art["title"], "url": art["url"], "date": art["date"],
+                             "judge": j["choice"], "confidence": j["confidence"]})
+        relevant = [e for e in evidence if e["judge"] == "relevant"]
+
+        # 6. score, tier, explain
+        ev = scoring.evidence(sig["news_z"], sig["attention_z"], sig["tone_shift"], len(relevant))
+        sc = scoring.score(ex.exposure, ev)
+        t = scoring.tier(sc, len(relevant), ex.exposure)
+        if t == "dark":
+            dark += 1
+            continue
+        reason = (f"Exposed via {_path_words(g, ex.paths[0])}"
+                  + (f" (+{len(ex.paths) - 1} more paths)" if len(ex.paths) > 1 else "")
+                  + f". News volume z={sig['news_z']:.1f}, attention z={sig['attention_z']:.1f}, "
+                  f"{len(relevant)} relevant article(s)."
+                  + (" Control term spiked too, so the news spike was discounted." if sig["placebo_flag"] else ""))
+        # TODO(Person B): one-sentence grounded summary via the decision model, citing only `relevant`.
+        results.append({
+            "id": ex.asset_id, "name": node["name"], "lat": float(node["lat"]), "lon": float(node["lon"]),
+            "tier": t, "score": round(sc, 4),
+            "components": {"exposure": round(ex.exposure, 4), "news_z": round(sig["news_z"], 3),
+                           "tone_shift": round(sig["tone_shift"], 3), "attention_z": round(sig["attention_z"], 3),
+                           "relevant_articles": min(len(relevant), scoring.RELEVANT_CAP)},
+            "paths": ex.paths[:5],
+            "reason": reason,
+            "evidence": relevant,  # plan: only relevant articles count as evidence
+        })
+
+    results.sort(key=lambda r: -r["score"])
+    out = {"criteria": criteria, "channels": channels, "results": results, "dark_count": dark}
+    return QueryResult.model_validate(out).model_dump()
+
+
+if __name__ == "__main__":
+    import json
+    import sys
+
+    print(json.dumps(run_query(" ".join(sys.argv[1:]) or "Which iron ore mines are exposed to the 2026 US midterms?"),
+                     indent=2))

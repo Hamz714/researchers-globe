@@ -1,0 +1,9 @@
+exporter_iso2,importer_iso2,commodity,share,year,source_url
+BR,CN,iron_ore,0.6,,MOCK
+AU,CN,iron_ore,0.8,,MOCK
+ZA,CN,iron_ore,0.6,,MOCK
+CA,CN,iron_ore,0.3,,MOCK
+CA,US,iron_ore,0.2,,MOCK
+SE,DE,iron_ore,0.3,,MOCK
+IN,CN,iron_ore,0.7,,MOCK
+US,CA,iron_ore,0.3,,MOCK

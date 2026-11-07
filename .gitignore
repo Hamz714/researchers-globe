@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Secrets
+.env
+
+# Data and caches (raw downloads and API caches stay local)
+data/raw/*
+!data/raw/.gitkeep
+data/graph/
+cache/*
+!cache/.gitkeep
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

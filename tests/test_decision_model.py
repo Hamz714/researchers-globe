@@ -1,0 +1,69 @@
+import pytest
+
+from reasoning import decision_model as dm
+from reasoning.judge import keyword_judge
+from reasoning.parser import choose_channels, parse_question
+
+
+class Fake:
+    def __init__(self, name, reply, ok=True):
+        self.name, self.model, self.reply, self.ok, self.calls = name, "m", reply, ok, 0
+
+    def configured(self):
+        return True
+
+    def complete(self, system, user):
+        self.calls += 1
+        if not self.ok:
+            raise RuntimeError("down")
+        return self.reply
+
+
+@pytest.fixture(autouse=True)
+def tmp_cache(tmp_path, monkeypatch):
+    monkeypatch.setattr(dm, "CACHE_DIR", tmp_path)
+
+
+def test_judge_validates_and_caches():
+    b = Fake("x", '```json\n{"choice": "relevant", "confidence": 0.8}\n```')
+    out = dm.judge("q?", ["relevant", "not_relevant"], {"a": 1}, backends=[b])
+    assert out == {"choice": "relevant", "confidence": 0.8}
+    dm.judge("q?", ["relevant", "not_relevant"], {"a": 1}, backends=[b])
+    assert b.calls == 1  # second call served from cache
+
+
+def test_falls_through_bad_backend_to_next():
+    bad = Fake("bad", '{"choice": "maybe", "confidence": 2}')
+    down = Fake("down", "", ok=False)
+    good = Fake("good", '{"choice": "not_relevant", "confidence": 0.6}')
+    out = dm.judge("q?", ["relevant", "not_relevant"], {}, backends=[bad, down, good])
+    assert out["choice"] == "not_relevant"
+
+
+def test_code_fallback_when_all_fail():
+    out = dm.judge("q?", ["relevant"], {}, fallback=lambda: {"choice": "relevant", "confidence": 0.5},
+                   backends=[Fake("down", "", ok=False)])
+    assert out["choice"] == "relevant"
+
+
+def test_raises_without_fallback():
+    with pytest.raises(dm.DecisionModelUnavailable):
+        dm.judge("q?", ["relevant"], {}, backends=[])
+
+
+def test_parser_falls_back_to_nearest_preset():
+    criteria, preset = parse_question("iron ore mines exposed to the US midterms", backends=[])
+    assert preset["id"] == "hero_midterms" and criteria["event"]["date"] == "2026-11-03"
+
+
+def test_channel_choice_rejects_ids_outside_library():
+    b = Fake("x", '{"channels": [{"id": "aliens", "reason": "?"}]}')
+    crit, _ = parse_question("iron ore mines exposed to the US midterms", backends=[])
+    out = choose_channels("anything", crit, None, backends=[b])  # invalid -> preset fallback
+    assert all(c["id"] in {"tariffs", "infrastructure", "permits"} for c in out)
+
+
+def test_keyword_judge_needs_asset_and_channel_terms():
+    art = {"title": "Steel tariff fight hits Hibbing"}
+    assert keyword_judge(art, ["Hibbing"], ["tariff"])["choice"] == "relevant"
+    assert keyword_judge(art, ["Hibbing"], ["strike"])["choice"] == "not_relevant"

@@ -1,0 +1,6 @@
+pair_id,article_title,article_url,article_date,snippet,asset_id,asset_name,asset_owner,asset_country,asset_terms,channel_id,event_name,event_terms
+ex001,MOCK: Minnesota iron range watches new Congress on steel tariffs,https://example.com/mock/article-1,2026-11-05,,mine_014,Hibbing Taconite,Cleveland-Cliffs,United States,Hibbing Taconite|Hibbing,tariffs,2026 US midterm elections,midterm|midterms|Congress
+ex002,MOCK: Cleveland-Cliffs comments on midterm results,https://example.com/mock/article-2,2026-11-04,,mine_014,Hibbing Taconite,Cleveland-Cliffs,United States,Hibbing Taconite|Hibbing,tariffs,2026 US midterm elections,midterm|midterms|Congress
+ex003,MOCK: Vale reports quarterly output,https://example.com/mock/article-6,2026-11-02,,mine_001,Carajas Serra Norte,Vale,Brazil,Carajas|Serra Norte,tariffs,2026 US midterm elections,midterm|midterms|Congress
+ex004,MOCK: Hibbing high school football wins state title,https://example.com/mock/article-7,2026-11-03,,mine_014,Hibbing Taconite,Cleveland-Cliffs,United States,Hibbing Taconite|Hibbing,tariffs,2026 US midterm elections,midterm|midterms|Congress
+ex005,MOCK: Steel tariff debate returns after midterms; Minntac jobs in focus,https://example.com/mock/article-3,2026-11-05,,mine_015,Minntac,U.S. Steel,United States,Minntac|Mountain Iron,tariffs,2026 US midterm elections,midterm|midterms|Congress

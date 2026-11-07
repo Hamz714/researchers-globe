@@ -1,0 +1,14 @@
+iso2,name,lat,lon,source_url
+BR,Brazil,-10.0,-52.0,MOCK
+AU,Australia,-25.0,134.0,MOCK
+SE,Sweden,62.0,15.0,MOCK
+NO,Norway,62.0,10.0,MOCK
+ZA,South Africa,-29.0,24.0,MOCK
+US,United States,39.0,-98.0,MOCK
+CA,Canada,57.0,-100.0,MOCK
+RU,Russia,60.0,90.0,MOCK
+IN,India,22.0,79.0,MOCK
+CN,China,35.0,103.0,MOCK
+DE,Germany,51.0,10.0,MOCK
+GB,United Kingdom,54.0,-2.0,MOCK
+LU,Luxembourg,49.8,6.1,MOCK
