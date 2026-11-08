@@ -53,9 +53,19 @@ def get_raw(url: str) -> str | None:
     if os.environ.get("GLOBE_OFFLINE", "0") == "1":
         MISSES[url] = str(p)
         return None
+    import time
+
     import requests
 
-    r = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=20)
+    for attempt in range(5):  # Wikimedia answers bursts from a shared IP with 429
+        r = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=20)
+        if r.status_code != 429:
+            break
+        try:
+            delay = float(r.headers.get("Retry-After", ""))
+        except ValueError:
+            delay = 2.0 * (attempt + 1)
+        time.sleep(min(delay, 30.0))
     body = "{}" if r.status_code == 404 else (r.raise_for_status() or r.text)
     store(url, body)
     return body

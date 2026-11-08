@@ -137,7 +137,7 @@ def _wiki_measure(kind: str, items: list[dict], end: date) -> dict[str, dict]:
                        "last_day": s.index.max().date().isoformat(), "series": s}
 
     # pageviews: REST API, a few in parallel; edits: the Action API asks for serial requests
-    workers = 4 if kind == "views" else 1
+    workers = 2 if kind == "views" else 1
     with ThreadPoolExecutor(max_workers=workers) as ex:
         return {t: m for t, m in ex.map(one, titles) if m is not None}
 
