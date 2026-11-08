@@ -62,7 +62,8 @@ def get_raw(url: str) -> str | None:
 
 
 def pageviews(title: str, start: date, end: date, project: str = "en.wikipedia") -> pd.Series:
-    """Daily user pageviews for one article, indexed by date (missing days filled with 0)."""
+    """Daily user pageviews for one article, indexed by date, up to the last published day
+    (days the API omits inside that range are filled with 0)."""
     body = get_raw(build_url(title, start, end, project))
     try:
         items = json.loads(body).get("items", []) if body else []
@@ -70,8 +71,11 @@ def pageviews(title: str, start: date, end: date, project: str = "en.wikipedia")
         items = []
     s = pd.Series([float(i["views"]) for i in items],
                   index=pd.to_datetime([i["timestamp"][:8] for i in items], format="%Y%m%d"), name=title, dtype=float)
-    if len(s):  # the API omits zero-view days: fill them so weekday logic stays aligned
-        s = s.reindex(pd.date_range(pd.Timestamp(start), pd.Timestamp(end), freq="D"), fill_value=0.0)
+    if len(s):
+        # The API omits zero-view days: fill them so weekday logic stays aligned. Fill only up to
+        # the last day the API returned: pageviews are published with a ~1-2 day lag, and padding
+        # the newest (not yet published) days with zeros would fake a drop in the recent window.
+        s = s.reindex(pd.date_range(pd.Timestamp(start), s.index.max(), freq="D"), fill_value=0.0)
     return s
 
 
