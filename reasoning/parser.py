@@ -110,7 +110,12 @@ def choose_touches(text: str, criteria: dict, channel_ids: list[str], graph, end
             prov[cid] = {"source": "gdelt_titles", "articles": n_articles,
                          "named": {nid: c for nid, _, c in measured}}
             continue
-        allowed = {nid: names[nid] for nid, t in types.items() if t in ch["touches"] and t == "country"}
+        # Candidates of every node type this channel may touch: all countries and ports, and only
+        # the curated (listed) companies, so the model is not asked about hundreds of obscure owners.
+        e = graph.edges
+        listed = set(e.loc[e["type"] == "LISTED_IN", "src"])
+        allowed = {nid: f"{names[nid]} ({t})" for nid, t in types.items()
+                   if t in ch["touches"] and t in ("country", "port", "company") and (t != "company" or nid in listed)}
         fb = (preset or {}).get("fallback_touches", {}).get(cid) or ch.get("default_touches", [])
         picked = decision_model.select(
             f"Through '{ch['name']}', which of these would this event act on most directly?",

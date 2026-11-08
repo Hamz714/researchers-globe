@@ -405,6 +405,13 @@ document.querySelectorAll<HTMLButtonElement>(".tabs button").forEach((b) =>
 
 // TODO(Person C): live layers toggle (ships, earthquakes, weather). Atmosphere only, never scoring.
 
+// The header grows when preset chips wrap; keep the status line and panels just below it.
+const syncTop = () =>
+  document.documentElement.style.setProperty("--top-h", `${Math.ceil($("#top").getBoundingClientRect().bottom)}px`);
+new ResizeObserver(syncTop).observe($("#top"));
+window.addEventListener("resize", syncTop);
+syncTop();
+
 async function init() {
   try {
     void assetsFor("mine");
@@ -415,8 +422,7 @@ async function init() {
     $("#presets").querySelectorAll<HTMLButtonElement>("button").forEach((b) =>
       b.addEventListener("click", () => void ask(b.dataset.q!)),
     );
-    const hero = presets.find((p) => p.kind === "hero");
-    if (hero) await ask(hero.query);
+    // No query runs on load: presets are suggestions, any question can be typed.
   } catch (err) {
     status(`Backend not reachable (${(err as Error).message}). Is \`make backend\` running?`, true);
   }

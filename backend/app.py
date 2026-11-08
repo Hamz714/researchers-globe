@@ -2,7 +2,7 @@
 
 Run:  uvicorn backend.app:app --reload --port 8000   (or `make backend`)
 
-Mode is chosen by USE_PIPELINE in .env:
+Mode is chosen by USE_MOCK in .env (default: real pipeline):
   0 (default) -> every endpoint returns mock data in the contract shape, so the
                  frontend works from minute one;
   1           -> POST /query calls reasoning.run_query.run_query (Person B).
@@ -55,7 +55,8 @@ _recent: OrderedDict[str, dict] = OrderedDict()
 
 
 def use_pipeline() -> bool:
-    return os.environ.get("USE_PIPELINE", "0") == "1"
+    # Real pipeline unless USE_MOCK=1. (The old USE_PIPELINE=0 from early .env files is ignored on purpose.)
+    return os.environ.get("USE_MOCK", "0") != "1"
 
 
 def _presets() -> list[dict]:

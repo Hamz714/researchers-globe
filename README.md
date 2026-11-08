@@ -39,8 +39,10 @@ make backend    # terminal 1: FastAPI on http://localhost:8000 (docs at /docs)
 make frontend   # terminal 2: open http://localhost:5173
 ```
 
-The backend serves **mock data** until you set `USE_PIPELINE=1` in `.env`; then `POST /query`
-runs `reasoning.run_query.run_query`. Set `GLOBE_OFFLINE=1` to read only from the cache, and use it on stage.
+The backend runs the **real pipeline** for any question (set `USE_MOCK=1` only for frontend work
+without data). GDELT's DOC API is **cache-only at query time** (`GDELT_LIVE=0`): it rate-limits shared IPs
+and had outages, so live questions never wait on it. Wikipedia and Open-Meteo are fetched live when a
+question needs them (and cached); `GLOBE_OFFLINE=1` makes everything cache-only, for the stage.
 
 Other targets: `make test`, `make fetch-sample` (one cached GDELT + Wikipedia call),
 `make eval` (writes `eval/results.json`, served at `GET /eval`), `make graph` (rebuild the real graph), `make presets` (precompute preset results),

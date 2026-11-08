@@ -70,3 +70,18 @@ def test_views_screen_lights_only_spikes(monkeypatch):
     out = sc.screen("Which US states have a spike in Wikipedia views?", end=date(2026, 11, 8))
     assert [r["name"] for r in out["results"]] == ["Georgia"] and out["results"][0]["tier"] == "high"
     assert out["results"][0]["evidence"][0]["url"].startswith("https://en.wikipedia.org/wiki/Georgia")
+
+
+def test_unspecified_weather_checks_every_condition():
+    from reasoning.screen import _weather_match, parse_screen
+
+    for q in ["Which iron ore mines have bad weather right now?", "What is the weather at iron ore mines?",
+              "Which US states have extreme weather?"]:
+        spec = parse_screen(q)
+        assert spec and spec["condition"] == "weather" and spec["weather"] == "any", q
+    assert parse_screen("Which iron ore mines are windy right now?")["weather"] == "wind"  # specific still wins
+    calm = {"temperature_2m": 12.0, "precipitation": 0.0, "snowfall": 0.0, "wind_speed_10m": 8.0, "weather_code": 2}
+    assert _weather_match(calm, "any", None) is None
+    stormy = {**calm, "wind_speed_10m": 70.0, "precipitation": 0.15}  # wind 2.3x its threshold, rain 1.5x
+    ratio, desc = _weather_match(stormy, "any", None)
+    assert desc.startswith("wind") and ratio > 2  # the strongest condition is reported

@@ -110,6 +110,10 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
     if criteria_override:
         criteria = _merge(criteria, criteria_override)
     channels = choose_channels(text, criteria, preset, backends=backends)
+    if preset is not None and " ".join(text.lower().split()) != " ".join(preset["query"].lower().split()):
+        # The model could not parse a free-text question: say so instead of silently answering another one.
+        note = f"[Could not interpret the question; showing the closest prepared query: '{preset['label']}'] "
+        channels = [{**c, "reason": note + c["reason"]} for c in channels]
     chosen = [c["id"] for c in channels]
 
     # 3. exposure (deterministic)

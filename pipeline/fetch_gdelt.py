@@ -73,7 +73,10 @@ def cache_dir() -> Path:
 
 
 def _offline() -> bool:
-    return os.environ.get("GLOBE_OFFLINE", "0") == "1"
+    """GDELT's DOC API is read from cache only unless GDELT_LIVE=1 (set by `make fetch-all` and
+    `make fetch-sample`). At query time it is too slow and rate-limited (429s from shared IPs),
+    and it had outages (GDELT_DOC_GAPS), so live questions never wait on it."""
+    return os.environ.get("GLOBE_OFFLINE", "0") == "1" or os.environ.get("GDELT_LIVE", "0") != "1"
 
 
 def _group(terms: list[str]) -> str:

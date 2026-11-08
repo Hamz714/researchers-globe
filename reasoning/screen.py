@@ -47,7 +47,10 @@ WEATHER_WORDS = [  # first match wins
     (r"thunder|storm", "storm"), (r"snow", "snow"), (r"rain|raining|wet|precipitation", "rain"),
     (r"wind|windy|gust", "wind"), (r"freez|frost|below zero|sub-?zero", "freezing"),
     (r"\bcold\b|chilly|colder|(?:below|under) -?\d", "cold"), (r"\bhot\b|heat|warmer|(?:above|over) -?\d", "hot"),
+    # No specific condition named ("bad weather", "extreme weather", "weather at mines"): check all of them.
+    (r"weather|conditions|extreme|severe|hazard|dangerous", "any"),
 ]
+ANY_KINDS = ["storm", "snow", "rain", "wind", "freezing", "hot"]  # "cold" (<= 5 °C) is too common to count as notable
 
 
 # ---------------------------------------------------------------- parsing (rule-based, deterministic)
@@ -143,6 +146,9 @@ def _wiki_measure(kind: str, items: list[dict], end: date) -> dict[str, dict]:
 
 
 def _weather_match(cur: dict, kind: str, threshold: float | None) -> tuple[float, str] | None:
+    if kind == "any":  # strongest of all notable conditions (each at its default threshold)
+        hits = [h for k in ANY_KINDS if (h := _weather_match(cur, k, None))]
+        return max(hits, key=lambda h: h[0]) if hits else None
     field, op, default, unit, label = WEATHER[kind]
     th = default if threshold is None else threshold
     v = cur.get(field)
@@ -200,10 +206,13 @@ def screen(text: str, spec: dict | None = None, end: date | None = None) -> dict
 
         kind, th = spec["weather"], spec.get("threshold")
         cur = fetch_weather.current([(it["id"], it["lat"], it["lon"]) for it in items])
-        label = WEATHER[kind][4]
+        if kind == "any":
+            label, measured_fields = "notable weather", ", ".join(f"{WEATHER[k][4]}" for k in ANY_KINDS)
+        else:
+            label, measured_fields = WEATHER[kind][4], WEATHER[kind][0]
         event = {"name": f"{label[:1].upper()}{label[1:]} right now", "date": end.isoformat(), "terms": [kind]}
         channel = {"id": "weather", "reason": f"Current weather at each {spec['thing']}'s coordinates from Open-Meteo "
-                                              f"({WEATHER[kind][0]}). Display only: weather now, not a forecast."}
+                                              f"({measured_fields}). Display only: weather now, not a forecast."}
         for it in items:
             c = cur.get(it["id"])
             hit = _weather_match(c, kind, th) if c else None

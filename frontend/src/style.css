@@ -74,13 +74,13 @@ main, #map { position: absolute; inset: 0; }
 .chip.hero.active { border-color: #ff4d4f; }
 
 #status {
-  position: absolute; left: 50%; top: 120px; transform: translateX(-50%); z-index: 6;
+  position: absolute; left: 50%; top: calc(var(--top-h, 120px) + 8px); transform: translateX(-50%); z-index: 12;
   padding: 8px 14px; border-radius: 8px; background: var(--panel); font-size: 13px;
 }
 #status.error { border: 1px solid #ff4d4f; }
 
 #panel {
-  position: absolute; right: 16px; top: 120px; bottom: 16px; width: min(380px, calc(100vw - 32px)); z-index: 8;
+  position: absolute; right: 16px; top: calc(var(--top-h, 120px) + 8px); bottom: 16px; width: min(380px, calc(100vw - 32px)); z-index: 8;
   overflow-y: auto; padding: 16px 18px; border-radius: 14px; background: var(--panel); border: 1px solid var(--line);
   font-size: 14px;
 }
@@ -128,7 +128,7 @@ svg.news .lbl.hot { fill: #ff8a7a; font-weight: 600; }
 #map .cesium-widget-credits { font-size: 10px; opacity: 0.75; }
 
 #results {
-  position: absolute; inset: 120px 16px 16px 16px; z-index: 9; overflow-y: auto;
+  position: absolute; inset: calc(var(--top-h, 120px) + 8px) 16px 16px 16px; z-index: 9; overflow-y: auto;
   padding: 20px 24px; border-radius: 14px; background: var(--panel); border: 1px solid var(--line);
 }
 #results table { border-collapse: collapse; min-width: 420px; margin-bottom: 12px; }
@@ -139,7 +139,6 @@ svg.news .lbl.hot { fill: #ff8a7a; font-weight: 600; }
 @media (max-width: 720px) {
   #top { grid-template-columns: 1fr; }
   .chips { grid-column: 1; }
-  #panel, #results { top: 200px; }
 }
 
 #credits {

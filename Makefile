@@ -10,7 +10,7 @@ endif
 
 help:
 	@echo "setup         create .venv, install Python + frontend deps, copy .env.example"
-	@echo "backend       FastAPI on http://localhost:8000 (mock data unless USE_PIPELINE=1)"
+	@echo "backend       FastAPI on http://localhost:8000 (real pipeline; USE_MOCK=1 for mock data)"
 	@echo "frontend      Vite dev server on http://localhost:5173"
 	@echo "test          pytest + frontend type check"
 	@echo "fetch-sample  one cached GDELT call and one Wikipedia call"
@@ -42,7 +42,7 @@ test:
 	cd frontend && npm run typecheck
 
 fetch-sample:
-	GLOBE_OFFLINE=0 $(PY) -m pipeline.fetch_gdelt
+	GDELT_LIVE=1 GLOBE_OFFLINE=0 $(PY) -m pipeline.fetch_gdelt
 	GLOBE_OFFLINE=0 $(PY) -m pipeline.fetch_wiki
 
 eval:
@@ -61,7 +61,7 @@ fetch-run:
 	$(PY) -m pipeline.browser_fetch run
 
 fetch-all:
-	$(PY) -m pipeline.browser_fetch all
+	GDELT_LIVE=1 $(PY) -m pipeline.browser_fetch all
 	GLOBE_OFFLINE=1 $(PY) -m reasoning.precompute
 
 fetch-ingest:

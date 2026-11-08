@@ -167,9 +167,9 @@ function el(html) {
 
 /**
  * Mount the HUD. `dataManager` (GEV's layer manager) is optional: without it the
- * Live layers toggle is hidden. `autoRun`: run the hero preset on load (demo mode).
+ * Live layers toggle is hidden. `autoRun` (off by default): run the first preset on load.
  */
-export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = true }) {
+export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = false }) {
   let current = null;
   let currentQuestion = '';
   let selectedId = null;
