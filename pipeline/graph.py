@@ -296,6 +296,8 @@ def load_gem(path: Path, statuses: tuple[str, ...] = ("operating",)) -> tuple[pd
     name_to_iso = {**dict(zip(countries["name"], countries["iso2"])), **COUNTRY_ALIASES}
     companies = pd.read_csv(CURATED_DIR / "companies.csv")
     curated = {r.name_in_gem: r for r in companies.itertuples()}
+    # exact Wikipedia titles for big mines, each checked against the live article (see the csv's `check`)
+    mine_wiki = pd.read_csv(CURATED_DIR / "mine_wiki.csv").set_index("mine_id")["wiki_title"].to_dict()
 
     mines, owners = [], []
     for r in df.itertuples(index=False):
@@ -324,7 +326,7 @@ def load_gem(path: Path, statuses: tuple[str, ...] = ("operating",)) -> tuple[pd
             "country_iso2": iso, "status": row[c["status"]],
             "capacity_mtpa": round(cap / 1000, 2) if pd.notna(cap) else None,
             "owner_id": None, "owner_name": None, "owner_share": None, "owner_listed_iso2": None,
-            "export_port_id": None, "wiki_title": "",
+            "export_port_id": None, "wiki_title": mine_wiki.get(f"mine_{row[c['gem_id']]}", ""),
             "search_terms": "|".join(mine_terms(row[c["name"]], owner_short + [short_name(p) for p, _ in parents])),
             "coord_accuracy": row[c["coord_accuracy"]],
         })

@@ -7,6 +7,10 @@ Every row needs a real `source_url`. No source, no row.
 - `trade.csv`: top destination countries per exporter. `share` is the fraction of the
   exporter's iron ore exports going to that importer (0–1); it becomes the EXPORTS_TO edge weight.
 - `countries.csv`: ISO2 code, name and an approximate centroid for drawing arcs.
+- `mine_wiki.csv`: exact English Wikipedia titles for 23 of the biggest operating mines (attention signal).
+  Each was found by Wikipedia geosearch near the GEM coordinates or by exact name, then checked
+  (exists, not a disambiguation page, intro or geotag matches the mine); `check` says how. Mines with
+  no article of their own (Gudai-Darri, Sino Iron, Carol Lake, all US taconite mines) stay blank.
 
 `data/mock/*_mock.csv` show the same columns filled with illustrative values.
 
