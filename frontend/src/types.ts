@@ -77,12 +77,20 @@ export interface PathNode {
   lon: number | null;
 }
 
+export interface PathEdge {
+  src: string;
+  dst: string;
+  type: string; // OWNED_BY | LOCATED_IN | EXPORTS_VIA | EXPORTS_TO | LISTED_IN | TOUCHES | UNKNOWN
+}
+
 export interface AssetDetail {
   id: string;
   name: string;
   path_nodes: PathNode[];
   paths: string[][];
+  path_edges: PathEdge[];
   series: { dates: string[]; news_volume: number[]; tone: number[]; pageviews: number[]; recent_days: number } | null;
+  series_note: string;
   evidence: Evidence[];
 }
 
