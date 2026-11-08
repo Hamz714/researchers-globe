@@ -15,7 +15,8 @@ Modes:
 Facts checked at the venue on 8 Nov 2026:
   * Rate limit: GDELT answers HTTP 429 with "Please limit requests to one every 5 seconds".
   * GDELT DOC only covers a rolling ~3 months (from the plan).
-Timelines are resampled to daily (sum for counts, mean for tone) whatever resolution comes back.
+Timelines are resampled to daily (sum for counts, mean for tone) whatever resolution comes back,
+and days inside a known DOC outage (GDELT_DOC_GAPS) are NaN.
 """
 from __future__ import annotations
 
@@ -27,11 +28,42 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from urllib.parse import urlencode
 
+import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 API = "https://api.gdeltproject.org/api/v2/doc/doc"
 MIN_INTERVAL_S = float(os.environ.get("GDELT_MIN_INTERVAL_S", "5.5"))
+
+# GDELT DOC outages: days the API returns ~nothing for every query. Measured on 8 Nov 2026 from a
+# hotspot: "iron ore" and four high-volume queries (e.g. attack/conflict ~15,000 articles/day)
+# drop to 0 (a few hundred at most) on 3-14 Oct and 26 Oct-5 Nov 2026; 6-7 Nov recover to only
+# ~25-37% of normal. parse_timeline() sets these days to NaN (missing), not 0, so signals skip
+# them instead of reading an outage as a drop in coverage. Override with GDELT_DOC_GAPS in .env:
+# comma-separated "YYYY-MM-DD:YYYY-MM-DD" ranges, inclusive ("" = none).
+DEFAULT_DOC_GAPS = "2026-10-03:2026-10-14,2026-10-26:2026-11-05"
+
+
+def doc_gaps() -> list[tuple[date, date]]:
+    """Configured outage ranges (inclusive), read at call time so a .env loaded later applies."""
+    raw = os.environ.get("GDELT_DOC_GAPS", DEFAULT_DOC_GAPS)
+    out = []
+    for part in raw.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        a, b = part.split(":")
+        out.append((date.fromisoformat(a.strip()), date.fromisoformat(b.strip())))
+    return out
+
+
+def in_gap(day: date) -> bool:
+    return any(a <= day <= b for a, b in doc_gaps())
+
+
+def gap_days_in(start: date, end: date) -> int:
+    """Outage days within [start, end]."""
+    return sum(in_gap(start + timedelta(days=i)) for i in range((end - start).days + 1))
 MISSES: dict[str, str] = {}  # url -> cache path, filled when offline
 _last_call = 0.0
 
@@ -127,6 +159,10 @@ def parse_timeline(body: str | None, mode: str) -> pd.Series:
     s = pd.Series([float(d["value"]) for d in data],
                   index=pd.to_datetime([d["date"] for d in data], format="%Y%m%dT%H%M%SZ"), name=mode)
     s = s.resample("D").sum() if mode == "timelinevolraw" else s.resample("D").mean()
+    gaps = [ts for ts in s.index if in_gap(ts.date())]
+    if gaps:
+        s = s.astype(float)
+        s.loc[gaps] = np.nan  # outage: missing, not zero
     return s.rename(mode)
 
 
