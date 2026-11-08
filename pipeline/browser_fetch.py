@@ -60,26 +60,63 @@ def ingest(path: Path) -> tuple[int, int]:
     return ok, bad
 
 
-def run(jobs_path: Path, out: Path) -> None:
-    """Plain-Python runner for a laptop with internet (same throttling as the browser runner)."""
+class RateLimited(RuntimeError):
+    """GDELT keeps answering 429 to this IP: stop instead of grinding through every job."""
+
+
+def _interval() -> float:
+    # read at call time so GDELT_MIN_INTERVAL_S in .env (loaded in main) takes effect
+    return max(5.5, float(os.environ.get("GDELT_MIN_INTERVAL_S", "6")))
+
+
+def run(jobs_path: Path, out: Path, give_up_after: int = 2) -> int:
+    """Plain-Python runner for a laptop with internet. Resumable: results are saved after every job.
+
+    One request per GDELT_MIN_INTERVAL_S (>= 5.5 s, GDELT's stated limit is one per 5 s); Wikipedia
+    jobs go first and are not throttled. Raises RateLimited after `give_up_after` consecutive jobs
+    that were still rate-limited after all retries. Returns the number of new results.
+    """
     import requests
 
-    jobs = json.loads(jobs_path.read_text())["jobs"]
+    from pipeline.fetch_wiki import USER_AGENT as WIKI_UA
+
+    jobs = sorted(json.loads(jobs_path.read_text())["jobs"], key=lambda j: j["kind"] != "wiki")
     results = json.loads(out.read_text()) if out.exists() else {}
-    for i, j in enumerate(jobs):
-        if j["url"] in results:
-            continue
-        for attempt in range(5):
-            r = requests.get(j["url"], timeout=30, headers={"User-Agent": "ResearchersGlobe/0.1 (HackTheBurgh 2026)"})
+    todo = [j for j in jobs if j["url"] not in results]
+    interval, new, failed_in_row, last = _interval(), 0, 0, 0.0
+    print(f"{len(todo)} to fetch, GDELT interval {interval:.1f}s (~{len(todo) * interval / 60:.0f} min)", file=sys.stderr)
+    for i, j in enumerate(todo, 1):
+        gdelt = j["kind"] == "gdelt"
+        ua = "ResearchersGlobe/0.1 (HackTheBurgh 2026)" if gdelt else WIKI_UA
+        status = "?"
+        for attempt in range(4):
+            if gdelt:
+                time.sleep(max(0.0, interval - (time.monotonic() - last)))
+                last = time.monotonic()
+            try:
+                r = requests.get(j["url"], timeout=40, headers={"User-Agent": ua})
+            except requests.RequestException as e:  # hotspot drop-outs: back off and retry
+                status = type(e).__name__
+                time.sleep(5 * (attempt + 1))
+                continue
             if r.status_code == 429 or "limit requests" in r.text[:200]:
-                time.sleep(10 * (attempt + 1))
+                status = "429"
+                time.sleep(interval * 2 * (attempt + 1))
+                continue
+            if r.status_code >= 500:
+                status = str(r.status_code)
+                time.sleep(5 * (attempt + 1))
                 continue
             results[j["url"]] = "{}" if r.status_code == 404 else r.text
+            status, new = "ok", new + 1
+            out.write_text(json.dumps(results))
             break
-        out.write_text(json.dumps(results))
-        print(f"{i + 1}/{len(jobs)}", file=sys.stderr)
-        if j["kind"] == "gdelt":
-            time.sleep(6)
+        failed_in_row = 0 if status == "ok" else failed_in_row + 1
+        print(f"{i}/{len(todo)} {j['kind']} {status}", file=sys.stderr)
+        if failed_in_row >= give_up_after:
+            raise RateLimited(f"{failed_in_row} jobs in a row failed ({status}); {new} new results saved. "
+                              "GDELT is limiting this IP: wait, or switch network, then re-run (resumable).")
+    return new
 
 
 # Paste into a browser console on https://api.gdeltproject.org/ (same origin, no CORS issues),
@@ -112,6 +149,9 @@ def main() -> None:
     r.add_argument("--jobs", type=Path, default=JOBS)
     r.add_argument("--out", type=Path, default=ROOT / "data" / "jobs" / "results.json")
     args = ap.parse_args()
+    from dotenv import load_dotenv
+
+    load_dotenv(ROOT / ".env")  # GDELT_MIN_INTERVAL_S, WIKI_USER_AGENT
     if args.cmd == "plan":
         jobs = plan(args.preset, date.fromisoformat(args.end))
         print(f"{len(jobs)} jobs ({sum(j['kind'] == 'gdelt' for j in jobs)} GDELT) -> {JOBS}")
@@ -127,11 +167,21 @@ def main() -> None:
             print(f"round {rnd}: {len(jobs)} missing", file=sys.stderr)
             if not jobs:
                 break
-            run(JOBS, out)
+            try:
+                new = run(JOBS, out)
+            except RateLimited as e:
+                ingest(out)  # keep what we got
+                sys.exit(f"stopped: {e}")
             ok, bad = ingest(out)
-            print(f"round {rnd}: stored {ok}, skipped {bad}", file=sys.stderr)
+            print(f"round {rnd}: {new} new, stored {ok}, skipped {bad}", file=sys.stderr)
+            if not new:
+                print("nothing new this round; stopping", file=sys.stderr)
+                break
     else:
-        run(args.jobs, args.out)
+        try:
+            run(args.jobs, args.out)
+        except RateLimited as e:
+            sys.exit(f"stopped: {e}")
 
 
 if __name__ == "__main__":
