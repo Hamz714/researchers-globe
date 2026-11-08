@@ -167,7 +167,11 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
             "evidence": relevant,  # plan: only relevant articles count as evidence
         })
 
-    results.sort(key=lambda r: -r["score"])
+    # score, then exposure, then design capacity (larger first), so equal scores are not in arbitrary order
+    cap = g.nodes.set_index("id")["capacity_mtpa"].to_dict() if "capacity_mtpa" in g.nodes.columns else {}
+    results.sort(key=lambda r: (-r["score"], -r["components"]["exposure"],
+                                -(cap.get(r["id"]) if cap.get(r["id"]) == cap.get(r["id"]) and cap.get(r["id"]) is not None
+                                  else -1.0), r["id"]))
     out = {"criteria": criteria, "channels": channels, "results": results, "dark_count": dark}
     return QueryResult.model_validate(out).model_dump()
 

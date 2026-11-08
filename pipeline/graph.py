@@ -27,7 +27,9 @@ MOCK_DIR = ROOT / "data" / "mock"
 CURATED_DIR = Path(__file__).resolve().parent / "curated"
 GRAPH_DIR = ROOT / "data" / "graph"
 
-NODE_COLUMNS = ["id", "type", "name", "lat", "lon", "country", "wiki_title", "search_terms"]
+NODE_COLUMNS = ["id", "type", "name", "lat", "lon", "country", "wiki_title", "search_terms", "capacity_mtpa"]
+# capacity_mtpa: mines only, GEM "Design capacity (ttpa)" / 1000; nullable (NaN when GEM has none).
+# Used to break ties between equally exposed mines. Older graph files without it load as NaN.
 EDGE_COLUMNS = ["src", "dst", "type", "weight", "source_url"]
 
 NODE_TYPES = {"mine", "company", "country", "port", "commodity", "event", "channel"}
@@ -108,7 +110,10 @@ class Graph:
 
     @classmethod
     def load(cls, in_dir: Path = GRAPH_DIR) -> "Graph":
-        g = cls(pd.read_parquet(in_dir / "nodes.parquet"), pd.read_parquet(in_dir / "edges.parquet"))
+        nodes = pd.read_parquet(in_dir / "nodes.parquet")
+        if "capacity_mtpa" not in nodes.columns:  # graph built before the column existed
+            nodes["capacity_mtpa"] = float("nan")
+        g = cls(nodes, pd.read_parquet(in_dir / "edges.parquet"))
         g.validate()
         return g
 
@@ -136,10 +141,13 @@ class Graph:
         return Graph(nodes, pd.concat([self.edges, extra_df], ignore_index=True))
 
 
-def _node(id_: str, type_: str, name: str, lat=None, lon=None, country=None, wiki_title="", search_terms="") -> dict:
+def _node(id_: str, type_: str, name: str, lat=None, lon=None, country=None, wiki_title="", search_terms="",
+          capacity_mtpa=None) -> dict:
+    cap = pd.to_numeric(capacity_mtpa, errors="coerce") if capacity_mtpa is not None else float("nan")
     return {
         "id": id_, "type": type_, "name": name, "lat": lat, "lon": lon,
         "country": country, "wiki_title": wiki_title or "", "search_terms": search_terms or "",
+        "capacity_mtpa": float(cap) if pd.notna(cap) else float("nan"),
     }
 
 
@@ -193,7 +201,8 @@ def build_graph(
         extra = [t for t in str(m.search_terms).split("|") if t] if isinstance(m.search_terms, str) else []
         terms = "|".join(extra or [m.name])
         nodes[m.id] = _node(m.id, "mine", m.name, m.lat, m.lon, m.country_iso2,
-                            m.wiki_title if isinstance(m.wiki_title, str) else "", terms)
+                            m.wiki_title if isinstance(m.wiki_title, str) else "", terms,
+                            capacity_mtpa=getattr(m, "capacity_mtpa", None))
         edges.append(_edge(m.id, ensure_country(m.country_iso2), "LOCATED_IN", 1.0, mines_source_url))
         if isinstance(m.owner_id, str) and m.owner_id:
             if m.owner_id not in nodes:
