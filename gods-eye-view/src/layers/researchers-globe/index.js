@@ -51,13 +51,11 @@ function pathInWords(path, names, edges) {
   return s + '.';
 }
 
-/** 60-day baseline + 7 recent days of GDELT article counts, recent days highlighted. */
-function newsChart(d) {
-  const s = d?.series;
-  if (!s || !s.news_volume.length) return `<p class="rg-muted">${esc(d?.series_note || 'No news series for this mine yet.')}</p>`;
-  const v = s.news_volume;
+/** Daily bars, the last `recent` days highlighted, baseline median dashed. */
+function barChart(values, dates, recent, { label, unit, hot }) {
+  const v = values;
   const n = v.length;
-  const recent = Math.min(s.recent_days, n);
+  recent = Math.min(recent, n);
   const W = 340, H = 92, top = 14, base = 70, max = Math.max(...v, 1); // prettier-ignore
   const bw = W / n;
   const y = (x) => base - (x / max) * (base - top);
@@ -67,20 +65,38 @@ function newsChart(d) {
   const bars = v
     .map(
       (x, i) =>
-        `<rect x="${(i * bw + 0.3).toFixed(1)}" y="${y(x).toFixed(1)}" width="${Math.max(bw - 0.6, 0.6).toFixed(1)}" height="${(base - y(x)).toFixed(1)}" class="${i >= n - recent ? 'r' : 'b'}"><title>${esc(s.dates[i] ?? '')}: ${x}</title></rect>`,
+        `<rect x="${(i * bw + 0.3).toFixed(1)}" y="${y(x).toFixed(1)}" width="${Math.max(bw - 0.6, 0.6).toFixed(1)}" height="${(base - y(x)).toFixed(1)}" class="${i >= n - recent ? 'r' : 'b'}"><title>${esc(dates[i] ?? '')}: ${x}</title></rect>`,
     )
     .join('');
   const rx = (n - recent) * bw;
-  return `<svg class="rg-news" viewBox="0 0 ${W} ${H}" role="img" aria-label="Daily news articles, last ${recent} days highlighted">
+  const fmtN = (x) => Math.round(x).toLocaleString('en-GB');
+  return `<svg class="rg-news ${hot ? 'is-' + hot : ''}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}, last ${recent} days highlighted">
       <rect x="${rx}" y="${top - 10}" width="${W - rx}" height="${base - top + 10}" class="recent-bg"/>
       ${bars}
       <line x1="0" x2="${rx}" y1="${y(median)}" y2="${y(median)}" class="median"/>
       <text x="${W}" y="${top - 2}" text-anchor="end" class="lbl hot">last ${recent} days</text>
-      <text x="0" y="${top - 2}" class="lbl">max ${max}/day</text>
-      <text x="0" y="${H - 6}" class="lbl">${esc(s.dates[0] ?? '')}</text>
-      <text x="${W}" y="${H - 6}" text-anchor="end" class="lbl">${esc(s.dates[n - 1] ?? '')}</text>
+      <text x="0" y="${top - 2}" class="lbl">max ${fmtN(max)}/day</text>
+      <text x="0" y="${H - 6}" class="lbl">${esc(dates[0] ?? '')}</text>
+      <text x="${W}" y="${H - 6}" text-anchor="end" class="lbl">${esc(dates[n - 1] ?? '')}</text>
     </svg>
-    <p class="rg-muted rg-small">Baseline median ${median}/day (dashed) · ${recentSum} articles in the last ${recent} days. ${esc(d?.series_note ?? '')}</p>`;
+    <p class="rg-muted rg-small">Baseline median ${fmtN(median)} ${unit}/day (dashed) · ${fmtN(recentSum)} ${unit} in the last ${recent} days.</p>`;
+}
+
+/** GDELT news volume, then Wikipedia attention (it lags 1-2 days, so it can end earlier). */
+function seriesCharts(d) {
+  const s = d?.series;
+  const news = s?.news_volume?.length
+    ? barChart(s.news_volume, s.dates, s.recent_days, { label: 'Daily news articles', unit: 'articles' })
+    : '<p class="rg-muted">No cached news series for this mine yet.</p>';
+  const attention = s?.pageviews?.length
+    ? barChart(s.pageviews, s.dates.slice(0, s.pageviews.length), s.recent_days, {
+        label: 'Daily Wikipedia views',
+        unit: 'views',
+        hot: 'attention',
+      })
+    : '<p class="rg-muted">No Wikipedia article for this mine or its owner.</p>';
+  return `<h4>News volume (GDELT)</h4>${news}<h4>Attention (Wikipedia views)</h4>${attention}
+    ${d?.series_note ? `<p class="rg-muted rg-small">${esc(d.series_note)}</p>` : ''}`;
 }
 
 /**
@@ -356,8 +372,8 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = tr
           : `<ul class="rg-paths">${shown.map((p) => `<li>${pathInWords(p, names, edges)}</li>`).join('')}</ul>
              ${more > 0 ? `<p class="rg-muted">+${more} more path${more > 1 ? 's' : ''} (combined with noisy-OR).</p>` : ''}`
       }
-      <h3>News around this mine</h3>
-      ${loading ? '<p class="rg-muted">Loading news series…</p>' : newsChart(d)}
+      <h3>News and attention around this mine</h3>
+      ${loading ? '<p class="rg-muted">Loading series…</p>' : seriesCharts(d)}
       <h3>Score components</h3>
       <table class="rg-components">
         <tr><td>Exposure (path strength, 0–1)</td><td>${fmt(c.exposure)}</td></tr>

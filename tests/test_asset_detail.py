@@ -74,5 +74,28 @@ def test_cached_series_is_used(tmp_path):
     assert s["news_volume"][-1] == 12 and s["news_volume"][0] == 3
 
 
+def test_pageviews_series_stops_at_last_published_day():
+    from pipeline import fetch_wiki
+    from pipeline.graph import default_graph
+    from reasoning.run_query import _asset_context
+
+    doc = json.loads((ROOT / "data" / "preset_results" / "hero_midterms.json").read_text())
+    g = default_graph()
+    row = next((r for r in doc["results"] if _asset_context(g, r["id"])["wiki_titles"]), None)
+    if row is None:
+        pytest.skip("no hero result with a Wikipedia title")
+    titles = _asset_context(g, row["id"])["wiki_titles"]
+    end = date.today()
+    start = end - timedelta(days=67)
+    last = end - timedelta(days=2)  # Wikipedia publishes with a lag
+    items = [{"timestamp": (start + timedelta(days=i)).strftime("%Y%m%d00"), "views": 10 + i}
+             for i in range((last - start).days + 1)]
+    for t in titles:
+        fetch_wiki.store(fetch_wiki.build_url(t, start, end), json.dumps({"items": items}))
+    s = client.get(f"/asset/{row['id']}", params={"q": HERO}).json()["series"]
+    assert s is not None and len(s["dates"]) == 68
+    assert len(s["pageviews"]) == 66 and s["pageviews"][0] == 10 * len(titles)
+
+
 def test_unknown_asset_is_404():
     assert client.get("/asset/mine_nope", params={"q": HERO}).status_code == 404
