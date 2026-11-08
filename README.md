@@ -43,7 +43,7 @@ The backend serves **mock data** until you set `USE_PIPELINE=1` in `.env`; then 
 runs `reasoning.run_query.run_query`. Set `GLOBE_OFFLINE=1` to read only from the cache, and use it on stage.
 
 Other targets: `make test`, `make fetch-sample` (one cached GDELT + Wikipedia call),
-`make eval` (writes `eval/results.json`, served at `GET /eval`), `make graph` (mock graph),
+`make eval` (writes `eval/results.json`, served at `GET /eval`), `make graph` (rebuild the real graph), `make presets` (precompute preset results),
 `make pipeline-query` (runs the hero query through the real pipeline offline).
 
 ## Who owns what
@@ -92,24 +92,70 @@ After 03:00 every phase adds depth or polish, never new scope. A missed gate tri
 fallback, not extra hours. Everyone labels ~35 article pairs in phase 3
 (`python -m eval.label_tool --labeller <name>`).
 
+## Data (real, committed)
+
+- **Mines:** `data/gem/` holds the GEM Global Iron Ore Mines Tracker, Sep 2026 (V1), CC BY 4.0.
+  There are 701 operating mines with parent owners and shares. `make graph` rebuilds `data/graph/`.
+- **Curated tables:** `pipeline/curated/` has 37 export ports, trade shares (UN Comtrade via WITS, 2023)
+  and company mappings (listing country, exact Wikipedia title, search terms). Every row has a `source_url`.
+- **Cache:** `cache/` is committed, so everyone runs offline on identical data.
+- **GDELT from the venue:** GDELT answers 429 *"Please limit requests to one every 5 seconds"* to
+  every request, probably because the whole venue shares one IP. Fetch from a phone hotspot:
+  `make fetch-plan && make fetch-run && make fetch-ingest && make presets`.
+
+## Decision model (Jev)
+
+Jev is TypeSafe's decision model. It answers typed questions (yes/no, choice, score) with
+probabilities and generates no text. We call it through OpenRouter's Decisions API
+(`POST https://openrouter.ai/api/alpha/decisions`, model `typesafe/jev-1.14`):
+
+| Step | Function | Backend order |
+| --- | --- | --- |
+| 1. Parse the question | `parse()` | fallback LLM (Jev can't write JSON), then nearest preset |
+| 2. Channels and touched countries | `select()` | Jev (one yes/no per option), then fallback LLM, then preset or `default_touches` |
+| 5. Relevance judge | `judge()` | Jev (choice question), then fallback LLM, then keyword match |
+
+The fallback LLM is `anthropic/claude-haiku-5.5` via OpenRouter, at temperature 0. One OpenRouter key
+works for both; put it in `.env` as `JEV_API_KEY` and `FALLBACK_LLM_API_KEY`. Jev has no temperature,
+and repeat calls vary by about 0.02, so every validated answer is cached in `cache/llm/` and replayed.
+
+## Presets (`data/presets.json`)
+
+1. **Hero:** iron ore mines exposed to the 2026 US midterms (3 Nov).
+2. **Weather:** mines exporting through ports hit by **Cyclone Murasu**. It made landfall near Ongole,
+   Andhra Pradesh, on 3 Nov 2026 and touches the Krishnapatnam, Visakhapatnam and Gangavaram ports.
+3. **Labour:** the **BHP Port Hedland ports wage dispute**. There were strikes in Jul and Aug 2026, and arbitration
+   was sought on 15 Sep with no deal reported since. No iron ore strike was reported in the week before the hackathon.
+4. **Negative control:** the Premier League title race. It should stay dark.
+
+Each preset lists its sources and a `touches_note` explaining the hand-set TOUCHES weights.
+
+## Decisions taken on 8 Nov (were open questions)
+
+1. **Dark dots:** `GET /assets` returns every mine, and the globe draws the unlit ones grey.
+   The `/query` contract is unchanged.
+2. **TOUCHES edges:** presets carry hand-reviewed touches. For free-text questions the decision model picks
+   touched countries per channel from the graph's countries; p becomes the weight, and code validates it.
+   `channels.json` `default_touches` is the last resort.
+3. **Exposure no longer saturates:** edges are walked in their own direction, so a Chinese mine isn't
+   exposed to Brazil just because China imports Brazilian ore. Only the strongest path per
+   (touched node, channel) counts in the noisy-OR. All paths are still shown.
+4. **Rate-limit budget:** all 50 candidates are returned. GDELT evidence is pulled for the top 25
+   (`EVIDENCE_K`), and the placebo for the top 10 (`PLACEBO_K`).
+
 ## Hand-set numbers (record every change here)
 
 | Where | Value | Why |
 | --- | --- | --- |
 | `reasoning/scoring.py` | a=0.5, b=0.3, c=0.4, d=1.0, **k=3.0** | k=3 keeps an asset with zero evidence below the medium tier |
 | `reasoning/channels.json` | channel weights 0.5–0.9 | first guess |
+| `data/presets.json` | TOUCHES weights per preset | see each `touches_note` |
 | `pipeline/signals.py` | tone std floor 0.25, placebo threshold z≥2 | the plan gives none |
+| `reasoning/run_query.py` | EVIDENCE_K=25, PLACEBO_K=10, control term "copper" | GDELT rate limit |
 | `eval/metrics.py` | negative control passes if ≤10% lit | first guess |
 
-## Open questions found while scaffolding
+## Still open
 
-1. **Dark dots.** The contract gives `dark_count`, not dark positions, so the globe can't draw
-   grey dots yet. Option: add a `GET /assets` endpoint (no contract change). Decide before 03:00.
-2. **Where channel→country `TOUCHES` edges come from.** They depend on the event (tariffs touch
-   the US for the midterms). For now presets carry them, and `channels.json` has
-   `default_touches` for free-text questions.
-3. **Exposure saturates on the mock graph.** Noisy-OR over many overlapping paths puts most
-   mines at 0.5–1.0 and leaves 3 of 20 dark. Consider de-duplicating paths or lowering weights.
-4. GDELT article lists have **no snippet**, so the judge sees title, domain and date only.
-5. Small additions to the plan's graph schema: `port -LOCATED_IN-> country` (needed for the
-   plan's own example path) and channels touching `port` (for the storm preset).
+- GDELT articles have **no snippet**, so the judge sees title, domain and date only.
+- Small additions to the plan's graph schema: `port -LOCATED_IN-> country`, and channels may touch `port`.
+- Pipeline mode in `GET /asset/{id}` still returns a mock series. It needs the cached series (A+C).

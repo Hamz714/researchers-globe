@@ -76,7 +76,10 @@
           ]
         ]
       },
-      "touches_note": "Hand-set. US = where policy is made; CA = USMCA partner and main pellet trade link; BR = subject of 2025 US tariffs; CN = US-China trade policy; Nippon Steel = owner of U.S. Steel, politically contested. Edit with care and record changes in README."
+      "touches_note": "Hand-set. US = where policy is made; CA = USMCA partner and main pellet trade link; BR = subject of 2025 US tariffs; CN = US-China trade policy; Nippon Steel = owner of U.S. Steel, politically contested. Edit with care and record changes in README.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2026_United_States_elections"
+      ]
     },
     {
       "id": "weather_ports",
@@ -135,17 +138,18 @@
     {
       "id": "labour_protest",
       "kind": "labour",
-      "label": "Mines exposed to strikes and protests",
-      "query": "Which iron ore mines are exposed to labour strikes and protests?",
+      "label": "Mines exposed to the BHP Port Hedland wage dispute",
+      "query": "Which iron ore mines are exposed to the BHP Port Hedland port workers' wage dispute?",
       "criteria": {
         "asset_type": "iron_ore_mine",
         "event": {
-          "name": "TODO: name the strike or protest on the day",
-          "date": "2026-11-07",
+          "name": "BHP Port Hedland ports wage dispute",
+          "date": "2026-09-15",
           "terms": [
-            "strike",
-            "protest",
-            "union"
+            "Port Hedland",
+            "wage dispute",
+            "arbitration",
+            "strike"
           ]
         },
         "window": {
@@ -155,22 +159,32 @@
         "status": [
           "operating"
         ],
-        "region": "global"
+        "region": "Australia"
       },
       "channels": [
         {
           "id": "labour",
-          "reason": "Strikes and blockades stop mines and railways."
+          "reason": "The Combined BHP Ports Unions struck at Port Hedland in July and August 2026 and on 15 Sep 2026 said they would seek arbitration after nine months of failed talks; no deal has been reported since."
         }
       ],
       "touches": {
         "labour": [
           [
-            "TODO_country_or_company_id",
+            "company_bhp",
             1.0
+          ],
+          [
+            "port_hedland",
+            0.8
           ]
         ]
-      }
+      },
+      "touches_note": "Dispute covers BHP's Port Hedland port operations. Other miners exporting through the same harbour are touched via the port at 0.8. Hand-set. Picked on 8 Nov 2026: no iron ore strike was reported in the past week, and this is the live labour dispute in the sector.",
+      "sources": [
+        "https://www.investing.com/news/stock-market-news/combined-bhp-ports-unions-to-seek-arbitration-over-wage-deal-dispute-4900787",
+        "https://www.mining.com/bhps-first-port-strike-in-26-years-rattles-iron-ore-supply/",
+        "https://www.bloomberg.com/news/articles/2026-08-08/union-workers-strike-at-bhp-s-port-hedland-iron-ore-export-hub"
+      ]
     },
     {
       "id": "negative_control",

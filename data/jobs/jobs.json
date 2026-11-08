@@ -1,5 +1,5 @@
 {
-"created": "2026-11-08T00:27:43",
+"created": "2026-11-08T00:33:10",
 "end": "2026-11-08",
 "jobs": [
 {
@@ -683,6 +683,298 @@
 "kind": "gdelt"
 },
 {
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mount+Newman%22+OR+%22BHP+Mount+Newman%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mount+Newman%22+OR+%22BHP+Mount+Newman%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mount+Newman%22+OR+%22BHP+Mount+Newman%22+OR+BHP%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mount+Newman%22+OR+%22BHP+Mount+Newman%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Flank%22+OR+%22BHP+South+Flank%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Flank%22+OR+%22BHP+South+Flank%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Flank%22+OR+%22BHP+South+Flank%22+OR+BHP%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Flank%22+OR+%22BHP+South+Flank%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Yandi+OR+%22BHP+Yandi%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Yandi+OR+%22BHP+Yandi%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Yandi+OR+%22BHP+Yandi%22+OR+BHP%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Yandi+OR+%22BHP+Yandi%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Area+C%22+OR+%22BHP+Area+C%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Area+C%22+OR+%22BHP+Area+C%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Area+C%22+OR+%22BHP+Area+C%22+OR+BHP%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Area+C%22+OR+%22BHP+Area+C%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Jimblebar+OR+%22BHP+Jimblebar%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Jimblebar+OR+%22BHP+Jimblebar%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Jimblebar+OR+%22BHP+Jimblebar%22+OR+BHP%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Jimblebar+OR+%22BHP+Jimblebar%22+OR+BHP%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Christmas+Creek%22+OR+%22Fortescue+Christmas+Creek%22+OR+Fortescue%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Christmas+Creek%22+OR+%22Fortescue+Christmas+Creek%22+OR+Fortescue%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Christmas+Creek%22+OR+%22Fortescue+Christmas+Creek%22+OR+Fortescue%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Christmas+Creek%22+OR+%22Fortescue+Christmas+Creek%22+OR+Fortescue%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Frances+Creek%22+OR+%22NT+Bullion%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Frances+Creek%22+OR+%22NT+Bullion%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Frances+Creek%22+OR+%22NT+Bullion%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Frances+Creek%22+OR+%22NT+Bullion%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Gudai-Darri%22+OR+%22Rio+Tinto+Gudai-Darri%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Gudai-Darri%22+OR+%22Rio+Tinto+Gudai-Darri%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Gudai-Darri%22+OR+%22Rio+Tinto+Gudai-Darri%22+OR+%22Rio+Tinto%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Gudai-Darri%22+OR+%22Rio+Tinto+Gudai-Darri%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Iron+Valley%22+OR+%22MinRes+Iron+Valley%22+OR+%22Mineral+Resources%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Iron+Valley%22+OR+%22MinRes+Iron+Valley%22+OR+%22Mineral+Resources%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Iron+Valley%22+OR+%22MinRes+Iron+Valley%22+OR+%22Mineral+Resources%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Iron+Valley%22+OR+%22MinRes+Iron+Valley%22+OR+%22Mineral+Resources%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mt+Gibson+Iron+Koolan+Island%22+OR+%22Mount+Gibson+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mt+Gibson+Iron+Koolan+Island%22+OR+%22Mount+Gibson+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mt+Gibson+Iron+Koolan+Island%22+OR+%22Mount+Gibson+Iron%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mt+Gibson+Iron+Koolan+Island%22+OR+%22Mount+Gibson+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Miralga+Creek%22+OR+%22Atlas+Iron+Miralga+Creek%22+OR+%22Atlas+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Miralga+Creek%22+OR+%22Atlas+Iron+Miralga+Creek%22+OR+%22Atlas+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Miralga+Creek%22+OR+%22Atlas+Iron+Miralga+Creek%22+OR+%22Atlas+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Roy+Hill%22+OR+%22Hancock+Prospecting%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Roy+Hill%22+OR+%22Hancock+Prospecting%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Roy+Hill%22+OR+%22Hancock+Prospecting%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22West+Angelas%22+OR+%22Rio+Tinto+West+Angelas%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22West+Angelas%22+OR+%22Rio+Tinto+West+Angelas%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22West+Angelas%22+OR+%22Rio+Tinto+West+Angelas%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Yandicoogina+OR+%22Rio+Tinto+Yandicoogina%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Yandicoogina+OR+%22Rio+Tinto+Yandicoogina%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Yandicoogina+OR+%22Rio+Tinto+Yandicoogina%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Wonmunna+OR+%22MinRes+Wonmunna%22+OR+%22Mineral+Resources%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Wonmunna+OR+%22MinRes+Wonmunna%22+OR+%22Mineral+Resources%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Wonmunna+OR+%22MinRes+Wonmunna%22+OR+%22Mineral+Resources%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Cloudbreak+OR+%22Fortescue+Cloudbreak%22+OR+Fortescue%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Cloudbreak+OR+%22Fortescue+Cloudbreak%22+OR+Fortescue%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Cloudbreak+OR+%22Fortescue+Cloudbreak%22+OR+Fortescue%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Iron+Bridge%22+OR+%22Fortescue+Iron+Bridge%22+OR+Fortescue%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Iron+Bridge%22+OR+%22Fortescue+Iron+Bridge%22+OR+Fortescue%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Iron+Bridge%22+OR+%22Fortescue+Iron+Bridge%22+OR+Fortescue%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Sanjiv+Ridge%22+OR+%22Atlas+Iron+Sanjiv+Ridge%22+OR+%22Atlas+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Sanjiv+Ridge%22+OR+%22Atlas+Iron+Sanjiv+Ridge%22+OR+%22Atlas+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Sanjiv+Ridge%22+OR+%22Atlas+Iron+Sanjiv+Ridge%22+OR+%22Atlas+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hope+Downs+1%22+OR+%22Rio+Tinto+Hope+Downs+1%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hope+Downs+1%22+OR+%22Rio+Tinto+Hope+Downs+1%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hope+Downs+1%22+OR+%22Rio+Tinto+Hope+Downs+1%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mount+Webber%22+OR+%22Atlas+Iron+Mount+Webber%22+OR+%22Atlas+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mount+Webber%22+OR+%22Atlas+Iron+Mount+Webber%22+OR+%22Atlas+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mount+Webber%22+OR+%22Atlas+Iron+Mount+Webber%22+OR+%22Atlas+Iron%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hope+Downs+4%22+OR+%22Rio+Tinto+Hope+Downs+4%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hope+Downs+4%22+OR+%22Rio+Tinto+Hope+Downs+4%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hope+Downs+4%22+OR+%22Rio+Tinto+Hope+Downs+4%22+OR+%22Rio+Tinto%22%29+%28%22Port+Hedland%22+OR+arbitration+OR+blockade+OR+protest+OR+strike+OR+union+OR+%22wage+dispute%22+OR+walkout%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
 "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Nippon_Steel/daily/20260902/20261108",
 "kind": "wiki"
 },
@@ -708,6 +1000,22 @@
 },
 {
 "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Steel_Authority_of_India/daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/BHP/daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Fortescue_%28company%29/daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Mineral_Resources/daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Hancock_Prospecting/daily/20260902/20261108",
 "kind": "wiki"
 }
 ]

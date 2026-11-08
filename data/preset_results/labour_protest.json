@@ -2,12 +2,13 @@
  "criteria": {
   "asset_type": "iron_ore_mine",
   "event": {
-   "name": "TODO: name the strike or protest on the day",
-   "date": "2026-11-07",
+   "name": "BHP Port Hedland ports wage dispute",
+   "date": "2026-09-15",
    "terms": [
-    "strike",
-    "protest",
-    "union"
+    "Port Hedland",
+    "wage dispute",
+    "arbitration",
+    "strike"
    ]
   },
   "window": {
@@ -17,14 +18,544 @@
   "status": [
    "operating"
   ],
-  "region": "global"
+  "region": "Australia"
  },
  "channels": [
   {
    "id": "labour",
-   "reason": "Strikes and blockades stop mines and railways."
+   "reason": "The Combined BHP Ports Unions struck at Port Hedland in July and August 2026 and on 15 Sep 2026 said they would seek arbitration after nine months of failed talks; no deal has been reported since."
   }
  ],
- "results": [],
- "dark_count": 701
+ "results": [
+  {
+   "id": "mine_P100000128037",
+   "name": "BHP Mount Newman Mine",
+   "lat": -23.361111,
+   "lon": 119.670833,
+   "tier": "low",
+   "score": 0.2948,
+   "components": {
+    "exposure": 0.8848,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128037",
+     "company_bhp",
+     "channel_labour"
+    ],
+    [
+     "mine_P100000128037",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via BHP Mount Newman Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128079",
+   "name": "BHP South Flank Mine",
+   "lat": -22.993056,
+   "lon": 118.995833,
+   "tier": "low",
+   "score": 0.2948,
+   "components": {
+    "exposure": 0.8848,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128079",
+     "company_bhp",
+     "channel_labour"
+    ],
+    [
+     "mine_P100000128079",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via BHP South Flank Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128086",
+   "name": "BHP Yandi Mine",
+   "lat": -22.720833,
+   "lon": 119.0875,
+   "tier": "low",
+   "score": 0.2948,
+   "components": {
+    "exposure": 0.8848,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128086",
+     "company_bhp",
+     "channel_labour"
+    ],
+    [
+     "mine_P100000128086",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via BHP Yandi Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128100",
+   "name": "BHP Area C Mine",
+   "lat": -22.925,
+   "lon": 118.981944,
+   "tier": "low",
+   "score": 0.2948,
+   "components": {
+    "exposure": 0.8848,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128100",
+     "company_bhp",
+     "channel_labour"
+    ],
+    [
+     "mine_P100000128100",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via BHP Area C Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128112",
+   "name": "BHP Jimblebar Mine",
+   "lat": -23.369261,
+   "lon": 120.061885,
+   "tier": "low",
+   "score": 0.2948,
+   "components": {
+    "exposure": 0.8848,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128112",
+     "company_bhp",
+     "channel_labour"
+    ],
+    [
+     "mine_P100000128112",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via BHP Jimblebar Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128046",
+   "name": "Fortescue Christmas Creek (Chichester Hub) Mine",
+   "lat": -22.3762,
+   "lon": 119.759,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128046",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Fortescue Christmas Creek (Chichester Hub) Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128053",
+   "name": "Frances Creek Mine",
+   "lat": -13.597955,
+   "lon": 131.851824,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128053",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Frances Creek Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128054",
+   "name": "Rio Tinto Gudai-Darri (Hamersley) Mine",
+   "lat": -22.5559,
+   "lon": 119.0239,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128054",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Rio Tinto Gudai-Darri (Hamersley) Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128056",
+   "name": "MinRes Iron Valley (Pilbara Hub) Mine",
+   "lat": -22.7201,
+   "lon": 119.3171,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128056",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via MinRes Iron Valley (Pilbara Hub) Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128060",
+   "name": "Mt Gibson Iron Koolan Island Mine",
+   "lat": -16.1275,
+   "lon": 123.7402,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128060",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Mt Gibson Iron Koolan Island Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128064",
+   "name": "Atlas Iron Miralga Creek Mine",
+   "lat": -20.9725,
+   "lon": 119.4314,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128064",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Atlas Iron Miralga Creek Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128076",
+   "name": "Roy Hill Mine",
+   "lat": -22.446938,
+   "lon": 119.913566,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128076",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Roy Hill Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128081",
+   "name": "Rio Tinto West Angelas Mine",
+   "lat": -23.180069,
+   "lon": 118.7709,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128081",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Rio Tinto West Angelas Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128087",
+   "name": "Rio Tinto Yandicoogina (Hamersley) Mine",
+   "lat": -22.776192,
+   "lon": 119.203312,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128087",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Rio Tinto Yandicoogina (Hamersley) Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128090",
+   "name": "MinRes Wonmunna (Pilbara Hub) Mine",
+   "lat": -23.122903,
+   "lon": 119.04973,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128090",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via MinRes Wonmunna (Pilbara Hub) Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128095",
+   "name": "Fortescue Cloudbreak (Chichester Hub) Mine",
+   "lat": -22.302778,
+   "lon": 119.396385,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128095",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Fortescue Cloudbreak (Chichester Hub) Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128096",
+   "name": "Fortescue Iron Bridge Mine",
+   "lat": -21.25186,
+   "lon": 119.0557,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128096",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Fortescue Iron Bridge Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128104",
+   "name": "Atlas Iron Sanjiv Ridge Mine",
+   "lat": -21.473998,
+   "lon": 119.664944,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128104",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Atlas Iron Sanjiv Ridge Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128107",
+   "name": "Rio Tinto Hope Downs 1 Mine",
+   "lat": -22.960914,
+   "lon": 119.126354,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128107",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Rio Tinto Hope Downs 1 Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128114",
+   "name": "Atlas Iron Mount Webber Mine",
+   "lat": -21.544339,
+   "lon": 119.284714,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128114",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Atlas Iron Mount Webber Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129401",
+   "name": "Rio Tinto Hope Downs 4 Mine",
+   "lat": -23.153296,
+   "lon": 119.530323,
+   "tier": "low",
+   "score": 0.2132,
+   "components": {
+    "exposure": 0.64,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129401",
+     "port_hedland",
+     "channel_labour"
+    ]
+   ],
+   "reason": "Exposed via Rio Tinto Hope Downs 4 Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  }
+ ],
+ "dark_count": 680
 }
