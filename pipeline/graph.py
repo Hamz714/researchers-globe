@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import math
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -33,26 +34,40 @@ NODE_TYPES = {"mine", "company", "country", "port", "commodity", "event", "chann
 EDGE_TYPES = {
     "OWNED_BY",       # mine -> company      (weight = ownership share)
     "LOCATED_IN",     # mine -> country; also port -> country (needed for the plan's example path)
-    "EXPORTS_VIA",    # mine -> port         (nearest major export port)
+    "EXPORTS_VIA",    # mine -> port         (nearest curated export port in the same country)
     "EXPORTS_TO",     # country -> country   (weight = share of exports)
     "LISTED_IN",      # company -> country
     "ACTS_THROUGH",   # event -> channel     (chosen per query)
     "TOUCHES",        # channel -> country | company | commodity (| port, see README)
 }
 
-# TODO(Person A): fill in once the GEM Global Iron Ore Mines Tracker file is downloaded.
-# We have NOT seen the file; do not trust any column name until you've printed df.columns.
-# Keys are our names, values are the GEM column names.
-GEM_COLUMN_MAP: dict[str, str | None] = {
-    "gem_id": None,
-    "name": None,
-    "lat": None,
-    "lon": None,
-    "country": None,          # likely a country NAME; we need ISO2 -> map via curated/countries.csv
-    "status": None,
-    "capacity_mtpa": None,
-    "owner": None,            # may be a single string with several owners and percentages
+# Column names in the GEM Global Iron Ore Mines Tracker, September 2026 (V1) release,
+# sheet "Main Data" (checked against the downloaded file). Keys are our names.
+GEM_SHEET = "Main Data"
+GEM_COLUMN_MAP: dict[str, str] = {
+    "gem_id": "GEM asset ID",
+    "name": "Asset name (English)",
+    "coords": "Coordinates",              # "lat, lon" in one string
+    "coord_accuracy": "Coordinate accuracy",  # exact | approximate
+    "municipality": "Municipality",
+    "country": "Country/area",            # country NAME -> ISO2 via curated/countries.csv
+    "status": "Operating status",         # operating | proposed | mothballed | retired | shelved | cancelled | unknown
+    "capacity_ttpa": "Design capacity (ttpa)",
+    "production_2025_ttpa": "Production 2025 (ttpa)",
+    "owner": "Owner (English)",           # immediate owner(s), "Name [85.0%]; Name [15.0%]"
+    "parent": "Parent (English)",         # ultimate parent(s), same format, % sometimes missing
+    "wiki": "GEM wiki page",              # GEM wiki, NOT Wikipedia: never used as wiki_title
 }
+GEM_SOURCE_URL = "https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker"
+COUNTRY_ALIASES = {"Türkiye": "TR", "Republic of the Congo": "CG", "North Korea": "KP", "South Korea": "KR",
+                   "Russia": "RU", "Iran": "IR", "Laos": "LA", "Vietnam": "VN", "Bolivia": "BO",
+                   "Venezuela": "VE", "United States": "US", "United Kingdom": "GB"}
+BRAND_PREFIXES = ["US Steel", "Rio Tinto", "Anglo American", "Cleveland-Cliffs", "Quebec Iron", "Sishen Iron",
+                  "Kumba", "ArcelorMittal", "Fortescue", "MinRes", "Vale", "BHP", "IOC", "EVRAZ", "NLMK", "Ferrexpo",
+                  "SSGPO", "Metinvest", "Baffinland", "Champion", "Tacora Resources", "NMDC", "SAIL", "Tata Steel",
+                  "JSW", "Ansteel", "HBIS", "Baogang", "Shougang", "Severstal", "Metalloinvest", "ERG"]
+SKIP_OWNERS = {"unknown", "natural person(s)", "small shareholder(s)", ""}
+_SUFFIX = r"\b(Ltd|Limited|PLC|plc|SA|S\.A\.|Corp|Corporation|Inc|Co|Company|Group|Holdings|PJSC|JSC|LLC|Pty|AG|AB|SAB de CV|SpA|BV|NV|Sarl|SARL)\b\.?"
 
 
 @dataclass
@@ -175,7 +190,8 @@ def build_graph(
         edges.append(_edge(p.port_id, ensure_country(p.country_iso2), "LOCATED_IN", 1.0, p.source_url))
 
     for m in mines.itertuples():
-        terms = "|".join(t for t in [m.name, *(str(m.search_terms).split("|") if isinstance(m.search_terms, str) else [])] if t)
+        extra = [t for t in str(m.search_terms).split("|") if t] if isinstance(m.search_terms, str) else []
+        terms = "|".join(extra or [m.name])
         nodes[m.id] = _node(m.id, "mine", m.name, m.lat, m.lon, m.country_iso2,
                             m.wiki_title if isinstance(m.wiki_title, str) else "", terms)
         edges.append(_edge(m.id, ensure_country(m.country_iso2), "LOCATED_IN", 1.0, mines_source_url))
@@ -212,18 +228,129 @@ def build_mock_graph() -> Graph:
     )
 
 
-def load_gem(path: Path) -> pd.DataFrame:
-    """TODO(Person A): read the GEM file and return it in the mock mines schema.
+def parse_owners(s: str) -> list[tuple[str, float | None]]:
+    """'BHP Group Ltd [85.0%]; ITOCHU Corp; Mitsui & Co Ltd [7.0%]' -> [(name, share or None), ...]."""
+    out = []
+    for part in str(s).split(";"):
+        m = re.match(r"\s*(.*?)\s*\[(\d+(?:\.\d+)?)%\]\s*$", part)
+        name, share = (m.group(1), float(m.group(2)) / 100) if m else (part.strip(), None)
+        if name.lower() not in SKIP_OWNERS:
+            out.append((name, share))
+    # Spread any unassigned share over owners listed without a percentage.
+    known = sum(s for _, s in out if s is not None)
+    missing = [i for i, (_, s) in enumerate(out) if s is None]
+    if missing:
+        each = max(1.0 - known, 0.0) / len(missing) or 0.05
+        out = [(n, s if s is not None else max(each, 0.05)) for n, s in out]
+    merged: dict[str, float] = {}
+    for n, s in out:
+        merged[n] = min(1.0, merged.get(n, 0.0) + s)
+    return list(merged.items())
 
-    Steps: print df.columns, fill GEM_COLUMN_MAP, keep status == operating with
-    coordinates and owners, map country names to ISO2, split multi-owner strings.
+
+def short_name(company: str) -> str:
+    s = re.sub(_SUFFIX, "", company)
+    s = re.sub(r"\(.*?\)", "", s)
+    return re.sub(r"\s+", " ", s).strip(" ,&")
+
+
+def slug(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", s.lower()).strip("_")
+
+
+def mine_terms(name: str, owner_terms: list[str]) -> list[str]:
+    """Search terms for a GEM mine name like 'BHP South Flank Mine' -> ['South Flank']."""
+    core = re.sub(r"\(.*?\)", "", name)
+    core = re.sub(r"\b(Complex\s+)?Mine\b", "", core, flags=re.I)
+    core = re.sub(r"\s+", " ", core).strip()
+    terms = [core]
+    for o in owner_terms:  # GEM names are usually "<Parent> <Location> Mine": drop the parent prefix
+        if o and core.lower().startswith(o.lower() + " "):
+            terms.insert(0, core[len(o) + 1:].strip())
+    for prefix in BRAND_PREFIXES:  # operator brands GEM puts in front of the mine name
+        if core.startswith(prefix + " ") and len(core) > len(prefix) + 4:
+            terms.insert(0, core[len(prefix) + 1:].strip())
+            break
+    seen, out = set(), []
+    for t in terms:
+        if len(t) >= 4 and t.lower() not in seen:  # GDELT rejects very short keywords
+            seen.add(t.lower())
+            out.append(t)
+    return out
+
+
+def load_gem(path: Path, statuses: tuple[str, ...] = ("operating",)) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Read the GEM workbook. Returns (mines in the mock schema, ownership rows).
+
+    Keeps mines with the given statuses and parseable coordinates. Owners are the
+    GEM *parent* companies (ultimate owners); unknown/natural persons are dropped.
     """
-    df = pd.read_excel(path) if path.suffix in {".xlsx", ".xls"} else pd.read_csv(path)
-    if any(v is None for v in GEM_COLUMN_MAP.values()):
-        raise NotImplementedError(
-            "Fill GEM_COLUMN_MAP in pipeline/graph.py first. Columns in this file:\n  " + "\n  ".join(map(str, df.columns))
-        )
-    raise NotImplementedError("TODO(Person A): convert GEM rows to the mock mines schema")
+    c = GEM_COLUMN_MAP
+    df = pd.read_excel(path, sheet_name=GEM_SHEET)
+    missing = [v for v in c.values() if v not in df.columns]
+    if missing:
+        raise ValueError(f"GEM columns not found: {missing}. Columns: {list(df.columns)}")
+    df = df[df[c["status"]].isin(statuses)].copy()
+
+    countries = pd.read_csv(CURATED_DIR / "countries.csv")
+    name_to_iso = {**dict(zip(countries["name"], countries["iso2"])), **COUNTRY_ALIASES}
+    companies = pd.read_csv(CURATED_DIR / "companies.csv")
+    curated = {r.name_in_gem: r for r in companies.itertuples()}
+
+    mines, owners = [], []
+    for r in df.itertuples(index=False):
+        row = dict(zip(df.columns, r))
+        try:
+            lat, lon = (float(x) for x in str(row[c["coords"]]).split(","))
+        except ValueError:
+            continue
+        iso = name_to_iso.get(row[c["country"]])
+        if iso is None:
+            continue
+        parents = parse_owners(row[c["parent"]])
+        owner_short = []
+        for pname, share in parents:
+            cur = curated.get(pname)
+            cid = cur.company_id if cur else "company_" + slug(short_name(pname))
+            terms = cur.search_terms if cur else short_name(pname)
+            owners.append({"mine_id": f"mine_{row[c['gem_id']]}", "company_id": cid, "company_name": pname,
+                           "share": share, "listed_iso2": cur.listed_iso2 if cur else "",
+                           "wiki_title": (cur.wiki_title if cur and isinstance(cur.wiki_title, str) else ""),
+                           "search_terms": terms})
+            owner_short += [t for t in str(terms).split("|") if t]
+        cap = pd.to_numeric(row[c["capacity_ttpa"]], errors="coerce")
+        mines.append({
+            "id": f"mine_{row[c['gem_id']]}", "name": row[c["name"]], "lat": lat, "lon": lon,
+            "country_iso2": iso, "status": row[c["status"]],
+            "capacity_mtpa": round(cap / 1000, 2) if pd.notna(cap) else None,
+            "owner_id": None, "owner_name": None, "owner_share": None, "owner_listed_iso2": None,
+            "export_port_id": None, "wiki_title": "",
+            "search_terms": "|".join(mine_terms(row[c["name"]], owner_short + [short_name(p) for p, _ in parents])),
+            "coord_accuracy": row[c["coord_accuracy"]],
+        })
+    return pd.DataFrame(mines), pd.DataFrame(owners)
+
+
+def build_real_graph(gem_path: Path) -> Graph:
+    """GEM mines + curated ports/trade/countries/companies -> Graph (multi-owner aware)."""
+    mines, owners = load_gem(gem_path)
+    ports = pd.read_csv(CURATED_DIR / "ports.csv")
+    g = build_graph(mines, ports, pd.read_csv(CURATED_DIR / "trade.csv"),
+                    pd.read_csv(CURATED_DIR / "countries.csv"), mines_source_url=GEM_SOURCE_URL)
+    nodes = {r["id"]: r for r in g.nodes.to_dict("records")}
+    edges = g.edges.to_dict("records")
+    for o in owners.itertuples():
+        if o.company_id not in nodes:
+            nodes[o.company_id] = _node(o.company_id, "company", o.company_name, wiki_title=o.wiki_title,
+                                        search_terms=o.search_terms)
+            if isinstance(o.listed_iso2, str) and o.listed_iso2 and f"country_{o.listed_iso2}" in nodes:
+                edges.append(_edge(o.company_id, f"country_{o.listed_iso2}", "LISTED_IN", 1.0,
+                                   "pipeline/curated/companies.csv"))
+        edges.append(_edge(o.mine_id, o.company_id, "OWNED_BY", o.share, GEM_SOURCE_URL))
+    out = Graph(pd.DataFrame(list(nodes.values()), columns=NODE_COLUMNS),
+                pd.DataFrame(edges, columns=EDGE_COLUMNS).drop_duplicates(["src", "dst", "type"]))
+    out.validate()
+    return out
 
 
 def default_graph() -> Graph:
@@ -242,10 +369,7 @@ if __name__ == "__main__":
     if args.mock:
         g = build_mock_graph()
     else:
-        mines = load_gem(args.gem)
-        g = build_graph(mines, pd.read_csv(CURATED_DIR / "ports.csv"), pd.read_csv(CURATED_DIR / "trade.csv"),
-                        pd.read_csv(CURATED_DIR / "countries.csv"),
-                        mines_source_url="https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker")
+        g = build_real_graph(args.gem)
     g.save()
     print(f"wrote {len(g.nodes)} nodes, {len(g.edges)} edges to {GRAPH_DIR}")
     print(g.nodes["type"].value_counts().to_string())

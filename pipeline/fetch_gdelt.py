@@ -1,21 +1,21 @@
 """GDELT DOC 2.0 fetcher with disk caching (plan: Step 4, Caching).
 
-Owner: Person A. Uses the `gdeltdoc` client (checked against gdeltdoc 1.12.0).
+Owner: Person A.
 
-Every call is cached under cache/gdelt/ keyed by (mode, query, start, end, n), so
-the demo runs offline and no query is sent twice. Set GLOBE_OFFLINE=1 to forbid
-network calls entirely (a cache miss then returns an empty frame).
+Every request is identified by its exact URL and the raw response body is cached
+under cache/gdelt/<sha>.json, so the demo runs offline, no URL is fetched twice,
+and the cache can be filled from anywhere that can reach GDELT (a laptop, a
+browser; see pipeline/browser_fetch.py) and copied in.
 
-Query shape: (asset terms OR ...) AND (channel/event terms OR ...). gdeltdoc's
-Filters only takes ONE keyword group, so `_filters()` appends the second group
-to Filters.query_params, which is an internal detail of gdeltdoc 1.12.0.
+Modes:
+  GLOBE_OFFLINE=1  never touch the network; a cache miss returns an empty result
+                   and is recorded in MISSES (browser_fetch.py turns those into a job list).
+  GLOBE_OFFLINE=0  fetch misses live, at most one request every MIN_INTERVAL_S.
 
-TODO(Person A), unverified facts to check before the demo:
-  * GDELT DOC covers a rolling ~3 months (from the plan); requests outside it return nothing.
-  * Rate limit: we've seen reports of "one request every 5 seconds"; MIN_INTERVAL_S is set
-    to that. Check the error text you actually get and adjust.
-  * Timeline resolution for a 60-day span: we resample to daily (sum for counts,
-    mean for tone) so it is correct whatever resolution comes back.
+Facts checked at the venue on 8 Nov 2026:
+  * Rate limit: GDELT answers HTTP 429 with "Please limit requests to one every 5 seconds".
+  * GDELT DOC only covers a rolling ~3 months (from the plan).
+Timelines are resampled to daily (sum for counts, mean for tone) whatever resolution comes back.
 """
 from __future__ import annotations
 
@@ -23,46 +23,111 @@ import hashlib
 import json
 import os
 import time
-from datetime import date
+from datetime import date, datetime, timedelta
 from pathlib import Path
+from urllib.parse import urlencode
 
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-CACHE_DIR = Path(os.environ.get("GLOBE_CACHE_DIR", ROOT / "cache")) / "gdelt"
-MIN_INTERVAL_S = float(os.environ.get("GDELT_MIN_INTERVAL_S", "5"))
+API = "https://api.gdeltproject.org/api/v2/doc/doc"
+MIN_INTERVAL_S = float(os.environ.get("GDELT_MIN_INTERVAL_S", "5.5"))
+MISSES: dict[str, str] = {}  # url -> cache path, filled when offline
 _last_call = 0.0
+
+
+def cache_dir() -> Path:
+    return Path(os.environ.get("GLOBE_CACHE_DIR", ROOT / "cache")) / "gdelt"
 
 
 def _offline() -> bool:
     return os.environ.get("GLOBE_OFFLINE", "0") == "1"
 
 
-def cache_key(**parts) -> str:
-    blob = json.dumps(parts, sort_keys=True, default=str)
-    return hashlib.sha256(blob.encode()).hexdigest()[:24]
+def _group(terms: list[str]) -> str:
+    """('a', 'b c') -> '(a OR "b c")'; a single term gets no parentheses (GDELT rejects them)."""
+    terms = [t.strip() for t in terms if t and t.strip()]
+    quoted = [f'"{t}"' if " " in t or "-" in t else t for t in dict.fromkeys(terms)]
+    if not quoted:
+        raise ValueError("empty term group")
+    return quoted[0] if len(quoted) == 1 else "(" + " OR ".join(quoted) + ")"
 
 
-def _cache_path(key: str, suffix: str) -> Path:
-    return CACHE_DIR / f"{key}.{suffix}"
+def build_url(mode: str, terms_a: list[str], terms_b: list[str] | None, start: date, end: date,
+              max_records: int = 250) -> str:
+    query = _group(terms_a) + (" " + _group(terms_b) if terms_b else "")
+    params = {
+        "query": query, "mode": mode, "format": "json",
+        "startdatetime": datetime.combine(start, datetime.min.time()).strftime("%Y%m%d%H%M%S"),
+        "enddatetime": datetime.combine(end + timedelta(days=1), datetime.min.time()).strftime("%Y%m%d%H%M%S"),
+    }
+    if mode == "artlist":
+        params.update(maxrecords=str(max_records), sort="hybridrel")
+    return f"{API}?{urlencode(params)}"
 
 
-def _throttle() -> None:
+def cache_path(url: str) -> Path:
+    return cache_dir() / f"{hashlib.sha256(url.encode()).hexdigest()[:32]}.json"
+
+
+def store(url: str, body: str) -> Path:
+    """Write one raw response into the cache (used by the live fetch and by browser_fetch ingest)."""
+    p = cache_path(url)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps({"url": url, "body": body}))
+    return p
+
+
+def get_raw(url: str) -> str | None:
+    """Raw body for a URL: from cache, else live (if allowed), else None and the URL is recorded as a miss."""
     global _last_call
-    wait = MIN_INTERVAL_S - (time.monotonic() - _last_call)
-    if wait > 0:
-        time.sleep(wait)
-    _last_call = time.monotonic()
+    p = cache_path(url)
+    if p.exists():
+        return json.loads(p.read_text())["body"]
+    if _offline():
+        MISSES[url] = str(p)
+        return None
+    import requests
+
+    for attempt in range(3):
+        wait = MIN_INTERVAL_S - (time.monotonic() - _last_call)
+        if wait > 0:
+            time.sleep(wait)
+        _last_call = time.monotonic()
+        r = requests.get(url, timeout=30, headers={"User-Agent": "ResearchersGlobe/0.1 (HackTheBurgh 2026)"})
+        if r.status_code == 429 or "limit requests" in r.text[:200]:
+            time.sleep(MIN_INTERVAL_S * (attempt + 2))
+            continue
+        r.raise_for_status()
+        store(url, r.text)
+        return r.text
+    return None
 
 
-def _filters(terms_a: list[str], terms_b: list[str] | None, start: date, end: date, num_records: int = 250):
-    from gdeltdoc import Filters
+def _json(body: str | None) -> dict:
+    if not body or not body.strip().startswith("{"):
+        return {}
+    try:
+        return json.loads(body)
+    except json.JSONDecodeError:
+        from gdeltdoc.helpers import load_json  # tolerates GDELT's stray control characters
 
-    f = Filters(keyword=terms_a if len(terms_a) > 1 else terms_a[0],
-                start_date=start.isoformat(), end_date=end.isoformat(), num_records=num_records)
-    if terms_b:
-        f.query_params.insert(1, Filters._keyword_to_string(terms_b if len(terms_b) > 1 else terms_b[0]))
-    return f
+        try:
+            return load_json(body, 100)
+        except Exception:
+            return {}
+
+
+def parse_timeline(body: str | None, mode: str) -> pd.Series:
+    j = _json(body)
+    tl = j.get("timeline") or []
+    if not tl or not tl[0].get("data"):
+        return pd.Series(dtype=float, name=mode)
+    data = tl[0]["data"]
+    s = pd.Series([float(d["value"]) for d in data],
+                  index=pd.to_datetime([d["date"] for d in data], format="%Y%m%dT%H%M%SZ"), name=mode)
+    s = s.resample("D").sum() if mode == "timelinevolraw" else s.resample("D").mean()
+    return s.rename(mode)
 
 
 def timeline(terms_a: list[str], terms_b: list[str] | None, start: date, end: date,
@@ -70,56 +135,19 @@ def timeline(terms_a: list[str], terms_b: list[str] | None, start: date, end: da
     """Daily series for (terms_a AND terms_b). mode: 'timelinevolraw' (counts) or 'timelinetone'."""
     if mode not in {"timelinevolraw", "timelinetone"}:
         raise ValueError(mode)
-    key = cache_key(kind="timeline", mode=mode, a=sorted(terms_a), b=sorted(terms_b or []), start=start, end=end)
-    path = _cache_path(key, "json")
-    if path.exists():
-        raw = json.loads(path.read_text())
-        return pd.Series(raw["values"], index=pd.to_datetime(raw["dates"]), name=mode, dtype=float)
-    if _offline():
-        return pd.Series(dtype=float, name=mode)
-
-    from gdeltdoc import GdeltDoc
-
-    _throttle()
-    df = GdeltDoc().timeline_search(mode, _filters(terms_a, terms_b, start, end))
-    if df.empty:
-        s = pd.Series(dtype=float, name=mode)
-    else:
-        value_cols = [c for c in df.columns if c not in ("datetime", "All Articles")]
-        s = df.set_index("datetime")[value_cols[0]].astype(float)
-        s = s.resample("D").sum() if mode == "timelinevolraw" else s.resample("D").mean()
-        s = s.rename(mode)
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps({"dates": [d.strftime("%Y-%m-%d") for d in s.index],
-                                "values": [None if pd.isna(v) else float(v) for v in s.values]}))
-    return s
+    return parse_timeline(get_raw(build_url(mode, terms_a, terms_b, start, end)), mode)
 
 
 def articles(terms_a: list[str], terms_b: list[str] | None, start: date, end: date,
              max_records: int = 20) -> list[dict]:
     """Recent articles: dicts with url, title, seendate, domain, language, sourcecountry."""
-    key = cache_key(kind="artlist", a=sorted(terms_a), b=sorted(terms_b or []), start=start, end=end, n=max_records)
-    path = _cache_path(key, "json")
-    if path.exists():
-        return json.loads(path.read_text())
-    if _offline():
-        return []
-
-    from gdeltdoc import GdeltDoc
-
-    _throttle()
-    df = GdeltDoc().article_search(_filters(terms_a, terms_b, start, end, num_records=max_records))
-    rows = [] if df.empty else df.to_dict(orient="records")
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(rows, default=str))
-    return rows
+    j = _json(get_raw(build_url("artlist", terms_a, terms_b, start, end, max_records)))
+    return list(j.get("articles") or [])
 
 
 if __name__ == "__main__":
     # make fetch-sample: one volume query, cached to disk.
-    from datetime import timedelta
-
     end = date.today()
     s = timeline(["iron ore"], ["tariff", "midterms"], end - timedelta(days=60), end)
     print(s.tail(10).to_string() if len(s) else "no data (offline, blocked, or empty result)")
-    print(f"cached under {CACHE_DIR}")
+    print(f"cache: {cache_dir()}  misses: {len(MISSES)}")

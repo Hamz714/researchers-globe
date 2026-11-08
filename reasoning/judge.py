@@ -38,7 +38,7 @@ def judge_article(article: dict, asset: dict, channel: dict, event: dict,
         "article": {k: article.get(k, "") for k in ("title", "domain", "date", "snippet")},
         "asset": asset, "channel": {"id": channel["id"], "name": channel["name"]}, "event": event,
     }
-    asset_terms = asset.get("terms", []) + [t for t in [asset.get("owner")] if t]
+    asset_terms = asset.get("terms", []) + asset.get("owner_terms", []) + [t for t in [asset.get("owner")] if t]
     channel_terms = channel.get("search_terms", []) + event.get("terms", [])
     return decision_model.judge(
         question, OPTIONS, context,

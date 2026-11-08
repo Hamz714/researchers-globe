@@ -1,1 +1,94 @@
 iso2,name,lat,lon,source_url
+AD,Andorra,42.546245,1.601554,https://developers.google.com/public-data/docs/canonical/countries_csv
+AE,United Arab Emirates,23.424076,53.847818,https://developers.google.com/public-data/docs/canonical/countries_csv
+AF,Afghanistan,33.93911,67.709953,https://developers.google.com/public-data/docs/canonical/countries_csv
+AL,Albania,41.153332,20.168331,https://developers.google.com/public-data/docs/canonical/countries_csv
+AM,Armenia,40.069099,45.038189,https://developers.google.com/public-data/docs/canonical/countries_csv
+AO,Angola,-11.202692,17.873887,https://developers.google.com/public-data/docs/canonical/countries_csv
+AR,Argentina,-38.416097,-63.616672,https://developers.google.com/public-data/docs/canonical/countries_csv
+AT,Austria,47.516231,14.550072,https://developers.google.com/public-data/docs/canonical/countries_csv
+AU,Australia,-25.274398,133.775136,https://developers.google.com/public-data/docs/canonical/countries_csv
+AZ,Azerbaijan,40.143105,47.576927,https://developers.google.com/public-data/docs/canonical/countries_csv
+BA,Bosnia and Herzegovina,43.915886,17.679076,https://developers.google.com/public-data/docs/canonical/countries_csv
+BD,Bangladesh,23.684994,90.356331,https://developers.google.com/public-data/docs/canonical/countries_csv
+BE,Belgium,50.503887,4.469936,https://developers.google.com/public-data/docs/canonical/countries_csv
+BG,Bulgaria,42.733883,25.48583,https://developers.google.com/public-data/docs/canonical/countries_csv
+BH,Bahrain,25.930414,50.637772,https://developers.google.com/public-data/docs/canonical/countries_csv
+BO,Bolivia,-16.290154,-63.588653,https://developers.google.com/public-data/docs/canonical/countries_csv
+BR,Brazil,-14.235004,-51.92528,https://developers.google.com/public-data/docs/canonical/countries_csv
+BT,Bhutan,27.514162,90.433601,https://developers.google.com/public-data/docs/canonical/countries_csv
+BY,Belarus,53.709807,27.953389,https://developers.google.com/public-data/docs/canonical/countries_csv
+CA,Canada,56.130366,-106.346771,https://developers.google.com/public-data/docs/canonical/countries_csv
+CD,Democratic Republic of the Congo,-4.038333,21.758664,https://developers.google.com/public-data/docs/canonical/countries_csv
+CG,Republic of the Congo,-0.228021,15.827659,https://developers.google.com/public-data/docs/canonical/countries_csv
+CH,Switzerland,46.818188,8.227512,https://developers.google.com/public-data/docs/canonical/countries_csv
+CL,Chile,-35.675147,-71.542969,https://developers.google.com/public-data/docs/canonical/countries_csv
+CM,Cameroon,7.369722,12.354722,https://developers.google.com/public-data/docs/canonical/countries_csv
+CN,China,35.86166,104.195397,https://developers.google.com/public-data/docs/canonical/countries_csv
+CO,Colombia,4.570868,-74.297333,https://developers.google.com/public-data/docs/canonical/countries_csv
+CZ,Czech Republic,49.817492,15.472962,https://developers.google.com/public-data/docs/canonical/countries_csv
+DE,Germany,51.165691,10.451526,https://developers.google.com/public-data/docs/canonical/countries_csv
+DZ,Algeria,28.033886,1.659626,https://developers.google.com/public-data/docs/canonical/countries_csv
+EG,Egypt,26.820553,30.802498,https://developers.google.com/public-data/docs/canonical/countries_csv
+ES,Spain,40.463667,-3.74922,https://developers.google.com/public-data/docs/canonical/countries_csv
+FI,Finland,61.92411,25.748151,https://developers.google.com/public-data/docs/canonical/countries_csv
+FR,France,46.227638,2.213749,https://developers.google.com/public-data/docs/canonical/countries_csv
+GA,Gabon,-0.803689,11.609444,https://developers.google.com/public-data/docs/canonical/countries_csv
+GB,United Kingdom,55.378051,-3.435973,https://developers.google.com/public-data/docs/canonical/countries_csv
+GN,Guinea,9.945587,-9.696645,https://developers.google.com/public-data/docs/canonical/countries_csv
+GR,Greece,39.074208,21.824312,https://developers.google.com/public-data/docs/canonical/countries_csv
+HK,Hong Kong,22.396428,114.109497,https://developers.google.com/public-data/docs/canonical/countries_csv
+HU,Hungary,47.162494,19.503304,https://developers.google.com/public-data/docs/canonical/countries_csv
+ID,Indonesia,-0.789275,113.921327,https://developers.google.com/public-data/docs/canonical/countries_csv
+IN,India,20.593684,78.96288,https://developers.google.com/public-data/docs/canonical/countries_csv
+IR,Iran,32.427908,53.688046,https://developers.google.com/public-data/docs/canonical/countries_csv
+IT,Italy,41.87194,12.56738,https://developers.google.com/public-data/docs/canonical/countries_csv
+JP,Japan,36.204824,138.252924,https://developers.google.com/public-data/docs/canonical/countries_csv
+KE,Kenya,-0.023559,37.906193,https://developers.google.com/public-data/docs/canonical/countries_csv
+KH,Cambodia,12.565679,104.990963,https://developers.google.com/public-data/docs/canonical/countries_csv
+KP,North Korea,40.339852,127.510093,https://developers.google.com/public-data/docs/canonical/countries_csv
+KR,South Korea,35.907757,127.766922,https://developers.google.com/public-data/docs/canonical/countries_csv
+KZ,Kazakhstan,48.019573,66.923684,https://developers.google.com/public-data/docs/canonical/countries_csv
+LA,Laos,19.85627,102.495496,https://developers.google.com/public-data/docs/canonical/countries_csv
+LR,Liberia,6.428055,-9.429499,https://developers.google.com/public-data/docs/canonical/countries_csv
+LU,Luxembourg,49.815273,6.129583,https://developers.google.com/public-data/docs/canonical/countries_csv
+MA,Morocco,31.791702,-7.09262,https://developers.google.com/public-data/docs/canonical/countries_csv
+ML,Mali,17.570692,-3.996166,https://developers.google.com/public-data/docs/canonical/countries_csv
+MN,Mongolia,46.862496,103.846656,https://developers.google.com/public-data/docs/canonical/countries_csv
+MR,Mauritania,21.00789,-10.940835,https://developers.google.com/public-data/docs/canonical/countries_csv
+MX,Mexico,23.634501,-102.552784,https://developers.google.com/public-data/docs/canonical/countries_csv
+MY,Malaysia,4.210484,101.975766,https://developers.google.com/public-data/docs/canonical/countries_csv
+MZ,Mozambique,-18.665695,35.529562,https://developers.google.com/public-data/docs/canonical/countries_csv
+NA,Namibia,-22.95764,18.49041,https://developers.google.com/public-data/docs/canonical/countries_csv
+NG,Nigeria,9.081999,8.675277,https://developers.google.com/public-data/docs/canonical/countries_csv
+NL,Netherlands,52.132633,5.291266,https://developers.google.com/public-data/docs/canonical/countries_csv
+NO,Norway,60.472024,8.468946,https://developers.google.com/public-data/docs/canonical/countries_csv
+NP,Nepal,28.394857,84.124008,https://developers.google.com/public-data/docs/canonical/countries_csv
+NZ,New Zealand,-40.900557,174.885971,https://developers.google.com/public-data/docs/canonical/countries_csv
+OM,Oman,21.512583,55.923255,https://developers.google.com/public-data/docs/canonical/countries_csv
+PE,Peru,-9.189967,-75.015152,https://developers.google.com/public-data/docs/canonical/countries_csv
+PH,Philippines,12.879721,121.774017,https://developers.google.com/public-data/docs/canonical/countries_csv
+PK,Pakistan,30.375321,69.345116,https://developers.google.com/public-data/docs/canonical/countries_csv
+PL,Poland,51.919438,19.145136,https://developers.google.com/public-data/docs/canonical/countries_csv
+QA,Qatar,25.354826,51.183884,https://developers.google.com/public-data/docs/canonical/countries_csv
+RO,Romania,45.943161,24.96676,https://developers.google.com/public-data/docs/canonical/countries_csv
+RS,Serbia,44.016521,21.005859,https://developers.google.com/public-data/docs/canonical/countries_csv
+RU,Russia,61.52401,105.318756,https://developers.google.com/public-data/docs/canonical/countries_csv
+SA,Saudi Arabia,23.885942,45.079162,https://developers.google.com/public-data/docs/canonical/countries_csv
+SD,Sudan,12.862807,30.217636,https://developers.google.com/public-data/docs/canonical/countries_csv
+SE,Sweden,60.128161,18.643501,https://developers.google.com/public-data/docs/canonical/countries_csv
+SG,Singapore,1.352083,103.819836,https://developers.google.com/public-data/docs/canonical/countries_csv
+SI,Slovenia,46.151241,14.995463,https://developers.google.com/public-data/docs/canonical/countries_csv
+SK,Slovakia,48.669026,19.699024,https://developers.google.com/public-data/docs/canonical/countries_csv
+SL,Sierra Leone,8.460555,-11.779889,https://developers.google.com/public-data/docs/canonical/countries_csv
+TH,Thailand,15.870032,100.992541,https://developers.google.com/public-data/docs/canonical/countries_csv
+TN,Tunisia,33.886917,9.537499,https://developers.google.com/public-data/docs/canonical/countries_csv
+TR,Türkiye,38.963745,35.243322,https://developers.google.com/public-data/docs/canonical/countries_csv
+TW,Taiwan,23.69781,120.960515,https://developers.google.com/public-data/docs/canonical/countries_csv
+UA,Ukraine,48.379433,31.16558,https://developers.google.com/public-data/docs/canonical/countries_csv
+US,United States,37.09024,-95.712891,https://developers.google.com/public-data/docs/canonical/countries_csv
+UZ,Uzbekistan,41.377491,64.585262,https://developers.google.com/public-data/docs/canonical/countries_csv
+VE,Venezuela,6.42375,-66.58973,https://developers.google.com/public-data/docs/canonical/countries_csv
+VN,Vietnam,14.058324,108.277199,https://developers.google.com/public-data/docs/canonical/countries_csv
+ZA,South Africa,-30.559482,22.937506,https://developers.google.com/public-data/docs/canonical/countries_csv
+ZM,Zambia,-13.133897,27.849332,https://developers.google.com/public-data/docs/canonical/countries_csv

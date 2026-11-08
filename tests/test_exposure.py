@@ -43,8 +43,10 @@ def test_noisy_or():
 def test_exposure_values(toy):
     top, dark = propagate(toy, {"tariffs": 0.9})
     got = {x.asset_id: x for x in top}
-    # mine_a paths: BR->CN (0.5), port->BR->CN (0.5), co_x->CN (0.8); each * 0.9
-    assert got["mine_a"].exposure == pytest.approx(1 - (1 - 0.45) * (1 - 0.45) * (1 - 0.72))
+    # mine_a paths: BR->CN (0.5), port->BR->CN (0.5), co_x->CN (0.8); each * 0.9.
+    # All three arrive via the same touched node (CN), so only the strongest counts.
+    assert got["mine_a"].exposure == pytest.approx(0.72)
+    assert len(got["mine_a"].paths) == 3
     # mine_b: co_x -> CN only
     assert got["mine_b"].exposure == pytest.approx(0.9)
     assert "mine_c" not in got and dark == 1
@@ -58,6 +60,14 @@ def test_paths_start_at_asset_end_at_channel(toy):
             assert len(p) == len(set(p))
 
 
+def test_independent_touches_combine_with_noisy_or(toy):
+    g = toy.with_edges(touches_edges(["tariffs"], {"tariffs": [["country_BR", 0.5]]}))
+    top, _ = propagate(g, {"tariffs": 0.9})
+    got = {x.asset_id: x for x in top}
+    # strongest via CN = 0.72, via BR directly = 0.45 -> 1 - 0.28 * 0.55
+    assert got["mine_a"].exposure == pytest.approx(1 - 0.28 * 0.55)
+
+
 def test_no_path_through_another_mine(toy):
     top, _ = propagate(toy, {"tariffs": 0.9})
     for x in top:
@@ -67,7 +77,7 @@ def test_no_path_through_another_mine(toy):
 
 def test_top_k_and_dark_count(toy):
     top, dark = propagate(toy, {"tariffs": 0.9}, top_k=1)
-    assert len(top) == 1 and top[0].asset_id == "mine_a" and dark == 2
+    assert len(top) == 1 and top[0].asset_id == "mine_b" and dark == 2
 
 
 def test_no_channels_means_everything_dark(toy):

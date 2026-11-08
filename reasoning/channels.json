@@ -1,13 +1,161 @@
 {
   "_comment": "Fixed channel library (plan: Channel library). The model may only pick ids from this list; code rejects anything else. 'weight' is w_channel in the exposure formula and is HAND-SET: tune and record changes in the README. 'touches' lists the node TYPES a channel may touch. 'default_touches' are used only when a query has no preset; they are a placeholder (see README: open design question).",
   "channels": [
-    {"id": "tariffs", "name": "Tariffs and trade policy", "description": "Import duties, quotas, trade deals and trade disputes that change where and how ore and steel are sold.", "search_terms": ["tariff", "steel tariff", "Section 232", "trade war", "import duty"], "touches": ["country", "company", "commodity"], "weight": 0.9, "default_touches": [["country_US", 1.0], ["country_CN", 0.6]]},
-    {"id": "sanctions", "name": "Sanctions", "description": "Sanctions on countries, companies or people that restrict trade or finance.", "search_terms": ["sanctions", "export ban", "blacklist", "OFAC"], "touches": ["country", "company"], "weight": 0.9, "default_touches": []},
-    {"id": "permits", "name": "Permits and regulation", "description": "Mining permits, environmental approvals, royalties and regulation.", "search_terms": ["mining permit", "environmental approval", "royalty", "regulation", "licence"], "touches": ["country", "company"], "weight": 0.7, "default_touches": []},
-    {"id": "infrastructure", "name": "Infrastructure and demand", "description": "Construction and infrastructure spending that drives steel and ore demand.", "search_terms": ["infrastructure bill", "infrastructure spending", "steel demand", "construction"], "touches": ["country", "commodity"], "weight": 0.7, "default_touches": [["country_US", 1.0], ["country_CN", 1.0]]},
-    {"id": "currency", "name": "Currency and rates", "description": "Exchange-rate and interest-rate moves that change producers' costs and revenues.", "search_terms": ["exchange rate", "interest rate", "currency", "central bank"], "touches": ["country"], "weight": 0.5, "default_touches": []},
-    {"id": "conflict", "name": "Conflict and security", "description": "War, unrest and security incidents near assets or routes.", "search_terms": ["conflict", "attack", "security", "unrest", "military"], "touches": ["country", "port"], "weight": 0.8, "default_touches": []},
-    {"id": "labour", "name": "Labour and protest", "description": "Strikes, blockades and protests at mines, railways and ports.", "search_terms": ["strike", "protest", "union", "blockade", "walkout"], "touches": ["country", "company", "port"], "weight": 0.8, "default_touches": []},
-    {"id": "weather", "name": "Weather and disaster", "description": "Storms, floods, earthquakes and other hazards near mines or export ports.", "search_terms": ["cyclone", "storm", "flood", "earthquake", "port closure"], "touches": ["country", "port"], "weight": 0.8, "default_touches": []}
+    {
+      "id": "tariffs",
+      "name": "Tariffs and trade policy",
+      "description": "Import duties, quotas, trade deals and trade disputes that change where and how ore and steel are sold.",
+      "search_terms": [
+        "tariff",
+        "tariffs",
+        "steel tariff",
+        "Section 232",
+        "trade war"
+      ],
+      "touches": [
+        "country",
+        "company",
+        "commodity"
+      ],
+      "weight": 0.9,
+      "default_touches": [
+        [
+          "country_US",
+          1.0
+        ],
+        [
+          "country_CN",
+          0.6
+        ]
+      ]
+    },
+    {
+      "id": "sanctions",
+      "name": "Sanctions",
+      "description": "Sanctions on countries, companies or people that restrict trade or finance.",
+      "search_terms": [
+        "sanctions",
+        "export ban",
+        "blacklist",
+        "OFAC"
+      ],
+      "touches": [
+        "country",
+        "company"
+      ],
+      "weight": 0.9,
+      "default_touches": []
+    },
+    {
+      "id": "permits",
+      "name": "Permits and regulation",
+      "description": "Mining permits, environmental approvals, royalties and regulation.",
+      "search_terms": [
+        "mining permit",
+        "environmental approval",
+        "mining royalty",
+        "mining licence"
+      ],
+      "touches": [
+        "country",
+        "company"
+      ],
+      "weight": 0.7,
+      "default_touches": []
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure and demand",
+      "description": "Construction and infrastructure spending that drives steel and ore demand.",
+      "search_terms": [
+        "infrastructure bill",
+        "infrastructure spending",
+        "steel demand"
+      ],
+      "touches": [
+        "country",
+        "commodity"
+      ],
+      "weight": 0.7,
+      "default_touches": [
+        [
+          "country_US",
+          1.0
+        ],
+        [
+          "country_CN",
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "currency",
+      "name": "Currency and rates",
+      "description": "Exchange-rate and interest-rate moves that change producers' costs and revenues.",
+      "search_terms": [
+        "exchange rate",
+        "interest rate",
+        "central bank"
+      ],
+      "touches": [
+        "country"
+      ],
+      "weight": 0.5,
+      "default_touches": []
+    },
+    {
+      "id": "conflict",
+      "name": "Conflict and security",
+      "description": "War, unrest and security incidents near assets or routes.",
+      "search_terms": [
+        "attack",
+        "armed conflict",
+        "unrest",
+        "military"
+      ],
+      "touches": [
+        "country",
+        "port"
+      ],
+      "weight": 0.8,
+      "default_touches": []
+    },
+    {
+      "id": "labour",
+      "name": "Labour and protest",
+      "description": "Strikes, blockades and protests at mines, railways and ports.",
+      "search_terms": [
+        "strike",
+        "protest",
+        "union",
+        "blockade",
+        "walkout"
+      ],
+      "touches": [
+        "country",
+        "company",
+        "port"
+      ],
+      "weight": 0.8,
+      "default_touches": []
+    },
+    {
+      "id": "weather",
+      "name": "Weather and disaster",
+      "description": "Storms, floods, earthquakes and other hazards near mines or export ports.",
+      "search_terms": [
+        "cyclone",
+        "storm",
+        "flood",
+        "earthquake",
+        "port closure"
+      ],
+      "touches": [
+        "country",
+        "port"
+      ],
+      "weight": 0.8,
+      "default_touches": []
+    }
   ]
 }

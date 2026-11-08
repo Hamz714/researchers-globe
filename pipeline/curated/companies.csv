@@ -1,0 +1,37 @@
+name_in_gem,company_id,listed_iso2,wiki_title,search_terms,source_url
+Vale SA,company_vale,BR,Vale S.A.,Vale,https://en.wikipedia.org/wiki/Vale_S.A.
+BHP Group Ltd,company_bhp,AU,BHP,BHP,https://en.wikipedia.org/wiki/BHP
+Rio Tinto Ltd,company_rio_tinto,GB,Rio Tinto,Rio Tinto,https://en.wikipedia.org/wiki/Rio_Tinto
+Rio Tinto PLC,company_rio_tinto,GB,Rio Tinto,Rio Tinto,https://en.wikipedia.org/wiki/Rio_Tinto
+Fortescue Ltd,company_fortescue,AU,Fortescue (company),Fortescue,https://en.wikipedia.org/wiki/Fortescue_(company)
+Mitsui & Co Ltd,company_mitsui,JP,Mitsui & Co.,Mitsui,https://en.wikipedia.org/wiki/Mitsui_%26_Co.
+ITOCHU Corp,company_itochu,JP,Itochu,Itochu,https://en.wikipedia.org/wiki/Itochu
+Hope Margaret Hancock Trust,company_hancock,AU,Hancock Prospecting,Hancock Prospecting|Roy Hill,https://en.wikipedia.org/wiki/Hancock_Prospecting
+Mineral Resources Ltd,company_mineral_resources,AU,Mineral Resources,Mineral Resources,https://en.wikipedia.org/wiki/Mineral_Resources
+Kumba Iron Ore Ltd,company_kumba,ZA,Kumba Iron Ore,Kumba,https://en.wikipedia.org/wiki/Kumba_Iron_Ore
+Anglo American PLC,company_anglo_american,GB,Anglo American plc,Anglo American,https://en.wikipedia.org/wiki/Anglo_American_plc
+ArcelorMittal SA,company_arcelormittal,LU,ArcelorMittal,ArcelorMittal,https://en.wikipedia.org/wiki/ArcelorMittal
+Champion Iron Ltd,company_champion_iron,AU,,Champion Iron,https://www.championiron.com/
+Ansteel Group Co Ltd,company_ansteel,CN,Ansteel Group,Ansteel,https://en.wikipedia.org/wiki/Ansteel_Group
+Tata Steel Ltd,company_tata_steel,IN,Tata Steel,Tata Steel,https://en.wikipedia.org/wiki/Tata_Steel
+Steel Authority of India Ltd,company_sail,IN,Steel Authority of India,SAIL,https://en.wikipedia.org/wiki/Steel_Authority_of_India
+NMDC Ltd,company_nmdc,IN,NMDC Limited,NMDC,https://en.wikipedia.org/wiki/NMDC_Limited
+Nippon Steel Corp,company_nippon_steel,JP,Nippon Steel,Nippon Steel,https://en.wikipedia.org/wiki/Nippon_Steel
+POSCO Holdings Inc,company_posco,KR,POSCO,POSCO,https://en.wikipedia.org/wiki/POSCO
+Exxaro Resources Ltd,company_exxaro,ZA,Exxaro,Exxaro,https://en.wikipedia.org/wiki/Exxaro
+Vedanta Ltd,company_vedanta,IN,Vedanta Limited,Vedanta,https://en.wikipedia.org/wiki/Vedanta_Limited
+Ferrexpo PLC,company_ferrexpo,GB,Ferrexpo,Ferrexpo,https://en.wikipedia.org/wiki/Ferrexpo
+LKAB,company_lkab,SE,LKAB,LKAB,https://en.wikipedia.org/wiki/LKAB
+Luossavaara-Kiirunavaara AB,company_lkab,SE,LKAB,LKAB,https://en.wikipedia.org/wiki/LKAB
+Cleveland-Cliffs Inc,company_cleveland_cliffs,US,Cleveland-Cliffs,Cleveland-Cliffs,https://en.wikipedia.org/wiki/Cleveland-Cliffs
+United States Steel Corp,company_us_steel,US,U.S. Steel,U.S. Steel,https://en.wikipedia.org/wiki/U.S._Steel
+Nippon Steel North America Inc,company_nippon_steel,JP,Nippon Steel,Nippon Steel,https://en.wikipedia.org/wiki/Nippon_Steel
+Severstal PJSC,company_severstal,RU,Severstal,Severstal,https://en.wikipedia.org/wiki/Severstal
+Metinvest BV,company_metinvest,UA,Metinvest,Metinvest,https://en.wikipedia.org/wiki/Metinvest
+Baosteel Group,company_baowu,CN,China Baowu Steel Group,Baowu,https://en.wikipedia.org/wiki/China_Baowu_Steel_Group
+China Baowu Steel Group Corp Ltd,company_baowu,CN,China Baowu Steel Group,Baowu,https://en.wikipedia.org/wiki/China_Baowu_Steel_Group
+Shougang Group Co Ltd,company_shougang,CN,Shougang Group,Shougang,https://en.wikipedia.org/wiki/Shougang_Group
+JSW Steel Ltd,company_jsw,IN,JSW Steel,JSW Steel,https://en.wikipedia.org/wiki/JSW_Steel
+CAP SA,company_cap,CL,CAP S.A.,CAP,https://en.wikipedia.org/wiki/CAP_S.A.
+Societe Nationale Industrielle et Miniere,company_snim,MR,SNIM,SNIM,https://en.wikipedia.org/wiki/SNIM
+Grupo Mexico SAB de CV,company_grupo_mexico,MX,Grupo México,Grupo Mexico,https://en.wikipedia.org/wiki/Grupo_M%C3%A9xico

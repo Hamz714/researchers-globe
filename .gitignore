@@ -16,7 +16,7 @@ frontend/dist/
 # Data and caches (raw downloads and API caches stay local)
 data/raw/*
 !data/raw/.gitkeep
-data/graph/
+# data/graph/ is committed so everyone has the real graph
 cache/*
 !cache/.gitkeep
 

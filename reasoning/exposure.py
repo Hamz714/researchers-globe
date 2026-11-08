@@ -5,13 +5,18 @@ Owner: Person B.
     path strength  = w_channel * product of edge weights on the path
     exposure(a)    = 1 - prod over paths (1 - path strength)
 
-A path runs from an asset to a chosen channel node. Edges are walked in either
-direction (the plan's example path "mine -> port -> country -> country <- channel"
-uses both). Rules that keep paths meaningful:
+Paths that reach the channel through the SAME touched node (e.g. mine -> AU -> CN and
+mine -> port -> AU -> CN both arrive via China) are not independent chances, so we
+keep only the strongest path per touched node before combining (prevents saturation).
+All paths are still returned, strongest first, for the UI.
+
+A path runs from an asset to a chosen channel node, following edges in their own
+direction and then the channel's TOUCHES edge backwards (the plan's example path
+"mine -> port -> country -> country <- channel"). Rules that keep paths meaningful:
   * paths are simple (no node twice) and at most `max_hops` edges long;
   * they never pass through another asset, an event or another channel;
   * they end at the first channel node reached.
-Known simplification: paths that share edges are treated as independent (plan).
+Paths through DIFFERENT touched nodes are still treated as independent (plan).
 """
 from __future__ import annotations
 
@@ -50,17 +55,24 @@ def propagate(graph: Graph, channel_weights: dict[str, float], asset_type: str =
               max_hops: int = 4, top_k: int = 50) -> tuple[list[Exposed], int]:
     """channel_weights maps channel ids (without the 'channel_' prefix) to w_channel.
 
+    Edges are walked FORWARD only (mine -> port -> country -> importing country,
+    mine -> owner -> listing country), so a Chinese mine is not exposed to Brazil just
+    because China imports Brazilian ore. A path ends where a chosen channel TOUCHES a node.
     Returns (top_k exposed assets sorted by exposure desc, dark_count).
     """
     types = dict(zip(graph.nodes["id"], graph.nodes["type"]))
-    targets = {f"channel_{c}": w for c, w in channel_weights.items()}
+    w_channel = {f"channel_{c}": w for c, w in channel_weights.items()}
 
-    adj: dict[str, dict[str, float]] = defaultdict(dict)  # undirected, keep the max weight per pair
+    out_edges: dict[str, dict[str, float]] = defaultdict(dict)
+    touched_by: dict[str, list[tuple[str, float]]] = defaultdict(list)
     for e in graph.edges.itertuples():
         if e.src not in types or e.dst not in types:
             continue
-        for a, b in ((e.src, e.dst), (e.dst, e.src)):
-            adj[a][b] = max(adj[a].get(b, 0.0), float(e.weight))
+        if e.type == "TOUCHES":
+            if e.src in w_channel:
+                touched_by[e.dst].append((e.src, float(e.weight)))
+        else:
+            out_edges[e.src][e.dst] = max(out_edges[e.src].get(e.dst, 0.0), float(e.weight))
 
     assets = [n for n, t in types.items() if t == asset_type]
     exposed: list[Exposed] = []
@@ -68,19 +80,24 @@ def propagate(graph: Graph, channel_weights: dict[str, float], asset_type: str =
         found: list[tuple[list[str], float]] = []
 
         def walk(node: str, path: list[str], strength: float) -> None:
-            for nxt, w in adj[node].items():
-                if nxt in path:
+            for nxt, w in out_edges[node].items():
+                if nxt in path or types.get(nxt) not in PASS_THROUGH:
                     continue
-                if nxt in targets:
-                    found.append((path + [nxt], strength * w * targets[nxt]))
-                elif len(path) < max_hops and types.get(nxt) in PASS_THROUGH:
-                    walk(nxt, path + [nxt], strength * w)
+                s = strength * w
+                for ch, w_touch in touched_by.get(nxt, []):
+                    found.append((path + [nxt, ch], s * w_touch * w_channel[ch]))
+                if len(path) < max_hops:
+                    walk(nxt, path + [nxt], s)
 
         walk(asset, [asset], 1.0)
         found = [(p, s) for p, s in found if s > 0]
         if found:
             found.sort(key=lambda ps: -ps[1])
-            exposed.append(Exposed(asset, noisy_or([s for _, s in found]),
+            best_per_touch: dict[str, float] = {}
+            for p, s in found:  # p[-2] is the node the channel touches
+                key = p[-2] + "|" + p[-1]
+                best_per_touch[key] = max(best_per_touch.get(key, 0.0), s)
+            exposed.append(Exposed(asset, noisy_or(list(best_per_touch.values())),
                                    [p for p, _ in found], [s for _, s in found]))
 
     exposed.sort(key=lambda x: (-x.exposure, x.asset_id))

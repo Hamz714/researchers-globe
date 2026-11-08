@@ -19,7 +19,9 @@ from reasoning import scoring
 from reasoning.judge import judge_article
 from reasoning.parser import choose_channels, load_channels, parse_question
 
-TOP_K = 50
+TOP_K = 50          # candidates returned (plan)
+EVIDENCE_K = 25     # candidates we pull GDELT evidence for (rate limit: ~6 s per request)
+PLACEBO_K = 10      # candidates that also get the placebo control query
 MAX_ARTICLES = 20
 CONTROL_TERMS = ["copper"]  # placebo term (plan); TODO(Person A): pick a better control per query
 
@@ -41,23 +43,28 @@ def _path_words(graph: Graph, path: list[str]) -> str:
 def _asset_context(graph: Graph, asset_id: str) -> dict:
     node = graph.node(asset_id)
     e = graph.edges
-    owners = e[(e["src"] == asset_id) & (e["type"] == "OWNED_BY")]["dst"].tolist()
-    owner = graph.node(owners[0])["name"] if owners else None
+    owned = e[(e["src"] == asset_id) & (e["type"] == "OWNED_BY")].sort_values("weight", ascending=False)
+    owner_node = graph.node(owned.iloc[0]["dst"]) if len(owned) else None
     country = graph.node(f"country_{node['country']}")["name"] if node.get("country") else None
-    return {"name": node["name"], "owner": owner, "country": country, "terms": _terms(node),
-            "wiki_title": node.get("wiki_title") or ""}
+    wiki = [t for t in [node.get("wiki_title"), owner_node.get("wiki_title") if owner_node else None]
+            if isinstance(t, str) and t]
+    return {"name": node["name"], "owner": owner_node["name"] if owner_node else None,
+            "owner_terms": _terms(owner_node) if owner_node else [],
+            "country": country, "terms": _terms(node), "wiki_titles": wiki}
 
 
-def _gather(asset: dict, channel_terms: list[str], criteria: dict, end: date) -> tuple[dict, list[dict]]:
+def _gather(asset: dict, channel_terms: list[str], criteria: dict, end: date,
+            with_control: bool = True) -> tuple[dict, list[dict]]:
     """Step 4: signals + recent articles for one asset. Imported lazily so tests stay offline."""
     from pipeline import fetch_gdelt
     from pipeline.signals import signals
 
-    asset_terms = asset["terms"] + [t for t in [asset["owner"]] if t]
+    asset_terms = asset["terms"] + asset["owner_terms"]
     win = criteria["window"]
     sig = signals(asset["name"], {
-        "asset_terms": asset_terms, "channel_terms": channel_terms, "control_terms": CONTROL_TERMS,
-        "wiki_titles": [asset["wiki_title"]] if asset["wiki_title"] else [],
+        "asset_terms": asset_terms, "channel_terms": channel_terms,
+        "control_terms": CONTROL_TERMS if with_control else [],
+        "wiki_titles": asset["wiki_titles"],
         "baseline_days": win["baseline_days"], "recent_days": win["recent_days"], "end": end,
     })
     arts = fetch_gdelt.articles(asset_terms, channel_terms, end - timedelta(days=win["recent_days"]), end,
@@ -83,12 +90,16 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
 
     channel_terms = sorted({t for c in chosen for t in library[c]["search_terms"]} | set(criteria["event"]["terms"]))
     results = []
-    for ex in top:
+    zero = {"news_z": 0.0, "tone_shift": 0.0, "attention_z": 0.0, "placebo_flag": False}
+    for rank, ex in enumerate(top):
         node = g.node(ex.asset_id)
         asset = _asset_context(g, ex.asset_id)
 
-        # 4. evidence (cached fetches)
-        sig, articles = _gather(asset, channel_terms, criteria, end)
+        # 4. evidence (cached fetches); beyond EVIDENCE_K the asset is scored on exposure alone
+        if rank < EVIDENCE_K:
+            sig, articles = _gather(asset, channel_terms, criteria, end, with_control=rank < PLACEBO_K)
+        else:
+            sig, articles = dict(zero), []
 
         # 5. judge each article against the channel on its strongest path
         best_channel = library[ex.paths[0][-1].removeprefix("channel_")]

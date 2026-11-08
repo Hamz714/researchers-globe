@@ -1,1 +1,38 @@
 port_id,name,country_iso2,lat,lon,commodity,source_url
+port_hedland,Port Hedland,AU,-20.31,118.58,iron_ore,https://en.wikipedia.org/wiki/Port_Hedland
+port_dampier,Dampier,AU,-20.66,116.71,iron_ore,https://en.wikipedia.org/wiki/Port_of_Dampier
+port_walcott,Port Walcott (Cape Lambert),AU,-20.59,117.19,iron_ore,https://en.wikipedia.org/wiki/Port_Walcott
+port_esperance,Esperance,AU,-33.87,121.90,iron_ore,https://en.wikipedia.org/wiki/Esperance_Port
+port_geraldton,Geraldton,AU,-28.78,114.60,iron_ore,https://en.wikipedia.org/wiki/Geraldton_Port
+port_whyalla,Whyalla,AU,-33.03,137.59,iron_ore,https://en.wikipedia.org/wiki/Whyalla
+port_ponta_da_madeira,Ponta da Madeira (Sao Luis),BR,-2.57,-44.37,iron_ore,https://en.wikipedia.org/wiki/Ponta_da_Madeira_Maritime_Terminal
+port_tubarao,Tubarao (Vitoria),BR,-20.29,-40.24,iron_ore,https://en.wikipedia.org/wiki/Port_of_Tubar%C3%A3o
+port_itaguai,Itaguai / Guaiba Island,BR,-22.93,-43.84,iron_ore,https://en.wikipedia.org/wiki/Port_of_Itagua%C3%AD
+port_acu,Port of Acu,BR,-21.83,-41.00,iron_ore,https://en.wikipedia.org/wiki/Port_of_A%C3%A7u
+port_ubu,Ponta Ubu,BR,-20.78,-40.57,iron_ore,https://en.wikipedia.org/wiki/Samarco
+port_saldanha,Saldanha Bay,ZA,-33.03,17.95,iron_ore,https://en.wikipedia.org/wiki/Port_of_Saldanha
+port_sept_iles,Sept-Iles,CA,50.20,-66.38,iron_ore,https://en.wikipedia.org/wiki/Port_of_Sept-%C3%8Eles
+port_cartier,Port-Cartier,CA,50.03,-66.87,iron_ore,https://en.wikipedia.org/wiki/Port-Cartier
+port_milne_inlet,Milne Inlet,CA,71.88,-80.90,iron_ore,https://en.wikipedia.org/wiki/Mary_River_Mine
+port_visakhapatnam,Visakhapatnam,IN,17.69,83.29,iron_ore,https://en.wikipedia.org/wiki/Visakhapatnam_Port
+port_gangavaram,Gangavaram,IN,17.62,83.23,iron_ore,https://en.wikipedia.org/wiki/Gangavaram_Port
+port_krishnapatnam,Krishnapatnam,IN,14.25,80.13,iron_ore,https://en.wikipedia.org/wiki/Krishnapatnam_Port
+port_paradip,Paradip,IN,20.26,86.67,iron_ore,https://en.wikipedia.org/wiki/Paradip_Port
+port_mormugao,Mormugao,IN,15.41,73.80,iron_ore,https://en.wikipedia.org/wiki/Mormugao_Port
+port_mangalore,New Mangalore,IN,12.92,74.81,iron_ore,https://en.wikipedia.org/wiki/New_Mangalore_Port
+port_pivdennyi,Pivdennyi,UA,46.62,31.02,iron_ore,https://en.wikipedia.org/wiki/Port_of_Pivdennyi
+port_lulea,Lulea,SE,65.58,22.15,iron_ore,https://en.wikipedia.org/wiki/Lule%C3%A5
+port_narvik,Narvik,NO,68.43,17.43,iron_ore,https://en.wikipedia.org/wiki/Ofotbanen
+port_kirkenes,Kirkenes,NO,69.73,30.05,iron_ore,https://en.wikipedia.org/wiki/Sydvaranger
+port_duluth,Duluth-Superior,US,46.78,-92.10,iron_ore,https://en.wikipedia.org/wiki/Port_of_Duluth%E2%80%93Superior
+port_two_harbors,Two Harbors,US,47.02,-91.67,iron_ore,https://en.wikipedia.org/wiki/Two_Harbors%2C_Minnesota
+port_huasco,Huasco (Guacolda),CL,-28.46,-71.22,iron_ore,https://en.wikipedia.org/wiki/Huasco
+port_caldera,Caldera (Punta Totoralillo),CL,-27.06,-70.83,iron_ore,https://en.wikipedia.org/wiki/Caldera%2C_Chile
+port_san_nicolas,San Nicolas,PE,-15.25,-75.23,iron_ore,https://en.wikipedia.org/wiki/Marcona_District
+port_nouadhibou,Nouadhibou,MR,20.90,-17.05,iron_ore,https://en.wikipedia.org/wiki/Mauritania_Railway
+port_pepel,Pepel,SL,8.59,-13.05,iron_ore,https://en.wikipedia.org/wiki/Pepel
+port_buchanan,Buchanan,LR,5.88,-10.04,iron_ore,https://en.wikipedia.org/wiki/Buchanan%2C_Liberia
+port_morebaya,Morebaya (Simandou),GN,9.60,-13.40,iron_ore,https://en.wikipedia.org/wiki/Simandou
+port_manzanillo,Manzanillo,MX,19.05,-104.31,iron_ore,https://en.wikipedia.org/wiki/Port_of_Manzanillo
+port_lazaro_cardenas,Lazaro Cardenas,MX,17.94,-102.18,iron_ore,https://en.wikipedia.org/wiki/L%C3%A1zaro_C%C3%A1rdenas%2C_Michoac%C3%A1n
+port_bandar_abbas,Bandar Abbas (Shahid Rajaee),IR,27.11,56.06,iron_ore,https://en.wikipedia.org/wiki/Shahid_Rajaee_Port

@@ -1,1 +1,41 @@
 exporter_iso2,importer_iso2,commodity,share,year,source_url
+AU,CN,iron_ore,0.851,2023,https://wits.worldbank.org/trade/comtrade/en/country/AUS/year/2023/tradeflow/Exports/partner/ALL/product/260111
+AU,JP,iron_ore,0.058,2023,https://wits.worldbank.org/trade/comtrade/en/country/AUS/year/2023/tradeflow/Exports/partner/ALL/product/260111
+AU,KR,iron_ore,0.053,2023,https://wits.worldbank.org/trade/comtrade/en/country/AUS/year/2023/tradeflow/Exports/partner/ALL/product/260111
+BR,CN,iron_ore,0.717,2023,https://wits.worldbank.org/trade/comtrade/en/country/BRA/year/2023/tradeflow/Exports/partner/ALL/product/260111
+BR,MY,iron_ore,0.062,2023,https://wits.worldbank.org/trade/comtrade/en/country/BRA/year/2023/tradeflow/Exports/partner/ALL/product/260111
+ZA,CN,iron_ore,0.575,2023,https://wits.worldbank.org/trade/comtrade/en/country/ZAF/year/2023/tradeflow/Exports/partner/ALL/product/260111
+ZA,MZ,iron_ore,0.125,2023,https://wits.worldbank.org/trade/comtrade/en/country/ZAF/year/2023/tradeflow/Exports/partner/ALL/product/260111
+ZA,NL,iron_ore,0.101,2023,https://wits.worldbank.org/trade/comtrade/en/country/ZAF/year/2023/tradeflow/Exports/partner/ALL/product/260111
+ZA,KR,iron_ore,0.062,2023,https://wits.worldbank.org/trade/comtrade/en/country/ZAF/year/2023/tradeflow/Exports/partner/ALL/product/260111
+IN,CN,iron_ore,0.986,2023,https://wits.worldbank.org/trade/comtrade/en/country/IND/year/2023/tradeflow/Exports/partner/ALL/product/260111
+UA,CZ,iron_ore,0.338,2023,https://wits.worldbank.org/trade/comtrade/en/country/UKR/year/2023/tradeflow/Exports/partner/ALL/product/260111
+UA,PL,iron_ore,0.276,2023,https://wits.worldbank.org/trade/comtrade/en/country/UKR/year/2023/tradeflow/Exports/partner/ALL/product/260111
+UA,SK,iron_ore,0.186,2023,https://wits.worldbank.org/trade/comtrade/en/country/UKR/year/2023/tradeflow/Exports/partner/ALL/product/260111
+UA,CN,iron_ore,0.109,2023,https://wits.worldbank.org/trade/comtrade/en/country/UKR/year/2023/tradeflow/Exports/partner/ALL/product/260111
+SE,SG,iron_ore,0.286,2023,https://wits.worldbank.org/trade/comtrade/en/country/SWE/year/2023/tradeflow/Exports/partner/ALL/product/260111
+SE,NL,iron_ore,0.277,2023,https://wits.worldbank.org/trade/comtrade/en/country/SWE/year/2023/tradeflow/Exports/partner/ALL/product/260111
+SE,DE,iron_ore,0.206,2023,https://wits.worldbank.org/trade/comtrade/en/country/SWE/year/2023/tradeflow/Exports/partner/ALL/product/260111
+SE,CN,iron_ore,0.086,2023,https://wits.worldbank.org/trade/comtrade/en/country/SWE/year/2023/tradeflow/Exports/partner/ALL/product/260111
+US,CA,iron_ore,0.861,2023,https://wits.worldbank.org/trade/comtrade/en/country/USA/year/2023/tradeflow/Exports/partner/ALL/product/260112
+CL,CN,iron_ore,0.860,2023,https://wits.worldbank.org/trade/comtrade/en/country/CHL/year/2023/tradeflow/Exports/partner/ALL/product/260111
+CL,BH,iron_ore,0.104,2023,https://wits.worldbank.org/trade/comtrade/en/country/CHL/year/2023/tradeflow/Exports/partner/ALL/product/260111
+PE,CN,iron_ore,0.966,2023,https://wits.worldbank.org/trade/comtrade/en/country/PER/year/2023/tradeflow/Exports/partner/ALL/product/260111
+PE,JP,iron_ore,0.034,2023,https://wits.worldbank.org/trade/comtrade/en/country/PER/year/2023/tradeflow/Exports/partner/ALL/product/260111
+MX,CN,iron_ore,1.0,2023,https://wits.worldbank.org/trade/comtrade/en/country/MEX/year/2023/tradeflow/Exports/partner/ALL/product/260111
+NO,NL,iron_ore,0.397,2023,https://wits.worldbank.org/trade/comtrade/en/country/NOR/year/2023/tradeflow/Exports/partner/ALL/product/260111
+NO,DE,iron_ore,0.264,2023,https://wits.worldbank.org/trade/comtrade/en/country/NOR/year/2023/tradeflow/Exports/partner/ALL/product/260111
+NO,GB,iron_ore,0.145,2023,https://wits.worldbank.org/trade/comtrade/en/country/NOR/year/2023/tradeflow/Exports/partner/ALL/product/260111
+NO,CN,iron_ore,0.081,2023,https://wits.worldbank.org/trade/comtrade/en/country/NOR/year/2023/tradeflow/Exports/partner/ALL/product/260111
+NO,IN,iron_ore,0.065,2023,https://wits.worldbank.org/trade/comtrade/en/country/NOR/year/2023/tradeflow/Exports/partner/ALL/product/260111
+MR,CN,iron_ore,0.478,2023,https://wits.worldbank.org/trade/comtrade/en/country/MRT/year/2023/tradeflow/Exports/partner/ALL/product/260111
+MR,DZ,iron_ore,0.234,2023,https://wits.worldbank.org/trade/comtrade/en/country/MRT/year/2023/tradeflow/Exports/partner/ALL/product/260111
+MR,IT,iron_ore,0.096,2023,https://wits.worldbank.org/trade/comtrade/en/country/MRT/year/2023/tradeflow/Exports/partner/ALL/product/260111
+MR,AU,iron_ore,0.075,2023,https://wits.worldbank.org/trade/comtrade/en/country/MRT/year/2023/tradeflow/Exports/partner/ALL/product/260111
+CA,CN,iron_ore,0.276,2023,https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260111 | https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260112
+CA,NL,iron_ore,0.162,2023,https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260111 | https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260112
+CA,JP,iron_ore,0.118,2023,https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260111 | https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260112
+CA,DE,iron_ore,0.076,2023,https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260111 | https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260112
+CA,KR,iron_ore,0.075,2023,https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260111 | https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260112
+CA,FR,iron_ore,0.054,2023,https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260111 | https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260112
+CA,US,iron_ore,0.038,2023,https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260111 | https://wits.worldbank.org/trade/comtrade/en/country/CAN/year/2023/tradeflow/Exports/partner/ALL/product/260112

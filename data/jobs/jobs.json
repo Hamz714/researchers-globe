@@ -1,0 +1,714 @@
+{
+"created": "2026-11-08T00:27:43",
+"end": "2026-11-08",
+"jobs": [
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Keetac+OR+%22US+Steel+Keetac%22+OR+%22Nippon+Steel%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Keetac+OR+%22US+Steel+Keetac%22+OR+%22Nippon+Steel%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Keetac+OR+%22US+Steel+Keetac%22+OR+%22Nippon+Steel%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Keetac+OR+%22US+Steel+Keetac%22+OR+%22Nippon+Steel%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Minntac+OR+%22US+Steel+Minntac%22+OR+%22Nippon+Steel%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Minntac+OR+%22US+Steel+Minntac%22+OR+%22Nippon+Steel%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Minntac+OR+%22US+Steel+Minntac%22+OR+%22Nippon+Steel%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Minntac+OR+%22US+Steel+Minntac%22+OR+%22Nippon+Steel%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hibbing+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hibbing+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hibbing+Taconite%22+OR+%22Cleveland-Cliffs%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hibbing+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Northshore+OR+%22Cleveland-Cliffs+Northshore%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Northshore+OR+%22Cleveland-Cliffs+Northshore%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Northshore+OR+%22Cleveland-Cliffs+Northshore%22+OR+%22Cleveland-Cliffs%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Northshore+OR+%22Cleveland-Cliffs+Northshore%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Tilden+OR+%22Cleveland-Cliffs+Tilden%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Tilden+OR+%22Cleveland-Cliffs+Tilden%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Tilden+OR+%22Cleveland-Cliffs+Tilden%22+OR+%22Cleveland-Cliffs%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Tilden+OR+%22Cleveland-Cliffs+Tilden%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22United+Taconite%22+OR+%22Cleveland-Cliffs+United+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22United+Taconite%22+OR+%22Cleveland-Cliffs+United+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22United+Taconite%22+OR+%22Cleveland-Cliffs+United+Taconite%22+OR+%22Cleveland-Cliffs%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22United+Taconite%22+OR+%22Cleveland-Cliffs+United+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22CalPortland+Baxter%22+OR+%22Taiheiyo+Cement%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22CalPortland+Baxter%22+OR+%22Taiheiyo+Cement%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22CalPortland+Baxter%22+OR+%22Taiheiyo+Cement%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22CalPortland+Baxter%22+OR+%22Taiheiyo+Cement%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bloom+Lake%22+OR+%22Quebec+Iron+Bloom+Lake%22+OR+%22Champion+Iron%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bloom+Lake%22+OR+%22Quebec+Iron+Bloom+Lake%22+OR+%22Champion+Iron%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bloom+Lake%22+OR+%22Quebec+Iron+Bloom+Lake%22+OR+%22Champion+Iron%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bloom+Lake%22+OR+%22Quebec+Iron+Bloom+Lake%22+OR+%22Champion+Iron%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Fire+Lake%22+OR+%22ArcelorMittal+Fire+Lake%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Fire+Lake%22+OR+%22ArcelorMittal+Fire+Lake%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Fire+Lake%22+OR+%22ArcelorMittal+Fire+Lake%22+OR+ArcelorMittal%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Fire+Lake%22+OR+%22ArcelorMittal+Fire+Lake%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Carol+Lake%22+OR+%22IOC+Carol+Lake%22+OR+%22Rio+Tinto%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Carol+Lake%22+OR+%22IOC+Carol+Lake%22+OR+%22Rio+Tinto%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Carol+Lake%22+OR+%22IOC+Carol+Lake%22+OR+%22Rio+Tinto%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Carol+Lake%22+OR+%22IOC+Carol+Lake%22+OR+%22Rio+Tinto%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mont+Wright%22+OR+%22ArcelorMittal+Mont+Wright%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mont+Wright%22+OR+%22ArcelorMittal+Mont+Wright%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mont+Wright%22+OR+%22ArcelorMittal+Mont+Wright%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mary+River%22+OR+%22Baffinland+Mary+River%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mary+River%22+OR+%22Baffinland+Mary+River%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mary+River%22+OR+%22Baffinland+Mary+River%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Scully+OR+%22Tacora+Resources+Scully%22+OR+%22Millstreet+Capital+Management%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Scully+OR+%22Tacora+Resources+Scully%22+OR+%22Millstreet+Capital+Management%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Scully+OR+%22Tacora+Resources+Scully%22+OR+%22Millstreet+Capital+Management%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Serra+Sul%22+OR+%22Vale+Serra+Sul%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Serra+Sul%22+OR+%22Vale+Serra+Sul%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Serra+Sul%22+OR+%22Vale+Serra+Sul%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Serra+Azul%22+OR+%22ArcelorMittal+Serra+Azul%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Serra+Azul%22+OR+%22ArcelorMittal+Serra+Azul%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Serra+Azul%22+OR+%22ArcelorMittal+Serra+Azul%22+OR+ArcelorMittal%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Itabira+OR+%22Vale+Itabira%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Itabira+OR+%22Vale+Itabira%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Itabira+OR+%22Vale+Itabira%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Mariana+OR+%22Vale+Mariana%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Mariana+OR+%22Vale+Mariana%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Mariana+OR+%22Vale+Mariana%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Usiminas+East%22+OR+%22Usinas+Siderurgicas+de+Minas+Gerais%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Usiminas+East%22+OR+%22Usinas+Siderurgicas+de+Minas+Gerais%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Usiminas+East%22+OR+%22Usinas+Siderurgicas+de+Minas+Gerais%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Usiminas+West%22+OR+%22Usinas+Siderurgicas+de+Minas+Gerais%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Usiminas+West%22+OR+%22Usinas+Siderurgicas+de+Minas+Gerais%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Usiminas+West%22+OR+%22Usinas+Siderurgicas+de+Minas+Gerais%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Vetria+La%C3%ADs%22+OR+Rumo%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Vetria+La%C3%ADs%22+OR+Rumo%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Vetria+La%C3%ADs%22+OR+Rumo%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Minas-Rio%22+OR+%22Anglo+American+Minas-Rio%22+OR+%22Anglo+American%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Minas-Rio%22+OR+%22Anglo+American+Minas-Rio%22+OR+%22Anglo+American%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Minas-Rio%22+OR+%22Anglo+American+Minas-Rio%22+OR+%22Anglo+American%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Vetria+Monjolinho%22+OR+Rumo%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Vetria+Monjolinho%22+OR+Rumo%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Vetria+Monjolinho%22+OR+Rumo%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Vallourec+Pau+Branco%22+OR+%22Vallourec+Tubos+do+Brasil+Ltda%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Vallourec+Pau+Branco%22+OR+%22Vallourec+Tubos+do+Brasil+Ltda%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Vallourec+Pau+Branco%22+OR+%22Vallourec+Tubos+do+Brasil+Ltda%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22BAMIN+Pedra+de+Ferro%22+OR+%22Eurasian+Resources%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22BAMIN+Pedra+de+Ferro%22+OR+%22Eurasian+Resources%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22BAMIN+Pedra+de+Ferro%22+OR+%22Eurasian+Resources%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Paraopeba+OR+%22Vale+Paraopeba%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Paraopeba+OR+%22Vale+Paraopeba%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Paraopeba+OR+%22Vale+Paraopeba%22+OR+Vale%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Sri+Anjani+Pandlimarri%22+OR+%22Sri+Anjani+Mines+%26+Minerals+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Sri+Anjani+Pandlimarri%22+OR+%22Sri+Anjani+Mines+%26+Minerals+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Sri+Anjani+Pandlimarri%22+OR+%22Sri+Anjani+Mines+%26+Minerals+Pvt%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Sri+Anjani+Pandlimarri%22+OR+%22Sri+Anjani+Mines+%26+Minerals+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22BV+Joshi+Ganigattu%22+OR+%22Joshi+Mines+%26+Minerals+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22BV+Joshi+Ganigattu%22+OR+%22Joshi+Mines+%26+Minerals+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22BV+Joshi+Ganigattu%22+OR+%22Joshi+Mines+%26+Minerals+Pvt%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22BV+Joshi+Ganigattu%22+OR+%22Joshi+Mines+%26+Minerals+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Shree+Arya+Lakshmi+Tavasikonda%22+OR+%22Shree+Arya+Lakshmi+Steel+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Shree+Arya+Lakshmi+Tavasikonda%22+OR+%22Shree+Arya+Lakshmi+Steel+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Shree+Arya+Lakshmi+Tavasikonda%22+OR+%22Shree+Arya+Lakshmi+Steel+Pvt%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Shree+Arya+Lakshmi+Tavasikonda%22+OR+%22Shree+Arya+Lakshmi+Steel+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22EV+Ranga+Reddy+Pagadapalli%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22EV+Ranga+Reddy+Pagadapalli%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22EV+Ranga+Reddy+Pagadapalli%22+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22EV+Ranga+Reddy+Pagadapalli%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22D+Venkata+Subbamma+Hanuman%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22D+Venkata+Subbamma+Hanuman%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22D+Venkata+Subbamma+Hanuman%22+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22D+Venkata+Subbamma+Hanuman%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22B+Sanjeev+Reddy+Seetharamapuram%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22B+Sanjeev+Reddy+Seetharamapuram%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22B+Sanjeev+Reddy+Seetharamapuram%22+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22B+Sanjeev+Reddy+Seetharamapuram%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gutupalli+OR+%22Dhigvijay+Minerals+Gutupalli%22+OR+%22Dhigvijay+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gutupalli+OR+%22Dhigvijay+Minerals+Gutupalli%22+OR+%22Dhigvijay+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gutupalli+OR+%22Dhigvijay+Minerals+Gutupalli%22+OR+%22Dhigvijay+Minerals%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gutupalli+OR+%22Dhigvijay+Minerals+Gutupalli%22+OR+%22Dhigvijay+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gaganapalli+OR+%22IBC+Gaganapalli%22+OR+IBC%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gaganapalli+OR+%22IBC+Gaganapalli%22+OR+IBC%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gaganapalli+OR+%22IBC+Gaganapalli%22+OR+IBC%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gaganapalli+OR+%22IBC+Gaganapalli%22+OR+IBC%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22K+Rajamohan+Reddy+Chabali%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22K+Rajamohan+Reddy+Chabali%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22K+Rajamohan+Reddy+Chabali%22+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22K+Rajamohan+Reddy+Chabali%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Chabali+OR+%22Benita+Industries+Chabali%22+OR+%22Benita+Industries%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Chabali+OR+%22Benita+Industries+Chabali%22+OR+%22Benita+Industries%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Chabali+OR+%22Benita+Industries+Chabali%22+OR+%22Benita+Industries%22%29+copper&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Chabali+OR+%22Benita+Industries+Chabali%22+OR+%22Benita+Industries%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Sri+Padmavathi+Veldurthi%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Sri+Padmavathi+Veldurthi%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Sri+Padmavathi+Veldurthi%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gandrai+OR+%22Lakshmi+Enterprises+Gandrai%22+OR+%22Lakshmi+Enterprises%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gandrai+OR+%22Lakshmi+Enterprises+Gandrai%22+OR+%22Lakshmi+Enterprises%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Gandrai+OR+%22Lakshmi+Enterprises+Gandrai%22+OR+%22Lakshmi+Enterprises%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Company+Gutupalli%22+OR+%22Gutupalli+Mining+Company+Gutupalli%22+OR+%22Gutupalli+Mining%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Company+Gutupalli%22+OR+%22Gutupalli+Mining+Company+Gutupalli%22+OR+%22Gutupalli+Mining%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Company+Gutupalli%22+OR+%22Gutupalli+Mining+Company+Gutupalli%22+OR+%22Gutupalli+Mining%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Kirandul+Deposit+14+NMZ%22+OR+%22NMDC+Bailadila-Kirandul+Deposit+14+NMZ%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Kirandul+Deposit+14+NMZ%22+OR+%22NMDC+Bailadila-Kirandul+Deposit+14+NMZ%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Kirandul+Deposit+14+NMZ%22+OR+%22NMDC+Bailadila-Kirandul+Deposit+14+NMZ%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Dalli+OR+%22SAIL+Dalli%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Dalli+OR+%22SAIL+Dalli%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Dalli+OR+%22SAIL+Dalli%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Kirandul+Deposit+11C%22+OR+%22NMDC+Bailadila-Kirandul+Deposit+11C%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Kirandul+Deposit+11C%22+OR+%22NMDC+Bailadila-Kirandul+Deposit+11C%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Kirandul+Deposit+11C%22+OR+%22NMDC+Bailadila-Kirandul+Deposit+11C%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Rajhara+OR+%22SAIL+Rajhara%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Rajhara+OR+%22SAIL+Rajhara%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Rajhara+OR+%22SAIL+Rajhara%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Bacheli+Deposit+5%22+OR+%22NMDC+Bailadila-Bacheli+Deposit+5%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Bacheli+Deposit+5%22+OR+%22NMDC+Bailadila-Bacheli+Deposit+5%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Bacheli+Deposit+5%22+OR+%22NMDC+Bailadila-Bacheli+Deposit+5%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mahamaya-Dulki%22+OR+%22SAIL+Mahamaya-Dulki%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mahamaya-Dulki%22+OR+%22SAIL+Mahamaya-Dulki%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mahamaya-Dulki%22+OR+%22SAIL+Mahamaya-Dulki%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Rowghat+OR+%22SAIL+Rowghat%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Rowghat+OR+%22SAIL+Rowghat%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Rowghat+OR+%22SAIL+Rowghat%22+OR+SAIL%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Bacheli+Deposit+10%22+OR+%22NMDC+Bailadila-Bacheli+Deposit+10%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Bacheli+Deposit+10%22+OR+%22NMDC+Bailadila-Bacheli+Deposit+10%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bailadila-Bacheli+Deposit+10%22+OR+%22NMDC+Bailadila-Bacheli+Deposit+10%22+OR+%22National+Mineral+Development%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22LMEL+Surjagarh%22+OR+%22Lloyds+Metals+and+Energy%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22LMEL+Surjagarh%22+OR+%22Lloyds+Metals+and+Energy%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22LMEL+Surjagarh%22+OR+%22Lloyds+Metals+and+Energy%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Kedia+Lohakana%22+OR+%22Kedia+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Kedia+Lohakana%22+OR+%22Kedia+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Kedia+Lohakana%22+OR+%22Kedia+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22DRG+Preetampuri%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22DRG+Preetampuri%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22DRG+Preetampuri%22+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Narda+OR+%22Prateek+Minerals+Narda%22+OR+%22Prateek+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Narda+OR+%22Prateek+Minerals+Narda%22+OR+%22Prateek+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Narda+OR+%22Prateek+Minerals+Narda%22+OR+%22Prateek+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Nippon_Steel/daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Cleveland-Cliffs/daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/ArcelorMittal/daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Rio_Tinto/daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Vale_S.A./daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Anglo_American_plc/daily/20260902/20261108",
+"kind": "wiki"
+},
+{
+"url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Steel_Authority_of_India/daily/20260902/20261108",
+"kind": "wiki"
+}
+]
+}
