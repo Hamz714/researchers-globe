@@ -398,7 +398,7 @@ def _measure_label(m: dict) -> str:
     if m["kind"] == "edits":
         return "spike in Wikipedia edits"
     if m["kind"] == "live_edits":
-        return "Wikipedia page edited in the last " + _window_words(m.get("window_minutes", 60))
+        return "Edited on Wikipedia in the last " + _window_words(m.get("window_minutes", 60))
     if m["weather"] == "any":
         return "notable weather"
     label = WEATHER[m["weather"]][4]
@@ -422,33 +422,41 @@ def _ago(ts: float, now: float) -> str:
 
 
 def _live_edits(m: dict, items: list[dict]) -> dict[str, dict]:
-    """Things whose Wikipedia page was edited in the window, from the live stream (pipeline/live_wiki.py)."""
+    """Things with English Wikipedia edits in the window, from the live stream (pipeline/live_wiki.py):
+    edits to the thing's own page, and to articles whose title names it ("Springfield, Illinois")."""
     import time
 
     from pipeline.live_wiki import LIVE
 
     now = time.time()
-    since = now - 60 * m.get("window_minutes", 60)
+    win = m.get("window_minutes", 60)
+    since = now - 60 * win
     out = {}
     for it in items:
-        if not it["wiki_title"]:
-            continue
-        edits = LIVE.edits_for(it["wiki_title"], since)
+        edits = LIVE.edits_for_thing(it["id"], since)
         if not edits:
             continue
         n = len(edits)
-        humans = [e for e in edits if not e["bot"]]
+        own = [e for e in edits if e["via"] == "page"]
+        humans = sum(1 for e in edits if not e["bot"])
+        articles = list(dict.fromkeys(e["title"] for e in edits[::-1]))
         last = edits[-1]
+        parts = []
+        if own:
+            parts.append(f"{len(own)} to its own page '{own[0]['title']}'{it.get('wiki_note', '') if own[0]['title'] == it.get('wiki_title') else ''}")
+        if n - len(own):
+            named = [a for a in articles if a != (own[0]["title"] if own else None)]
+            parts.append(f"{n - len(own)} to {len(named)} article{'s' if len(named) != 1 else ''} naming it, e.g. "
+                         + ", ".join(f"'{a}'" for a in named[:3]))
         comment = f": \u201c{last['comment'][:80]}\u201d" if last["comment"] else ""
         out[it["id"]] = {
-            "score": round(1.0 - 0.6 ** n, 4), "z": 0.0,
-            "tier": "high" if n >= 5 else "medium" if n >= 2 else "low",
-            "reason": (f"Wikipedia page '{it['wiki_title']}'{it.get('wiki_note', '')} edited {n} time{'s' if n > 1 else ''} "
-                       f"in the last {_window_words(m.get('window_minutes', 60))} ({len(humans)} by people, "
-                       f"{n - len(humans)} by bots); latest {_ago(last['ts'], now)} by {last['user']}"
-                       f"{' (bot)' if last['bot'] else ''}{comment}."),
-            "evidence": [{"title": f"Edit by {e['user']}{' (bot)' if e['bot'] else ''}, {_ago(e['ts'], now)}"
-                                   + (f": {e['comment'][:70]}" if e['comment'] else ""),
+            "score": round(1.0 - 0.85 ** n, 4), "z": 0.0,
+            "tier": "high" if n >= 10 else "medium" if n >= 3 else "low",
+            "reason": (f"{n} English Wikipedia edit{'s' if n > 1 else ''} in the last {_window_words(win)} "
+                       f"({'; '.join(parts)}); {humans} by people, {n - humans} by bots. Latest {_ago(last['ts'], now)}: "
+                       f"'{last['title']}' by {last['user']}{' (bot)' if last['bot'] else ''}{comment}."),
+            "evidence": [{"title": f"'{e['title']}' edited by {e['user']}{' (bot)' if e['bot'] else ''}, {_ago(e['ts'], now)}"
+                                   + (f": {e['comment'][:60]}" if e['comment'] else ""),
                           "url": e["url"], "date": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime(e["ts"])),
                           "judge": "relevant", "confidence": 1.0} for e in edits[::-1][:5]]}
     return out
@@ -615,9 +623,10 @@ def execute(plan: dict, text: str, end: date | None = None) -> dict:
                 lab = _measure_label(m)
                 ev_name = f"{lab[:1].upper()}{lab[1:]}"
                 channel = {"id": "live_edits",
-                           "reason": "Live English Wikipedia edits to each thing's page (Wikimedia EventStreams, one "
-                                     "streaming connection, updated within seconds). 1 edit low, 2-4 medium, 5+ high. "
-                                     "Edits show attention, not importance."}
+                           "reason": "Live English Wikipedia edits (Wikimedia EventStreams, one streaming connection, "
+                                     "updated within seconds) to each thing's own page and to articles whose title names "
+                                     "it, e.g. 'Springfield, Illinois' counts for Illinois. 1-2 edits low, 3-9 medium, "
+                                     "10+ high. Edits show attention, not importance."}
             else:
                 lab = _measure_label(m)
                 fields = ", ".join(WEATHER[k][4] for k in ANY_KINDS) if m["weather"] == "any" else WEATHER[m["weather"]][0]

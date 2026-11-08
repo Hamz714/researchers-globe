@@ -79,7 +79,7 @@ def live_feed(limit: int = 20) -> list[dict]:
         names.update({t["id"]: t for t in things(kind)})
     out = []
     for e in LIVE.recent(max(1, min(limit, 100))):
-        ids = [tid for _, tid in e["things"]]
+        ids = [t[1] for t in e["things"]]
         first = names.get(ids[0]) if ids else None
         out.append({**e, "thing_ids": ids, "name": first["name"] if first else e["title"],
                     "lat": first["lat"] if first else None, "lon": first["lon"] if first else None})
@@ -134,10 +134,10 @@ def health() -> dict:
 SCREEN_PRESETS = [  # suggestion chips; the first three update live (Wikimedia edit stream)
     {"id": "screen_live_countries", "label": "LIVE: countries being edited on Wikipedia right now",
      "query": "Which countries are being edited on Wikipedia right now?", "kind": "other"},
-    {"id": "screen_live_companies", "label": "LIVE: mining companies edited in the last hour",
-     "query": "Which mining companies have been edited on Wikipedia in the last hour?", "kind": "other"},
-    {"id": "screen_live_states", "label": "LIVE: US states edited in the last 30 minutes",
-     "query": "Which US states have been edited on Wikipedia in the last 30 minutes?", "kind": "other"},
+    {"id": "screen_live_europe", "label": "LIVE: European countries being edited right now",
+     "query": "Which countries in Europe are being edited on Wikipedia right now?", "kind": "other"},
+    {"id": "screen_live_states", "label": "LIVE: US states edited in the last 15 minutes",
+     "query": "Which US states have been edited on Wikipedia in the last 15 minutes?", "kind": "other"},
     {"id": "screen_ports_weather", "label": "Export ports in the rain or wind right now",
      "query": "Which export ports are in the rain or wind right now?", "kind": "other"},
     {"id": "screen_states_views", "label": "US states: spike in Wikipedia views",

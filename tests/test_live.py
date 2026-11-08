@@ -9,7 +9,7 @@ os.environ["GLOBE_OFFLINE"] = "1"
 
 from pipeline.live_wiki import LIVE, LiveWiki  # noqa: E402
 from reasoning.plan import execute, make_plan, rule_plan  # noqa: E402
-from reasoning.things import all_wiki_titles, detect_kind, things  # noqa: E402
+from reasoning.things import all_wiki_titles, detect_kind, mention_patterns, things  # noqa: E402
 
 
 def ev(title, ago=60, bot=False, wiki="enwiki", ns=0, typ="edit", user="Alice"):
@@ -24,7 +24,7 @@ def fresh_stream(tmp_path, monkeypatch):
     from reasoning import decision_model as dm
     monkeypatch.setattr(dm, "default_backends", lambda: [])
     LIVE.edits.clear()
-    LIVE.set_watch(all_wiki_titles())
+    LIVE.set_watch(all_wiki_titles(), mention_patterns())
     yield
     LIVE.edits.clear()
 
@@ -59,7 +59,7 @@ def test_handle_filters_to_watched_english_articles():
 
 
 def test_live_question_counts_window_and_tiers():
-    for _ in range(5):
+    for _ in range(10):
         LIVE.handle(ev("China", ago=120))
     LIVE.handle(ev("Brazil", ago=300, bot=True))
     LIVE.handle(ev("Australia", ago=7200))          # outside "right now" (60 min)
@@ -147,3 +147,36 @@ def test_sse_http_error_is_reported(monkeypatch):
     monkeypatch.setattr(requests, "get", lambda *a, **k: Resp())
     w._run()
     assert w.last_error.startswith("RuntimeError: HTTP 403") and "user-agent" in w.last_error and not w.connected
+
+
+@pytest.mark.parametrize("title,want,not_want", [
+    ("2026 Brazilian Grand Prix", {"country_BR"}, set()),
+    ("Springfield, Illinois", {"state_IL"}, set()),
+    ("Atlanta, Georgia", {"state_GA"}, set()),
+    ("Papua New Guinea", set(), {"country_GN"}),
+    ("New Mexico State University", {"state_NM"}, {"country_MX"}),
+    ("Washington, D.C.", set(), {"state_WA"}),
+    ("West Virginia University", {"state_WV"}, {"state_VA"}),
+    ("Latin American music", set(), {"country_US"}),
+    ("Port Hedland International Airport", {"port_hedland"}, set()),
+    ("Turkey–United States relations", {"country_TR", "country_US"}, set()),
+])
+def test_title_mentions(title, want, not_want):
+    got = {t[1] for t in LIVE.match(title)}
+    assert want <= got and not (not_want & got)
+
+
+def test_mentions_count_and_are_explained():
+    LIVE.handle(ev("Illinois", ago=100))                     # its own page
+    LIVE.handle(ev("Springfield, Illinois", ago=50))          # an article naming it
+    LIVE.handle(ev("Illinois Route 176", ago=40, bot=True))
+    got = {r["name"]: r for r in execute(make_plan("US states edited on Wikipedia in the last hour"), "x")["results"]}
+    il = got["Illinois"]
+    assert il["tier"] == "medium" and "1 to its own page" in il["reason"] and "2 to 2 articles naming it" in il["reason"]
+    assert il["evidence"][0]["title"].startswith("'Illinois Route 176'")
+
+
+def test_old_snapshot_records_still_work():
+    LIVE.edits.append({"title": "China", "things": [["country", "country_CN"]], "ts": time.time() - 30, "user": "A",
+                       "bot": False, "type": "edit", "comment": "", "url": "https://en.wikipedia.org/wiki/China"})
+    assert LIVE.edits_for_thing("country_CN", time.time() - 60)[0]["via"] == "page"

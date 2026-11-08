@@ -200,3 +200,87 @@ def list_rows(kind: str, items: list[dict]) -> list[dict]:
                      "score": round(size / top, 4), "components": dict(blank), "paths": paths,
                      "reason": reason, "evidence": []})
     return rows
+
+
+# ------------------------------------------------------------------ live-edit "mentions"
+# Exact page edits are rare (one per ~30 min across all 226 watched pages on a quiet morning), so the
+# live layer also counts edits to articles whose TITLE names the thing: "2026 Brazilian Grand Prix" ->
+# Brazil, "Springfield, Illinois" -> Illinois, "Port Hedland International Airport" -> Port Hedland.
+# Patterns are Python regexes (fixed-width lookbehinds only); the exclusions avoid the obvious traps.
+DEMONYMS = {
+    "Andorra": ["Andorran"], "United Arab Emirates": ["Emirati", "UAE"], "Afghanistan": ["Afghan"],
+    "Albania": ["Albanian"], "Armenia": ["Armenian"], "Angola": ["Angolan"], "Argentina": ["Argentine", "Argentinian"],
+    "Austria": ["Austrian"], "Australia": ["Australian"], "Azerbaijan": ["Azerbaijani"], "Bosnia and Herzegovina": ["Bosnian"],
+    "Bangladesh": ["Bangladeshi"], "Belgium": ["Belgian"], "Bulgaria": ["Bulgarian"], "Bahrain": ["Bahraini"],
+    "Bolivia": ["Bolivian"], "Brazil": ["Brazilian"], "Bhutan": ["Bhutanese"], "Belarus": ["Belarusian"],
+    "Canada": ["Canadian"], "Switzerland": ["Swiss"], "Chile": ["Chilean"], "Cameroon": ["Cameroonian"],
+    "China": ["Chinese", "PRC"], "Colombia": ["Colombian"], "Czech Republic": ["Czech", "Czechia"], "Germany": ["German"],
+    "Algeria": ["Algerian"], "Egypt": ["Egyptian"], "Spain": ["Spanish"], "Finland": ["Finnish"], "France": ["French"],
+    "Gabon": ["Gabonese"], "United Kingdom": ["British", "UK", "England", "Scotland", "Wales", "Northern Ireland", "Scottish", "Welsh"],
+    "Greece": ["Greek"], "Hungary": ["Hungarian"], "Indonesia": ["Indonesian"], "India": [r"(?<!American )Indian"],
+    "Iran": ["Iranian"], "Italy": ["Italian"], "Japan": ["Japanese"], "Kenya": ["Kenyan"], "Cambodia": ["Cambodian"],
+    "North Korea": ["North Korean"], "South Korea": ["South Korean"], "Kazakhstan": ["Kazakh", "Kazakhstani"],
+    "Laos": ["Laotian"], "Liberia": ["Liberian"], "Luxembourg": ["Luxembourgish"], "Morocco": ["Moroccan"],
+    "Mali": ["Malian"], "Mongolia": ["Mongolian"], "Mauritania": ["Mauritanian"], "Mexico": ["Mexican"],
+    "Malaysia": ["Malaysian"], "Mozambique": ["Mozambican"], "Namibia": ["Namibian"], "Nigeria": ["Nigerian"],
+    "Netherlands": ["Dutch"], "Norway": ["Norwegian"], "Nepal": ["Nepali", "Nepalese"], "Oman": ["Omani"],
+    "Peru": ["Peruvian"], "Philippines": ["Filipino", "Philippine"], "Pakistan": ["Pakistani"], "Poland": ["Polish"],
+    "Qatar": ["Qatari"], "Romania": ["Romanian"], "Serbia": ["Serbian"], "Russia": ["Russian"], "Saudi Arabia": ["Saudi"],
+    "Sudan": [r"(?<!South )Sudanese"], "Sweden": ["Swedish"], "Singapore": ["Singaporean"],
+    "Slovenia": ["Slovenian", "Slovene"], "Slovakia": ["Slovak"], "Sierra Leone": ["Sierra Leonean"], "Thailand": ["Thai"],
+    "Tunisia": ["Tunisian"], "Turkey": ["Turkish", "Türkiye"], "Taiwan": ["Taiwanese"], "Ukraine": ["Ukrainian"],
+    "United States": [r"(?<!Latin )(?<!South )(?<!North )(?<!Central )(?<!Native )American", "U\\.S\\.", "US", "USA"],
+    "Uzbekistan": ["Uzbek"], "Venezuela": ["Venezuelan"], "Vietnam": ["Vietnamese"], "South Africa": ["South African"],
+    "Zambia": ["Zambian"], "Hong Kong": ["Hongkonger"],
+}
+NAME_PATTERNS = {   # where the plain name is a trap
+    "Guinea": r"(?<!New )(?<!Equatorial )(?<!Papua )\bGuinea\b(?![- ](?:Bissau|pig))",
+    "Sudan": r"(?<!South )\bSudan\b",
+    "Mexico": r"(?<!New )\bMexico\b",
+    "Georgia": r"(?<=, )Georgia\b|\bGeorgia \(U\.S\. state\)",
+    "Washington": r"(?<=, )Washington\b(?!,? D\.C\.)|\bWashington \(state\)",
+    "Virginia": r"(?<!West )\bVirginia\b",
+    "Kansas": r"(?<!Ar)\bKansas\b(?! City, Missouri)",
+}
+COMPANY_TERMS = {   # unambiguous short names; the rest only count edits to their own page
+    "company_bhp": ["BHP"], "company_rio_tinto": ["Rio Tinto Group", r"Rio Tinto (?:plc|Limited|Iron Ore)"],
+    "company_vale": ["Vale S\\.A\\.", "Vale SA"], "company_fortescue": ["Fortescue Metals", "Fortescue Ltd"],
+    "company_anglo_american": ["Anglo American plc", "Anglo American Platinum"],
+}
+AMBIGUOUS_COMPANY = {"Vale S.A.", "Rio Tinto", "Fortescue (company)", "Mineral Resources", "CAP S.A.", "Anglo American plc"}
+
+
+def _term(t: str) -> str:
+    """A plain word/phrase -> whole-word regex; anything already written as a regex is kept as is."""
+    return t if any(c in t for c in "\\(|") else r"\b" + re.escape(t) + r"\b"
+
+
+@lru_cache(maxsize=1)
+def mention_patterns() -> tuple[tuple[str, tuple[tuple[str, str], ...]], ...]:
+    """(regex, ((kind, id), ...)) pairs; an edited article whose title matches counts for those things."""
+    pats: dict[str, list[tuple[str, str]]] = {}
+
+    def add(p: str, kind: str, tid: str) -> None:
+        pats.setdefault(p, []).append((kind, tid))
+
+    for it in _load("country"):
+        add(NAME_PATTERNS.get(it["name"], _term(it["name"])), "country", it["id"])
+        if it["wiki_title"] and it["wiki_title"] != it["name"]:         # Türkiye -> "Turkey"
+            add(_term(it["wiki_title"]), "country", it["id"])
+        for d in DEMONYMS.get(it["name"], []):
+            add(_term(d) if not d.startswith("(?") else d + r"\b", "country", it["id"])
+    for it in _load("state"):
+        add(NAME_PATTERNS.get(it["name"], _term(it["name"])), "state", it["id"])
+    for it in _load("port"):
+        if it["wiki_title"]:
+            add(_term(it["wiki_title"]), "port", it["id"])
+    for it in _load("company"):
+        terms = COMPANY_TERMS.get(it["id"], [])
+        if it["wiki_title"] and it["wiki_title"] not in AMBIGUOUS_COMPANY:
+            terms = terms + [re.sub(r" \(.*\)$", "", it["wiki_title"])]
+        for t in terms:
+            add(_term(t), "company", it["id"])
+    for it in _load("mine"):
+        if it["wiki_title"] and not it["wiki_note"]:          # the mine's own article
+            add(_term(it["wiki_title"]), "mine", it["id"])
+    return tuple((p, tuple(v)) for p, v in pats.items())
