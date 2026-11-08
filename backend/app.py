@@ -88,8 +88,33 @@ def health() -> dict:
     return {"ok": True, "mode": "pipeline" if use_pipeline() else "mock"}
 
 
+# Condition screens ("which <mines | US states> where <condition>?", reasoning/screen.py), shown
+# first in the preset chips. Live data (Wikipedia, Open-Meteo), cached; not precomputed.
+SCREEN_PRESETS = [
+    {"id": "screen_states_views", "label": "US states: spike in Wikipedia views",
+     "query": "Which US states have a spike in Wikipedia views?", "kind": "other"},
+    {"id": "screen_states_edits", "label": "US states: spike in Wikipedia edits",
+     "query": "Which US states have a spike in Wikipedia edits?", "kind": "other"},
+    {"id": "screen_states_cold", "label": "US states below 0 °C right now",
+     "query": "Which US states are below 0 degrees right now?", "kind": "other"},
+    {"id": "screen_mines_wind", "label": "Mines where it is windy right now",
+     "query": "Which iron ore mines are windy right now?", "kind": "other"},
+    {"id": "screen_mines_views", "label": "Mines: spike in Wikipedia views",
+     "query": "Which iron ore mines have a spike in Wikipedia views?", "kind": "other"},
+]
+
+
 @app.post("/query", response_model=QueryResult)
 def query(req: QueryRequest) -> dict:
+    from reasoning.screen import parse_screen, screen
+
+    spec = parse_screen(req.text)
+    if spec is not None:
+        try:
+            return _remember(req.text, screen(req.text, spec))
+        except Exception as e:
+            log.exception("screen failed")
+            raise HTTPException(status_code=503, detail=f"screen failed: {e}") from e
     preset = _preset_for(req.text)
     if preset is not None:
         cached = PRESET_RESULTS / f"{preset['id']}.json"
@@ -112,7 +137,7 @@ def query(req: QueryRequest) -> dict:
 
 @app.get("/presets", response_model=list[Preset])
 def presets() -> list[dict]:
-    return [{k: p[k] for k in ("id", "label", "query", "kind")} for p in _presets()]
+    return SCREEN_PRESETS + [{k: p[k] for k in ("id", "label", "query", "kind")} for p in _presets()]
 
 
 @lru_cache(maxsize=1)
@@ -126,10 +151,28 @@ def _asset_points() -> list[dict]:
 
 
 @app.get("/assets", response_model=list[AssetPoint])
-def assets() -> list[dict]:
-    """All assets (real graph if built, else the 20 mock mines). Not in the plan's contract:
-    added so the globe can draw dark assets as grey dots (decision, 8 Nov)."""
+def assets(kind: str = "mine") -> list[dict]:
+    """All assets of a kind (mine: real graph if built, else the 20 mock mines; state: the 50 US
+    states). Not in the plan's contract: added so the globe can draw dark assets as grey dots."""
+    if kind == "state":
+        from reasoning.screen import things
+
+        return [{"id": t["id"], "name": t["name"], "lat": t["lat"], "lon": t["lon"], "country": "US"}
+                for t in things("state")]
     return _asset_points()
+
+
+@app.get("/series/{kind}/{thing_id}")
+def series(kind: str, thing_id: str) -> dict:
+    """Daily Wikipedia views or edits behind a condition-screen result (detail chart)."""
+    from reasoning.screen import series as screen_series
+
+    if kind not in ("views", "edits"):
+        raise HTTPException(status_code=404, detail="kind must be views or edits")
+    out = screen_series(kind, thing_id)
+    if out is None:
+        raise HTTPException(status_code=404, detail="no Wikipedia article for this thing")
+    return out
 
 
 # ----------------------------------------------------------------- /asset helpers

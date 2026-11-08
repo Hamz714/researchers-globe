@@ -101,3 +101,13 @@ export interface EvalReport {
   negative_controls: { query: string; lit: number; dark: number; passed: boolean }[];
   note: string;
 }
+
+/** GET /series/{views|edits}/{id}: the Wikipedia series behind a condition-screen result. */
+export interface ScreenSeries {
+  label: string;
+  unit: string;
+  dates: string[];
+  values: number[];
+  recent_days: number;
+  source: string;
+}

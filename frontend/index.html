@@ -8,10 +8,10 @@
   </head>
   <body>
     <header id="top">
-      <div class="brand">Researcher's Globe</div>
+      <div class="brand">Researcher's Globe<span class="tagline">ask which places a condition or an event touches</span></div>
       <form id="ask">
         <input id="question" type="text" autocomplete="off"
-               placeholder="Ask a question, e.g. which iron ore mines are exposed to the 2026 US midterms?" />
+               placeholder="e.g. Which US states have a spike in Wikipedia views?  ·  Which iron ore mines are windy right now?" />
         <button type="submit">Ask</button>
       </form>
       <div id="presets" class="chips"></div>
@@ -26,7 +26,7 @@
       <div id="status"></div>
       <aside id="panel" hidden></aside>
       <section id="results" hidden></section>
-      <footer id="credits">Mines: <a href="https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker" target="_blank" rel="noopener">Global Iron Ore Mines Tracker</a>, Global Energy Monitor, Sep 2026 (CC BY 4.0) · News: <a href="https://www.gdeltproject.org/" target="_blank" rel="noopener">GDELT</a> · Attention: Wikimedia · Trade: UN Comtrade via WITS · Imagery: Esri World Imagery · Globe: CesiumJS</footer>
+      <footer id="credits">Researcher's Globe · Mines: <a href="https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker" target="_blank" rel="noopener">Global Iron Ore Mines Tracker</a>, Global Energy Monitor, Sep 2026 (CC BY 4.0) · States: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · News: <a href="https://www.gdeltproject.org/" target="_blank" rel="noopener">GDELT</a> · Wikipedia views and edits: <a href="https://wikimedia.org/api/rest_v1/" target="_blank" rel="noopener">Wikimedia</a> · Weather: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Trade: UN Comtrade via WITS · Imagery: Esri World Imagery · Globe: CesiumJS</footer>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
