@@ -107,44 +107,21 @@ SCREEN_PRESETS = [
 
 @app.post("/query", response_model=QueryResult)
 def query(req: QueryRequest) -> dict:
-    """Any question: routed to a list, a live-condition screen or the exposure pipeline (reasoning/intent.py)."""
-    from reasoning.intent import route
-    from reasoning.listing import list_assets, parse_filters
-    from reasoning.screen import screen
-
-    try:
-        kind, payload = route(req.text)
-    except Exception:  # routing must never take the app down: fall back to the rule-based list
-        log.exception("routing failed")
-        kind, payload = "list", parse_filters(req.text)
-    if kind == "list":
-        return _remember(req.text, list_assets(payload, req.text))
-    if kind == "condition":
-        try:
-            return _remember(req.text, screen(req.text, payload))
-        except Exception as e:
-            log.exception("screen failed")
-            raise HTTPException(status_code=503, detail=f"Could not check that condition: {e}") from e
+    """Any question -> one plan (filters, conditions, event) -> one executor (reasoning/plan.py)."""
     preset = _preset_for(req.text)
     if preset is not None:
         cached = PRESET_RESULTS / f"{preset['id']}.json"
         if cached.exists():
             return _remember(req.text, json.loads(cached.read_text()))
-    if use_pipeline():
-        from reasoning.run_query import NoEvent, run_query
+    if not use_pipeline():
+        return _mock_result()
+    from reasoning.plan import answer
 
-        try:
-            return _remember(req.text, run_query(req.text))
-        except NoEvent:  # e.g. "show all mines exposed": no event found -> show the matching assets
-            return _remember(req.text, list_assets(parse_filters(req.text), req.text))
-        except Exception as e:  # never show a stack trace on stage
-            log.exception("pipeline failed")
-            raise HTTPException(status_code=503, detail=f"Could not answer that question: {e}") from e
-    if preset is not None and preset["kind"] == "negative_control":
-        mock = _mock_result()
-        return {"criteria": preset["criteria"], "channels": [], "results": [],
-                "dark_count": mock["dark_count"] + len(mock["results"])}
-    return _mock_result()
+    try:
+        return _remember(req.text, answer(req.text))
+    except Exception as e:  # never show a stack trace on stage
+        log.exception("query failed")
+        raise HTTPException(status_code=503, detail=f"Could not answer that question: {e}") from e
 
 
 @app.get("/presets", response_model=list[Preset])

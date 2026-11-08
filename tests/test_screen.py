@@ -12,7 +12,7 @@ from reasoning import screen as sc
     ("Which iron ore mines have a spike in Wikipedia edits?", {"thing": "mine", "condition": "edits"}),
     ("Which iron ore mines are windy right now?", {"thing": "mine", "condition": "weather", "weather": "wind"}),
     ("Which US states are below 0 degrees right now?",
-     {"thing": "state", "condition": "weather", "weather": "cold", "threshold": 0.0}),
+     {"thing": "state", "condition": "weather", "weather": "freezing", "threshold": 0.0}),
     ("Which states have snow?", {"thing": "state", "condition": "weather", "weather": "snow"}),
 ])
 def test_parse_screen(text, expected):
@@ -22,7 +22,6 @@ def test_parse_screen(text, expected):
 @pytest.mark.parametrize("text", [
     "Which iron ore mines are exposed to the 2026 US midterms?",   # event exposure: run_query's job
     "Which iron ore mines are exposed to the Premier League title race?",
-    "What is the weather like?",                                    # no thing
 ])
 def test_not_a_screen(text):
     assert sc.parse_screen(text) is None

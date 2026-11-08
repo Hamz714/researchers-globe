@@ -52,12 +52,14 @@ def noisy_or(strengths: list[float]) -> float:
 
 
 def propagate(graph: Graph, channel_weights: dict[str, float], asset_type: str = "mine",
-              max_hops: int = 4, top_k: int = 50) -> tuple[list[Exposed], int]:
+              max_hops: int = 4, top_k: int = 50, only: set[str] | None = None) -> tuple[list[Exposed], int]:
     """channel_weights maps channel ids (without the 'channel_' prefix) to w_channel.
 
     Edges are walked FORWARD only (mine -> port -> country -> importing country,
     mine -> owner -> listing country), so a Chinese mine is not exposed to Brazil just
     because China imports Brazilian ore. A path ends where a chosen channel TOUCHES a node.
+    `only`: restrict to these asset ids (the question's filters, e.g. "mines in Brazil ..."); the
+    others are still counted as dark.
     Returns (top_k exposed assets sorted by exposure desc, dark_count).
     """
     types = dict(zip(graph.nodes["id"], graph.nodes["type"]))
@@ -74,7 +76,8 @@ def propagate(graph: Graph, channel_weights: dict[str, float], asset_type: str =
         else:
             out_edges[e.src][e.dst] = max(out_edges[e.src].get(e.dst, 0.0), float(e.weight))
 
-    assets = [n for n, t in types.items() if t == asset_type]
+    all_assets = [n for n, t in types.items() if t == asset_type]
+    assets = [a for a in all_assets if only is None or a in only]
     exposed: list[Exposed] = []
     for asset in assets:
         found: list[tuple[list[str], float]] = []
@@ -111,4 +114,4 @@ def propagate(graph: Graph, channel_weights: dict[str, float], asset_type: str =
 
     exposed.sort(key=lambda x: (-round(x.exposure, 6), -capacity(x.asset_id), x.asset_id))
     top = exposed[:top_k]
-    return top, len(assets) - len(top)
+    return top, len(all_assets) - len(top)

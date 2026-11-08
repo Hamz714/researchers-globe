@@ -20,7 +20,7 @@ let currentQuestion = "";
 let selectedId: string | null = null;
 // Condition screens ("which US states / mines where <condition>?") answer with one of these channels.
 // "filter" = a list question with no event ("show all mines in Brazil"), same simple panel.
-const SCREEN_CHANNELS = new Set(["attention", "edits", "weather", "filter"]);
+const SCREEN_CHANNELS = new Set(["attention", "edits", "weather", "filter", "conditions"]);
 const isScreen = (q: QueryResult | null) => !!q && q.channels.length === 1 && SCREEN_CHANNELS.has(q.channels[0].id);
 const assetKind = (q: QueryResult) => (q.criteria.asset_type === "us_state" ? "state" : "mine") as "state" | "mine";
 const assetsByKind: Partial<Record<"mine" | "state", AssetPoint[]>> = {};
@@ -262,8 +262,9 @@ function screenPanelHtml(r: Result, s: ScreenSeries | null, loading: boolean, er
   const rank = [...q.results].sort((a, b) => b.score - a.score).findIndex((x) => x.id === r.id) + 1;
   const source = ch === "filter"
     ? `<a href="https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker" target="_blank" rel="noopener noreferrer">Global Iron Ore Mines Tracker</a> (Global Energy Monitor, CC BY 4.0)`
-    : ch === "weather"
-    ? `<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> current weather`
+    : ch === "weather" || ch === "conditions"
+    ? `<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> current weather` +
+      r.evidence.map((e) => `<br><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join("")
     : r.evidence.map((e) => `<a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join("<br>");
   return `
     <button class="close" aria-label="Close">×</button>
@@ -273,7 +274,7 @@ function screenPanelHtml(r: Result, s: ScreenSeries | null, loading: boolean, er
     <p class="score-note">${ch === "filter" ? "Ranked by design capacity among the matches: a size ranking, not a probability." : SCREEN_NOTE}</p>
     <h3>${esc(q.criteria.event.name)}</h3>
     <p>${esc(r.reason)}</p>
-    ${ch === "weather" || ch === "filter" ? "" : `<h3>Wikipedia ${ch === "attention" ? "views" : "edits"} per day</h3>
+    ${ch === "weather" || ch === "filter" || ch === "conditions" ? "" : `<h3>Wikipedia ${ch === "attention" ? "views" : "edits"} per day</h3>
       ${loading ? `<p class="muted">Loading series…</p>` : s ? seriesChart(s) : `<p class="muted">No series.</p>`}
       <table class="components"><tr><td>Robust z (last ${q.criteria.window.recent_days} days vs ${q.criteria.window.baseline_days} before)</td><td>${fmt(r.components.attention_z, 1)}</td></tr></table>`}
     <h3>Source</h3><p>${source}</p>

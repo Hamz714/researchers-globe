@@ -3,7 +3,7 @@
     screen("Which US states have a spike in Wikipedia views?")       # attention
     screen("Which iron ore mines have a spike in Wikipedia edits?")  # edits
     screen("Which iron ore mines are in the rain right now?")        # weather
-    parse_screen(text) -> spec or None   (None: not a screen; run_query handles it)
+    parse_screen(text) -> spec or None   (compatibility; the real parser is reasoning/plan.py)
 
 Things: iron ore mines (GEM, data/graph) and US states (pipeline/curated/us_states.csv).
 Conditions:
@@ -43,36 +43,26 @@ WEATHER = {
     "cold":     ("temperature_2m", "<=", 5.0, "°C", "cold"),
     "hot":      ("temperature_2m", ">=", 30.0, "°C", "hot"),
 }
-WEATHER_WORDS = [  # first match wins
-    (r"thunder|storm", "storm"), (r"snow", "snow"), (r"rain|raining|wet|precipitation", "rain"),
-    (r"wind|windy|gust", "wind"), (r"freez|frost|below zero|sub-?zero", "freezing"),
-    (r"\bcold\b|chilly|colder|(?:below|under) -?\d", "cold"), (r"\bhot\b|heat|warmer|(?:above|over) -?\d", "hot"),
-    # No specific condition named ("bad weather", "extreme weather", "weather at mines"): check all of them.
-    (r"\bweather\b", "any"),
-]
 ANY_KINDS = ["storm", "snow", "rain", "wind", "freezing", "hot"]  # "cold" (<= 5 °C) is too common to count as notable
 
 
 # ---------------------------------------------------------------- parsing (rule-based, deterministic)
 def parse_screen(text: str) -> dict | None:
-    t = " ".join(text.lower().split())
-    thing = "state" if re.search(r"\bstates?\b", t) else "mine" if re.search(r"\bmines?\b", t) else None
-    if thing is None:
-        return None
-    wiki = re.search(r"wikipedia|\bwiki\b", t)
-    if wiki and re.search(r"\bedit", t):
-        return {"thing": thing, "condition": "edits"}
-    if wiki or re.search(r"page ?views|attention", t):
-        return {"thing": thing, "condition": "views"}
-    for pat, kind in WEATHER_WORDS:
-        if re.search(pat, t):
-            spec = {"thing": thing, "condition": "weather", "weather": kind}
-            m = re.search(r"(?:below|under|above|over|than)\s+(-?\d+(?:\.\d+)?)", t)
-            if m:
-                spec["threshold"] = float(m.group(1))
-            return spec
-    return None
+    """Old single-condition spec, derived from the ONE shared parser (reasoning/plan.rule_plan), so there is
+    no second set of word rules to drift. None if the question has no condition or is about an event."""
+    from reasoning.plan import rule_plan
 
+    plan = rule_plan(text)
+    conds = [m for m in plan["measures"] if m["kind"] != "exposure"]
+    if not conds or any(m["kind"] == "exposure" for m in plan["measures"]):
+        return None
+    m = conds[0]
+    if m["kind"] in ("views", "edits"):
+        return {"thing": plan["thing"], "condition": m["kind"]}
+    spec = {"thing": plan["thing"], "condition": "weather", "weather": m["weather"]}
+    if m.get("threshold") is not None:
+        spec["threshold"] = m["threshold"]
+    return spec
 
 # ---------------------------------------------------------------- things
 def _states() -> list[dict]:
@@ -165,100 +155,24 @@ def _weather_match(cur: dict, kind: str, threshold: float | None) -> tuple[float
 
 # ---------------------------------------------------------------- screen
 def screen(text: str, spec: dict | None = None, end: date | None = None) -> dict:
-    from backend.schemas import QueryResult
+    """Condition answer. Kept for old callers: it now runs the shared plan (reasoning/plan.py), so filters,
+    negation and combined conditions in `text` always apply. `spec` (old format) only forces the condition."""
+    from reasoning.plan import execute, rule_plan
 
-    spec = spec or parse_screen(text)
-    if spec is None:
-        raise ValueError("not a condition screen")
-    end = end or date.today()
-    from reasoning.listing import describe_filters, has_filters, matching_mine_ids, parse_filters
-
-    all_items = things(spec["thing"])
-    # Filters in the same question ("mines in China in the rain", "BHP mines with a Wikipedia spike",
-    # "rain in Texas") restrict which things are checked; the rest stay dark.
-    filters = spec.get("filters") or parse_filters(text)
-    items, where = all_items, ""
-    if spec["thing"] == "mine" and has_filters(filters):
-        keep = matching_mine_ids(filters)
-        items, where = [i for i in all_items if i["id"] in keep], describe_filters({**filters, "top_n": None})
-    elif spec["thing"] == "state":
-        named = [i for i in all_items if re.search(r"\b" + re.escape(i["name"].lower()) + r"\b", text.lower())]
-        if named:
-            items, where = named, "in " + ", ".join(i["name"] for i in named)
-    thing_label = "US states" if spec["thing"] == "state" else "iron ore mines"
-    results = []
-
-    if spec["condition"] in ("views", "edits"):
-        what = "views" if spec["condition"] == "views" else "edits"
-        measured = _wiki_measure(spec["condition"], items, end)
-        event = {"name": f"Spike in Wikipedia {what}", "date": end.isoformat(), "terms": [f"wikipedia {what}"]}
-        channel = {"id": "attention" if what == "views" else "edits",
-                   "reason": (f"Wikipedia {what} of each thing's article ({'the mine, else its owner' if spec['thing'] == 'mine' else 'the state'}): "
-                              f"last {RECENT_DAYS} days vs the {BASELINE_DAYS} before, robust z"
-                              + (", weekday-adjusted" if what == "views" else "") + ".")}
-        for it in items:
-            m = measured.get(it["wiki_title"]) if it["wiki_title"] else None
-            tier = _tier_z(m["z"]) if m else None
-            if not tier:
-                continue
-            via = "" if it["wiki_of"] == it["name"] else f" (via its owner {it['wiki_of']})"
-            reason = (f"Wikipedia {what} of '{it['wiki_title']}'{via}: {m['recent']:,.0f} in the last {RECENT_DAYS} days "
-                      f"vs a baseline median of {m['baseline_median']:,.0f}/day, z={m['z']:.1f} "
-                      f"(data to {m['last_day']}).")
-            results.append({
-                "id": it["id"], "name": it["name"], "lat": it["lat"], "lon": it["lon"], "tier": tier,
-                "score": _squash(m["z"], 4.0),
-                "components": {"exposure": 0.0, "news_z": 0.0, "tone_shift": 0.0,
-                               "attention_z": round(m["z"], 3), "relevant_articles": 0},
-                "paths": [], "reason": reason,
-                "evidence": [{"title": f"Wikipedia: {it['wiki_title']}", "url": _wiki_url(it["wiki_title"]),
-                              "date": m["last_day"], "judge": "relevant", "confidence": 1.0}],
-            })
-    else:
-        from pipeline import fetch_weather
-
-        kind, th = spec["weather"], spec.get("threshold")
-        # Always ask for ALL things: the weather cache is keyed by the full point set, so a filtered
-        # subset would miss it (and cost extra API calls). Filtering happens below.
-        cur = fetch_weather.current([(it["id"], it["lat"], it["lon"]) for it in all_items])
-        if kind == "any":
-            label, measured_fields = "notable weather", ", ".join(f"{WEATHER[k][4]}" for k in ANY_KINDS)
+    plan = rule_plan(text)
+    if spec is not None:
+        plan["thing"] = spec.get("thing", plan["thing"])
+        if spec.get("condition") in ("views", "edits"):
+            forced = {"kind": spec["condition"]}
         else:
-            label, measured_fields = WEATHER[kind][4], WEATHER[kind][0]
-        event = {"name": f"{label[:1].upper()}{label[1:]} right now", "date": end.isoformat(), "terms": [kind]}
-        channel = {"id": "weather", "reason": f"Current weather at each {spec['thing']}'s coordinates from Open-Meteo "
-                                              f"({measured_fields}). Display only: weather now, not a forecast."}
-        for it in items:
-            c = cur.get(it["id"])
-            hit = _weather_match(c, kind, th) if c else None
-            if not hit:
-                continue
-            ratio, desc = hit
-            tier = "high" if ratio >= 4 else "medium" if ratio >= 2 else "low"
-            results.append({
-                "id": it["id"], "name": it["name"], "lat": it["lat"], "lon": it["lon"], "tier": tier,
-                "score": _squash(ratio, 2.0),
-                "components": {"exposure": 0.0, "news_z": 0.0, "tone_shift": 0.0, "attention_z": 0.0,
-                               "relevant_articles": 0},
-                "paths": [], "reason": f"{desc[:1].upper()}{desc[1:]} at {c.get('time', '')} UTC (Open-Meteo).",
-                "evidence": [],
-            })
-
-    results.sort(key=lambda r: (-r["score"], r["name"]))
-    if filters.get("top_n"):
-        results = results[: int(filters["top_n"])]
-    if where:
-        event = {**event, "name": f"{event['name']} — {thing_label} {where}"}
-        channel = {**channel, "reason": f"Checked only {len(items)} {thing_label} {where}. " + channel["reason"]}
-    out = {
-        "criteria": {"asset_type": "us_state" if spec["thing"] == "state" else "iron_ore_mine", "event": event,
-                     "window": {"baseline_days": BASELINE_DAYS, "recent_days": RECENT_DAYS},
-                     "status": ["operating"] if spec["thing"] == "mine" else [], "region": "US" if spec["thing"] == "state" else "global"},
-        "channels": [channel],
-        "results": results,
-        "dark_count": len(all_items) - len(results),
-    }
-    return QueryResult.model_validate(out).model_dump()
+            forced = {"kind": "weather", "weather": spec.get("weather", "any"), "threshold": spec.get("threshold")}
+        if not any(m == forced or (m["kind"] == forced["kind"] and m.get("weather") == forced.get("weather"))
+                   for m in plan["measures"]):
+            plan["measures"] = [m for m in plan["measures"] if m["kind"] == "exposure"] + [forced]
+    plan["measures"] = [m for m in plan["measures"] if m["kind"] != "exposure"]
+    if not plan["measures"]:
+        raise ValueError("not a condition screen")
+    return execute(plan, text, end=end)
 
 
 def series(kind: str, thing_id: str, end: date | None = None) -> dict | None:

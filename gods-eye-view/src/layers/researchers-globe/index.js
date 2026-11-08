@@ -170,7 +170,7 @@ function el(html) {
  * Live layers toggle is hidden. `autoRun` (off by default): run the first preset on load.
  */
 /** Answers that are not exposure rankings: a list ("filter") or a live condition screen. */
-const SIMPLE_CHANNELS = new Set(['filter', 'attention', 'edits', 'weather']);
+const SIMPLE_CHANNELS = new Set(['filter', 'attention', 'edits', 'weather', 'conditions']);
 const isSimple = (q) => !!q && q.channels.length === 1 && SIMPLE_CHANNELS.has(q.channels[0].id);
 
 export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = false }) {
@@ -359,8 +359,9 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
     const rank = [...current.results].sort((a, b) => b.score - a.score).findIndex((x) => x.id === r.id) + 1;
     const source = ch === 'filter'
       ? '<a href="https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker" target="_blank" rel="noopener noreferrer">Global Iron Ore Mines Tracker</a> (Global Energy Monitor, CC BY 4.0)'
-      : ch === 'weather'
-        ? '<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> current weather'
+      : ch === 'weather' || ch === 'conditions'
+        ? '<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> current weather' +
+          r.evidence.map((e) => `<br><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join('')
         : r.evidence.map((e) => `<a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join('<br>');
     detail.hidden = false;
     detail.innerHTML = `

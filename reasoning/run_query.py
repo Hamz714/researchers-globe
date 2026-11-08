@@ -104,9 +104,11 @@ class NoEvent(ValueError):
 
 
 def run_query(text: str, graph: Graph | None = None, end: date | None = None,
-              backends: list | None = None, criteria_override: dict | None = None) -> dict:
+              backends: list | None = None, criteria_override: dict | None = None,
+              only: set[str] | None = None) -> dict:
     """criteria_override: deep-merged into the parsed criteria, e.g. {"event": {"date": "2026-10-18"}}
-    for the shifted-date negative control (eval/metrics.py). Pass `end` with it to move the windows."""
+    for the shifted-date negative control (eval/metrics.py). Pass `end` with it to move the windows.
+    only: restrict the candidate mines to these ids (filters from the question, reasoning/plan.py)."""
     os.environ.setdefault("GLOBE_OFFLINE", "1")
     end = end or date.today()
     library = load_channels()
@@ -128,7 +130,7 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
     base = graph or default_graph()
     touches, touch_prov = choose_touches(text, criteria, chosen, base, end, preset, backends=backends)
     g = base.with_edges(exp.touches_edges(chosen, touches))
-    top, dark = exp.propagate(g, {c: library[c]["weight"] for c in chosen}, top_k=TOP_K)
+    top, dark = exp.propagate(g, {c: library[c]["weight"] for c in chosen}, top_k=TOP_K, only=only)
 
     from pipeline.controls import control_terms
 
