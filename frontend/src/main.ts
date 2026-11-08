@@ -1,11 +1,12 @@
 import "./style.css";
 import { api } from "./api";
 import { createGlobe, TIER_COLOR, type Arc, type Located } from "./globe";
-import type { AssetDetail, AssetPoint, EvalReport, PathEdge, PathNode, QueryResult, Result, Tier } from "./types";
+import type { AssetDetail, AssetPoint, EvalReport, PathEdge, PathNode, QueryResult, Result, ScreenSeries, Tier } from "./types";
 
 // ----------------------------------------------------------------- constants
 const TIER_LABEL: Record<Tier, string> = { high: "High", medium: "Medium", low: "Low" };
 const SCORE_NOTE = "Scores rank assets by exposure plus current evidence. A score is a ranking, not a probability.";
+const SCREEN_NOTE = "Scores rank places by how strongly the condition holds now. A score is a ranking, not a probability.";
 const TOP_LIST = 8;
 
 const $ = <T extends HTMLElement>(sel: string) => document.querySelector(sel) as T;
@@ -17,7 +18,15 @@ const safeUrl = (u: string) => (/^https?:\/\//i.test(u) ? u : "#");
 let current: QueryResult | null = null;
 let currentQuestion = "";
 let selectedId: string | null = null;
-let allAssets: AssetPoint[] = [];
+// Condition screens ("which US states / mines where <condition>?") answer with one of these channels.
+const SCREEN_CHANNELS = new Set(["attention", "edits", "weather"]);
+const isScreen = (q: QueryResult | null) => !!q && q.channels.length === 1 && SCREEN_CHANNELS.has(q.channels[0].id);
+const assetKind = (q: QueryResult) => (q.criteria.asset_type === "us_state" ? "state" : "mine") as "state" | "mine";
+const assetsByKind: Partial<Record<"mine" | "state", AssetPoint[]>> = {};
+async function assetsFor(kind: "mine" | "state"): Promise<AssetPoint[]> {
+  if (!assetsByKind[kind]) assetsByKind[kind] = await api.assets(kind).catch(() => []);
+  return assetsByKind[kind]!;
+}
 
 // ----------------------------------------------------------------- globe (Cesium, see globe.ts)
 const globe = createGlobe(
@@ -60,13 +69,19 @@ function render(q: QueryResult, fly: boolean) {
   const rank = new Map(ranked.map((r, i) => [r.id, i + 1]));
   globe.setResults(q.results, rank);
   const lit = new Set(q.results.map((r) => r.id));
-  globe.setDark(allAssets.filter((a) => !lit.has(a.id)));
+  globe.setDark([]);
+  void assetsFor(assetKind(q)).then((all) => {
+    if (current === q) globe.setDark(all.filter((a) => !lit.has(a.id)));
+  });
+  const screen = isScreen(q);
 
   const counts = { high: 0, medium: 0, low: 0 } as Record<Tier, number>;
   q.results.forEach((r) => counts[r.tier]++);
   $("#legend").innerHTML = `
     <div class="legend-title">${esc(q.criteria.event.name)}</div>
-    <div class="legend-sub">${esc(q.criteria.event.date)} · last ${q.criteria.window.recent_days} days vs ${q.criteria.window.baseline_days} before</div>
+    <div class="legend-sub">${screen
+      ? esc(q.channels[0].reason)
+      : `${esc(q.criteria.event.date)} · last ${q.criteria.window.recent_days} days vs ${q.criteria.window.baseline_days} before`}</div>
     <div class="channels">${q.channels.map((c) => `<span class="chip small" title="${esc(c.reason)}">${esc(c.id)}</span>`).join("") || "<em>no channels chosen</em>"}</div>
     <div class="tiers">${(["high", "medium", "low"] as Tier[])
       .map((t) => `<span><span class="dot" style="background:${TIER_COLOR[t]}"></span>${TIER_LABEL[t]} <b>${counts[t]}</b></span>`)
@@ -74,8 +89,8 @@ function render(q: QueryResult, fly: boolean) {
     ${ranked.length ? `<div class="top-title">Top ranked</div><ol class="top">${ranked
       .slice(0, TOP_LIST)
       .map((r) => `<li><button data-id="${esc(r.id)}" title="${esc(r.name)}"><span class="dot" style="background:${TIER_COLOR[r.tier]}"></span><span class="nm">${esc(r.name)}</span><span class="sc">${fmt(r.score)}</span></button></li>`)
-      .join("")}</ol>` : `<p class="empty">Nothing lights up: no asset is exposed to this event.</p>`}
-    <div class="hint">${SCORE_NOTE}</div>`;
+      .join("")}</ol>` : `<p class="empty">Nothing lights up: ${screen ? "nothing meets this condition right now" : "no asset is exposed to this event"}.</p>`}
+    <div class="hint">${screen ? SCREEN_NOTE : SCORE_NOTE}</div>`;
   $("#legend").querySelectorAll<HTMLButtonElement>(".top button").forEach((b) =>
     b.addEventListener("click", () => {
       const r = current?.results.find((x) => x.id === b.dataset.id);
@@ -90,6 +105,7 @@ function render(q: QueryResult, fly: boolean) {
 
 // ----------------------------------------------------------------- side panel
 async function select(r: Result) {
+  if (isScreen(current)) return selectScreen(r);
   selectedId = r.id;
   const panel = $("#panel");
   panel.hidden = false;
@@ -215,6 +231,76 @@ function newsChart(d: AssetDetail | null): string {
     <p class="muted small">Baseline median ${median}/day (dashed) · ${recentSum} articles in the last ${recent} days. ${esc(d?.series_note ?? "")}</p>`;
 }
 
+// ----------------------------------------------------------------- condition-screen panel
+async function selectScreen(r: Result) {
+  selectedId = r.id;
+  const panel = $("#panel");
+  const ch = current!.channels[0].id;
+  const kind = ch === "attention" ? "views" : ch === "edits" ? "edits" : null;
+  panel.hidden = false;
+  panel.innerHTML = screenPanelHtml(r, null, kind !== null);
+  bindPanel();
+  globe.setSelected(r);
+  clearPath();
+  fitTo([[r.lon, r.lat]], r.id.startsWith("state_") ? 14 : 8);
+  if (!kind) return;
+  try {
+    const s = await api.series(kind, r.id);
+    if (selectedId !== r.id) return;
+    panel.innerHTML = screenPanelHtml(r, s, false);
+  } catch (err) {
+    if (selectedId !== r.id) return;
+    panel.innerHTML = screenPanelHtml(r, null, false, (err as Error).message);
+  }
+  bindPanel();
+}
+
+function screenPanelHtml(r: Result, s: ScreenSeries | null, loading: boolean, error?: string): string {
+  const q = current!;
+  const ch = q.channels[0].id;
+  const rank = [...q.results].sort((a, b) => b.score - a.score).findIndex((x) => x.id === r.id) + 1;
+  const source = ch === "weather"
+    ? `<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> current weather`
+    : r.evidence.map((e) => `<a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join("<br>");
+  return `
+    <button class="close" aria-label="Close">×</button>
+    <h2>${esc(r.name)}</h2>
+    <div class="badges"><span class="tier" style="background:${TIER_COLOR[r.tier]}">${TIER_LABEL[r.tier]} tier</span>
+      <span class="score">score <b>${fmt(r.score)}</b> · rank ${rank} of ${q.results.length}</span></div>
+    <p class="score-note">${SCREEN_NOTE}</p>
+    <h3>${esc(q.criteria.event.name)}</h3>
+    <p>${esc(r.reason)}</p>
+    ${ch === "weather" ? "" : `<h3>Wikipedia ${ch === "attention" ? "views" : "edits"} per day</h3>
+      ${loading ? `<p class="muted">Loading series…</p>` : s ? seriesChart(s) : `<p class="muted">No series.</p>`}
+      <table class="components"><tr><td>Robust z (last ${q.criteria.window.recent_days} days vs ${q.criteria.window.baseline_days} before)</td><td>${fmt(r.components.attention_z, 1)}</td></tr></table>`}
+    <h3>Source</h3><p>${source}</p>
+    ${error ? `<p class="error">Series unavailable: ${esc(error)}</p>` : ""}`;
+}
+
+/** Daily bars, the last `recent_days` highlighted, baseline median dashed. */
+function seriesChart(s: ScreenSeries): string {
+  const v = s.values, n = v.length, recent = Math.min(s.recent_days, n);
+  const W = 340, H = 92, top = 14, base = 70, max = Math.max(...v, 1);
+  const bw = W / n;
+  const y = (x: number) => base - (x / max) * (base - top);
+  const baseline = v.slice(0, n - recent).sort((a, b) => a - b);
+  const median = baseline.length ? baseline[Math.floor(baseline.length / 2)] : 0;
+  const recentSum = v.slice(n - recent).reduce((a, b) => a + b, 0);
+  const rx = (n - recent) * bw;
+  const nf = (x: number) => Math.round(x).toLocaleString("en-GB");
+  const bars = v.map((x, i) => `<rect x="${(i * bw + 0.3).toFixed(1)}" y="${y(x).toFixed(1)}" width="${Math.max(bw - 0.6, 0.6).toFixed(1)}" height="${(base - y(x)).toFixed(1)}" class="${i >= n - recent ? "r" : "b"}"><title>${esc(s.dates[i] ?? "")}: ${nf(x)}</title></rect>`).join("");
+  return `<svg class="news" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(s.label)}">
+      <rect x="${rx}" y="${top - 10}" width="${W - rx}" height="${base - top + 10}" class="recent-bg"/>
+      ${bars}
+      <line x1="0" x2="${rx}" y1="${y(median)}" y2="${y(median)}" class="median"/>
+      <text x="${W}" y="${top - 2}" text-anchor="end" class="lbl hot">last ${recent} days</text>
+      <text x="0" y="${top - 2}" class="lbl">max ${nf(max)}/day</text>
+      <text x="0" y="${H - 6}" class="lbl">${esc(s.dates[0] ?? "")}</text>
+      <text x="${W}" y="${H - 6}" text-anchor="end" class="lbl">${esc(s.dates[n - 1] ?? "")}</text>
+    </svg>
+    <p class="muted small">Baseline median ${nf(median)} ${esc(s.unit)}/day (dashed) · ${nf(recentSum)} ${esc(s.unit)} in the last ${recent} days.</p>`;
+}
+
 // ----------------------------------------------------------------- exposure path on the globe
 function clearPath() {
   globe.setPath([], []);
@@ -321,7 +407,7 @@ document.querySelectorAll<HTMLButtonElement>(".tabs button").forEach((b) =>
 
 async function init() {
   try {
-    allAssets = await api.assets().catch(() => []);
+    void assetsFor("mine");
     const presets = await api.presets();
     $("#presets").innerHTML = presets
       .map((p) => `<button class="chip ${p.kind}" data-q="${esc(p.query)}" title="${esc(p.query)}">${esc(p.label)}</button>`)

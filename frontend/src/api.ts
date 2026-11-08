@@ -1,4 +1,4 @@
-import type { AssetDetail, AssetPoint, EvalReport, Preset, QueryResult } from "./types";
+import type { AssetDetail, AssetPoint, EvalReport, Preset, QueryResult, ScreenSeries } from "./types";
 
 const BASE = "/api"; // proxied to FastAPI by vite.config.ts
 
@@ -17,7 +17,9 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
 export const api = {
   query: (text: string) => call<QueryResult>("/query", { method: "POST", body: JSON.stringify({ text }) }),
   presets: () => call<Preset[]>("/presets"),
-  assets: () => call<AssetPoint[]>("/assets"),
+  assets: (kind: "mine" | "state" = "mine") => call<AssetPoint[]>(`/assets?kind=${kind}`),
+  series: (kind: "views" | "edits", id: string) =>
+    call<ScreenSeries>(`/series/${kind}/${encodeURIComponent(id)}`),
   asset: (id: string, question?: string) =>
     call<AssetDetail>(`/asset/${encodeURIComponent(id)}${question ? `?q=${encodeURIComponent(question)}` : ""}`),
   evalReport: () => call<EvalReport>("/eval"),

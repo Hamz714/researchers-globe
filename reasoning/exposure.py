@@ -100,6 +100,15 @@ def propagate(graph: Graph, channel_weights: dict[str, float], asset_type: str =
             exposed.append(Exposed(asset, noisy_or(list(best_per_touch.values())),
                                    [p for p, _ in found], [s for _, s in found]))
 
-    exposed.sort(key=lambda x: (-x.exposure, x.asset_id))
+    # Ties in exposure (e.g. every US mine at 0.99) are broken by design capacity, larger first,
+    # so the evidence budget (EVIDENCE_K) goes to the mines that matter most; then by id.
+    cap = (graph.nodes.set_index("id")["capacity_mtpa"].to_dict()
+           if "capacity_mtpa" in graph.nodes.columns else {})
+
+    def capacity(asset_id: str) -> float:
+        c = cap.get(asset_id)
+        return float(c) if c is not None and c == c else -1.0  # NaN/unknown sorts last
+
+    exposed.sort(key=lambda x: (-round(x.exposure, 6), -capacity(x.asset_id), x.asset_id))
     top = exposed[:top_k]
     return top, len(assets) - len(top)

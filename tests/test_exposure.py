@@ -88,3 +88,21 @@ def test_no_channels_means_everything_dark(toy):
 def test_max_hops(toy):
     top, _ = propagate(toy, {"tariffs": 0.9}, max_hops=1)
     assert {x.asset_id for x in top} == set()  # every path needs >= 2 hops to reach CN
+
+
+def test_exposure_ties_broken_by_capacity():
+    from reasoning import exposure as exp
+
+    def mine(i, cap):
+        return {"id": f"mine_{i}", "type": "mine", "name": f"M{i}", "lat": 0.0, "lon": 0.0, "country": "US",
+                "wiki_title": "", "search_terms": f"M{i}", "capacity_mtpa": cap}
+    nodes = [mine(1, 0.3), mine(2, 16.0), mine(3, None), mine(4, 8.3),
+             {"id": "country_US", "type": "country", "name": "United States", "lat": 0.0, "lon": 0.0,
+              "country": "US", "wiki_title": "", "search_terms": "US", "capacity_mtpa": None},
+             {"id": "channel_tariffs", "type": "channel", "name": "Tariffs", "lat": None, "lon": None,
+              "country": None, "wiki_title": "", "search_terms": "", "capacity_mtpa": None}]
+    edges = [e(f"mine_{i}", "country_US", "LOCATED_IN") for i in range(1, 5)]
+    g = Graph(pd.DataFrame(nodes, columns=NODE_COLUMNS), pd.DataFrame(edges, columns=EDGE_COLUMNS))
+    g = g.with_edges(touches_edges(["tariffs"], {"tariffs": [["country_US", 1.0]]}))
+    top, _ = exp.propagate(g, {"tariffs": 0.9})
+    assert [e.asset_id for e in top] == ["mine_2", "mine_4", "mine_1", "mine_3"]  # equal exposure, by capacity

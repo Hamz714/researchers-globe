@@ -5,6 +5,7 @@ Owner: Person B. Everything that calls a model goes through these functions:
     parse(text, schema) -> dict                                   # step 1 (free-form criteria)
     select(question, options, context) -> [(option_id, p), ...]   # step 2 (channels, touched nodes)
     judge(question, options, context) -> {"choice", "confidence"} # step 5
+    summarise(asset, channel, event, relevant_articles) -> str|None  # step 6 (fallback LLM only)
 
 WHAT JEV IS (checked 8 Nov 2026). Jev is TypeSafe's *decision* model: it takes a
 `state` and typed `questions` (noul = yes/no probability, choice = one of N options
@@ -249,3 +250,63 @@ def judge(question: str, options: list[str], context: dict,
         return {"choice": obj["choice"], "confidence": conf}
 
     return _run("judge", {"q": question, "o": options, "c": context}, attempt, validate, fallback, backends)
+
+
+SUMMARY_MAX_WORDS = 35
+
+
+def check_summary(text: str, titles: list[str]) -> str:
+    """Validate a one-sentence summary that may cite only the given articles, as [1]..[n].
+
+    Raises ValueError unless: one sentence, <= SUMMARY_MAX_WORDS words, at least one citation,
+    every [k] within 1..n, no URL, and any quoted phrase is part of a given title (so it cannot
+    name an article it was not given)."""
+    s = " ".join(str(text).strip().strip('"').split())
+    if not s:
+        raise ValueError("empty summary")
+    words = re.sub(r"\[\d+\]", "", s).split()
+    if len(words) > SUMMARY_MAX_WORDS:
+        raise ValueError(f"{len(words)} words > {SUMMARY_MAX_WORDS}")
+    if len(re.findall(r"[.!?](?:\s|$)", re.sub(r"\[\d+\]", "", s).rstrip(".!? ") + ".")) > 1:
+        raise ValueError("more than one sentence")
+    refs = [int(k) for k in re.findall(r"\[(\d+)\]", s)]
+    if not refs:
+        raise ValueError("cites no article")
+    if any(k < 1 or k > len(titles) for k in refs):
+        raise ValueError(f"cites an article that was not given: {refs}")
+    if re.search(r"https?://|www\.|\.com\b|\.org\b|\.net\b", s, re.I):
+        raise ValueError("contains a URL or domain")
+    lowered = [t.lower() for t in titles]
+    for q in re.findall(r"[\"“‘']([^\"”’']{12,})[\"”’']", s):
+        if not any(q.lower().strip() in t for t in lowered):
+            raise ValueError(f"quotes text that is not a given title: {q!r}")
+    return s
+
+
+def summarise(asset: dict, channel: dict, event: dict, relevant_articles: list[dict],
+              backends: list | None = None) -> str | None:
+    """One grounded sentence on why this asset is exposed, citing only `relevant_articles` as [n].
+
+    Generative fallback LLM only (Jev cannot write text), temperature 0, cached in cache/llm/.
+    Returns None when there is nothing to cite, no backend answers, or the sentence fails
+    check_summary(): the caller then shows no summary."""
+    if not relevant_articles:
+        return None
+    titles = [str(a.get("title", "")) for a in relevant_articles]
+    system = (f"Write ONE sentence of at most {SUMMARY_MAX_WORDS} words saying why the asset is exposed to the "
+              "event through the channel, using ONLY the numbered article titles given. Cite them as [1], [2]. "
+              "Do not mention any other article, source, number or fact. Do not use the word probability. "
+              "Reply with the sentence only.")
+    user = (f"Asset: {asset.get('name')} (owner: {asset.get('owner') or 'unknown'}, country: "
+            f"{asset.get('country') or 'unknown'})\nChannel: {channel.get('name') or channel.get('id')}\n"
+            f"Event: {event.get('name')} ({event.get('date', '')})\nArticles:\n"
+            + "\n".join(f"[{i}] {t}" for i, t in enumerate(titles, 1)))
+
+    def attempt(b):
+        return b.complete(system, user)
+
+    payload = {"a": asset.get("name"), "c": channel.get("id"), "e": event.get("name"), "t": titles}
+    try:
+        return _run("summarise", payload, attempt, lambda text: check_summary(text, titles), None, backends)
+    except DecisionModelUnavailable:
+        return None

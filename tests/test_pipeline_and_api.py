@@ -46,7 +46,9 @@ def test_api_endpoints():
     assert r.status_code == 200
     QueryResult.model_validate(r.json())
     presets = client.get("/presets").json()
-    assert len(presets) == 4 and presets[0]["kind"] == "hero"
+    events = [p for p in presets if not p["id"].startswith("screen_")]
+    assert len(events) == 4 and events[0]["kind"] == "hero"
+    assert len(presets) > len(events)  # condition screens come first
     a = client.get("/asset/mine_014").json()
     assert a["path_nodes"] and a["series"]["news_volume"]
     assert client.get("/asset/nope").status_code == 404

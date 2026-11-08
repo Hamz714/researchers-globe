@@ -9,11 +9,13 @@ empty cache every asset gets zero signals and no articles, i.e. exposure-only sc
 """
 from __future__ import annotations
 
+import copy
 import os
 from datetime import date, timedelta
 
 from backend.schemas import QueryResult
 from pipeline.graph import Graph, default_graph
+from reasoning import decision_model
 from reasoning import exposure as exp
 from reasoning import scoring
 from reasoning.judge import judge_article
@@ -88,14 +90,25 @@ def _gather(asset: dict, channel_terms: list[str], criteria: dict, end: date,
     return sig.to_dict(), arts
 
 
+def _merge(base: dict, override: dict) -> dict:
+    out = copy.deepcopy(base)
+    for k, v in override.items():
+        out[k] = _merge(out[k], v) if isinstance(v, dict) and isinstance(out.get(k), dict) else copy.deepcopy(v)
+    return out
+
+
 def run_query(text: str, graph: Graph | None = None, end: date | None = None,
-              backends: list | None = None) -> dict:
+              backends: list | None = None, criteria_override: dict | None = None) -> dict:
+    """criteria_override: deep-merged into the parsed criteria, e.g. {"event": {"date": "2026-10-18"}}
+    for the shifted-date negative control (eval/metrics.py). Pass `end` with it to move the windows."""
     os.environ.setdefault("GLOBE_OFFLINE", "1")
     end = end or date.today()
     library = load_channels()
 
     # 1-2. parse and choose channels (decision model, validated)
     criteria, preset = parse_question(text, backends=backends)
+    if criteria_override:
+        criteria = _merge(criteria, criteria_override)
     channels = choose_channels(text, criteria, preset, backends=backends)
     chosen = [c["id"] for c in channels]
 
@@ -151,8 +164,14 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
                   + f". News volume z={sig['news_z']:.1f}, attention z={sig['attention_z']:.1f}, "
                   f"{len(relevant)} relevant article(s)."
                   + (f" The placebo control ({control['channel'] or 'copper'} news) spiked too, so the news spike was discounted."
-                     if sig["placebo_flag"] else ""))
-        # TODO(Person B): one-sentence grounded summary via the decision model, citing only `relevant`.
+                     if sig["placebo_flag"] else "")
+                  + (" GDELT outage days excluded." if sig.get("gap_days_dropped") else "")
+                  + (f" Insufficient data for {', '.join(sig['insufficient'])} (too few valid recent days)."
+                     if sig.get("insufficient") else ""))
+        # step 6: one grounded sentence citing only `relevant` as [n] (validated; None -> no summary)
+        summary = decision_model.summarise(asset, best_channel, criteria["event"], relevant, backends=backends)
+        if summary:
+            reason = f"{summary} {reason}"
         results.append({
             "id": ex.asset_id, "name": node["name"], "lat": float(node["lat"]), "lon": float(node["lon"]),
             "tier": t, "score": round(sc, 4),
@@ -164,7 +183,11 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
             "evidence": relevant,  # plan: only relevant articles count as evidence
         })
 
-    results.sort(key=lambda r: -r["score"])
+    # score, then exposure, then design capacity (larger first), so equal scores are not in arbitrary order
+    cap = g.nodes.set_index("id")["capacity_mtpa"].to_dict() if "capacity_mtpa" in g.nodes.columns else {}
+    results.sort(key=lambda r: (-r["score"], -r["components"]["exposure"],
+                                -(cap.get(r["id"]) if cap.get(r["id"]) == cap.get(r["id"]) and cap.get(r["id"]) is not None
+                                  else -1.0), r["id"]))
     out = {"criteria": criteria, "channels": channels, "results": results, "dark_count": dark}
     return QueryResult.model_validate(out).model_dump()
 

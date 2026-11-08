@@ -20,7 +20,7 @@ os.environ["GLOBE_OFFLINE"] = "1"
 
 from pipeline import fetch_gdelt  # noqa: E402
 
-EXPECTED_DAYS = 67 + 1  # baseline 60 + recent 7, end day inclusive
+EXPECTED_DAYS = 67  # baseline 60 + recent 7; GDELT has no bucket yet for the current (end) day
 
 
 def cache_report() -> None:
