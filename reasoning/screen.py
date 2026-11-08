@@ -48,7 +48,7 @@ WEATHER_WORDS = [  # first match wins
     (r"wind|windy|gust", "wind"), (r"freez|frost|below zero|sub-?zero", "freezing"),
     (r"\bcold\b|chilly|colder|(?:below|under) -?\d", "cold"), (r"\bhot\b|heat|warmer|(?:above|over) -?\d", "hot"),
     # No specific condition named ("bad weather", "extreme weather", "weather at mines"): check all of them.
-    (r"weather|conditions|extreme|severe|hazard|dangerous", "any"),
+    (r"\bweather\b", "any"),
 ]
 ANY_KINDS = ["storm", "snow", "rain", "wind", "freezing", "hot"]  # "cold" (<= 5 °C) is too common to count as notable
 

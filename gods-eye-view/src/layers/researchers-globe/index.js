@@ -169,6 +169,10 @@ function el(html) {
  * Mount the HUD. `dataManager` (GEV's layer manager) is optional: without it the
  * Live layers toggle is hidden. `autoRun` (off by default): run the first preset on load.
  */
+/** Answers that are not exposure rankings: a list ("filter") or a live condition screen. */
+const SIMPLE_CHANNELS = new Set(['filter', 'attention', 'edits', 'weather']);
+const isSimple = (q) => !!q && q.channels.length === 1 && SIMPLE_CHANNELS.has(q.channels[0].id);
+
 export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = false }) {
   let current = null;
   let currentQuestion = '';
@@ -291,7 +295,7 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
     const legend = $('.rg-legend');
     legend.innerHTML = `
       <div class="rg-event">${esc(q.criteria.event.name)}</div>
-      <div class="rg-sub">${esc(q.criteria.event.date)} · last ${q.criteria.window.recent_days} days vs ${q.criteria.window.baseline_days} before</div>
+      <div class="rg-sub">${isSimple(q) ? esc(q.channels[0].reason) : `${esc(q.criteria.event.date)} · last ${q.criteria.window.recent_days} days vs ${q.criteria.window.baseline_days} before`}</div>
       <div class="rg-channels">${q.channels.map((c) => `<span class="rg-chip small" title="${esc(c.reason)}">${esc(c.id)}</span>`).join('') || '<em>no channels chosen</em>'}</div>
       <div class="rg-tiers">${['high', 'medium', 'low']
         .map((t) => `<span><i class="rg-dot" style="background:${TIER_COLOR[t]}"></i>${TIER_LABEL[t]} <b>${counts[t]}</b></span>`)
@@ -322,6 +326,7 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
 
   // ---------------------------------------------------------------- detail panel
   async function select(r) {
+    if (isSimple(current)) return selectSimple(r);
     selectedId = r.id;
     detail.hidden = false;
     detail.innerHTML = detailHtml(r, null, true);
@@ -345,6 +350,32 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
   }
   function bindDetail() {
     detail.querySelector('.rg-close')?.addEventListener('click', closeDetail);
+  }
+
+  /** List and live-condition answers have no exposure path or news: name, tier, reason, source. */
+  function selectSimple(r) {
+    selectedId = r.id;
+    const ch = current.channels[0].id;
+    const rank = [...current.results].sort((a, b) => b.score - a.score).findIndex((x) => x.id === r.id) + 1;
+    const source = ch === 'filter'
+      ? '<a href="https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker" target="_blank" rel="noopener noreferrer">Global Iron Ore Mines Tracker</a> (Global Energy Monitor, CC BY 4.0)'
+      : ch === 'weather'
+        ? '<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> current weather'
+        : r.evidence.map((e) => `<a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join('<br>');
+    detail.hidden = false;
+    detail.innerHTML = `
+      <button class="rg-close" type="button" aria-label="Close">×</button>
+      <h2>${esc(r.name)}</h2>
+      <div class="rg-badges"><span class="rg-tier" style="background:${TIER_COLOR[r.tier]}">${TIER_LABEL[r.tier]} tier</span>
+        <span>score <b>${fmt(r.score)}</b> · rank ${rank} of ${current.results.length}</span></div>
+      <p class="rg-hint">${ch === 'filter' ? 'Ranked by design capacity among the matches: a size ranking, not a probability.' : 'Ranked by how strongly the condition holds now: a ranking, not a probability.'}</p>
+      <h3>${esc(current.criteria.event.name)}</h3>
+      <p>${esc(r.reason)}</p>
+      <h3>Source</h3><p>${source}</p>`;
+    bindDetail();
+    globe.setSelected(r);
+    globe.setPath([], []);
+    fitTo([[r.lon, r.lat]], 8);
   }
 
   function detailHtml(r, d, loading, error) {

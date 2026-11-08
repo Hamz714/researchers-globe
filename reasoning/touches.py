@@ -108,6 +108,8 @@ def weights_from_counts(counts: dict[str, tuple[int, int]], n_titles: int) -> li
 def measured_touches(criteria: dict, channel: dict, graph: Graph, end: date) -> tuple[list[list], int]:
     """Returns ([[node_id, weight, n_titles_naming_it], ...], n_articles). Empty if no coverage cached."""
     ev = criteria["event"]
+    if not [t for t in ev.get("terms", []) if t and t.strip()] or not channel.get("search_terms"):
+        return [], 0
     try:
         start = date.fromisoformat(ev["date"]) - timedelta(days=1)
     except ValueError:

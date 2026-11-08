@@ -77,8 +77,10 @@ def _gather(asset: dict, channel_terms: list[str], criteria: dict, end: date,
     from pipeline import fetch_gdelt
     from pipeline.signals import signals
 
-    asset_terms = asset["terms"] + asset["owner_terms"]
+    asset_terms = [t for t in asset["terms"] + asset["owner_terms"] if t and t.strip()]
     win = criteria["window"]
+    if not asset_terms or not [t for t in channel_terms if t and t.strip()]:
+        return {"news_z": 0.0, "tone_shift": 0.0, "attention_z": 0.0, "placebo_flag": False}, []
     sig = signals(asset["name"], {
         "asset_terms": asset_terms, "channel_terms": channel_terms,
         "control_terms": (control or CONTROL_TERMS) if with_control else [],
@@ -97,6 +99,10 @@ def _merge(base: dict, override: dict) -> dict:
     return out
 
 
+class NoEvent(ValueError):
+    """The question names no event to search for (e.g. "show all mines"): answer it as a list instead."""
+
+
 def run_query(text: str, graph: Graph | None = None, end: date | None = None,
               backends: list | None = None, criteria_override: dict | None = None) -> dict:
     """criteria_override: deep-merged into the parsed criteria, e.g. {"event": {"date": "2026-10-18"}}
@@ -109,6 +115,8 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
     criteria, preset = parse_question(text, backends=backends)
     if criteria_override:
         criteria = _merge(criteria, criteria_override)
+    if not [t for t in criteria["event"]["terms"] if t and t.strip()]:
+        raise NoEvent(f"no event terms in: {text!r}")
     channels = choose_channels(text, criteria, preset, backends=backends)
     if preset is not None and " ".join(text.lower().split()) != " ".join(preset["query"].lower().split()):
         # The model could not parse a free-text question: say so instead of silently answering another one.
