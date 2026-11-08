@@ -123,6 +123,13 @@ class PathNode(BaseModel):
     lon: float | None = None
 
 
+class PathEdge(BaseModel):
+    """One hop of a stored path with its graph edge type, so the panel can say the path in words."""
+    src: str
+    dst: str
+    type: str = Field(description="OWNED_BY, LOCATED_IN, EXPORTS_VIA, EXPORTS_TO, LISTED_IN, TOUCHES or UNKNOWN")
+
+
 class SignalSeries(BaseModel):
     dates: list[str]
     news_volume: list[float] = []
@@ -139,7 +146,9 @@ class AssetDetail(BaseModel):
         description="Coordinates for every node on the stored paths, so the globe can draw arcs",
     )
     paths: list[list[str]] = []
+    path_edges: list[PathEdge] = []
     series: SignalSeries | None = None
+    series_note: str = Field("", description="Why series is missing or what it measures, shown under the chart")
     evidence: list[Evidence] = []
 
 

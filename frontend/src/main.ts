@@ -2,21 +2,27 @@ import maplibregl, { type GeoJSONSource, type Map as MLMap } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./style.css";
 import { api } from "./api";
-import type { AssetDetail, AssetPoint, EvalReport, QueryResult, Result, Tier } from "./types";
+import type { AssetDetail, AssetPoint, EvalReport, PathEdge, PathNode, QueryResult, Result, Tier } from "./types";
 
 // ----------------------------------------------------------------- constants
 // TODO(Person C): demotiles is a free, low-detail basemap with no key. Swap for a nicer style if time allows.
 const STYLE_URL = "https://demotiles.maplibre.org/style.json";
 const TIER_COLOR: Record<Tier, string> = { high: "#ff4d4f", medium: "#ffa940", low: "#ffe7a3" };
 const TIER_LABEL: Record<Tier, string> = { high: "High", medium: "Medium", low: "Low" };
+const SCORE_NOTE = "Scores rank assets by exposure plus current evidence. A score is a ranking, not a probability.";
+const TOP_LIST = 8;
 
 const $ = <T extends HTMLElement>(sel: string) => document.querySelector(sel) as T;
 const esc = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 const fmt = (x: number | null | undefined, d = 2) => (x === null || x === undefined ? "—" : x.toFixed(d));
+const safeUrl = (u: string) => (/^https?:\/\//i.test(u) ? u : "#");
 
 let current: QueryResult | null = null;
+let currentQuestion = "";
+let selectedId: string | null = null;
 let allAssets: AssetPoint[] = [];
+let nodeMarkers: maplibregl.Marker[] = [];
 
 // ----------------------------------------------------------------- map
 const map: MLMap = new maplibregl.Map({
@@ -27,6 +33,7 @@ const map: MLMap = new maplibregl.Map({
   attributionControl: { compact: true },
 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
+const hoverPopup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10, className: "hover-pop" });
 
 const emptyFC = (): GeoJSON.FeatureCollection => ({ type: "FeatureCollection", features: [] });
 
@@ -35,26 +42,30 @@ map.on("style.load", () => {
 
   map.addSource("dark", { type: "geojson", data: emptyFC() });
   map.addSource("assets", { type: "geojson", data: emptyFC() });
+  map.addSource("path", { type: "geojson", data: emptyFC() });
+  map.addSource("selected", { type: "geojson", data: emptyFC() });
   map.addLayer({
     id: "dark",
     type: "circle",
     source: "dark",
-    paint: { "circle-radius": 2.2, "circle-color": "#6b7280", "circle-opacity": 0.6 },
+    paint: { "circle-radius": 2.2, "circle-color": "#6b7280", "circle-opacity": 0.55 },
   });
-  map.addSource("path", { type: "geojson", data: emptyFC() });
-
+  // Exposure path arcs: trade hops (mine → port → destination) solid, location/ownership hops dashed.
+  map.addLayer({
+    id: "path-line-context",
+    type: "line",
+    source: "path",
+    filter: ["all", ["==", ["geometry-type"], "LineString"], ["!=", ["get", "kind"], "trade"]],
+    layout: { "line-cap": "round" },
+    paint: { "line-color": "#9fb6d9", "line-width": 1.6, "line-opacity": 0.8, "line-dasharray": [2, 2] },
+  });
   map.addLayer({
     id: "path-line",
     type: "line",
     source: "path",
-    paint: { "line-color": "#69b1ff", "line-width": 2, "line-dasharray": [2, 1] },
-  });
-  map.addLayer({
-    id: "path-nodes",
-    type: "circle",
-    source: "path",
-    filter: ["==", ["geometry-type"], "Point"],
-    paint: { "circle-radius": 4, "circle-color": "#69b1ff", "circle-stroke-color": "#fff", "circle-stroke-width": 1 },
+    filter: ["all", ["==", ["geometry-type"], "LineString"], ["==", ["get", "kind"], "trade"]],
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: { "line-color": "#69b1ff", "line-width": 2.6, "line-opacity": 0.95 },
   });
   map.addLayer({
     id: "assets-pulse",
@@ -68,12 +79,18 @@ map.on("style.load", () => {
     type: "circle",
     source: "assets",
     paint: {
-      "circle-radius": ["match", ["get", "tier"], "high", 7, "medium", 6, 4],
+      "circle-radius": ["match", ["get", "tier"], "high", 7, "medium", 6, 4.5],
       "circle-color": ["match", ["get", "tier"], "high", TIER_COLOR.high, "medium", TIER_COLOR.medium, TIER_COLOR.low],
-      "circle-opacity": ["match", ["get", "tier"], "low", 0.55, 1],
+      "circle-opacity": ["match", ["get", "tier"], "low", 0.85, 1],
       "circle-stroke-color": "#111",
       "circle-stroke-width": 1,
     },
+  });
+  map.addLayer({
+    id: "selected",
+    type: "circle",
+    source: "selected",
+    paint: { "circle-radius": 11, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#ffffff", "circle-stroke-width": 2.5 },
   });
 
   map.on("click", "assets", (e) => {
@@ -81,11 +98,22 @@ map.on("style.load", () => {
     const r = current?.results.find((x) => x.id === id);
     if (r) void select(r);
   });
-  map.on("mouseenter", "assets", () => (map.getCanvas().style.cursor = "pointer"));
-  map.on("mouseleave", "assets", () => (map.getCanvas().style.cursor = ""));
+  map.on("mousemove", "assets", (e) => {
+    map.getCanvas().style.cursor = "pointer";
+    const p = e.features?.[0]?.properties as { name: string; tier: Tier; score: number; rank: number } | undefined;
+    if (!p) return;
+    hoverPopup
+      .setLngLat(e.lngLat)
+      .setHTML(`<b>#${p.rank} ${esc(p.name)}</b><br>${TIER_LABEL[p.tier]} tier · score ${fmt(p.score)}`)
+      .addTo(map);
+  });
+  map.on("mouseleave", "assets", () => {
+    map.getCanvas().style.cursor = "";
+    hoverPopup.remove();
+  });
 
   pulse();
-  if (current) render(current);
+  if (current) render(current, false);
 });
 
 function pulse() {
@@ -96,27 +124,69 @@ function pulse() {
   requestAnimationFrame(pulse);
 }
 
+/** Pan/zoom so the given points are in view, leaving room for the side panel when it is open. */
+function fitTo(points: [number, number][], maxZoom = 4) {
+  if (!points.length) return;
+  const lons = unwrap(points.map((p) => p[0]));
+  const lats = points.map((p) => p[1]);
+  const bounds: [[number, number], [number, number]] = [
+    [Math.min(...lons), Math.min(...lats)],
+    [Math.max(...lons), Math.max(...lats)],
+  ];
+  const panelOpen = !$("#panel").hidden;
+  map.fitBounds(bounds, {
+    padding: { top: 150, bottom: 60, left: 320, right: panelOpen ? 480 : 60 },
+    maxZoom,
+    duration: 1400,
+  });
+}
+
+/** Make a list of longitudes continuous (no ±180 jump), so bounds and lines do not wrap the wrong way. */
+function unwrap(lons: number[]): number[] {
+  const out: number[] = [];
+  for (const lon of lons) {
+    if (!out.length) out.push(lon);
+    else {
+      let x = lon;
+      const prev = out[out.length - 1];
+      while (x - prev > 180) x -= 360;
+      while (x - prev < -180) x += 360;
+      out.push(x);
+    }
+  }
+  return out;
+}
+
 // ----------------------------------------------------------------- query flow
 async function ask(text: string) {
   status(`Asking: ${text}`);
   ($("#question") as HTMLInputElement).value = text;
+  document.querySelectorAll<HTMLButtonElement>("#presets button").forEach((b) =>
+    b.classList.toggle("active", (b.dataset.q ?? "").trim().toLowerCase() === text.trim().toLowerCase()),
+  );
   try {
     current = await api.query(text);
-    render(current);
+    currentQuestion = text;
+    render(current, true);
     status("");
   } catch (err) {
     status(`Query failed: ${(err as Error).message}`, true);
   }
 }
 
-function render(q: QueryResult) {
-  const src = map.getSource("assets") as GeoJSONSource | undefined;
-  src?.setData({
+function render(q: QueryResult, fly: boolean) {
+  clearPath();
+  selectedId = null;
+  $("#panel").hidden = true;
+  (map.getSource("selected") as GeoJSONSource | undefined)?.setData(emptyFC());
+  const ranked = [...q.results].sort((a, b) => b.score - a.score);
+  const rank = new Map(ranked.map((r, i) => [r.id, i + 1]));
+  (map.getSource("assets") as GeoJSONSource | undefined)?.setData({
     type: "FeatureCollection",
     features: q.results.map((r) => ({
       type: "Feature",
       geometry: { type: "Point", coordinates: [r.lon, r.lat] },
-      properties: { id: r.id, name: r.name, tier: r.tier, score: r.score },
+      properties: { id: r.id, name: r.name, tier: r.tier, score: r.score, rank: rank.get(r.id) },
     })),
   });
   const lit = new Set(q.results.map((r) => r.id));
@@ -126,90 +196,252 @@ function render(q: QueryResult) {
       .filter((a) => !lit.has(a.id))
       .map((a) => ({ type: "Feature", geometry: { type: "Point", coordinates: [a.lon, a.lat] }, properties: { id: a.id } })),
   });
-  (map.getSource("path") as GeoJSONSource | undefined)?.setData(emptyFC());
-  $("#panel").hidden = true;
 
   const counts = { high: 0, medium: 0, low: 0 } as Record<Tier, number>;
   q.results.forEach((r) => counts[r.tier]++);
   $("#legend").innerHTML = `
     <div class="legend-title">${esc(q.criteria.event.name)}</div>
+    <div class="legend-sub">${esc(q.criteria.event.date)} · last ${q.criteria.window.recent_days} days vs ${q.criteria.window.baseline_days} before</div>
     <div class="channels">${q.channels.map((c) => `<span class="chip small" title="${esc(c.reason)}">${esc(c.id)}</span>`).join("") || "<em>no channels chosen</em>"}</div>
-    ${(["high", "medium", "low"] as Tier[])
-      .map((t) => `<div><span class="dot" style="background:${TIER_COLOR[t]}"></span>${TIER_LABEL[t]} <b>${counts[t]}</b></div>`)
-      .join("")}
-    <div><span class="dot dark"></span>Dark <b>${q.dark_count}</b></div>
-    <div class="hint">Scores rank exposure plus current evidence. They are not probabilities.</div>`;
+    <div class="tiers">${(["high", "medium", "low"] as Tier[])
+      .map((t) => `<span><span class="dot" style="background:${TIER_COLOR[t]}"></span>${TIER_LABEL[t]} <b>${counts[t]}</b></span>`)
+      .join("")}<span><span class="dot dark"></span>Dark <b>${q.dark_count}</b></span></div>
+    ${ranked.length ? `<div class="top-title">Top ranked</div><ol class="top">${ranked
+      .slice(0, TOP_LIST)
+      .map((r) => `<li><button data-id="${esc(r.id)}" title="${esc(r.name)}"><span class="dot" style="background:${TIER_COLOR[r.tier]}"></span><span class="nm">${esc(r.name)}</span><span class="sc">${fmt(r.score)}</span></button></li>`)
+      .join("")}</ol>` : `<p class="empty">Nothing lights up: no asset is exposed to this event.</p>`}
+    <div class="hint">${SCORE_NOTE}</div>`;
+  $("#legend").querySelectorAll<HTMLButtonElement>(".top button").forEach((b) =>
+    b.addEventListener("click", () => {
+      const r = current?.results.find((x) => x.id === b.dataset.id);
+      if (r) void select(r);
+    }),
+  );
+  if (fly) {
+    if (q.results.length) fitTo(q.results.map((r) => [r.lon, r.lat]));
+    else map.flyTo({ center: [10, 20], zoom: 1.4, duration: 1200 });
+  }
 }
 
 // ----------------------------------------------------------------- side panel
 async function select(r: Result) {
+  selectedId = r.id;
   const panel = $("#panel");
   panel.hidden = false;
-  panel.innerHTML = panelHtml(r, null);
-  map.flyTo({ center: [r.lon, r.lat], zoom: Math.max(map.getZoom(), 2.5) });
+  panel.innerHTML = panelHtml(r, null, true);
+  bindPanel();
+  (map.getSource("selected") as GeoJSONSource | undefined)?.setData({
+    type: "FeatureCollection",
+    features: [{ type: "Feature", geometry: { type: "Point", coordinates: [r.lon, r.lat] }, properties: {} }],
+  });
+  clearPath();
   try {
-    const detail = await api.asset(r.id);
-    panel.innerHTML = panelHtml(r, detail);
-    drawPath(detail);
-  } catch {
-    /* detail is optional: the contract fields are already shown */
+    const detail = await api.asset(r.id, currentQuestion);
+    if (selectedId !== r.id) return; // another mine was clicked meanwhile
+    panel.innerHTML = panelHtml(r, detail, false);
+    bindPanel();
+    const pts = drawPath(r, detail);
+    fitTo(pts.length > 1 ? pts : [[r.lon, r.lat]], pts.length > 1 ? 5 : 4.5);
+  } catch (err) {
+    if (selectedId !== r.id) return;
+    panel.innerHTML = panelHtml(r, null, false, (err as Error).message);
+    bindPanel();
+    fitTo([[r.lon, r.lat]], 4.5);
   }
 }
 
-function panelHtml(r: Result, d: AssetDetail | null): string {
+function bindPanel() {
+  $("#panel").querySelector(".close")?.addEventListener("click", () => {
+    $("#panel").hidden = true;
+    selectedId = null;
+    clearPath();
+    (map.getSource("selected") as GeoJSONSource | undefined)?.setData(emptyFC());
+  });
+}
+
+const VERB: Record<string, string> = {
+  EXPORTS_VIA: "exports through",
+  EXPORTS_TO: "ships to",
+  LOCATED_IN: "is in",
+  OWNED_BY: "is owned by",
+  LISTED_IN: "is listed in",
+  TOUCHES: "is exposed to",
+};
+
+/** "US Steel Keetac Mine exports through Duluth, which is in United States, which is exposed to tariffs." */
+export function pathInWords(path: string[], names: Map<string, string>, edges: Map<string, string>): string {
+  const name = (id: string) => names.get(id) ?? id.replace(/^[a-z]+_/, "");
+  let s = `<b>${esc(name(path[0]))}</b>`;
+  for (let i = 1; i < path.length; i++) {
+    const verb = VERB[edges.get(`${path[i - 1]}>${path[i]}`) ?? ""] ?? "links to";
+    const obj = path[i].startsWith("channel_") ? `<b>${esc(name(path[i]).toLowerCase())}</b>` : esc(name(path[i]));
+    s += `${i === 1 ? " " : ", which "}${verb} ${obj}`;
+  }
+  return s + ".";
+}
+
+function panelHtml(r: Result, d: AssetDetail | null, loading: boolean, error?: string): string {
   const c = r.components;
   const names = new Map((d?.path_nodes ?? []).map((n) => [n.id, n.name]));
-  const pathWords = r.paths
-    .map((p) => `<li>${p.map((id) => esc(names.get(id) ?? id)).join(" → ")}</li>`)
-    .join("");
+  const edges = new Map((d?.path_edges ?? []).map((e: PathEdge) => [`${e.src}>${e.dst}`, e.type]));
+  const shown = r.paths.slice(0, 3);
+  const more = r.paths.length - shown.length;
+  const rank = current ? [...current.results].sort((a, b) => b.score - a.score).findIndex((x) => x.id === r.id) + 1 : 0;
+  const relevant = r.evidence.filter((e) => e.judge === "relevant");
+  const other = r.evidence.filter((e) => e.judge !== "relevant");
+  const evidenceLi = (e: (typeof r.evidence)[number]) =>
+    `<li><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title || e.url)}</a>
+      <small>${esc(e.date)} · judge: <span class="judge ${e.judge}">${esc(e.judge.replace("_", " "))}</span> (${fmt(e.confidence)})</small></li>`;
   return `
-    <button class="close" aria-label="Close" onclick="this.parentElement.hidden=true">×</button>
+    <button class="close" aria-label="Close">×</button>
     <h2>${esc(r.name)}</h2>
-    <div class="tier" style="background:${TIER_COLOR[r.tier]}">${TIER_LABEL[r.tier]} · score ${fmt(r.score)}</div>
+    <div class="badges"><span class="tier" style="background:${TIER_COLOR[r.tier]}">${TIER_LABEL[r.tier]} tier</span>
+      <span class="score">score <b>${fmt(r.score)}</b>${rank ? ` · rank ${rank} of ${current!.results.length}` : ""}</span></div>
+    <p class="score-note">${SCORE_NOTE}</p>
+
+    <h3>Exposure path</h3>
+    ${loading ? `<p class="muted">Loading path…</p>` : `<ul class="paths">${shown.map((p) => `<li>${pathInWords(p, names, edges)}</li>`).join("")}</ul>
+    ${more > 0 ? `<p class="muted">+${more} more path${more > 1 ? "s" : ""} (scored with noisy-OR).</p>` : ""}`}
+
+    <h3>News around this mine</h3>
+    ${loading ? `<p class="muted">Loading news series…</p>` : newsChart(d)}
+
+    <h3>Score components</h3>
     <table class="components">
-      <tr><td>Exposure</td><td>${fmt(c.exposure)}</td></tr>
-      <tr><td>News volume z</td><td>${fmt(c.news_z, 1)}</td></tr>
+      <tr><td>Exposure (path strength, 0–1)</td><td>${fmt(c.exposure)}</td></tr>
+      <tr><td>News volume z (last 7 days vs baseline)</td><td>${fmt(c.news_z, 1)}</td></tr>
       <tr><td>Tone shift</td><td>${fmt(c.tone_shift, 1)}</td></tr>
-      <tr><td>Attention z</td><td>${fmt(c.attention_z, 1)}</td></tr>
+      <tr><td>Wikipedia attention z</td><td>${fmt(c.attention_z, 1)}</td></tr>
       <tr><td>Relevant articles</td><td>${c.relevant_articles}</td></tr>
     </table>
-    <h3>Why</h3><p>${esc(r.reason)}</p>
-    <h3>Exposure paths</h3><ol class="paths">${pathWords}</ol>
-    ${d?.series ? `<h3>News volume, last ${d.series.dates.length} days</h3>${sparkline(d.series.news_volume, d.series.recent_days)}` : ""}
+
     <h3>Evidence</h3>
-    ${r.evidence.length ? `<ul class="evidence">${r.evidence
-      .map((e) => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a><br><small>${esc(e.date)} · ${esc(e.judge)} (${fmt(e.confidence)})</small></li>`)
-      .join("")}</ul>` : "<p><em>No relevant articles.</em></p>"}`;
+    ${relevant.length
+      ? `<ul class="evidence">${relevant.map(evidenceLi).join("")}</ul>`
+      : `<div class="callout"><b>Exposure only, no current evidence.</b> No news article judged relevant to this mine and event was found in the last ${current?.criteria.window.recent_days ?? 7} days, so its score comes from exposure along the paths above.</div>`}
+    ${other.length ? `<details><summary>${other.length} other article${other.length > 1 ? "s" : ""} (judged not relevant or unsure)</summary><ul class="evidence">${other.map(evidenceLi).join("")}</ul></details>` : ""}
+    ${error ? `<p class="error">Details unavailable: ${esc(error)}</p>` : ""}
+    <h3>Why</h3><p class="muted">${esc(r.reason)}</p>`;
 }
 
-function sparkline(values: number[], recentDays: number): string {
-  if (!values.length) return "";
-  const w = 300, h = 60, max = Math.max(...values, 1);
-  const x = (i: number) => (i / Math.max(values.length - 1, 1)) * w;
-  const y = (v: number) => h - (v / max) * (h - 4) - 2;
-  const pts = values.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
-  const recentX = x(values.length - recentDays);
-  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
-    <rect x="${recentX}" y="0" width="${w - recentX}" height="${h}" class="recent"/>
-    <polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
-}
-
-function drawPath(d: AssetDetail) {
-  const byId = new Map(d.path_nodes.map((n) => [n.id, n]));
-  const features: GeoJSON.Feature[] = [];
-  for (const p of d.paths) {
-    const coords = p
-      .map((id) => byId.get(id))
-      .filter((n): n is NonNullable<typeof n> => !!n && n.lat !== null && n.lon !== null)
-      .map((n) => [n.lon!, n.lat!]);
-    if (coords.length >= 2) features.push({ type: "Feature", geometry: { type: "LineString", coordinates: coords }, properties: {} });
+/** 60-day baseline + 7 recent days of GDELT article counts, recent days highlighted. */
+function newsChart(d: AssetDetail | null): string {
+  const s = d?.series;
+  if (!s || !s.news_volume.length) {
+    return `<p class="muted">${esc(d?.series_note || "No news series for this mine yet.")}</p>`;
   }
-  for (const n of d.path_nodes) {
-    if (n.lat !== null && n.lon !== null && n.type !== "mine") {
-      features.push({ type: "Feature", geometry: { type: "Point", coordinates: [n.lon, n.lat] }, properties: { name: n.name } });
+  const v = s.news_volume, n = v.length, recent = Math.min(s.recent_days, n);
+  const W = 340, H = 92, top = 14, base = 70, max = Math.max(...v, 1);
+  const bw = W / n;
+  const y = (x: number) => base - (x / max) * (base - top);
+  const baseline = v.slice(0, n - recent).sort((a, b) => a - b);
+  const median = baseline.length ? baseline[Math.floor(baseline.length / 2)] : 0;
+  const recentSum = v.slice(n - recent).reduce((a, b) => a + b, 0);
+  const bars = v
+    .map((x, i) => `<rect x="${(i * bw + 0.3).toFixed(1)}" y="${y(x).toFixed(1)}" width="${Math.max(bw - 0.6, 0.6).toFixed(1)}" height="${(base - y(x)).toFixed(1)}" class="${i >= n - recent ? "r" : "b"}"><title>${esc(s.dates[i] ?? "")}: ${x}</title></rect>`)
+    .join("");
+  const rx = (n - recent) * bw;
+  return `<svg class="news" viewBox="0 0 ${W} ${H}" role="img" aria-label="Daily news articles, last ${recent} days highlighted">
+      <rect x="${rx}" y="${top - 10}" width="${W - rx}" height="${base - top + 10}" class="recent-bg"/>
+      ${bars}
+      <line x1="0" x2="${rx}" y1="${y(median)}" y2="${y(median)}" class="median"/>
+      <text x="${W}" y="${top - 2}" text-anchor="end" class="lbl hot">last ${recent} days</text>
+      <text x="0" y="${top - 2}" class="lbl">max ${max}/day</text>
+      <text x="0" y="${H - 6}" class="lbl">${esc(s.dates[0] ?? "")}</text>
+      <text x="${W}" y="${H - 6}" text-anchor="end" class="lbl">${esc(s.dates[n - 1] ?? "")}</text>
+    </svg>
+    <p class="muted small">Baseline median ${median}/day (dashed) · ${recentSum} articles in the last ${recent} days. ${esc(d?.series_note ?? "")}</p>`;
+}
+
+// ----------------------------------------------------------------- exposure path on the globe
+/** Points along the great circle from a to b ([lon, lat] in degrees), longitudes kept continuous. */
+export function greatCircle(a: [number, number], b: [number, number], steps = 64): [number, number][] {
+  const rad = Math.PI / 180;
+  const toVec = ([lon, lat]: [number, number]) => [
+    Math.cos(lat * rad) * Math.cos(lon * rad),
+    Math.cos(lat * rad) * Math.sin(lon * rad),
+    Math.sin(lat * rad),
+  ];
+  const p = toVec(a), q = toVec(b);
+  const dot = Math.min(1, Math.max(-1, p[0] * q[0] + p[1] * q[1] + p[2] * q[2]));
+  const omega = Math.acos(dot);
+  if (omega < 1e-6) return [a, b];
+  const pts: [number, number][] = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const k1 = Math.sin((1 - t) * omega) / Math.sin(omega), k2 = Math.sin(t * omega) / Math.sin(omega);
+    const x = k1 * p[0] + k2 * q[0], y = k1 * p[1] + k2 * q[1], z = k1 * p[2] + k2 * q[2];
+    pts.push([Math.atan2(y, x) / rad, Math.atan2(z, Math.hypot(x, y)) / rad]);
+  }
+  const lons = unwrap(pts.map((pt) => pt[0]));
+  return pts.map((pt, i) => [lons[i], pt[1]]);
+}
+
+function clearPath() {
+  (map.getSource("path") as GeoJSONSource | undefined)?.setData(emptyFC());
+  nodeMarkers.forEach((m) => m.remove());
+  nodeMarkers = [];
+}
+
+/**
+ * Draw the selected mine's exposure path as great-circle arcs: mine → port (EXPORTS_VIA), then
+ * port (or mine) → destination country (EXPORTS_TO). "Is in" hops (LOCATED_IN) are locations, not
+ * shipments, so they are not drawn; a path that goes through ownership (OWNED_BY, LISTED_IN) is a
+ * financial link and is not drawn past that hop.
+ * Returns the drawn points for framing.
+ */
+function drawPath(r: Result, d: AssetDetail): [number, number][] {
+  clearPath();
+  const byId = new Map<string, PathNode>(d.path_nodes.map((n) => [n.id, n]));
+  byId.set(r.id, { id: r.id, type: "mine", name: r.name, lat: r.lat, lon: r.lon });
+  const edgeType = new Map(d.path_edges.map((e) => [`${e.src}>${e.dst}`, e.type]));
+  const located = (id: string) => {
+    const n = byId.get(id);
+    return n && n.lat !== null && n.lon !== null ? (n as PathNode & { lat: number; lon: number }) : null;
+  };
+  const features: GeoJSON.Feature[] = [];
+  const seen = new Set<string>();
+  const used = new Map<string, PathNode & { lat: number; lon: number }>();
+  const arc = (a: PathNode & { lat: number; lon: number }, b: PathNode & { lat: number; lon: number }, type: string) => {
+    if (a.id === b.id || seen.has(`${a.id}>${b.id}`)) return;
+    seen.add(`${a.id}>${b.id}`);
+    used.set(a.id, a);
+    used.set(b.id, b);
+    features.push({
+      type: "Feature",
+      geometry: { type: "LineString", coordinates: greatCircle([a.lon, a.lat], [b.lon, b.lat]) },
+      properties: { kind: "trade", type },
+    });
+  };
+  const pending: [PathNode & { lat: number; lon: number }, PathNode & { lat: number; lon: number }, string][] = [];
+  for (const p of d.paths) {
+    let lastPhysical = located(p[0]); // the mine, then the port it ships through
+    for (let i = 1; i < p.length; i++) {
+      const type = edgeType.get(`${p[i - 1]}>${p[i]}`) ?? "UNKNOWN";
+      if (type === "OWNED_BY" || type === "LISTED_IN") break; // ownership route: a financial link, not a shipment
+      const b = located(p[i]);
+      if (!b) continue;
+      if (type === "EXPORTS_VIA" && lastPhysical) {
+        arc(lastPhysical, b, type);
+        lastPhysical = b;
+      } else if (type === "EXPORTS_TO") {
+        const from = lastPhysical ?? located(p[i - 1]);
+        if (from) pending.push([from, b, type]);
+      }
     }
   }
+  // A destination reached through a port is drawn from the port only, not also straight from the mine.
+  const viaPort = new Set(pending.filter(([a]) => a.type === "port").map(([, b]) => b.id));
+  for (const [a, b, type] of pending) if (a.type === "port" || !viaPort.has(b.id)) arc(a, b, type);
   (map.getSource("path") as GeoJSONSource | undefined)?.setData({ type: "FeatureCollection", features });
+  for (const n of used.values()) {
+    if (n.id === r.id) continue;
+    const el = document.createElement("div");
+    el.className = `node-label ${n.type}`;
+    el.textContent = `${n.type === "port" ? "⚓ " : n.type === "country" ? "→ " : ""}${n.name}`;
+    nodeMarkers.push(new maplibregl.Marker({ element: el, anchor: "left", offset: [6, 0] }).setLngLat([n.lon, n.lat]).addTo(map));
+  }
+  return [[r.lon, r.lat], ...[...used.values()].filter((n) => n.id !== r.id).map((n) => [n.lon, n.lat] as [number, number])];
 }
 
 // ----------------------------------------------------------------- results tab
@@ -230,7 +462,8 @@ async function showResults() {
       ${r.backtests.map((b) => `<tr><td>${esc(b.event)}</td><td>${esc(b.method)}</td><td>${fmt(b.precision_at_10)}</td></tr>`).join("") || "<tr><td colspan=3><em>none yet</em></td></tr>"}</table>
       <h3>Negative controls</h3>
       <table><tr><th>Query</th><th>Lit</th><th>Dark</th><th>Pass</th></tr>
-      ${r.negative_controls.map((n) => `<tr><td>${esc(n.query)}</td><td>${n.lit}</td><td>${n.dark}</td><td>${n.passed ? "✓" : "✗"}</td></tr>`).join("") || "<tr><td colspan=4><em>none yet</em></td></tr>"}</table>`;
+      ${r.negative_controls.map((n) => `<tr><td>${esc(n.query)}</td><td>${n.lit}</td><td>${n.dark}</td><td>${n.passed ? "✓" : "✗"}</td></tr>`).join("") || "<tr><td colspan=4><em>none yet</em></td></tr>"}</table>
+      <p class="note">${SCORE_NOTE}</p>`;
   } catch (err) {
     el.innerHTML = `<p class="error">Could not load /eval: ${esc((err as Error).message)}</p>`;
   }
@@ -266,7 +499,7 @@ async function init() {
     allAssets = await api.assets().catch(() => []);
     const presets = await api.presets();
     $("#presets").innerHTML = presets
-      .map((p) => `<button class="chip ${p.kind}" data-q="${esc(p.query)}">${esc(p.label)}</button>`)
+      .map((p) => `<button class="chip ${p.kind}" data-q="${esc(p.query)}" title="${esc(p.query)}">${esc(p.label)}</button>`)
       .join("");
     $("#presets").querySelectorAll<HTMLButtonElement>("button").forEach((b) =>
       b.addEventListener("click", () => void ask(b.dataset.q!)),
@@ -276,6 +509,17 @@ async function init() {
   } catch (err) {
     status(`Backend not reachable (${(err as Error).message}). Is \`make backend\` running?`, true);
   }
+}
+
+// Dev-only hook for headless QA (select a mine by id without clicking a pixel).
+if (import.meta.env.DEV) {
+  (window as unknown as { __globe: unknown }).__globe = {
+    map,
+    selectById: (id: string) => {
+      const r = current?.results.find((x) => x.id === id);
+      if (r) void select(r);
+    },
+  };
 }
 
 void init();

@@ -18,6 +18,7 @@ export const api = {
   query: (text: string) => call<QueryResult>("/query", { method: "POST", body: JSON.stringify({ text }) }),
   presets: () => call<Preset[]>("/presets"),
   assets: () => call<AssetPoint[]>("/assets"),
-  asset: (id: string) => call<AssetDetail>(`/asset/${encodeURIComponent(id)}`),
+  asset: (id: string, question?: string) =>
+    call<AssetDetail>(`/asset/${encodeURIComponent(id)}${question ? `?q=${encodeURIComponent(question)}` : ""}`),
   evalReport: () => call<EvalReport>("/eval"),
 };
