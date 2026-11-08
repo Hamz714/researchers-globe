@@ -85,8 +85,7 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
 
     # 3. exposure (deterministic)
     base = graph or default_graph()
-    touches = choose_touches(text, criteria, chosen, dict(zip(base.nodes["id"], base.nodes["name"])),
-                             preset, backends=backends)
+    touches, touch_prov = choose_touches(text, criteria, chosen, base, end, preset, backends=backends)
     g = base.with_edges(exp.touches_edges(chosen, touches))
     top, dark = exp.propagate(g, {c: library[c]["weight"] for c in chosen}, top_k=TOP_K)
 
@@ -121,7 +120,13 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
         if t == "dark":
             dark += 1
             continue
-        reason = (f"Exposed via {_path_words(g, ex.paths[0])}"
+        touched, ch_id = ex.paths[0][-2], ex.paths[0][-1].removeprefix("channel_")
+        prov = touch_prov.get(ch_id, {})
+        why_touch = ""
+        if prov.get("source") == "gdelt_titles" and touched in prov.get("named", {}):
+            why_touch = (f" ({g.node(touched)['name']} is named in {prov['named'][touched]} of "
+                         f"{prov['articles']} {criteria['event']['name']} articles on {ch_id})")
+        reason = (f"Exposed via {_path_words(g, ex.paths[0])}{why_touch}"
                   + (f" (+{len(ex.paths) - 1} more paths)" if len(ex.paths) > 1 else "")
                   + f". News volume z={sig['news_z']:.1f}, attention z={sig['attention_z']:.1f}, "
                   f"{len(relevant)} relevant article(s)."

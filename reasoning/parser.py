@@ -76,24 +76,38 @@ def choose_channels(text: str, criteria: dict, preset: dict | None = None,
             for cid, p in picked if cid in library]
 
 
-def choose_touches(text: str, criteria: dict, channel_ids: list[str], node_names: dict[str, str],
-                   preset: dict | None = None, backends: list | None = None) -> dict[str, list]:
-    """Which nodes each chosen channel touches for THIS event (the TOUCHES edges).
+def choose_touches(text: str, criteria: dict, channel_ids: list[str], graph, end,
+                   preset: dict | None = None, backends: list | None = None) -> tuple[dict[str, list], dict]:
+    """Which nodes each chosen channel touches for THIS event (the TOUCHES edges), and how strongly.
 
-    Presets carry hand-reviewed touches. For free text the model picks, per channel, from
-    the countries in the graph (Jev: one yes/no each); p becomes the edge weight. If the
-    model is unavailable, channels.json `default_touches` are used.
+    Order, per channel:
+      1. measured from GDELT coverage of (event AND channel): share of titles naming each node
+         (reasoning/touches.py), restricted to the node types the channel may touch;
+      2. the decision model picks from those nodes (Jev: one yes/no each; p becomes the weight);
+      3. the preset's hand-set fallback_touches, then channels.json default_touches.
+    Returns (touches, provenance) where provenance[channel] says which source was used.
     """
+    from reasoning.touches import measured_touches
+
     library = load_channels()
-    if preset is not None and preset.get("touches") is not None:
-        return preset["touches"]
-    countries = {nid: name for nid, name in node_names.items() if nid.startswith("country_")}
+    names = dict(zip(graph.nodes["id"], graph.nodes["name"]))
+    types = dict(zip(graph.nodes["id"], graph.nodes["type"]))
     out: dict[str, list] = {}
+    prov: dict[str, dict] = {}
     for cid in channel_ids:
+        ch = library[cid]
+        measured, n_articles = measured_touches(criteria, ch, graph, end)
+        if measured:
+            out[cid] = [[nid, w] for nid, w, _ in measured]
+            prov[cid] = {"source": "gdelt_titles", "articles": n_articles,
+                         "named": {nid: c for nid, _, c in measured}}
+            continue
+        allowed = {nid: names[nid] for nid, t in types.items() if t in ch["touches"] and t == "country"}
+        fb = (preset or {}).get("fallback_touches", {}).get(cid) or ch.get("default_touches", [])
         picked = decision_model.select(
-            f"Through '{library[cid]['name']}', which country would this event act on most directly?",
-            countries, {"question": text, "event": criteria["event"]}, max_n=5,
-            fallback=lambda cid=cid: [tuple(t) for t in library[cid].get("default_touches", [])],
-            backends=backends)
-        out[cid] = [[nid, round(float(p), 3)] for nid, p in picked if nid in node_names]
-    return out
+            f"Through '{ch['name']}', which of these would this event act on most directly?",
+            allowed, {"question": text, "event": criteria["event"]}, max_n=5,
+            fallback=lambda fb=fb: [tuple(t) for t in fb], backends=backends) if allowed else [tuple(t) for t in fb]
+        out[cid] = [[nid, round(float(p), 3)] for nid, p in picked if nid in names]
+        prov[cid] = {"source": "model_or_fallback", "articles": n_articles}
+    return out, prov

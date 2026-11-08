@@ -1,5 +1,5 @@
 {
-  "_comment": "Fixed channel library (plan: Channel library). The model may only pick ids from this list; code rejects anything else. 'weight' is w_channel in the exposure formula and is HAND-SET: tune and record changes in the README. 'touches' lists the node TYPES a channel may touch. 'default_touches' are used only when a query has no preset; they are a placeholder (see README: open design question).",
+  "_comment": "Fixed channel library (plan: Channel library). The model may only pick ids from this list. 'weight' is w_channel (hand-set). 'touches' = node types the channel may touch; WHICH nodes and how strongly is measured per event from GDELT coverage (reasoning/touches.py). 'default_touches' is the last-resort fallback.",
   "channels": [
     {
       "id": "tariffs",
@@ -14,8 +14,7 @@
       ],
       "touches": [
         "country",
-        "company",
-        "commodity"
+        "company"
       ],
       "weight": 0.9,
       "default_touches": [
@@ -73,8 +72,7 @@
         "steel demand"
       ],
       "touches": [
-        "country",
-        "commodity"
+        "country"
       ],
       "weight": 0.7,
       "default_touches": [
@@ -132,7 +130,6 @@
         "walkout"
       ],
       "touches": [
-        "country",
         "company",
         "port"
       ],
@@ -151,7 +148,6 @@
         "port closure"
       ],
       "touches": [
-        "country",
         "port"
       ],
       "weight": 0.8,

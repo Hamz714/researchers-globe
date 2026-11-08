@@ -1,5 +1,5 @@
 {
-  "_comment": "Prepared queries (plan: Presets). 'criteria', 'channels' and 'touches' are used as the parser/channel fallback and for precomputing cached results. Presets 2-4 have TODO events: pick the real storm/strike on the day.",
+  "_comment": "Prepared queries (plan: Presets). 'criteria' and 'channels' are the parser's fallback. TOUCHES weights are measured from GDELT coverage at query time (reasoning/touches.py); 'fallback_touches' are hand-set and only used offline with an empty cache.",
   "presets": [
     {
       "id": "hero_midterms",
@@ -40,7 +40,10 @@
           "reason": "Federal mining permits depend on the administration and Congress."
         }
       ],
-      "touches": {
+      "sources": [
+        "https://en.wikipedia.org/wiki/2026_United_States_elections"
+      ],
+      "fallback_touches": {
         "tariffs": [
           [
             "country_US",
@@ -76,10 +79,7 @@
           ]
         ]
       },
-      "touches_note": "Hand-set. US = where policy is made; CA = USMCA partner and main pellet trade link; BR = subject of 2025 US tariffs; CN = US-China trade policy; Nippon Steel = owner of U.S. Steel, politically contested. Edit with care and record changes in README.",
-      "sources": [
-        "https://en.wikipedia.org/wiki/2026_United_States_elections"
-      ]
+      "fallback_touches_note": "Used ONLY if GDELT coverage and the decision model are both unavailable. Hand-set. US = where policy is made; CA = USMCA partner and main pellet trade link; BR = subject of 2025 US tariffs; CN = US-China trade policy; Nippon Steel = owner of U.S. Steel, politically contested. Edit with care and record changes in README."
     },
     {
       "id": "weather_ports",
@@ -112,7 +112,12 @@
           "reason": "Severe Cyclonic Storm Murasu made landfall near Ongole, Andhra Pradesh on 3 Nov 2026; ports on that coast handle iron ore exports."
         }
       ],
-      "touches": {
+      "sources": [
+        "https://www.aljazeera.com/news/2026/11/3/cyclone-murasu-makes-landfall-on-indias-eastern-coast",
+        "https://www.theweek.in/news/india/2026/11/03/cyclone-murasu-landfall-andhra-pradesh.html",
+        "https://vajiramandravi.com/current-affairs/cyclone-murasu-2026/"
+      ],
+      "fallback_touches": {
         "weather": [
           [
             "port_krishnapatnam",
@@ -128,12 +133,7 @@
           ]
         ]
       },
-      "touches_note": "Krishnapatnam is ~100 km south of the Ongole landfall; Visakhapatnam/Gangavaram districts were under IMD flash-flood risk. Weights hand-set.",
-      "sources": [
-        "https://www.aljazeera.com/news/2026/11/3/cyclone-murasu-makes-landfall-on-indias-eastern-coast",
-        "https://www.theweek.in/news/india/2026/11/03/cyclone-murasu-landfall-andhra-pradesh.html",
-        "https://vajiramandravi.com/current-affairs/cyclone-murasu-2026/"
-      ]
+      "fallback_touches_note": "Used ONLY if GDELT coverage and the decision model are both unavailable. Krishnapatnam is ~100 km south of the Ongole landfall; Visakhapatnam/Gangavaram districts were under IMD flash-flood risk. Weights hand-set."
     },
     {
       "id": "labour_protest",
@@ -167,7 +167,12 @@
           "reason": "The Combined BHP Ports Unions struck at Port Hedland in July and August 2026 and on 15 Sep 2026 said they would seek arbitration after nine months of failed talks; no deal has been reported since."
         }
       ],
-      "touches": {
+      "sources": [
+        "https://www.investing.com/news/stock-market-news/combined-bhp-ports-unions-to-seek-arbitration-over-wage-deal-dispute-4900787",
+        "https://www.mining.com/bhps-first-port-strike-in-26-years-rattles-iron-ore-supply/",
+        "https://www.bloomberg.com/news/articles/2026-08-08/union-workers-strike-at-bhp-s-port-hedland-iron-ore-export-hub"
+      ],
+      "fallback_touches": {
         "labour": [
           [
             "company_bhp",
@@ -179,12 +184,7 @@
           ]
         ]
       },
-      "touches_note": "Dispute covers BHP's Port Hedland port operations. Other miners exporting through the same harbour are touched via the port at 0.8. Hand-set. Picked on 8 Nov 2026: no iron ore strike was reported in the past week, and this is the live labour dispute in the sector.",
-      "sources": [
-        "https://www.investing.com/news/stock-market-news/combined-bhp-ports-unions-to-seek-arbitration-over-wage-deal-dispute-4900787",
-        "https://www.mining.com/bhps-first-port-strike-in-26-years-rattles-iron-ore-supply/",
-        "https://www.bloomberg.com/news/articles/2026-08-08/union-workers-strike-at-bhp-s-port-hedland-iron-ore-export-hub"
-      ]
+      "fallback_touches_note": "Used ONLY if GDELT coverage and the decision model are both unavailable. Dispute covers BHP's Port Hedland port operations. Other miners exporting through the same harbour are touched via the port at 0.8. Hand-set. Picked on 8 Nov 2026: no iron ore strike was reported in the past week, and this is the live labour dispute in the sector."
     },
     {
       "id": "negative_control",
@@ -210,7 +210,7 @@
         "region": "global"
       },
       "channels": [],
-      "touches": {}
+      "fallback_touches": {}
     }
   ]
 }

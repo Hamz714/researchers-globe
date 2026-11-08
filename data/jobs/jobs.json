@@ -1,7 +1,19 @@
 {
-"created": "2026-11-08T00:33:10",
+"created": "2026-11-08T00:41:49",
 "end": "2026-11-08",
 "jobs": [
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28midterm+OR+midterms+OR+Congress%29+%28tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261102000000&enddatetime=20261109000000&maxrecords=250&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28midterm+OR+midterms+OR+Congress%29+%28%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+%22steel+demand%22%29&mode=artlist&format=json&startdatetime=20261102000000&enddatetime=20261109000000&maxrecords=250&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28midterm+OR+midterms+OR+Congress%29+%28%22mining+permit%22+OR+%22environmental+approval%22+OR+%22mining+royalty%22+OR+%22mining+licence%22%29&mode=artlist&format=json&startdatetime=20261102000000&enddatetime=20261109000000&maxrecords=250&sort=hybridrel",
+"kind": "gdelt"
+},
 {
 "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Keetac+OR+%22US+Steel+Keetac%22+OR+%22Nippon+Steel%22%29+%28Congress+OR+%22Section+232%22+OR+%22environmental+approval%22+OR+%22infrastructure+bill%22+OR+%22infrastructure+spending%22+OR+midterm+OR+midterms+OR+%22mining+licence%22+OR+%22mining+permit%22+OR+%22mining+royalty%22+OR+%22steel+demand%22+OR+%22steel+tariff%22+OR+tariff+OR+tariffs+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
@@ -343,6 +355,10 @@
 "kind": "gdelt"
 },
 {
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Murasu+OR+cyclone+OR+%22Andhra+Pradesh%22%29+%28cyclone+OR+storm+OR+flood+OR+earthquake+OR+%22port+closure%22%29&mode=artlist&format=json&startdatetime=20261102000000&enddatetime=20261109000000&maxrecords=250&sort=hybridrel",
+"kind": "gdelt"
+},
+{
 "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Sri+Anjani+Pandlimarri%22+OR+%22Sri+Anjani+Mines+%26+Minerals+Pvt%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
@@ -680,6 +696,10 @@
 },
 {
 "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Narda+OR+%22Prateek+Minerals+Narda%22+OR+%22Prateek+Minerals%22%29+%28%22Andhra+Pradesh%22+OR+Murasu+OR+cyclone+OR+earthquake+OR+flood+OR+%22port+closure%22+OR+storm%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Port+Hedland%22+OR+%22wage+dispute%22+OR+arbitration+OR+strike%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=artlist&format=json&startdatetime=20260914000000&enddatetime=20261109000000&maxrecords=250&sort=hybridrel",
 "kind": "gdelt"
 },
 {

@@ -101,7 +101,7 @@ fallback, not extra hours. Everyone labels ~35 article pairs in phase 3
 - **Cache:** `cache/` is committed, so everyone runs offline on identical data.
 - **GDELT from the venue:** GDELT answers 429 *"Please limit requests to one every 5 seconds"* to
   every request, probably because the whole venue shares one IP. Fetch from a phone hotspot:
-  `make fetch-plan && make fetch-run && make fetch-ingest && make presets`.
+  `make fetch-all` (plan, fetch, ingest in rounds until nothing is missing, then precompute presets).
 
 ## Decision model (Jev)
 
@@ -128,15 +128,18 @@ and repeat calls vary by about 0.02, so every validated answer is cached in `cac
    was sought on 15 Sep with no deal reported since. No iron ore strike was reported in the week before the hackathon.
 4. **Negative control:** the Premier League title race. It should stay dark.
 
-Each preset lists its sources and a `touches_note` explaining the hand-set TOUCHES weights.
+Each preset lists its sources. TOUCHES weights are measured from coverage at query time.
 
 ## Decisions taken on 8 Nov (were open questions)
 
 1. **Dark dots:** `GET /assets` returns every mine, and the globe draws the unlit ones grey.
    The `/query` contract is unchanged.
-2. **TOUCHES edges:** presets carry hand-reviewed touches. For free-text questions the decision model picks
-   touched countries per channel from the graph's countries; p becomes the weight, and code validates it.
-   `channels.json` `default_touches` is the last resort.
+2. **TOUCHES edges are measured, not hand-set** (`reasoning/touches.py`). For each chosen channel we pull up to
+   250 GDELT articles on (event terms AND channel terms) since the day before the event, and count how many
+   titles name each node the channel may touch: country names and demonyms, curated companies, ports.
+   weight = titles naming the node / titles naming the most-named node (≥2 titles, ≥3% of coverage, top 8).
+   The reason text says so, e.g. "United States is named in 41 of 180 ... articles on tariffs".
+   If there is no coverage, the decision model picks, then the preset's `fallback_touches`, then `default_touches`.
 3. **Exposure no longer saturates:** edges are walked in their own direction, so a Chinese mine isn't
    exposed to Brazil just because China imports Brazilian ore. Only the strongest path per
    (touched node, channel) counts in the noisy-OR. All paths are still shown.
@@ -149,7 +152,8 @@ Each preset lists its sources and a `touches_note` explaining the hand-set TOUCH
 | --- | --- | --- |
 | `reasoning/scoring.py` | a=0.5, b=0.3, c=0.4, d=1.0, **k=3.0** | k=3 keeps an asset with zero evidence below the medium tier |
 | `reasoning/channels.json` | channel weights 0.5–0.9 | first guess |
-| `data/presets.json` | TOUCHES weights per preset | see each `touches_note` |
+| `reasoning/touches.py` | ≥2 titles, ≥3% share, top 8 touched nodes | keeps one-off mentions out |
+| `data/presets.json` | `fallback_touches` | only used offline with an empty cache |
 | `pipeline/signals.py` | tone std floor 0.25, placebo threshold z≥2 | the plan gives none |
 | `reasoning/run_query.py` | EVIDENCE_K=25, PLACEBO_K=10, control term "copper" | GDELT rate limit |
 | `eval/metrics.py` | negative control passes if ≤10% lit | first guess |

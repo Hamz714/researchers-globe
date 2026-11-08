@@ -106,6 +106,8 @@ def main() -> None:
     p.add_argument("--end", default=date.today().isoformat())
     i = sub.add_parser("ingest")
     i.add_argument("path", type=Path)
+    a = sub.add_parser("all", help="plan -> run -> ingest, repeated until nothing is missing (max 4 rounds)")
+    a.add_argument("--end", default=date.today().isoformat())
     r = sub.add_parser("run")
     r.add_argument("--jobs", type=Path, default=JOBS)
     r.add_argument("--out", type=Path, default=ROOT / "data" / "jobs" / "results.json")
@@ -116,6 +118,18 @@ def main() -> None:
     elif args.cmd == "ingest":
         ok, bad = ingest(args.path)
         print(f"stored {ok}, skipped {bad} (rate-limited or bad)")
+    elif args.cmd == "all":
+        # Rounds are needed because measured TOUCHES change which mines are candidates,
+        # and so which evidence URLs are needed.
+        out = ROOT / "data" / "jobs" / "results.json"
+        for rnd in range(1, 5):
+            jobs = plan(None, date.fromisoformat(args.end))
+            print(f"round {rnd}: {len(jobs)} missing", file=sys.stderr)
+            if not jobs:
+                break
+            run(JOBS, out)
+            ok, bad = ingest(out)
+            print(f"round {rnd}: stored {ok}, skipped {bad}", file=sys.stderr)
     else:
         run(args.jobs, args.out)
 

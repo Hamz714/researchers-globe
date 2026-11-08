@@ -91,3 +91,9 @@ a { color: var(--accent); }
   .chips { grid-column: 1; }
   #panel, #results { top: 200px; }
 }
+
+#credits {
+  position: absolute; right: 16px; bottom: 6px; z-index: 4; font-size: 11px; color: var(--muted);
+  max-width: calc(100vw - 300px); text-align: right;
+}
+#credits a { color: var(--muted); }

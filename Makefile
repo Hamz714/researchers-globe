@@ -6,7 +6,7 @@ ifeq ($(OS),Windows_NT)
 PY     := $(VENV)/Scripts/python.exe
 endif
 
-.PHONY: help setup backend frontend test fetch-sample eval graph pipeline-query presets fetch-plan fetch-run fetch-ingest
+.PHONY: help setup backend frontend test fetch-sample eval graph pipeline-query presets fetch-plan fetch-run fetch-ingest fetch-all
 
 help:
 	@echo "setup         create .venv, install Python + frontend deps, copy .env.example"
@@ -20,6 +20,7 @@ help:
 	@echo "fetch-plan    list GDELT/Wikipedia URLs missing from cache -> data/jobs/jobs.json"
 	@echo "fetch-run     fetch those URLs (throttled; use a phone hotspot if the venue IP is blocked)"
 	@echo "fetch-ingest  load data/jobs/results.json into cache/"
+	@echo "fetch-all     plan+run+ingest in rounds until nothing is missing, then presets (~30-40 min)"
 
 setup:
 	$(PYTHON) -m venv $(VENV)
@@ -56,6 +57,10 @@ fetch-plan:
 
 fetch-run:
 	$(PY) -m pipeline.browser_fetch run
+
+fetch-all:
+	$(PY) -m pipeline.browser_fetch all
+	GLOBE_OFFLINE=1 $(PY) -m reasoning.precompute
 
 fetch-ingest:
 	$(PY) -m pipeline.browser_fetch ingest data/jobs/results.json
