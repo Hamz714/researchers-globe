@@ -1,33 +1,13 @@
 {
-"created": "2026-11-08T03:14:45",
+"created": "2026-11-08T03:35:15",
 "end": "2026-11-08",
 "jobs": [
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28midterm+OR+midterms+OR+Congress%29+%28%22exchange+rate%22+OR+%22interest+rate%22+OR+%22central+bank%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
 {
 "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28midterm+OR+midterms+OR+Congress%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28cyclone+OR+storm+OR+flood+OR+earthquake+OR+%22port+closure%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28midterm+OR+midterms+OR+Congress%29+%28cyclone+OR+storm+OR+flood+OR+earthquake+OR+%22port+closure%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
 "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hibbing+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Keetac+OR+%22US+Steel+Keetac%22+OR+%22Nippon+Steel%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
