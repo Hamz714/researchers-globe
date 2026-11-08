@@ -15,6 +15,7 @@ from datetime import date, timedelta
 
 from backend.schemas import QueryResult
 from pipeline.graph import Graph, default_graph
+from reasoning import decision_model
 from reasoning import exposure as exp
 from reasoning import scoring
 from reasoning.judge import judge_article
@@ -167,7 +168,10 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
                   + (" GDELT outage days excluded." if sig.get("gap_days_dropped") else "")
                   + (f" Insufficient data for {', '.join(sig['insufficient'])} (too few valid recent days)."
                      if sig.get("insufficient") else ""))
-        # TODO(Person B): one-sentence grounded summary via the decision model, citing only `relevant`.
+        # step 6: one grounded sentence citing only `relevant` as [n] (validated; None -> no summary)
+        summary = decision_model.summarise(asset, best_channel, criteria["event"], relevant, backends=backends)
+        if summary:
+            reason = f"{summary} {reason}"
         results.append({
             "id": ex.asset_id, "name": node["name"], "lat": float(node["lat"]), "lon": float(node["lon"]),
             "tier": t, "score": round(sc, 4),

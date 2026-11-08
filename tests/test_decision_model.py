@@ -112,3 +112,49 @@ def test_blank_env_values_fall_back_to_defaults(monkeypatch):
     monkeypatch.setenv("JEV_BASE_URL", "")
     j = dm.JevBackend()
     assert j.model == "typesafe/jev-1.14" and j.base_url.endswith("/decisions")
+
+
+# ---------------------------------------------------------------- step 6: one-sentence summary
+from reasoning.decision_model import check_summary, summarise  # noqa: E402
+
+TITLES = ["Cleveland-Cliffs urges new Congress to keep steel tariffs", "Iron Range braces for tariff fight"]
+
+
+def test_check_summary_accepts_grounded_sentence():
+    s = "Hibbing is exposed because its owner urges Congress to keep steel tariffs [1] and the Iron Range braces for a fight [2]."
+    assert check_summary(s, TITLES) == s
+
+
+@pytest.mark.parametrize("bad", [
+    "Hibbing is exposed to tariffs.",                                        # cites nothing
+    "Hibbing is exposed [3].",                                               # article not given
+    "Hibbing is exposed [1]. Also the Iron Range [2].",                      # two sentences
+    "Hibbing is exposed, see reuters.com [1].",                              # names a source
+    'Hibbing is exposed as "Steel giant files for bankruptcy protection" says [1].',  # quotes a title not given
+    " ".join(["word"] * 36) + " [1].",                                       # too long
+])
+def test_check_summary_rejects(bad):
+    with pytest.raises(ValueError):
+        check_summary(bad, TITLES)
+
+
+class FakeWriter:
+    model = "m"
+
+    def __init__(self, reply, name="fake-writer"):
+        self.reply, self.name = reply, name  # answers are cached per backend name
+
+    def configured(self):
+        return True
+
+    def complete(self, system, user):
+        return self.reply
+
+
+def test_summarise_uses_generative_backend_and_drops_invalid(tmp_path, monkeypatch):
+    monkeypatch.setenv("GLOBE_CACHE_DIR", str(tmp_path))
+    args = ({"name": "Hibbing"}, {"id": "tariffs"}, {"name": "midterms"}, [{"title": t} for t in TITLES])
+    good = "Hibbing is exposed through tariffs as its owner lobbies Congress [1]."
+    assert summarise(*args, backends=[FakeWriter(good)]) == good
+    assert summarise(*args, backends=[FakeWriter("Hibbing is exposed [7].", name="liar")]) is None
+    assert summarise(args[0], args[1], args[2], [], backends=[FakeWriter(good)]) is None  # nothing to cite
