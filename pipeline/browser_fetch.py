@@ -5,6 +5,7 @@ shares one IP between hundreds of hackers, so GDELT's "one request every 5 s"
 limit bites. This splits fetching from computing:
 
     python -m pipeline.browser_fetch plan  [--preset ID ...]   # -> data/jobs/jobs.json (cache misses only)
+    #   (--preset eval: only the labelled set's article lists; with no --preset, those come right after the hero)
     #   ... run the jobs anywhere: `python -m pipeline.browser_fetch run` on a laptop with
     #       internet, or the in-browser runner (BROWSER_RUNNER below) ...
     python -m pipeline.browser_fetch ingest results.json      # -> cache/gdelt, cache/wiki
@@ -38,6 +39,15 @@ def plan(preset_ids: list[str] | None, end: date) -> list[dict]:
         if preset_ids and p["id"] not in preset_ids:
             continue
         run_query(p["query"], end=end, backends=[])  # backends=[]: presets answer parse, no model calls
+        if p.get("kind") == "hero" and (not preset_ids or "eval" in preset_ids):
+            # right after the hero: article lists for the labelled set (eval/build_candidates.py)
+            from eval.build_candidates import collect
+
+            collect(end)
+    if preset_ids and "eval" in preset_ids and not any(p["id"] in preset_ids for p in load_presets()):
+        from eval.build_candidates import collect
+
+        collect(end)
     jobs = [{"url": u, "kind": "gdelt"} for u in fetch_gdelt.MISSES] + \
            [{"url": u, "kind": "wiki"} for u in fetch_wiki.MISSES]
     JOBS.parent.mkdir(parents=True, exist_ok=True)
