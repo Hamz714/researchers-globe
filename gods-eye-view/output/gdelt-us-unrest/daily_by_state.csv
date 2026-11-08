@@ -1,0 +1,1684 @@
+day,period,state,state_name,files_ok,all_events,protest_events,riot_events,protest_election_url,protest_articles,protest_share
+2026-10-06,before,AL,Alabama,96,293,4,0,0,17,0.01365
+2026-10-06,before,AK,Alaska,96,319,1,0,0,10,0.00313
+2026-10-06,before,AZ,Arizona,96,699,5,0,0,28,0.00715
+2026-10-06,before,AR,Arkansas,96,346,0,0,0,0,0
+2026-10-06,before,CA,California,96,3769,14,0,3,62,0.00371
+2026-10-06,before,CO,Colorado,96,790,3,0,0,21,0.0038
+2026-10-06,before,CT,Connecticut,96,355,7,0,0,37,0.01972
+2026-10-06,before,DE,Delaware,96,125,0,0,0,0,0
+2026-10-06,before,DC,District of Columbia,96,3007,30,0,1,119,0.00998
+2026-10-06,before,FL,Florida,96,1591,5,0,2,15,0.00314
+2026-10-06,before,GA,Georgia,96,651,1,0,0,2,0.00154
+2026-10-06,before,HI,Hawaii,96,262,0,0,0,0,0
+2026-10-06,before,ID,Idaho,96,231,0,0,0,0,0
+2026-10-06,before,IL,Illinois,96,1063,2,0,0,8,0.00188
+2026-10-06,before,IN,Indiana,96,377,0,0,0,0,0
+2026-10-06,before,IA,Iowa,96,497,0,0,0,0,0
+2026-10-06,before,KS,Kansas,96,427,1,0,1,4,0.00234
+2026-10-06,before,KY,Kentucky,96,385,1,0,0,3,0.0026
+2026-10-06,before,LA,Louisiana,96,496,2,0,2,6,0.00403
+2026-10-06,before,ME,Maine,96,611,1,0,1,1,0.00164
+2026-10-06,before,MD,Maryland,96,479,3,0,0,72,0.00626
+2026-10-06,before,MA,Massachusetts,96,792,5,0,0,18,0.00631
+2026-10-06,before,MI,Michigan,96,859,6,0,3,30,0.00698
+2026-10-06,before,MN,Minnesota,96,524,5,0,0,18,0.00954
+2026-10-06,before,MS,Mississippi,96,221,3,0,0,8,0.01357
+2026-10-06,before,MO,Missouri,96,393,1,0,0,7,0.00254
+2026-10-06,before,MT,Montana,96,292,5,0,0,12,0.01712
+2026-10-06,before,NE,Nebraska,96,720,18,0,5,53,0.025
+2026-10-06,before,NV,Nevada,96,276,0,0,0,0,0
+2026-10-06,before,NH,New Hampshire,96,159,0,0,0,0,0
+2026-10-06,before,NJ,New Jersey,96,294,3,0,0,14,0.0102
+2026-10-06,before,NM,New Mexico,96,251,4,0,0,10,0.01594
+2026-10-06,before,NY,New York,96,3341,37,1,2,181,0.01107
+2026-10-06,before,NC,North Carolina,96,695,2,0,1,10,0.00288
+2026-10-06,before,ND,North Dakota,96,130,0,0,0,0,0
+2026-10-06,before,OH,Ohio,96,1083,6,0,1,22,0.00554
+2026-10-06,before,OK,Oklahoma,96,333,3,0,0,12,0.00901
+2026-10-06,before,OR,Oregon,96,394,0,0,0,0,0
+2026-10-06,before,PA,Pennsylvania,96,1058,4,0,0,11,0.00378
+2026-10-06,before,RI,Rhode Island,96,55,0,0,0,0,0
+2026-10-06,before,SC,South Carolina,96,774,0,0,0,0,0
+2026-10-06,before,SD,South Dakota,96,195,0,0,0,0,0
+2026-10-06,before,TN,Tennessee,96,817,0,0,0,0,0
+2026-10-06,before,TX,Texas,96,2691,24,0,7,89,0.00892
+2026-10-06,before,UT,Utah,96,413,2,0,0,5,0.00484
+2026-10-06,before,VT,Vermont,96,195,5,0,0,10,0.02564
+2026-10-06,before,VA,Virginia,96,832,0,0,0,0,0
+2026-10-06,before,WA,Washington,96,623,0,0,0,0,0
+2026-10-06,before,WV,West Virginia,96,268,0,0,0,0,0
+2026-10-06,before,WI,Wisconsin,96,483,1,0,0,5,0.00207
+2026-10-06,before,WY,Wyoming,96,135,0,0,0,0,0
+2026-10-07,before,AL,Alabama,96,342,0,0,0,0,0
+2026-10-07,before,AK,Alaska,96,397,2,0,0,2,0.00504
+2026-10-07,before,AZ,Arizona,96,687,2,0,0,6,0.00291
+2026-10-07,before,AR,Arkansas,96,346,0,0,0,0,0
+2026-10-07,before,CA,California,96,3722,34,5,0,137,0.00913
+2026-10-07,before,CO,Colorado,96,793,0,0,0,0,0
+2026-10-07,before,CT,Connecticut,96,247,2,0,0,5,0.0081
+2026-10-07,before,DE,Delaware,96,107,0,0,0,0,0
+2026-10-07,before,DC,District of Columbia,96,2732,20,0,1,87,0.00732
+2026-10-07,before,FL,Florida,96,1686,8,0,0,39,0.00474
+2026-10-07,before,GA,Georgia,96,749,2,0,0,8,0.00267
+2026-10-07,before,HI,Hawaii,96,275,0,0,0,0,0
+2026-10-07,before,ID,Idaho,96,243,0,0,0,0,0
+2026-10-07,before,IL,Illinois,96,953,4,1,0,17,0.0042
+2026-10-07,before,IN,Indiana,96,454,2,0,0,5,0.00441
+2026-10-07,before,IA,Iowa,96,521,2,0,2,10,0.00384
+2026-10-07,before,KS,Kansas,96,314,0,0,0,0,0
+2026-10-07,before,KY,Kentucky,96,353,2,0,0,10,0.00567
+2026-10-07,before,LA,Louisiana,96,395,1,0,0,10,0.00253
+2026-10-07,before,ME,Maine,96,616,4,0,0,13,0.00649
+2026-10-07,before,MD,Maryland,96,628,2,0,1,11,0.00318
+2026-10-07,before,MA,Massachusetts,96,781,9,0,0,31,0.01152
+2026-10-07,before,MI,Michigan,96,1080,4,0,0,14,0.0037
+2026-10-07,before,MN,Minnesota,96,876,3,0,1,15,0.00342
+2026-10-07,before,MS,Mississippi,96,126,0,0,0,0,0
+2026-10-07,before,MO,Missouri,96,415,5,0,0,15,0.01205
+2026-10-07,before,MT,Montana,96,326,4,0,0,10,0.01227
+2026-10-07,before,NE,Nebraska,96,400,10,0,2,33,0.025
+2026-10-07,before,NV,Nevada,96,344,0,0,0,0,0
+2026-10-07,before,NH,New Hampshire,96,106,1,0,1,2,0.00943
+2026-10-07,before,NJ,New Jersey,96,446,4,0,0,20,0.00897
+2026-10-07,before,NM,New Mexico,96,322,2,0,0,10,0.00621
+2026-10-07,before,NY,New York,96,3419,34,0,5,142,0.00994
+2026-10-07,before,NC,North Carolina,96,729,2,0,2,40,0.00274
+2026-10-07,before,ND,North Dakota,96,198,1,0,0,10,0.00505
+2026-10-07,before,OH,Ohio,96,968,4,0,0,30,0.00413
+2026-10-07,before,OK,Oklahoma,96,376,0,0,0,0,0
+2026-10-07,before,OR,Oregon,96,364,1,0,0,10,0.00275
+2026-10-07,before,PA,Pennsylvania,96,974,2,0,0,5,0.00205
+2026-10-07,before,RI,Rhode Island,96,99,0,0,0,0,0
+2026-10-07,before,SC,South Carolina,96,607,1,0,0,10,0.00165
+2026-10-07,before,SD,South Dakota,96,147,2,0,0,6,0.01361
+2026-10-07,before,TN,Tennessee,96,1223,7,0,5,28,0.00572
+2026-10-07,before,TX,Texas,96,2607,26,2,0,144,0.00997
+2026-10-07,before,UT,Utah,96,373,2,0,0,5,0.00536
+2026-10-07,before,VT,Vermont,96,202,0,0,0,0,0
+2026-10-07,before,VA,Virginia,96,962,1,0,0,10,0.00104
+2026-10-07,before,WA,Washington,96,606,6,0,0,16,0.0099
+2026-10-07,before,WV,West Virginia,96,211,0,0,0,0,0
+2026-10-07,before,WI,Wisconsin,96,499,4,0,3,22,0.00802
+2026-10-07,before,WY,Wyoming,96,254,0,0,0,0,0
+2026-10-08,before,AL,Alabama,96,293,0,0,0,0,0
+2026-10-08,before,AK,Alaska,96,478,6,0,3,26,0.01255
+2026-10-08,before,AZ,Arizona,96,721,5,0,0,15,0.00693
+2026-10-08,before,AR,Arkansas,96,390,4,0,0,26,0.01026
+2026-10-08,before,CA,California,96,4029,22,0,0,78,0.00546
+2026-10-08,before,CO,Colorado,96,579,2,0,0,6,0.00345
+2026-10-08,before,CT,Connecticut,96,226,1,0,0,5,0.00442
+2026-10-08,before,DE,Delaware,96,136,0,0,0,0,0
+2026-10-08,before,DC,District of Columbia,96,3013,15,0,1,97,0.00498
+2026-10-08,before,FL,Florida,96,1739,2,0,0,12,0.00115
+2026-10-08,before,GA,Georgia,96,850,3,0,1,24,0.00353
+2026-10-08,before,HI,Hawaii,96,228,0,0,0,0,0
+2026-10-08,before,ID,Idaho,96,206,0,0,0,0,0
+2026-10-08,before,IL,Illinois,96,1115,9,0,6,30,0.00807
+2026-10-08,before,IN,Indiana,96,424,1,0,0,5,0.00236
+2026-10-08,before,IA,Iowa,96,701,1,0,0,10,0.00143
+2026-10-08,before,KS,Kansas,96,383,3,0,0,10,0.00783
+2026-10-08,before,KY,Kentucky,96,421,2,0,0,4,0.00475
+2026-10-08,before,LA,Louisiana,96,481,0,0,0,0,0
+2026-10-08,before,ME,Maine,96,509,2,0,0,13,0.00393
+2026-10-08,before,MD,Maryland,96,441,1,0,0,1,0.00227
+2026-10-08,before,MA,Massachusetts,96,1081,6,0,0,29,0.00555
+2026-10-08,before,MI,Michigan,96,887,1,0,0,4,0.00113
+2026-10-08,before,MN,Minnesota,96,909,3,0,1,18,0.0033
+2026-10-08,before,MS,Mississippi,96,374,0,0,0,0,0
+2026-10-08,before,MO,Missouri,96,446,9,0,1,32,0.02018
+2026-10-08,before,MT,Montana,96,267,4,0,0,10,0.01498
+2026-10-08,before,NE,Nebraska,96,248,9,0,0,34,0.03629
+2026-10-08,before,NV,Nevada,96,348,0,0,0,0,0
+2026-10-08,before,NH,New Hampshire,96,69,0,0,0,0,0
+2026-10-08,before,NJ,New Jersey,96,315,2,0,0,14,0.00635
+2026-10-08,before,NM,New Mexico,96,216,3,0,0,14,0.01389
+2026-10-08,before,NY,New York,96,3400,27,0,0,132,0.00794
+2026-10-08,before,NC,North Carolina,96,622,4,1,2,27,0.00643
+2026-10-08,before,ND,North Dakota,96,160,2,0,0,10,0.0125
+2026-10-08,before,OH,Ohio,96,1202,2,0,0,10,0.00166
+2026-10-08,before,OK,Oklahoma,96,278,0,0,0,0,0
+2026-10-08,before,OR,Oregon,96,321,2,0,0,14,0.00623
+2026-10-08,before,PA,Pennsylvania,96,1060,2,1,0,34,0.00189
+2026-10-08,before,RI,Rhode Island,96,111,0,0,0,0,0
+2026-10-08,before,SC,South Carolina,96,445,0,0,0,0,0
+2026-10-08,before,SD,South Dakota,96,150,0,0,0,0,0
+2026-10-08,before,TN,Tennessee,96,918,9,0,6,37,0.0098
+2026-10-08,before,TX,Texas,96,2907,20,0,0,114,0.00688
+2026-10-08,before,UT,Utah,96,397,0,0,0,0,0
+2026-10-08,before,VT,Vermont,96,247,2,0,0,10,0.0081
+2026-10-08,before,VA,Virginia,96,840,0,0,0,0,0
+2026-10-08,before,WA,Washington,96,484,2,0,0,14,0.00413
+2026-10-08,before,WV,West Virginia,96,253,0,0,0,0,0
+2026-10-08,before,WI,Wisconsin,96,593,6,0,3,18,0.01012
+2026-10-08,before,WY,Wyoming,96,237,0,0,0,0,0
+2026-10-09,before,AL,Alabama,96,403,0,0,0,0,0
+2026-10-09,before,AK,Alaska,96,295,5,0,0,12,0.01695
+2026-10-09,before,AZ,Arizona,96,615,0,0,0,0,0
+2026-10-09,before,AR,Arkansas,96,403,1,0,1,7,0.00248
+2026-10-09,before,CA,California,96,3903,33,0,8,140,0.00846
+2026-10-09,before,CO,Colorado,96,599,3,0,0,12,0.00501
+2026-10-09,before,CT,Connecticut,96,311,1,0,0,10,0.00322
+2026-10-09,before,DE,Delaware,96,140,0,0,0,0,0
+2026-10-09,before,DC,District of Columbia,96,3273,21,0,0,63,0.00642
+2026-10-09,before,FL,Florida,96,1642,9,3,0,47,0.00548
+2026-10-09,before,GA,Georgia,96,772,5,0,0,29,0.00648
+2026-10-09,before,HI,Hawaii,96,249,0,0,0,0,0
+2026-10-09,before,ID,Idaho,96,257,0,0,0,0,0
+2026-10-09,before,IL,Illinois,96,922,15,0,0,48,0.01627
+2026-10-09,before,IN,Indiana,96,300,0,0,0,0,0
+2026-10-09,before,IA,Iowa,96,582,0,0,0,0,0
+2026-10-09,before,KS,Kansas,96,417,0,0,0,0,0
+2026-10-09,before,KY,Kentucky,96,408,2,0,0,6,0.0049
+2026-10-09,before,LA,Louisiana,96,365,0,0,0,0,0
+2026-10-09,before,ME,Maine,96,527,0,0,0,0,0
+2026-10-09,before,MD,Maryland,96,311,1,0,0,5,0.00322
+2026-10-09,before,MA,Massachusetts,96,715,3,0,0,15,0.0042
+2026-10-09,before,MI,Michigan,96,1226,3,0,0,17,0.00245
+2026-10-09,before,MN,Minnesota,96,598,4,0,0,23,0.00669
+2026-10-09,before,MS,Mississippi,96,172,2,0,0,20,0.01163
+2026-10-09,before,MO,Missouri,96,260,3,0,0,15,0.01154
+2026-10-09,before,MT,Montana,96,211,0,0,0,0,0
+2026-10-09,before,NE,Nebraska,96,232,0,0,0,0,0
+2026-10-09,before,NV,Nevada,96,227,0,0,0,0,0
+2026-10-09,before,NH,New Hampshire,96,136,0,0,0,0,0
+2026-10-09,before,NJ,New Jersey,96,273,2,0,0,8,0.00733
+2026-10-09,before,NM,New Mexico,96,249,0,0,0,0,0
+2026-10-09,before,NY,New York,96,3581,68,9,4,309,0.01899
+2026-10-09,before,NC,North Carolina,96,593,3,0,0,10,0.00506
+2026-10-09,before,ND,North Dakota,96,136,0,0,0,0,0
+2026-10-09,before,OH,Ohio,96,966,1,0,1,10,0.00104
+2026-10-09,before,OK,Oklahoma,96,349,0,0,0,0,0
+2026-10-09,before,OR,Oregon,96,425,4,1,0,30,0.00941
+2026-10-09,before,PA,Pennsylvania,96,1077,5,0,0,26,0.00464
+2026-10-09,before,RI,Rhode Island,96,105,0,0,0,0,0
+2026-10-09,before,SC,South Carolina,96,377,0,0,0,0,0
+2026-10-09,before,SD,South Dakota,96,182,0,0,0,0,0
+2026-10-09,before,TN,Tennessee,96,675,4,0,0,15,0.00593
+2026-10-09,before,TX,Texas,96,2902,5,1,2,29,0.00172
+2026-10-09,before,UT,Utah,96,342,0,0,0,0,0
+2026-10-09,before,VT,Vermont,96,294,1,0,0,10,0.0034
+2026-10-09,before,VA,Virginia,96,875,2,0,0,8,0.00229
+2026-10-09,before,WA,Washington,96,497,0,0,0,0,0
+2026-10-09,before,WV,West Virginia,96,156,1,0,0,5,0.00641
+2026-10-09,before,WI,Wisconsin,96,483,7,0,0,19,0.01449
+2026-10-09,before,WY,Wyoming,96,225,0,0,0,0,0
+2026-10-10,before,AL,Alabama,96,246,0,0,0,0,0
+2026-10-10,before,AK,Alaska,96,259,8,0,0,40,0.03089
+2026-10-10,before,AZ,Arizona,96,429,9,0,6,20,0.02098
+2026-10-10,before,AR,Arkansas,96,132,1,0,0,4,0.00758
+2026-10-10,before,CA,California,96,2045,14,0,0,52,0.00685
+2026-10-10,before,CO,Colorado,96,343,0,0,0,0,0
+2026-10-10,before,CT,Connecticut,96,148,0,0,0,0,0
+2026-10-10,before,DE,Delaware,96,34,0,0,0,0,0
+2026-10-10,before,DC,District of Columbia,96,2272,15,0,5,81,0.0066
+2026-10-10,before,FL,Florida,96,1117,4,3,0,17,0.00358
+2026-10-10,before,GA,Georgia,96,354,0,0,0,0,0
+2026-10-10,before,HI,Hawaii,96,194,0,0,0,0,0
+2026-10-10,before,ID,Idaho,96,151,3,0,0,7,0.01987
+2026-10-10,before,IL,Illinois,96,436,4,0,0,18,0.00917
+2026-10-10,before,IN,Indiana,96,177,1,0,0,6,0.00565
+2026-10-10,before,IA,Iowa,96,298,4,0,0,20,0.01342
+2026-10-10,before,KS,Kansas,96,172,2,0,1,7,0.01163
+2026-10-10,before,KY,Kentucky,96,177,0,0,0,0,0
+2026-10-10,before,LA,Louisiana,96,210,0,0,0,0,0
+2026-10-10,before,ME,Maine,96,265,3,0,2,13,0.01132
+2026-10-10,before,MD,Maryland,96,194,3,0,1,16,0.01546
+2026-10-10,before,MA,Massachusetts,96,448,0,0,0,0,0
+2026-10-10,before,MI,Michigan,96,475,0,0,0,0,0
+2026-10-10,before,MN,Minnesota,96,293,2,0,0,5,0.00683
+2026-10-10,before,MS,Mississippi,96,124,0,0,0,0,0
+2026-10-10,before,MO,Missouri,96,171,0,0,0,0,0
+2026-10-10,before,MT,Montana,96,201,0,0,0,0,0
+2026-10-10,before,NE,Nebraska,96,211,0,0,0,0,0
+2026-10-10,before,NV,Nevada,96,160,0,0,0,0,0
+2026-10-10,before,NH,New Hampshire,96,62,0,0,0,0,0
+2026-10-10,before,NJ,New Jersey,96,199,1,0,0,4,0.00503
+2026-10-10,before,NM,New Mexico,96,127,1,0,0,4,0.00787
+2026-10-10,before,NY,New York,96,2415,43,1,2,142,0.01781
+2026-10-10,before,NC,North Carolina,96,281,0,0,0,0,0
+2026-10-10,before,ND,North Dakota,96,74,0,0,0,0,0
+2026-10-10,before,OH,Ohio,96,532,0,0,0,0,0
+2026-10-10,before,OK,Oklahoma,96,195,0,0,0,0,0
+2026-10-10,before,OR,Oregon,96,230,2,1,0,28,0.0087
+2026-10-10,before,PA,Pennsylvania,96,955,4,0,0,10,0.00419
+2026-10-10,before,RI,Rhode Island,96,50,0,0,0,0,0
+2026-10-10,before,SC,South Carolina,96,181,1,0,0,10,0.00552
+2026-10-10,before,SD,South Dakota,96,103,0,0,0,0,0
+2026-10-10,before,TN,Tennessee,96,465,4,3,0,11,0.0086
+2026-10-10,before,TX,Texas,96,1515,12,0,1,42,0.00792
+2026-10-10,before,UT,Utah,96,206,1,0,0,10,0.00485
+2026-10-10,before,VT,Vermont,96,53,0,0,0,0,0
+2026-10-10,before,VA,Virginia,96,311,3,0,0,10,0.00965
+2026-10-10,before,WA,Washington,96,309,0,0,0,0,0
+2026-10-10,before,WV,West Virginia,96,135,0,0,0,0,0
+2026-10-10,before,WI,Wisconsin,96,289,7,0,0,14,0.02422
+2026-10-10,before,WY,Wyoming,96,93,0,0,0,0,0
+2026-10-11,before,AL,Alabama,96,128,4,0,0,9,0.03125
+2026-10-11,before,AK,Alaska,96,176,10,0,0,21,0.05682
+2026-10-11,before,AZ,Arizona,96,137,0,0,0,0,0
+2026-10-11,before,AR,Arkansas,96,73,0,0,0,0,0
+2026-10-11,before,CA,California,96,1404,15,0,0,54,0.01068
+2026-10-11,before,CO,Colorado,96,252,0,0,0,0,0
+2026-10-11,before,CT,Connecticut,96,157,0,0,0,0,0
+2026-10-11,before,DE,Delaware,96,42,0,0,0,0,0
+2026-10-11,before,DC,District of Columbia,96,2027,3,0,0,18,0.00148
+2026-10-11,before,FL,Florida,96,782,3,0,2,3,0.00384
+2026-10-11,before,GA,Georgia,96,255,3,0,0,9,0.01176
+2026-10-11,before,HI,Hawaii,96,168,0,0,0,0,0
+2026-10-11,before,ID,Idaho,96,97,1,0,0,10,0.01031
+2026-10-11,before,IL,Illinois,96,386,2,1,0,20,0.00518
+2026-10-11,before,IN,Indiana,96,104,0,0,0,0,0
+2026-10-11,before,IA,Iowa,96,187,0,0,0,0,0
+2026-10-11,before,KS,Kansas,96,97,0,0,0,0,0
+2026-10-11,before,KY,Kentucky,96,84,2,0,0,10,0.02381
+2026-10-11,before,LA,Louisiana,96,159,0,0,0,0,0
+2026-10-11,before,ME,Maine,96,223,7,0,0,12,0.03139
+2026-10-11,before,MD,Maryland,96,172,3,0,0,10,0.01744
+2026-10-11,before,MA,Massachusetts,96,311,2,0,0,16,0.00643
+2026-10-11,before,MI,Michigan,96,269,2,0,1,10,0.00743
+2026-10-11,before,MN,Minnesota,96,274,0,0,0,0,0
+2026-10-11,before,MS,Mississippi,96,63,0,0,0,0,0
+2026-10-11,before,MO,Missouri,96,147,1,0,0,10,0.0068
+2026-10-11,before,MT,Montana,96,61,0,0,0,0,0
+2026-10-11,before,NE,Nebraska,96,82,4,0,0,11,0.04878
+2026-10-11,before,NV,Nevada,96,51,0,0,0,0,0
+2026-10-11,before,NH,New Hampshire,96,89,0,0,0,0,0
+2026-10-11,before,NJ,New Jersey,96,86,1,0,0,5,0.01163
+2026-10-11,before,NM,New Mexico,96,146,1,0,0,4,0.00685
+2026-10-11,before,NY,New York,96,1519,30,0,1,102,0.01975
+2026-10-11,before,NC,North Carolina,96,257,0,0,0,0,0
+2026-10-11,before,ND,North Dakota,96,42,0,0,0,0,0
+2026-10-11,before,OH,Ohio,96,281,0,0,0,0,0
+2026-10-11,before,OK,Oklahoma,96,51,0,0,0,0,0
+2026-10-11,before,OR,Oregon,96,146,3,0,0,8,0.02055
+2026-10-11,before,PA,Pennsylvania,96,749,6,0,0,12,0.00801
+2026-10-11,before,RI,Rhode Island,96,30,2,0,0,3,0.06667
+2026-10-11,before,SC,South Carolina,96,112,0,0,0,0,0
+2026-10-11,before,SD,South Dakota,96,44,0,0,0,0,0
+2026-10-11,before,TN,Tennessee,96,502,0,0,0,0,0
+2026-10-11,before,TX,Texas,96,913,4,0,0,30,0.00438
+2026-10-11,before,UT,Utah,96,93,0,0,0,0,0
+2026-10-11,before,VT,Vermont,96,172,2,0,0,7,0.01163
+2026-10-11,before,VA,Virginia,96,174,0,0,0,0,0
+2026-10-11,before,WA,Washington,96,170,0,0,0,0,0
+2026-10-11,before,WV,West Virginia,96,60,0,0,0,0,0
+2026-10-11,before,WI,Wisconsin,96,166,0,0,0,0,0
+2026-10-11,before,WY,Wyoming,96,67,0,0,0,0,0
+2026-10-12,before,AL,Alabama,96,235,1,0,0,5,0.00426
+2026-10-12,before,AK,Alaska,96,262,13,0,2,36,0.04962
+2026-10-12,before,AZ,Arizona,96,388,1,0,0,2,0.00258
+2026-10-12,before,AR,Arkansas,96,167,0,0,0,0,0
+2026-10-12,before,CA,California,96,2473,11,0,2,51,0.00445
+2026-10-12,before,CO,Colorado,96,308,0,0,0,0,0
+2026-10-12,before,CT,Connecticut,96,281,1,0,0,5,0.00356
+2026-10-12,before,DE,Delaware,96,87,0,0,0,0,0
+2026-10-12,before,DC,District of Columbia,96,2925,17,0,0,61,0.00581
+2026-10-12,before,FL,Florida,96,1103,0,0,0,0,0
+2026-10-12,before,GA,Georgia,96,542,8,0,0,33,0.01476
+2026-10-12,before,HI,Hawaii,96,244,3,0,0,20,0.0123
+2026-10-12,before,ID,Idaho,96,254,0,0,0,0,0
+2026-10-12,before,IL,Illinois,96,780,1,0,1,2,0.00128
+2026-10-12,before,IN,Indiana,96,170,1,0,0,10,0.00588
+2026-10-12,before,IA,Iowa,96,390,0,0,0,0,0
+2026-10-12,before,KS,Kansas,96,243,3,0,3,17,0.01235
+2026-10-12,before,KY,Kentucky,96,254,8,0,0,15,0.0315
+2026-10-12,before,LA,Louisiana,96,266,0,0,0,0,0
+2026-10-12,before,ME,Maine,96,393,4,0,0,7,0.01018
+2026-10-12,before,MD,Maryland,96,182,2,0,0,2,0.01099
+2026-10-12,before,MA,Massachusetts,96,477,3,0,3,15,0.00629
+2026-10-12,before,MI,Michigan,96,709,5,0,2,22,0.00705
+2026-10-12,before,MN,Minnesota,96,704,3,0,0,7,0.00426
+2026-10-12,before,MS,Mississippi,96,124,0,0,0,0,0
+2026-10-12,before,MO,Missouri,96,175,0,0,0,0,0
+2026-10-12,before,MT,Montana,96,168,0,0,0,0,0
+2026-10-12,before,NE,Nebraska,96,185,1,0,1,10,0.00541
+2026-10-12,before,NV,Nevada,96,144,0,0,0,0,0
+2026-10-12,before,NH,New Hampshire,96,101,0,0,0,0,0
+2026-10-12,before,NJ,New Jersey,96,302,2,0,0,16,0.00662
+2026-10-12,before,NM,New Mexico,96,113,0,0,0,0,0
+2026-10-12,before,NY,New York,96,2652,23,0,0,110,0.00867
+2026-10-12,before,NC,North Carolina,96,415,2,0,1,6,0.00482
+2026-10-12,before,ND,North Dakota,96,95,0,0,0,0,0
+2026-10-12,before,OH,Ohio,96,748,11,0,0,45,0.01471
+2026-10-12,before,OK,Oklahoma,96,211,0,0,0,0,0
+2026-10-12,before,OR,Oregon,96,300,0,0,0,0,0
+2026-10-12,before,PA,Pennsylvania,96,1108,10,0,0,33,0.00903
+2026-10-12,before,RI,Rhode Island,96,93,0,0,0,0,0
+2026-10-12,before,SC,South Carolina,96,326,2,0,0,10,0.00613
+2026-10-12,before,SD,South Dakota,96,104,0,0,0,0,0
+2026-10-12,before,TN,Tennessee,96,629,15,0,1,31,0.02385
+2026-10-12,before,TX,Texas,96,1848,14,0,0,48,0.00758
+2026-10-12,before,UT,Utah,96,274,1,0,0,10,0.00365
+2026-10-12,before,VT,Vermont,96,143,0,0,0,0,0
+2026-10-12,before,VA,Virginia,96,405,0,0,0,0,0
+2026-10-12,before,WA,Washington,96,333,0,0,0,0,0
+2026-10-12,before,WV,West Virginia,96,122,0,0,0,0,0
+2026-10-12,before,WI,Wisconsin,96,523,0,0,0,0,0
+2026-10-12,before,WY,Wyoming,96,138,0,0,0,0,0
+2026-10-13,before,AL,Alabama,96,292,10,0,5,43,0.03425
+2026-10-13,before,AK,Alaska,96,510,11,0,0,29,0.02157
+2026-10-13,before,AZ,Arizona,96,478,5,0,1,19,0.01046
+2026-10-13,before,AR,Arkansas,96,235,0,0,0,0,0
+2026-10-13,before,CA,California,96,3364,14,1,1,45,0.00416
+2026-10-13,before,CO,Colorado,96,541,5,2,0,12,0.00924
+2026-10-13,before,CT,Connecticut,96,243,3,0,0,7,0.01235
+2026-10-13,before,DE,Delaware,96,112,0,0,0,0,0
+2026-10-13,before,DC,District of Columbia,96,3353,32,0,1,124,0.00954
+2026-10-13,before,FL,Florida,96,1448,3,0,0,20,0.00207
+2026-10-13,before,GA,Georgia,96,1101,13,0,3,46,0.01181
+2026-10-13,before,HI,Hawaii,96,224,0,0,0,0,0
+2026-10-13,before,ID,Idaho,96,211,1,0,0,20,0.00474
+2026-10-13,before,IL,Illinois,96,1260,3,0,3,10,0.00238
+2026-10-13,before,IN,Indiana,96,386,0,0,0,0,0
+2026-10-13,before,IA,Iowa,96,608,3,0,0,10,0.00493
+2026-10-13,before,KS,Kansas,96,414,13,0,10,44,0.0314
+2026-10-13,before,KY,Kentucky,96,433,0,0,0,0,0
+2026-10-13,before,LA,Louisiana,96,392,0,0,0,0,0
+2026-10-13,before,ME,Maine,96,506,0,0,0,0,0
+2026-10-13,before,MD,Maryland,96,385,1,0,0,2,0.0026
+2026-10-13,before,MA,Massachusetts,96,668,5,1,1,28,0.00749
+2026-10-13,before,MI,Michigan,96,842,2,0,1,13,0.00238
+2026-10-13,before,MN,Minnesota,96,827,3,0,0,8,0.00363
+2026-10-13,before,MS,Mississippi,96,239,0,0,0,0,0
+2026-10-13,before,MO,Missouri,96,285,1,0,0,4,0.00351
+2026-10-13,before,MT,Montana,96,173,0,0,0,0,0
+2026-10-13,before,NE,Nebraska,96,235,3,0,0,10,0.01277
+2026-10-13,before,NV,Nevada,96,552,1,0,0,10,0.00181
+2026-10-13,before,NH,New Hampshire,96,95,0,0,0,0,0
+2026-10-13,before,NJ,New Jersey,96,249,0,0,0,0,0
+2026-10-13,before,NM,New Mexico,96,285,9,0,0,24,0.03158
+2026-10-13,before,NY,New York,96,3078,26,1,3,128,0.00845
+2026-10-13,before,NC,North Carolina,96,647,19,0,18,61,0.02937
+2026-10-13,before,ND,North Dakota,96,113,0,0,0,0,0
+2026-10-13,before,OH,Ohio,96,1207,15,0,6,60,0.01243
+2026-10-13,before,OK,Oklahoma,96,387,0,0,0,0,0
+2026-10-13,before,OR,Oregon,96,467,3,0,1,13,0.00642
+2026-10-13,before,PA,Pennsylvania,96,992,7,0,0,35,0.00706
+2026-10-13,before,RI,Rhode Island,96,105,0,0,0,0,0
+2026-10-13,before,SC,South Carolina,96,260,0,0,0,0,0
+2026-10-13,before,SD,South Dakota,96,286,0,0,0,0,0
+2026-10-13,before,TN,Tennessee,96,627,3,0,0,8,0.00478
+2026-10-13,before,TX,Texas,96,2263,7,0,1,33,0.00309
+2026-10-13,before,UT,Utah,96,343,1,0,0,10,0.00292
+2026-10-13,before,VT,Vermont,96,301,4,0,2,14,0.01329
+2026-10-13,before,VA,Virginia,96,506,0,0,0,0,0
+2026-10-13,before,WA,Washington,96,414,0,0,0,0,0
+2026-10-13,before,WV,West Virginia,96,189,0,0,0,0,0
+2026-10-13,before,WI,Wisconsin,96,606,3,0,0,13,0.00495
+2026-10-13,before,WY,Wyoming,96,222,1,0,0,10,0.0045
+2026-10-14,before,AL,Alabama,96,328,6,0,2,22,0.01829
+2026-10-14,before,AK,Alaska,96,515,15,0,0,48,0.02913
+2026-10-14,before,AZ,Arizona,96,449,8,1,2,28,0.01782
+2026-10-14,before,AR,Arkansas,96,358,2,0,0,12,0.00559
+2026-10-14,before,CA,California,96,3683,27,1,1,119,0.00733
+2026-10-14,before,CO,Colorado,96,532,6,0,3,17,0.01128
+2026-10-14,before,CT,Connecticut,96,193,1,0,0,10,0.00518
+2026-10-14,before,DE,Delaware,96,141,0,0,0,0,0
+2026-10-14,before,DC,District of Columbia,96,3848,31,0,2,165,0.00806
+2026-10-14,before,FL,Florida,96,1434,10,3,2,20,0.00697
+2026-10-14,before,GA,Georgia,96,1167,11,0,0,28,0.00943
+2026-10-14,before,HI,Hawaii,96,293,3,0,3,4,0.01024
+2026-10-14,before,ID,Idaho,96,294,0,0,0,0,0
+2026-10-14,before,IL,Illinois,96,1271,2,2,0,5,0.00157
+2026-10-14,before,IN,Indiana,96,455,0,0,0,0,0
+2026-10-14,before,IA,Iowa,96,612,0,0,0,0,0
+2026-10-14,before,KS,Kansas,96,361,3,0,3,6,0.00831
+2026-10-14,before,KY,Kentucky,96,414,0,0,0,0,0
+2026-10-14,before,LA,Louisiana,96,368,0,0,0,0,0
+2026-10-14,before,ME,Maine,96,481,2,0,0,4,0.00416
+2026-10-14,before,MD,Maryland,96,416,2,0,0,10,0.00481
+2026-10-14,before,MA,Massachusetts,96,991,2,0,0,10,0.00202
+2026-10-14,before,MI,Michigan,96,765,3,0,0,7,0.00392
+2026-10-14,before,MN,Minnesota,96,717,6,0,0,22,0.00837
+2026-10-14,before,MS,Mississippi,96,189,0,0,0,0,0
+2026-10-14,before,MO,Missouri,96,469,2,0,1,5,0.00426
+2026-10-14,before,MT,Montana,96,373,0,0,0,0,0
+2026-10-14,before,NE,Nebraska,96,225,3,0,0,10,0.01333
+2026-10-14,before,NV,Nevada,96,493,2,0,0,7,0.00406
+2026-10-14,before,NH,New Hampshire,96,170,0,0,0,0,0
+2026-10-14,before,NJ,New Jersey,96,345,1,0,0,3,0.0029
+2026-10-14,before,NM,New Mexico,96,202,0,0,0,0,0
+2026-10-14,before,NY,New York,96,3137,22,3,1,106,0.00701
+2026-10-14,before,NC,North Carolina,96,567,3,0,0,13,0.00529
+2026-10-14,before,ND,North Dakota,96,209,2,0,0,18,0.00957
+2026-10-14,before,OH,Ohio,96,1091,3,0,0,9,0.00275
+2026-10-14,before,OK,Oklahoma,96,303,0,0,0,0,0
+2026-10-14,before,OR,Oregon,96,344,1,0,1,10,0.00291
+2026-10-14,before,PA,Pennsylvania,96,1329,6,0,0,29,0.00451
+2026-10-14,before,RI,Rhode Island,96,150,3,0,1,15,0.02
+2026-10-14,before,SC,South Carolina,96,370,4,0,0,9,0.01081
+2026-10-14,before,SD,South Dakota,96,351,0,0,0,0,0
+2026-10-14,before,TN,Tennessee,96,530,0,0,0,0,0
+2026-10-14,before,TX,Texas,96,2872,19,1,3,84,0.00662
+2026-10-14,before,UT,Utah,96,356,0,0,0,0,0
+2026-10-14,before,VT,Vermont,96,243,0,0,0,0,0
+2026-10-14,before,VA,Virginia,96,855,9,0,2,38,0.01053
+2026-10-14,before,WA,Washington,96,502,4,0,0,22,0.00797
+2026-10-14,before,WV,West Virginia,96,288,0,0,0,0,0
+2026-10-14,before,WI,Wisconsin,96,570,0,0,0,0,0
+2026-10-14,before,WY,Wyoming,96,295,0,0,0,0,0
+2026-10-15,before,AL,Alabama,96,298,3,0,3,9,0.01007
+2026-10-15,before,AK,Alaska,96,398,8,0,1,35,0.0201
+2026-10-15,before,AZ,Arizona,96,792,32,0,9,75,0.0404
+2026-10-15,before,AR,Arkansas,96,412,2,0,0,10,0.00485
+2026-10-15,before,CA,California,96,3862,12,0,2,41,0.00311
+2026-10-15,before,CO,Colorado,96,558,1,0,0,4,0.00179
+2026-10-15,before,CT,Connecticut,96,309,0,0,0,0,0
+2026-10-15,before,DE,Delaware,96,158,0,0,0,0,0
+2026-10-15,before,DC,District of Columbia,96,3673,18,0,2,78,0.0049
+2026-10-15,before,FL,Florida,96,1732,1,0,0,4,0.00058
+2026-10-15,before,GA,Georgia,96,977,4,0,4,18,0.00409
+2026-10-15,before,HI,Hawaii,96,316,2,0,0,14,0.00633
+2026-10-15,before,ID,Idaho,96,200,1,0,0,10,0.005
+2026-10-15,before,IL,Illinois,96,1628,5,1,1,39,0.00307
+2026-10-15,before,IN,Indiana,96,374,2,0,0,14,0.00535
+2026-10-15,before,IA,Iowa,96,592,0,0,0,0,0
+2026-10-15,before,KS,Kansas,96,366,6,0,0,34,0.01639
+2026-10-15,before,KY,Kentucky,96,397,3,0,0,8,0.00756
+2026-10-15,before,LA,Louisiana,96,402,1,0,0,6,0.00249
+2026-10-15,before,ME,Maine,96,572,2,0,0,2,0.0035
+2026-10-15,before,MD,Maryland,96,341,0,0,0,0,0
+2026-10-15,before,MA,Massachusetts,96,950,3,0,0,15,0.00316
+2026-10-15,before,MI,Michigan,96,1039,4,0,4,22,0.00385
+2026-10-15,before,MN,Minnesota,96,796,12,0,0,52,0.01508
+2026-10-15,before,MS,Mississippi,96,204,2,0,1,12,0.0098
+2026-10-15,before,MO,Missouri,96,561,1,0,0,10,0.00178
+2026-10-15,before,MT,Montana,96,360,6,1,1,27,0.01667
+2026-10-15,before,NE,Nebraska,96,251,0,0,0,0,0
+2026-10-15,before,NV,Nevada,96,361,1,0,1,2,0.00277
+2026-10-15,before,NH,New Hampshire,96,197,1,0,1,2,0.00508
+2026-10-15,before,NJ,New Jersey,96,368,2,0,0,10,0.00543
+2026-10-15,before,NM,New Mexico,96,274,0,0,0,0,0
+2026-10-15,before,NY,New York,96,3103,38,4,6,167,0.01225
+2026-10-15,before,NC,North Carolina,96,587,2,0,1,10,0.00341
+2026-10-15,before,ND,North Dakota,96,121,2,0,0,10,0.01653
+2026-10-15,before,OH,Ohio,96,1217,6,0,1,17,0.00493
+2026-10-15,before,OK,Oklahoma,96,347,1,0,0,4,0.00288
+2026-10-15,before,OR,Oregon,96,541,4,0,0,14,0.00739
+2026-10-15,before,PA,Pennsylvania,96,1194,4,0,0,14,0.00335
+2026-10-15,before,RI,Rhode Island,96,134,2,0,0,8,0.01493
+2026-10-15,before,SC,South Carolina,96,465,14,0,0,51,0.03011
+2026-10-15,before,SD,South Dakota,96,137,0,0,0,0,0
+2026-10-15,before,TN,Tennessee,96,589,7,0,6,21,0.01188
+2026-10-15,before,TX,Texas,96,3096,15,1,6,105,0.00484
+2026-10-15,before,UT,Utah,96,271,1,0,1,6,0.00369
+2026-10-15,before,VT,Vermont,96,264,3,0,0,12,0.01136
+2026-10-15,before,VA,Virginia,96,734,4,2,0,19,0.00545
+2026-10-15,before,WA,Washington,96,582,1,0,0,10,0.00172
+2026-10-15,before,WV,West Virginia,96,223,0,0,0,0,0
+2026-10-15,before,WI,Wisconsin,96,622,0,0,0,0,0
+2026-10-15,before,WY,Wyoming,96,332,0,0,0,0,0
+2026-10-16,before,AL,Alabama,96,306,0,0,0,0,0
+2026-10-16,before,AK,Alaska,96,518,4,0,0,10,0.00772
+2026-10-16,before,AZ,Arizona,96,575,2,0,0,8,0.00348
+2026-10-16,before,AR,Arkansas,96,403,0,0,0,0,0
+2026-10-16,before,CA,California,96,3712,29,1,4,127,0.00781
+2026-10-16,before,CO,Colorado,96,573,0,0,0,0,0
+2026-10-16,before,CT,Connecticut,96,352,0,0,0,0,0
+2026-10-16,before,DE,Delaware,96,82,0,0,0,0,0
+2026-10-16,before,DC,District of Columbia,96,3523,28,0,2,100,0.00795
+2026-10-16,before,FL,Florida,96,1512,3,0,0,20,0.00198
+2026-10-16,before,GA,Georgia,96,1141,17,0,7,59,0.0149
+2026-10-16,before,HI,Hawaii,96,229,0,0,0,0,0
+2026-10-16,before,ID,Idaho,96,203,1,0,0,8,0.00493
+2026-10-16,before,IL,Illinois,96,1311,7,0,0,28,0.00534
+2026-10-16,before,IN,Indiana,96,393,2,0,2,5,0.00509
+2026-10-16,before,IA,Iowa,96,642,3,0,3,8,0.00467
+2026-10-16,before,KS,Kansas,96,249,3,0,0,10,0.01205
+2026-10-16,before,KY,Kentucky,96,386,4,0,0,28,0.01036
+2026-10-16,before,LA,Louisiana,96,384,1,0,0,6,0.0026
+2026-10-16,before,ME,Maine,96,576,3,0,2,16,0.00521
+2026-10-16,before,MD,Maryland,96,395,1,0,0,2,0.00253
+2026-10-16,before,MA,Massachusetts,96,972,9,0,3,48,0.00926
+2026-10-16,before,MI,Michigan,96,974,12,0,3,45,0.01232
+2026-10-16,before,MN,Minnesota,96,740,4,0,0,14,0.00541
+2026-10-16,before,MS,Mississippi,96,173,0,0,0,0,0
+2026-10-16,before,MO,Missouri,96,358,0,0,0,0,0
+2026-10-16,before,MT,Montana,96,286,3,0,0,4,0.01049
+2026-10-16,before,NE,Nebraska,96,204,0,0,0,0,0
+2026-10-16,before,NV,Nevada,96,367,0,0,0,0,0
+2026-10-16,before,NH,New Hampshire,96,148,0,0,0,0,0
+2026-10-16,before,NJ,New Jersey,96,352,0,0,0,0,0
+2026-10-16,before,NM,New Mexico,96,380,1,0,0,10,0.00263
+2026-10-16,before,NY,New York,96,2614,24,4,1,112,0.00918
+2026-10-16,before,NC,North Carolina,96,619,17,0,14,63,0.02746
+2026-10-16,before,ND,North Dakota,96,104,0,0,0,0,0
+2026-10-16,before,OH,Ohio,96,1181,4,0,2,17,0.00339
+2026-10-16,before,OK,Oklahoma,96,299,1,0,0,10,0.00334
+2026-10-16,before,OR,Oregon,96,1124,4,0,0,10,0.00356
+2026-10-16,before,PA,Pennsylvania,96,1343,3,0,0,10,0.00223
+2026-10-16,before,RI,Rhode Island,96,67,0,0,0,0,0
+2026-10-16,before,SC,South Carolina,96,448,16,0,11,48,0.03571
+2026-10-16,before,SD,South Dakota,96,131,0,0,0,0,0
+2026-10-16,before,TN,Tennessee,96,410,0,0,0,0,0
+2026-10-16,before,TX,Texas,96,2919,15,0,1,76,0.00514
+2026-10-16,before,UT,Utah,96,341,2,0,0,10,0.00587
+2026-10-16,before,VT,Vermont,96,248,3,0,1,16,0.0121
+2026-10-16,before,VA,Virginia,96,707,3,2,0,8,0.00424
+2026-10-16,before,WA,Washington,96,446,1,0,0,10,0.00224
+2026-10-16,before,WV,West Virginia,96,125,0,0,0,0,0
+2026-10-16,before,WI,Wisconsin,96,548,0,0,0,0,0
+2026-10-16,before,WY,Wyoming,96,254,1,0,1,4,0.00394
+2026-10-17,before,AL,Alabama,96,186,1,0,1,10,0.00538
+2026-10-17,before,AK,Alaska,96,342,6,0,0,11,0.01754
+2026-10-17,before,AZ,Arizona,96,411,13,0,8,48,0.03163
+2026-10-17,before,AR,Arkansas,96,168,0,0,0,0,0
+2026-10-17,before,CA,California,96,2259,25,1,8,107,0.01107
+2026-10-17,before,CO,Colorado,96,342,2,0,0,10,0.00585
+2026-10-17,before,CT,Connecticut,96,147,2,0,0,8,0.01361
+2026-10-17,before,DE,Delaware,96,61,0,0,0,0,0
+2026-10-17,before,DC,District of Columbia,96,2408,17,0,6,81,0.00706
+2026-10-17,before,FL,Florida,96,941,19,0,12,61,0.02019
+2026-10-17,before,GA,Georgia,96,535,6,0,2,22,0.01121
+2026-10-17,before,HI,Hawaii,96,175,2,0,0,6,0.01143
+2026-10-17,before,ID,Idaho,96,167,0,0,0,0,0
+2026-10-17,before,IL,Illinois,96,671,7,0,5,30,0.01043
+2026-10-17,before,IN,Indiana,96,103,0,0,0,0,0
+2026-10-17,before,IA,Iowa,96,258,1,0,0,10,0.00388
+2026-10-17,before,KS,Kansas,96,203,1,0,0,8,0.00493
+2026-10-17,before,KY,Kentucky,96,281,3,0,0,8,0.01068
+2026-10-17,before,LA,Louisiana,96,211,0,0,0,0,0
+2026-10-17,before,ME,Maine,96,239,7,0,6,53,0.02929
+2026-10-17,before,MD,Maryland,96,171,0,0,0,0,0
+2026-10-17,before,MA,Massachusetts,96,313,7,0,4,20,0.02236
+2026-10-17,before,MI,Michigan,96,519,1,0,0,10,0.00193
+2026-10-17,before,MN,Minnesota,96,416,1,0,1,10,0.0024
+2026-10-17,before,MS,Mississippi,96,93,0,0,0,0,0
+2026-10-17,before,MO,Missouri,96,129,0,0,0,0,0
+2026-10-17,before,MT,Montana,96,133,1,0,0,5,0.00752
+2026-10-17,before,NE,Nebraska,96,109,1,0,1,2,0.00917
+2026-10-17,before,NV,Nevada,96,194,0,0,0,0,0
+2026-10-17,before,NH,New Hampshire,96,40,1,0,1,7,0.025
+2026-10-17,before,NJ,New Jersey,96,230,1,0,0,10,0.00435
+2026-10-17,before,NM,New Mexico,96,271,0,0,0,0,0
+2026-10-17,before,NY,New York,96,1390,9,0,4,45,0.00647
+2026-10-17,before,NC,North Carolina,96,306,12,0,6,34,0.03922
+2026-10-17,before,ND,North Dakota,96,106,0,0,0,0,0
+2026-10-17,before,OH,Ohio,96,553,3,0,1,10,0.00542
+2026-10-17,before,OK,Oklahoma,96,128,1,0,0,8,0.00781
+2026-10-17,before,OR,Oregon,96,476,1,0,1,10,0.0021
+2026-10-17,before,PA,Pennsylvania,96,633,10,0,5,30,0.0158
+2026-10-17,before,RI,Rhode Island,96,28,2,0,0,15,0.07143
+2026-10-17,before,SC,South Carolina,96,322,14,0,14,39,0.04348
+2026-10-17,before,SD,South Dakota,96,41,0,0,0,0,0
+2026-10-17,before,TN,Tennessee,96,291,2,0,0,6,0.00687
+2026-10-17,before,TX,Texas,96,1427,24,0,14,110,0.01682
+2026-10-17,before,UT,Utah,96,155,0,0,0,0,0
+2026-10-17,before,VT,Vermont,96,171,0,0,0,0,0
+2026-10-17,before,VA,Virginia,96,411,2,0,0,14,0.00487
+2026-10-17,before,WA,Washington,96,321,9,0,6,41,0.02804
+2026-10-17,before,WV,West Virginia,96,107,1,0,0,4,0.00935
+2026-10-17,before,WI,Wisconsin,96,165,0,0,0,0,0
+2026-10-17,before,WY,Wyoming,96,166,0,0,0,0,0
+2026-10-18,before,AL,Alabama,96,63,0,0,0,0,0
+2026-10-18,before,AK,Alaska,96,192,3,0,2,14,0.01563
+2026-10-18,before,AZ,Arizona,96,321,7,0,4,32,0.02181
+2026-10-18,before,AR,Arkansas,96,210,1,0,0,10,0.00476
+2026-10-18,before,CA,California,96,1643,24,0,14,109,0.01461
+2026-10-18,before,CO,Colorado,96,276,11,0,11,25,0.03986
+2026-10-18,before,CT,Connecticut,96,174,7,0,7,34,0.04023
+2026-10-18,before,DE,Delaware,96,44,0,0,0,0,0
+2026-10-18,before,DC,District of Columbia,96,2014,15,0,12,53,0.00745
+2026-10-18,before,FL,Florida,96,711,17,0,3,52,0.02391
+2026-10-18,before,GA,Georgia,96,235,3,0,2,21,0.01277
+2026-10-18,before,HI,Hawaii,96,161,0,0,0,0,0
+2026-10-18,before,ID,Idaho,96,76,1,0,1,5,0.01316
+2026-10-18,before,IL,Illinois,96,598,7,2,1,23,0.01171
+2026-10-18,before,IN,Indiana,96,107,2,0,0,10,0.01869
+2026-10-18,before,IA,Iowa,96,290,0,0,0,0,0
+2026-10-18,before,KS,Kansas,96,122,1,0,1,10,0.0082
+2026-10-18,before,KY,Kentucky,96,317,8,0,7,31,0.02524
+2026-10-18,before,LA,Louisiana,96,122,1,0,0,6,0.0082
+2026-10-18,before,ME,Maine,96,184,4,0,2,24,0.02174
+2026-10-18,before,MD,Maryland,96,69,4,0,4,8,0.05797
+2026-10-18,before,MA,Massachusetts,96,465,9,0,6,36,0.01935
+2026-10-18,before,MI,Michigan,96,447,1,0,1,2,0.00224
+2026-10-18,before,MN,Minnesota,96,238,2,0,0,20,0.0084
+2026-10-18,before,MS,Mississippi,96,48,1,0,0,10,0.02083
+2026-10-18,before,MO,Missouri,96,92,1,0,0,10,0.01087
+2026-10-18,before,MT,Montana,96,56,0,0,0,0,0
+2026-10-18,before,NE,Nebraska,96,92,1,0,0,10,0.01087
+2026-10-18,before,NV,Nevada,96,62,0,0,0,0,0
+2026-10-18,before,NH,New Hampshire,96,52,0,0,0,0,0
+2026-10-18,before,NJ,New Jersey,96,148,0,0,0,0,0
+2026-10-18,before,NM,New Mexico,96,178,0,0,0,0,0
+2026-10-18,before,NY,New York,96,1088,14,0,5,87,0.01287
+2026-10-18,before,NC,North Carolina,96,237,16,0,8,64,0.06751
+2026-10-18,before,ND,North Dakota,96,29,0,0,0,0,0
+2026-10-18,before,OH,Ohio,96,388,6,0,4,30,0.01546
+2026-10-18,before,OK,Oklahoma,96,100,2,0,0,10,0.02
+2026-10-18,before,OR,Oregon,96,214,0,0,0,0,0
+2026-10-18,before,PA,Pennsylvania,96,314,7,0,5,14,0.02229
+2026-10-18,before,RI,Rhode Island,96,17,0,0,0,0,0
+2026-10-18,before,SC,South Carolina,96,142,3,0,1,15,0.02113
+2026-10-18,before,SD,South Dakota,96,11,0,0,0,0,0
+2026-10-18,before,TN,Tennessee,96,141,0,0,0,0,0
+2026-10-18,before,TX,Texas,96,969,11,0,4,37,0.01135
+2026-10-18,before,UT,Utah,96,113,1,0,0,10,0.00885
+2026-10-18,before,VT,Vermont,96,148,1,0,1,8,0.00676
+2026-10-18,before,VA,Virginia,96,285,3,0,0,8,0.01053
+2026-10-18,before,WA,Washington,96,210,3,0,2,12,0.01429
+2026-10-18,before,WV,West Virginia,96,50,0,0,0,0,0
+2026-10-18,before,WI,Wisconsin,96,220,8,0,5,52,0.03636
+2026-10-18,before,WY,Wyoming,96,91,0,0,0,0,0
+2026-10-19,before,AL,Alabama,96,149,4,0,0,20,0.02685
+2026-10-19,before,AK,Alaska,96,352,2,0,2,10,0.00568
+2026-10-19,before,AZ,Arizona,96,532,2,0,0,10,0.00376
+2026-10-19,before,AR,Arkansas,96,260,1,0,0,10,0.00385
+2026-10-19,before,CA,California,96,3131,12,0,2,53,0.00383
+2026-10-19,before,CO,Colorado,96,497,0,0,0,0,0
+2026-10-19,before,CT,Connecticut,96,352,3,0,0,16,0.00852
+2026-10-19,before,DE,Delaware,96,86,0,0,0,0,0
+2026-10-19,before,DC,District of Columbia,96,3366,22,0,3,86,0.00654
+2026-10-19,before,FL,Florida,96,1467,3,0,0,12,0.00204
+2026-10-19,before,GA,Georgia,96,699,14,0,7,58,0.02003
+2026-10-19,before,HI,Hawaii,96,233,0,0,0,0,0
+2026-10-19,before,ID,Idaho,96,213,0,0,0,0,0
+2026-10-19,before,IL,Illinois,96,749,11,0,5,47,0.01469
+2026-10-19,before,IN,Indiana,96,318,0,0,0,0,0
+2026-10-19,before,IA,Iowa,96,428,2,0,2,8,0.00467
+2026-10-19,before,KS,Kansas,96,429,8,0,2,29,0.01865
+2026-10-19,before,KY,Kentucky,96,269,0,0,0,0,0
+2026-10-19,before,LA,Louisiana,96,377,1,0,0,10,0.00265
+2026-10-19,before,ME,Maine,96,381,2,0,0,6,0.00525
+2026-10-19,before,MD,Maryland,96,371,1,0,0,4,0.0027
+2026-10-19,before,MA,Massachusetts,96,689,8,0,1,20,0.01161
+2026-10-19,before,MI,Michigan,96,885,10,0,2,32,0.0113
+2026-10-19,before,MN,Minnesota,96,677,3,0,0,17,0.00443
+2026-10-19,before,MS,Mississippi,96,234,4,0,0,8,0.01709
+2026-10-19,before,MO,Missouri,96,257,2,0,1,10,0.00778
+2026-10-19,before,MT,Montana,96,132,0,0,0,0,0
+2026-10-19,before,NE,Nebraska,96,143,0,0,0,0,0
+2026-10-19,before,NV,Nevada,96,242,0,0,0,0,0
+2026-10-19,before,NH,New Hampshire,96,156,1,0,0,10,0.00641
+2026-10-19,before,NJ,New Jersey,96,303,0,0,0,0,0
+2026-10-19,before,NM,New Mexico,96,159,0,0,0,0,0
+2026-10-19,before,NY,New York,96,2038,29,0,2,89,0.01423
+2026-10-19,before,NC,North Carolina,96,468,14,0,9,54,0.02991
+2026-10-19,before,ND,North Dakota,96,90,0,0,0,0,0
+2026-10-19,before,OH,Ohio,96,924,3,0,0,3,0.00325
+2026-10-19,before,OK,Oklahoma,96,141,0,0,0,0,0
+2026-10-19,before,OR,Oregon,96,357,3,0,0,40,0.0084
+2026-10-19,before,PA,Pennsylvania,96,871,3,0,0,16,0.00344
+2026-10-19,before,RI,Rhode Island,96,73,1,0,0,5,0.0137
+2026-10-19,before,SC,South Carolina,96,255,0,0,0,0,0
+2026-10-19,before,SD,South Dakota,96,89,0,0,0,0,0
+2026-10-19,before,TN,Tennessee,96,438,1,0,0,6,0.00228
+2026-10-19,before,TX,Texas,96,2036,17,0,1,58,0.00835
+2026-10-19,before,UT,Utah,96,248,1,0,0,2,0.00403
+2026-10-19,before,VT,Vermont,96,175,0,0,0,0,0
+2026-10-19,before,VA,Virginia,96,591,3,0,0,11,0.00508
+2026-10-19,before,WA,Washington,96,329,0,0,0,0,0
+2026-10-19,before,WV,West Virginia,96,161,0,0,0,0,0
+2026-10-19,before,WI,Wisconsin,96,574,7,0,3,31,0.0122
+2026-10-19,before,WY,Wyoming,96,133,0,0,0,0,0
+2026-10-20,before,AL,Alabama,96,407,1,0,0,6,0.00246
+2026-10-20,before,AK,Alaska,96,391,11,0,2,56,0.02813
+2026-10-20,before,AZ,Arizona,96,620,10,0,10,30,0.01613
+2026-10-20,before,AR,Arkansas,96,282,2,0,0,10,0.00709
+2026-10-20,before,CA,California,96,3679,17,0,0,81,0.00462
+2026-10-20,before,CO,Colorado,96,516,0,0,0,0,0
+2026-10-20,before,CT,Connecticut,96,290,1,0,0,3,0.00345
+2026-10-20,before,DE,Delaware,96,132,1,0,0,2,0.00758
+2026-10-20,before,DC,District of Columbia,96,3615,20,2,0,69,0.00553
+2026-10-20,before,FL,Florida,96,1824,9,0,1,68,0.00493
+2026-10-20,before,GA,Georgia,96,791,5,0,1,27,0.00632
+2026-10-20,before,HI,Hawaii,96,320,0,0,0,0,0
+2026-10-20,before,ID,Idaho,96,265,1,0,0,5,0.00377
+2026-10-20,before,IL,Illinois,96,1057,1,0,0,3,0.00095
+2026-10-20,before,IN,Indiana,96,530,2,0,0,8,0.00377
+2026-10-20,before,IA,Iowa,96,490,4,0,1,8,0.00816
+2026-10-20,before,KS,Kansas,96,1256,30,2,3,94,0.02389
+2026-10-20,before,KY,Kentucky,96,421,0,0,0,0,0
+2026-10-20,before,LA,Louisiana,96,568,4,0,1,16,0.00704
+2026-10-20,before,ME,Maine,96,419,1,0,0,10,0.00239
+2026-10-20,before,MD,Maryland,96,490,2,0,0,10,0.00408
+2026-10-20,before,MA,Massachusetts,96,694,1,0,0,2,0.00144
+2026-10-20,before,MI,Michigan,96,996,7,1,0,24,0.00703
+2026-10-20,before,MN,Minnesota,96,748,3,0,0,15,0.00401
+2026-10-20,before,MS,Mississippi,96,375,3,0,0,10,0.008
+2026-10-20,before,MO,Missouri,96,425,2,0,0,14,0.00471
+2026-10-20,before,MT,Montana,96,233,0,0,0,0,0
+2026-10-20,before,NE,Nebraska,96,233,2,0,0,5,0.00858
+2026-10-20,before,NV,Nevada,96,450,0,0,0,0,0
+2026-10-20,before,NH,New Hampshire,96,150,1,0,0,10,0.00667
+2026-10-20,before,NJ,New Jersey,96,393,0,0,0,0,0
+2026-10-20,before,NM,New Mexico,96,264,0,0,0,0,0
+2026-10-20,before,NY,New York,96,2536,24,2,0,66,0.00946
+2026-10-20,before,NC,North Carolina,96,788,22,0,10,118,0.02792
+2026-10-20,before,ND,North Dakota,96,94,0,0,0,0,0
+2026-10-20,before,OH,Ohio,96,1058,2,0,1,18,0.00189
+2026-10-20,before,OK,Oklahoma,96,248,0,0,0,0,0
+2026-10-20,before,OR,Oregon,96,353,5,0,0,22,0.01416
+2026-10-20,before,PA,Pennsylvania,96,1169,3,0,0,23,0.00257
+2026-10-20,before,RI,Rhode Island,96,65,1,0,0,2,0.01538
+2026-10-20,before,SC,South Carolina,96,497,2,0,0,3,0.00402
+2026-10-20,before,SD,South Dakota,96,118,0,0,0,0,0
+2026-10-20,before,TN,Tennessee,96,430,0,0,0,0,0
+2026-10-20,before,TX,Texas,96,2286,26,0,4,91,0.01137
+2026-10-20,before,UT,Utah,96,261,2,0,0,18,0.00766
+2026-10-20,before,VT,Vermont,96,247,1,0,0,3,0.00405
+2026-10-20,before,VA,Virginia,96,689,2,0,1,8,0.0029
+2026-10-20,before,WA,Washington,96,460,5,1,1,23,0.01087
+2026-10-20,before,WV,West Virginia,96,298,0,0,0,0,0
+2026-10-20,before,WI,Wisconsin,96,702,13,0,0,44,0.01852
+2026-10-20,before,WY,Wyoming,96,164,1,0,1,5,0.0061
+2026-10-21,before,AL,Alabama,96,469,0,0,0,0,0
+2026-10-21,before,AK,Alaska,96,369,1,0,0,10,0.00271
+2026-10-21,before,AZ,Arizona,96,752,2,0,2,10,0.00266
+2026-10-21,before,AR,Arkansas,96,362,2,0,0,14,0.00552
+2026-10-21,before,CA,California,96,3543,32,1,0,163,0.00903
+2026-10-21,before,CO,Colorado,96,596,2,0,0,12,0.00336
+2026-10-21,before,CT,Connecticut,96,333,1,0,0,4,0.003
+2026-10-21,before,DE,Delaware,96,122,0,0,0,0,0
+2026-10-21,before,DC,District of Columbia,96,3848,20,0,3,103,0.0052
+2026-10-21,before,FL,Florida,96,2069,13,0,2,41,0.00628
+2026-10-21,before,GA,Georgia,96,920,5,0,2,27,0.00543
+2026-10-21,before,HI,Hawaii,96,275,1,0,0,2,0.00364
+2026-10-21,before,ID,Idaho,96,235,1,0,0,10,0.00426
+2026-10-21,before,IL,Illinois,96,1192,6,0,2,39,0.00503
+2026-10-21,before,IN,Indiana,96,429,9,0,0,36,0.02098
+2026-10-21,before,IA,Iowa,96,555,1,0,0,2,0.0018
+2026-10-21,before,KS,Kansas,96,688,9,1,0,17,0.01308
+2026-10-21,before,KY,Kentucky,96,367,2,0,1,12,0.00545
+2026-10-21,before,LA,Louisiana,96,440,5,1,3,30,0.01136
+2026-10-21,before,ME,Maine,96,634,0,0,0,0,0
+2026-10-21,before,MD,Maryland,96,519,1,0,0,10,0.00193
+2026-10-21,before,MA,Massachusetts,96,857,6,0,0,25,0.007
+2026-10-21,before,MI,Michigan,96,1450,4,0,2,7,0.00276
+2026-10-21,before,MN,Minnesota,96,700,2,0,0,10,0.00286
+2026-10-21,before,MS,Mississippi,96,320,1,0,0,4,0.00313
+2026-10-21,before,MO,Missouri,96,365,0,0,0,0,0
+2026-10-21,before,MT,Montana,96,281,3,0,0,8,0.01068
+2026-10-21,before,NE,Nebraska,96,247,0,0,0,0,0
+2026-10-21,before,NV,Nevada,96,357,2,0,0,4,0.0056
+2026-10-21,before,NH,New Hampshire,96,168,0,0,0,0,0
+2026-10-21,before,NJ,New Jersey,96,405,0,0,0,0,0
+2026-10-21,before,NM,New Mexico,96,575,1,0,0,5,0.00174
+2026-10-21,before,NY,New York,96,2863,22,3,1,90,0.00768
+2026-10-21,before,NC,North Carolina,96,701,19,0,2,73,0.0271
+2026-10-21,before,ND,North Dakota,96,168,0,0,0,0,0
+2026-10-21,before,OH,Ohio,96,1552,4,0,0,38,0.00258
+2026-10-21,before,OK,Oklahoma,96,239,0,0,0,0,0
+2026-10-21,before,OR,Oregon,96,473,5,0,0,17,0.01057
+2026-10-21,before,PA,Pennsylvania,96,1042,5,0,0,19,0.0048
+2026-10-21,before,RI,Rhode Island,96,142,0,0,0,0,0
+2026-10-21,before,SC,South Carolina,96,578,1,0,0,1,0.00173
+2026-10-21,before,SD,South Dakota,96,121,0,0,0,0,0
+2026-10-21,before,TN,Tennessee,96,429,4,0,0,40,0.00932
+2026-10-21,before,TX,Texas,96,2649,7,0,0,27,0.00264
+2026-10-21,before,UT,Utah,96,397,6,0,1,39,0.01511
+2026-10-21,before,VT,Vermont,96,263,5,0,0,17,0.01901
+2026-10-21,before,VA,Virginia,96,716,12,0,0,51,0.01676
+2026-10-21,before,WA,Washington,96,674,1,0,0,4,0.00148
+2026-10-21,before,WV,West Virginia,96,321,0,0,0,0,0
+2026-10-21,before,WI,Wisconsin,96,685,6,0,4,38,0.00876
+2026-10-21,before,WY,Wyoming,96,209,0,0,0,0,0
+2026-10-22,before,AL,Alabama,96,269,2,0,0,10,0.00743
+2026-10-22,before,AK,Alaska,96,541,5,0,0,20,0.00924
+2026-10-22,before,AZ,Arizona,96,746,2,2,0,10,0.00268
+2026-10-22,before,AR,Arkansas,96,262,1,0,0,2,0.00382
+2026-10-22,before,CA,California,96,3685,28,0,9,171,0.0076
+2026-10-22,before,CO,Colorado,96,744,0,0,0,0,0
+2026-10-22,before,CT,Connecticut,96,243,1,0,0,4,0.00412
+2026-10-22,before,DE,Delaware,96,142,1,0,0,3,0.00704
+2026-10-22,before,DC,District of Columbia,96,3386,26,4,3,83,0.00768
+2026-10-22,before,FL,Florida,96,2137,10,0,0,39,0.00468
+2026-10-22,before,GA,Georgia,96,827,2,0,1,4,0.00242
+2026-10-22,before,HI,Hawaii,96,272,1,0,0,4,0.00368
+2026-10-22,before,ID,Idaho,96,313,0,0,0,0,0
+2026-10-22,before,IL,Illinois,96,1130,9,0,1,30,0.00796
+2026-10-22,before,IN,Indiana,96,511,1,0,0,10,0.00196
+2026-10-22,before,IA,Iowa,96,773,31,0,11,75,0.0401
+2026-10-22,before,KS,Kansas,96,609,2,1,1,3,0.00328
+2026-10-22,before,KY,Kentucky,96,360,0,0,0,0,0
+2026-10-22,before,LA,Louisiana,96,541,3,0,0,20,0.00555
+2026-10-22,before,ME,Maine,96,463,1,0,1,3,0.00216
+2026-10-22,before,MD,Maryland,96,368,2,0,0,2,0.00543
+2026-10-22,before,MA,Massachusetts,96,1019,10,0,4,37,0.00981
+2026-10-22,before,MI,Michigan,96,1394,8,0,2,63,0.00574
+2026-10-22,before,MN,Minnesota,96,701,7,3,1,44,0.00999
+2026-10-22,before,MS,Mississippi,96,339,4,0,0,17,0.0118
+2026-10-22,before,MO,Missouri,96,399,2,0,0,10,0.00501
+2026-10-22,before,MT,Montana,96,300,7,0,4,27,0.02333
+2026-10-22,before,NE,Nebraska,96,231,4,0,0,32,0.01732
+2026-10-22,before,NV,Nevada,96,306,3,0,0,12,0.0098
+2026-10-22,before,NH,New Hampshire,96,173,1,0,0,2,0.00578
+2026-10-22,before,NJ,New Jersey,96,512,3,0,3,4,0.00586
+2026-10-22,before,NM,New Mexico,96,511,1,0,0,2,0.00196
+2026-10-22,before,NY,New York,96,2828,19,1,3,118,0.00672
+2026-10-22,before,NC,North Carolina,96,740,9,0,5,34,0.01216
+2026-10-22,before,ND,North Dakota,96,105,0,0,0,0,0
+2026-10-22,before,OH,Ohio,96,1485,8,4,0,37,0.00539
+2026-10-22,before,OK,Oklahoma,96,302,0,0,0,0,0
+2026-10-22,before,OR,Oregon,96,464,0,0,0,0,0
+2026-10-22,before,PA,Pennsylvania,96,1077,8,0,1,40,0.00743
+2026-10-22,before,RI,Rhode Island,96,108,3,0,0,12,0.02778
+2026-10-22,before,SC,South Carolina,96,782,13,0,5,54,0.01662
+2026-10-22,before,SD,South Dakota,96,134,0,0,0,0,0
+2026-10-22,before,TN,Tennessee,96,525,1,0,0,10,0.0019
+2026-10-22,before,TX,Texas,96,2683,16,0,0,50,0.00596
+2026-10-22,before,UT,Utah,96,429,11,0,2,36,0.02564
+2026-10-22,before,VT,Vermont,96,266,0,0,0,0,0
+2026-10-22,before,VA,Virginia,96,853,3,0,3,14,0.00352
+2026-10-22,before,WA,Washington,96,615,2,0,0,10,0.00325
+2026-10-22,before,WV,West Virginia,96,238,0,0,0,0,0
+2026-10-22,before,WI,Wisconsin,96,687,2,0,0,10,0.00291
+2026-10-22,before,WY,Wyoming,96,183,1,0,1,10,0.00546
+2026-10-23,before,AL,Alabama,96,272,0,0,0,0,0
+2026-10-23,before,AK,Alaska,96,546,2,0,0,7,0.00366
+2026-10-23,before,AZ,Arizona,96,881,3,0,0,18,0.00341
+2026-10-23,before,AR,Arkansas,96,221,0,0,0,0,0
+2026-10-23,before,CA,California,96,3486,17,0,4,126,0.00488
+2026-10-23,before,CO,Colorado,96,595,1,0,0,1,0.00168
+2026-10-23,before,CT,Connecticut,96,324,0,0,0,0,0
+2026-10-23,before,DE,Delaware,96,170,2,0,1,8,0.01176
+2026-10-23,before,DC,District of Columbia,96,3088,15,0,6,75,0.00486
+2026-10-23,before,FL,Florida,96,1812,13,0,4,50,0.00717
+2026-10-23,before,GA,Georgia,96,848,10,0,6,37,0.01179
+2026-10-23,before,HI,Hawaii,96,203,0,0,0,0,0
+2026-10-23,before,ID,Idaho,96,192,0,0,0,0,0
+2026-10-23,before,IL,Illinois,96,1121,11,0,0,46,0.00981
+2026-10-23,before,IN,Indiana,96,457,1,0,0,10,0.00219
+2026-10-23,before,IA,Iowa,96,833,31,0,16,76,0.03721
+2026-10-23,before,KS,Kansas,96,612,2,0,2,10,0.00327
+2026-10-23,before,KY,Kentucky,96,341,1,0,0,5,0.00293
+2026-10-23,before,LA,Louisiana,96,431,2,0,0,10,0.00464
+2026-10-23,before,ME,Maine,96,406,1,0,0,4,0.00246
+2026-10-23,before,MD,Maryland,96,509,3,0,0,12,0.00589
+2026-10-23,before,MA,Massachusetts,96,1005,3,0,0,5,0.00299
+2026-10-23,before,MI,Michigan,96,1137,4,0,0,34,0.00352
+2026-10-23,before,MN,Minnesota,96,658,6,1,0,58,0.00912
+2026-10-23,before,MS,Mississippi,96,560,5,0,3,19,0.00893
+2026-10-23,before,MO,Missouri,96,347,0,0,0,0,0
+2026-10-23,before,MT,Montana,96,264,3,0,0,20,0.01136
+2026-10-23,before,NE,Nebraska,96,296,3,0,1,14,0.01014
+2026-10-23,before,NV,Nevada,96,217,2,0,2,5,0.00922
+2026-10-23,before,NH,New Hampshire,96,224,1,0,0,2,0.00446
+2026-10-23,before,NJ,New Jersey,96,467,1,0,0,10,0.00214
+2026-10-23,before,NM,New Mexico,96,317,4,0,0,20,0.01262
+2026-10-23,before,NY,New York,96,2601,31,1,4,120,0.01192
+2026-10-23,before,NC,North Carolina,96,657,3,0,0,16,0.00457
+2026-10-23,before,ND,North Dakota,96,156,0,0,0,0,0
+2026-10-23,before,OH,Ohio,96,1575,2,0,0,5,0.00127
+2026-10-23,before,OK,Oklahoma,96,379,0,0,0,0,0
+2026-10-23,before,OR,Oregon,96,477,3,0,0,10,0.00629
+2026-10-23,before,PA,Pennsylvania,96,977,1,0,0,8,0.00102
+2026-10-23,before,RI,Rhode Island,96,100,0,0,0,0,0
+2026-10-23,before,SC,South Carolina,96,456,1,0,1,8,0.00219
+2026-10-23,before,SD,South Dakota,96,123,0,0,0,0,0
+2026-10-23,before,TN,Tennessee,96,504,6,0,0,30,0.0119
+2026-10-23,before,TX,Texas,96,2568,27,0,0,99,0.01051
+2026-10-23,before,UT,Utah,96,538,0,0,0,0,0
+2026-10-23,before,VT,Vermont,96,207,1,0,0,10,0.00483
+2026-10-23,before,VA,Virginia,96,865,4,0,2,20,0.00462
+2026-10-23,before,WA,Washington,96,500,4,0,2,37,0.008
+2026-10-23,before,WV,West Virginia,96,180,0,0,0,0,0
+2026-10-23,before,WI,Wisconsin,96,473,1,1,1,10,0.00211
+2026-10-23,before,WY,Wyoming,96,216,1,0,1,10,0.00463
+2026-10-24,before,AL,Alabama,96,164,2,0,0,10,0.0122
+2026-10-24,before,AK,Alaska,96,410,2,0,0,7,0.00488
+2026-10-24,before,AZ,Arizona,96,381,2,0,0,6,0.00525
+2026-10-24,before,AR,Arkansas,96,251,0,0,0,0,0
+2026-10-24,before,CA,California,96,2165,7,0,0,42,0.00323
+2026-10-24,before,CO,Colorado,96,356,0,0,0,0,0
+2026-10-24,before,CT,Connecticut,96,123,0,0,0,0,0
+2026-10-24,before,DE,Delaware,96,42,0,0,0,0,0
+2026-10-24,before,DC,District of Columbia,96,2150,5,0,0,26,0.00233
+2026-10-24,before,FL,Florida,96,1226,29,0,13,114,0.02365
+2026-10-24,before,GA,Georgia,96,618,24,0,4,82,0.03883
+2026-10-24,before,HI,Hawaii,96,167,0,0,0,0,0
+2026-10-24,before,ID,Idaho,96,222,0,0,0,0,0
+2026-10-24,before,IL,Illinois,96,620,2,0,0,14,0.00323
+2026-10-24,before,IN,Indiana,96,247,0,0,0,0,0
+2026-10-24,before,IA,Iowa,96,385,9,0,1,29,0.02338
+2026-10-24,before,KS,Kansas,96,206,2,0,1,20,0.00971
+2026-10-24,before,KY,Kentucky,96,163,0,0,0,0,0
+2026-10-24,before,LA,Louisiana,96,239,0,0,0,0,0
+2026-10-24,before,ME,Maine,96,252,0,0,0,0,0
+2026-10-24,before,MD,Maryland,96,161,0,0,0,0,0
+2026-10-24,before,MA,Massachusetts,96,373,3,0,2,7,0.00804
+2026-10-24,before,MI,Michigan,96,709,9,1,3,51,0.01269
+2026-10-24,before,MN,Minnesota,96,451,4,2,0,25,0.00887
+2026-10-24,before,MS,Mississippi,96,352,2,0,0,10,0.00568
+2026-10-24,before,MO,Missouri,96,219,0,0,0,0,0
+2026-10-24,before,MT,Montana,96,179,5,0,4,14,0.02793
+2026-10-24,before,NE,Nebraska,96,132,0,0,0,0,0
+2026-10-24,before,NV,Nevada,96,139,0,0,0,0,0
+2026-10-24,before,NH,New Hampshire,96,90,0,0,0,0,0
+2026-10-24,before,NJ,New Jersey,96,199,0,0,0,0,0
+2026-10-24,before,NM,New Mexico,96,216,0,0,0,0,0
+2026-10-24,before,NY,New York,96,1565,17,2,7,71,0.01086
+2026-10-24,before,NC,North Carolina,96,493,1,0,0,2,0.00203
+2026-10-24,before,ND,North Dakota,96,119,0,0,0,0,0
+2026-10-24,before,OH,Ohio,96,877,4,0,1,26,0.00456
+2026-10-24,before,OK,Oklahoma,96,140,1,0,0,4,0.00714
+2026-10-24,before,OR,Oregon,96,296,2,0,0,12,0.00676
+2026-10-24,before,PA,Pennsylvania,96,692,4,0,2,20,0.00578
+2026-10-24,before,RI,Rhode Island,96,62,0,0,0,0,0
+2026-10-24,before,SC,South Carolina,96,186,1,0,0,5,0.00538
+2026-10-24,before,SD,South Dakota,96,119,0,0,0,0,0
+2026-10-24,before,TN,Tennessee,96,291,0,0,0,0,0
+2026-10-24,before,TX,Texas,96,1374,10,0,0,46,0.00728
+2026-10-24,before,UT,Utah,96,359,1,0,0,10,0.00279
+2026-10-24,before,VT,Vermont,96,116,0,0,0,0,0
+2026-10-24,before,VA,Virginia,96,394,2,1,0,14,0.00508
+2026-10-24,before,WA,Washington,96,393,1,0,0,14,0.00254
+2026-10-24,before,WV,West Virginia,96,137,0,0,0,0,0
+2026-10-24,before,WI,Wisconsin,96,170,2,0,1,6,0.01176
+2026-10-24,before,WY,Wyoming,96,232,4,0,0,8,0.01724
+2026-10-25,before,AL,Alabama,96,44,1,0,0,3,0.02273
+2026-10-25,before,AK,Alaska,96,346,5,0,1,19,0.01445
+2026-10-25,before,AZ,Arizona,96,265,2,0,0,5,0.00755
+2026-10-25,before,AR,Arkansas,96,73,0,0,0,0,0
+2026-10-25,before,CA,California,96,1560,16,0,3,81,0.01026
+2026-10-25,before,CO,Colorado,96,353,2,0,0,7,0.00567
+2026-10-25,before,CT,Connecticut,96,83,0,0,0,0,0
+2026-10-25,before,DE,Delaware,96,77,0,0,0,0,0
+2026-10-25,before,DC,District of Columbia,96,1643,17,0,1,78,0.01035
+2026-10-25,before,FL,Florida,96,862,10,0,2,41,0.0116
+2026-10-25,before,GA,Georgia,96,559,16,0,5,72,0.02862
+2026-10-25,before,HI,Hawaii,96,123,0,0,0,0,0
+2026-10-25,before,ID,Idaho,96,113,0,0,0,0,0
+2026-10-25,before,IL,Illinois,96,498,6,0,0,28,0.01205
+2026-10-25,before,IN,Indiana,96,123,0,0,0,0,0
+2026-10-25,before,IA,Iowa,96,265,0,0,0,0,0
+2026-10-25,before,KS,Kansas,96,81,0,0,0,0,0
+2026-10-25,before,KY,Kentucky,96,77,2,0,0,6,0.02597
+2026-10-25,before,LA,Louisiana,96,132,0,0,0,0,0
+2026-10-25,before,ME,Maine,96,124,0,0,0,0,0
+2026-10-25,before,MD,Maryland,96,118,0,0,0,0,0
+2026-10-25,before,MA,Massachusetts,96,281,4,0,0,13,0.01423
+2026-10-25,before,MI,Michigan,96,904,15,0,0,44,0.01659
+2026-10-25,before,MN,Minnesota,96,172,1,0,0,10,0.00581
+2026-10-25,before,MS,Mississippi,96,113,3,0,0,8,0.02655
+2026-10-25,before,MO,Missouri,96,186,0,0,0,0,0
+2026-10-25,before,MT,Montana,96,85,0,0,0,0,0
+2026-10-25,before,NE,Nebraska,96,140,0,0,0,0,0
+2026-10-25,before,NV,Nevada,96,106,0,0,0,0,0
+2026-10-25,before,NH,New Hampshire,96,83,0,0,0,0,0
+2026-10-25,before,NJ,New Jersey,96,67,0,0,0,0,0
+2026-10-25,before,NM,New Mexico,96,187,0,0,0,0,0
+2026-10-25,before,NY,New York,96,1338,15,1,5,65,0.01121
+2026-10-25,before,NC,North Carolina,96,296,1,0,0,6,0.00338
+2026-10-25,before,ND,North Dakota,96,23,0,0,0,0,0
+2026-10-25,before,OH,Ohio,96,667,14,0,13,62,0.02099
+2026-10-25,before,OK,Oklahoma,96,104,1,0,0,5,0.00962
+2026-10-25,before,OR,Oregon,96,101,0,0,0,0,0
+2026-10-25,before,PA,Pennsylvania,96,481,2,0,2,6,0.00416
+2026-10-25,before,RI,Rhode Island,96,27,0,0,0,0,0
+2026-10-25,before,SC,South Carolina,96,180,0,0,0,0,0
+2026-10-25,before,SD,South Dakota,96,67,0,0,0,0,0
+2026-10-25,before,TN,Tennessee,96,128,1,0,0,4,0.00781
+2026-10-25,before,TX,Texas,96,913,9,0,2,30,0.00986
+2026-10-25,before,UT,Utah,96,88,0,0,0,0,0
+2026-10-25,before,VT,Vermont,96,73,0,0,0,0,0
+2026-10-25,before,VA,Virginia,96,307,0,0,0,0,0
+2026-10-25,before,WA,Washington,96,134,1,0,0,10,0.00746
+2026-10-25,before,WV,West Virginia,96,81,0,0,0,0,0
+2026-10-25,before,WI,Wisconsin,96,184,7,0,3,24,0.03804
+2026-10-25,before,WY,Wyoming,96,32,0,0,0,0,0
+2026-10-26,before,AL,Alabama,96,249,3,0,0,32,0.01205
+2026-10-26,before,AK,Alaska,96,471,1,0,0,6,0.00212
+2026-10-26,before,AZ,Arizona,96,353,0,0,0,0,0
+2026-10-26,before,AR,Arkansas,96,270,0,0,0,0,0
+2026-10-26,before,CA,California,96,2477,11,0,6,46,0.00444
+2026-10-26,before,CO,Colorado,96,510,5,0,2,22,0.0098
+2026-10-26,before,CT,Connecticut,96,245,0,0,0,0,0
+2026-10-26,before,DE,Delaware,96,77,0,0,0,0,0
+2026-10-26,before,DC,District of Columbia,96,2957,24,1,1,83,0.00812
+2026-10-26,before,FL,Florida,96,1155,7,0,1,19,0.00606
+2026-10-26,before,GA,Georgia,96,730,10,0,4,30,0.0137
+2026-10-26,before,HI,Hawaii,96,210,1,0,0,2,0.00476
+2026-10-26,before,ID,Idaho,96,200,0,0,0,0,0
+2026-10-26,before,IL,Illinois,96,1114,5,0,3,17,0.00449
+2026-10-26,before,IN,Indiana,96,490,0,0,0,0,0
+2026-10-26,before,IA,Iowa,96,484,3,0,1,12,0.0062
+2026-10-26,before,KS,Kansas,96,288,1,0,0,8,0.00347
+2026-10-26,before,KY,Kentucky,96,214,2,0,0,6,0.00935
+2026-10-26,before,LA,Louisiana,96,359,1,0,0,2,0.00279
+2026-10-26,before,ME,Maine,96,443,0,0,0,0,0
+2026-10-26,before,MD,Maryland,96,282,2,0,0,7,0.00709
+2026-10-26,before,MA,Massachusetts,96,826,10,0,0,43,0.01211
+2026-10-26,before,MI,Michigan,96,1413,15,0,7,70,0.01062
+2026-10-26,before,MN,Minnesota,96,577,4,0,0,13,0.00693
+2026-10-26,before,MS,Mississippi,96,399,0,0,0,0,0
+2026-10-26,before,MO,Missouri,96,198,0,0,0,0,0
+2026-10-26,before,MT,Montana,96,136,1,0,0,2,0.00735
+2026-10-26,before,NE,Nebraska,96,173,1,0,0,8,0.00578
+2026-10-26,before,NV,Nevada,96,195,5,0,4,14,0.02564
+2026-10-26,before,NH,New Hampshire,96,134,0,0,0,0,0
+2026-10-26,before,NJ,New Jersey,96,390,3,0,3,7,0.00769
+2026-10-26,before,NM,New Mexico,96,243,0,0,0,0,0
+2026-10-26,before,NY,New York,96,2397,21,3,5,74,0.00876
+2026-10-26,before,NC,North Carolina,96,480,12,0,4,35,0.025
+2026-10-26,before,ND,North Dakota,96,110,0,0,0,0,0
+2026-10-26,before,OH,Ohio,96,963,10,4,1,22,0.01038
+2026-10-26,before,OK,Oklahoma,96,145,0,0,0,0,0
+2026-10-26,before,OR,Oregon,96,436,0,0,0,0,0
+2026-10-26,before,PA,Pennsylvania,96,965,3,0,0,14,0.00311
+2026-10-26,before,RI,Rhode Island,96,57,0,0,0,0,0
+2026-10-26,before,SC,South Carolina,96,397,2,0,2,10,0.00504
+2026-10-26,before,SD,South Dakota,96,118,0,0,0,0,0
+2026-10-26,before,TN,Tennessee,96,369,0,0,0,0,0
+2026-10-26,before,TX,Texas,96,1875,9,0,3,56,0.0048
+2026-10-26,before,UT,Utah,96,321,1,0,1,6,0.00312
+2026-10-26,before,VT,Vermont,96,146,0,0,0,0,0
+2026-10-26,before,VA,Virginia,96,576,1,0,0,5,0.00174
+2026-10-26,before,WA,Washington,96,358,1,1,0,6,0.00279
+2026-10-26,before,WV,West Virginia,96,105,0,0,0,0,0
+2026-10-26,before,WI,Wisconsin,96,516,8,0,5,44,0.0155
+2026-10-26,before,WY,Wyoming,96,86,0,0,0,0,0
+2026-10-27,before,AL,Alabama,96,325,1,0,0,10,0.00308
+2026-10-27,before,AK,Alaska,96,569,5,0,3,18,0.00879
+2026-10-27,before,AZ,Arizona,96,621,2,0,0,10,0.00322
+2026-10-27,before,AR,Arkansas,96,382,4,0,0,8,0.01047
+2026-10-27,before,CA,California,96,3547,23,1,5,88,0.00648
+2026-10-27,before,CO,Colorado,96,643,5,0,2,22,0.00778
+2026-10-27,before,CT,Connecticut,96,326,0,0,0,0,0
+2026-10-27,before,DE,Delaware,96,100,0,0,0,0,0
+2026-10-27,before,DC,District of Columbia,96,3090,21,0,2,60,0.0068
+2026-10-27,before,FL,Florida,96,1852,9,0,6,34,0.00486
+2026-10-27,before,GA,Georgia,96,900,7,0,6,25,0.00778
+2026-10-27,before,HI,Hawaii,96,304,1,0,0,4,0.00329
+2026-10-27,before,ID,Idaho,96,212,0,0,0,0,0
+2026-10-27,before,IL,Illinois,96,1269,3,1,0,18,0.00236
+2026-10-27,before,IN,Indiana,96,495,4,0,0,14,0.00808
+2026-10-27,before,IA,Iowa,96,587,6,0,0,7,0.01022
+2026-10-27,before,KS,Kansas,96,566,15,0,2,48,0.0265
+2026-10-27,before,KY,Kentucky,96,324,2,0,1,13,0.00617
+2026-10-27,before,LA,Louisiana,96,452,0,0,0,0,0
+2026-10-27,before,ME,Maine,96,440,2,0,0,8,0.00455
+2026-10-27,before,MD,Maryland,96,464,2,0,1,14,0.00431
+2026-10-27,before,MA,Massachusetts,96,836,4,0,0,31,0.00478
+2026-10-27,before,MI,Michigan,96,1181,12,1,5,75,0.01016
+2026-10-27,before,MN,Minnesota,96,777,1,0,1,6,0.00129
+2026-10-27,before,MS,Mississippi,96,492,7,0,4,34,0.01423
+2026-10-27,before,MO,Missouri,96,397,4,0,0,14,0.01008
+2026-10-27,before,MT,Montana,96,293,4,0,0,7,0.01365
+2026-10-27,before,NE,Nebraska,96,174,1,0,0,8,0.00575
+2026-10-27,before,NV,Nevada,96,284,5,0,4,10,0.01761
+2026-10-27,before,NH,New Hampshire,96,143,0,0,0,0,0
+2026-10-27,before,NJ,New Jersey,96,447,0,0,0,0,0
+2026-10-27,before,NM,New Mexico,96,240,1,0,1,4,0.00417
+2026-10-27,before,NY,New York,96,2769,11,0,1,62,0.00397
+2026-10-27,before,NC,North Carolina,96,786,4,0,2,13,0.00509
+2026-10-27,before,ND,North Dakota,96,105,0,0,0,0,0
+2026-10-27,before,OH,Ohio,96,1263,13,0,6,51,0.01029
+2026-10-27,before,OK,Oklahoma,96,323,4,0,0,34,0.01238
+2026-10-27,before,OR,Oregon,96,389,15,0,0,43,0.03856
+2026-10-27,before,PA,Pennsylvania,96,1040,5,0,1,13,0.00481
+2026-10-27,before,RI,Rhode Island,96,106,0,0,0,0,0
+2026-10-27,before,SC,South Carolina,96,475,7,0,4,36,0.01474
+2026-10-27,before,SD,South Dakota,96,155,0,0,0,0,0
+2026-10-27,before,TN,Tennessee,96,525,4,3,0,18,0.00762
+2026-10-27,before,TX,Texas,96,2698,33,0,14,167,0.01223
+2026-10-27,before,UT,Utah,96,502,3,0,0,18,0.00598
+2026-10-27,before,VT,Vermont,96,313,0,0,0,0,0
+2026-10-27,before,VA,Virginia,96,780,3,0,0,17,0.00385
+2026-10-27,before,WA,Washington,96,428,1,0,0,1,0.00234
+2026-10-27,before,WV,West Virginia,96,246,5,0,0,25,0.02033
+2026-10-27,before,WI,Wisconsin,96,514,2,0,0,12,0.00389
+2026-10-27,before,WY,Wyoming,96,202,0,0,0,0,0
+2026-10-28,before,AL,Alabama,96,365,0,0,0,0,0
+2026-10-28,before,AK,Alaska,96,762,0,0,0,0,0
+2026-10-28,before,AZ,Arizona,96,524,8,0,4,20,0.01527
+2026-10-28,before,AR,Arkansas,96,272,4,0,0,8,0.01471
+2026-10-28,before,CA,California,96,4058,30,0,0,168,0.00739
+2026-10-28,before,CO,Colorado,96,808,2,2,0,16,0.00248
+2026-10-28,before,CT,Connecticut,96,371,0,0,0,0,0
+2026-10-28,before,DE,Delaware,96,106,0,0,0,0,0
+2026-10-28,before,DC,District of Columbia,96,2937,14,0,7,49,0.00477
+2026-10-28,before,FL,Florida,96,2368,10,0,5,48,0.00422
+2026-10-28,before,GA,Georgia,96,915,6,0,2,32,0.00656
+2026-10-28,before,HI,Hawaii,96,241,1,0,0,10,0.00415
+2026-10-28,before,ID,Idaho,96,333,2,0,0,12,0.00601
+2026-10-28,before,IL,Illinois,96,1191,6,0,0,28,0.00504
+2026-10-28,before,IN,Indiana,96,498,1,0,0,5,0.00201
+2026-10-28,before,IA,Iowa,96,536,15,0,9,32,0.02799
+2026-10-28,before,KS,Kansas,96,440,0,0,0,0,0
+2026-10-28,before,KY,Kentucky,96,386,0,0,0,0,0
+2026-10-28,before,LA,Louisiana,96,310,4,0,2,20,0.0129
+2026-10-28,before,ME,Maine,96,654,5,0,4,11,0.00765
+2026-10-28,before,MD,Maryland,96,437,2,0,0,18,0.00458
+2026-10-28,before,MA,Massachusetts,96,815,10,0,1,47,0.01227
+2026-10-28,before,MI,Michigan,96,1267,5,0,1,12,0.00395
+2026-10-28,before,MN,Minnesota,96,857,3,0,0,15,0.0035
+2026-10-28,before,MS,Mississippi,96,339,8,0,0,26,0.0236
+2026-10-28,before,MO,Missouri,96,383,0,0,0,0,0
+2026-10-28,before,MT,Montana,96,292,0,0,0,0,0
+2026-10-28,before,NE,Nebraska,96,196,4,0,0,10,0.02041
+2026-10-28,before,NV,Nevada,96,361,0,0,0,0,0
+2026-10-28,before,NH,New Hampshire,96,129,0,0,0,0,0
+2026-10-28,before,NJ,New Jersey,96,383,0,0,0,0,0
+2026-10-28,before,NM,New Mexico,96,395,7,0,0,26,0.01772
+2026-10-28,before,NY,New York,96,2965,28,1,5,155,0.00944
+2026-10-28,before,NC,North Carolina,96,694,11,0,4,29,0.01585
+2026-10-28,before,ND,North Dakota,96,102,0,0,0,0,0
+2026-10-28,before,OH,Ohio,96,1477,21,0,18,49,0.01422
+2026-10-28,before,OK,Oklahoma,96,319,0,0,0,0,0
+2026-10-28,before,OR,Oregon,96,421,2,0,0,13,0.00475
+2026-10-28,before,PA,Pennsylvania,96,1233,8,0,1,29,0.00649
+2026-10-28,before,RI,Rhode Island,96,87,0,0,0,0,0
+2026-10-28,before,SC,South Carolina,96,463,3,0,0,14,0.00648
+2026-10-28,before,SD,South Dakota,96,127,0,0,0,0,0
+2026-10-28,before,TN,Tennessee,96,762,3,0,0,15,0.00394
+2026-10-28,before,TX,Texas,96,2848,21,0,2,72,0.00737
+2026-10-28,before,UT,Utah,96,516,1,0,0,2,0.00194
+2026-10-28,before,VT,Vermont,96,298,2,0,0,13,0.00671
+2026-10-28,before,VA,Virginia,96,736,6,0,1,18,0.00815
+2026-10-28,before,WA,Washington,96,574,1,0,0,1,0.00174
+2026-10-28,before,WV,West Virginia,96,281,2,0,0,8,0.00712
+2026-10-28,before,WI,Wisconsin,96,607,11,0,0,35,0.01812
+2026-10-28,before,WY,Wyoming,96,291,0,0,0,0,0
+2026-10-29,before,AL,Alabama,96,421,1,0,0,5,0.00238
+2026-10-29,before,AK,Alaska,96,918,12,0,4,38,0.01307
+2026-10-29,before,AZ,Arizona,96,623,4,0,0,8,0.00642
+2026-10-29,before,AR,Arkansas,96,443,0,0,0,0,0
+2026-10-29,before,CA,California,96,3786,24,1,3,98,0.00634
+2026-10-29,before,CO,Colorado,96,1028,3,0,0,15,0.00292
+2026-10-29,before,CT,Connecticut,96,357,0,0,0,0,0
+2026-10-29,before,DE,Delaware,96,172,2,0,2,2,0.01163
+2026-10-29,before,DC,District of Columbia,96,2923,32,2,9,103,0.01095
+2026-10-29,before,FL,Florida,96,1945,15,0,1,130,0.00771
+2026-10-29,before,GA,Georgia,96,965,9,0,4,41,0.00933
+2026-10-29,before,HI,Hawaii,96,287,0,0,0,0,0
+2026-10-29,before,ID,Idaho,96,246,0,0,0,0,0
+2026-10-29,before,IL,Illinois,96,1170,7,0,0,33,0.00598
+2026-10-29,before,IN,Indiana,96,464,0,0,0,0,0
+2026-10-29,before,IA,Iowa,96,566,9,0,8,25,0.0159
+2026-10-29,before,KS,Kansas,96,480,14,0,4,42,0.02917
+2026-10-29,before,KY,Kentucky,96,502,0,0,0,0,0
+2026-10-29,before,LA,Louisiana,96,489,5,0,3,23,0.01022
+2026-10-29,before,ME,Maine,96,570,2,0,1,8,0.00351
+2026-10-29,before,MD,Maryland,96,346,1,0,0,5,0.00289
+2026-10-29,before,MA,Massachusetts,96,927,1,0,0,4,0.00108
+2026-10-29,before,MI,Michigan,96,1276,20,0,13,48,0.01567
+2026-10-29,before,MN,Minnesota,96,852,1,0,0,8,0.00117
+2026-10-29,before,MS,Mississippi,96,210,3,0,3,11,0.01429
+2026-10-29,before,MO,Missouri,96,474,3,0,1,14,0.00633
+2026-10-29,before,MT,Montana,96,329,1,0,0,8,0.00304
+2026-10-29,before,NE,Nebraska,96,194,0,0,0,0,0
+2026-10-29,before,NV,Nevada,96,381,0,0,0,0,0
+2026-10-29,before,NH,New Hampshire,96,158,1,0,0,2,0.00633
+2026-10-29,before,NJ,New Jersey,96,374,0,0,0,0,0
+2026-10-29,before,NM,New Mexico,96,363,2,0,0,8,0.00551
+2026-10-29,before,NY,New York,96,2722,15,0,1,84,0.00551
+2026-10-29,before,NC,North Carolina,96,690,4,0,4,12,0.0058
+2026-10-29,before,ND,North Dakota,96,148,0,0,0,0,0
+2026-10-29,before,OH,Ohio,96,1660,17,0,12,57,0.01024
+2026-10-29,before,OK,Oklahoma,96,341,0,0,0,0,0
+2026-10-29,before,OR,Oregon,96,518,6,0,0,31,0.01158
+2026-10-29,before,PA,Pennsylvania,96,983,5,0,1,17,0.00509
+2026-10-29,before,RI,Rhode Island,96,93,0,0,0,0,0
+2026-10-29,before,SC,South Carolina,96,614,20,0,10,38,0.03257
+2026-10-29,before,SD,South Dakota,96,104,0,0,0,0,0
+2026-10-29,before,TN,Tennessee,96,613,3,0,1,12,0.00489
+2026-10-29,before,TX,Texas,96,2547,26,2,10,98,0.01021
+2026-10-29,before,UT,Utah,96,356,0,0,0,0,0
+2026-10-29,before,VT,Vermont,96,310,2,0,0,10,0.00645
+2026-10-29,before,VA,Virginia,96,718,0,0,0,0,0
+2026-10-29,before,WA,Washington,96,443,2,0,0,14,0.00451
+2026-10-29,before,WV,West Virginia,96,210,0,0,0,0,0
+2026-10-29,before,WI,Wisconsin,96,609,2,0,0,8,0.00328
+2026-10-29,before,WY,Wyoming,96,256,1,0,1,4,0.00391
+2026-10-30,before,AL,Alabama,96,342,7,0,1,19,0.02047
+2026-10-30,before,AK,Alaska,96,874,1,0,1,4,0.00114
+2026-10-30,before,AZ,Arizona,96,561,1,0,0,5,0.00178
+2026-10-30,before,AR,Arkansas,96,270,2,0,0,20,0.00741
+2026-10-30,before,CA,California,96,3637,12,0,1,48,0.0033
+2026-10-30,before,CO,Colorado,96,629,0,0,0,0,0
+2026-10-30,before,CT,Connecticut,96,278,0,0,0,0,0
+2026-10-30,before,DE,Delaware,96,112,0,0,0,0,0
+2026-10-30,before,DC,District of Columbia,96,3046,26,0,7,109,0.00854
+2026-10-30,before,FL,Florida,96,2177,32,0,15,200,0.0147
+2026-10-30,before,GA,Georgia,96,1155,21,0,12,66,0.01818
+2026-10-30,before,HI,Hawaii,96,255,0,0,0,0,0
+2026-10-30,before,ID,Idaho,96,275,0,0,0,0,0
+2026-10-30,before,IL,Illinois,96,1362,18,0,4,51,0.01322
+2026-10-30,before,IN,Indiana,96,415,1,0,0,2,0.00241
+2026-10-30,before,IA,Iowa,96,764,20,0,10,42,0.02618
+2026-10-30,before,KS,Kansas,96,634,28,0,15,131,0.04416
+2026-10-30,before,KY,Kentucky,96,396,5,0,2,24,0.01263
+2026-10-30,before,LA,Louisiana,96,338,9,0,5,21,0.02663
+2026-10-30,before,ME,Maine,96,512,4,0,1,17,0.00781
+2026-10-30,before,MD,Maryland,96,505,5,0,1,26,0.0099
+2026-10-30,before,MA,Massachusetts,96,910,13,0,3,51,0.01429
+2026-10-30,before,MI,Michigan,96,978,11,0,4,48,0.01125
+2026-10-30,before,MN,Minnesota,96,816,2,0,2,4,0.00245
+2026-10-30,before,MS,Mississippi,96,229,4,0,1,27,0.01747
+2026-10-30,before,MO,Missouri,96,377,1,0,0,2,0.00265
+2026-10-30,before,MT,Montana,96,324,2,0,0,8,0.00617
+2026-10-30,before,NE,Nebraska,96,225,0,0,0,0,0
+2026-10-30,before,NV,Nevada,96,319,1,0,0,2,0.00313
+2026-10-30,before,NH,New Hampshire,96,206,1,0,0,10,0.00485
+2026-10-30,before,NJ,New Jersey,96,224,2,1,0,6,0.00893
+2026-10-30,before,NM,New Mexico,96,294,3,0,0,10,0.0102
+2026-10-30,before,NY,New York,96,2942,18,1,1,69,0.00612
+2026-10-30,before,NC,North Carolina,96,666,5,0,0,15,0.00751
+2026-10-30,before,ND,North Dakota,96,165,2,0,0,5,0.01212
+2026-10-30,before,OH,Ohio,96,1271,1,0,1,4,0.00079
+2026-10-30,before,OK,Oklahoma,96,231,1,0,0,10,0.00433
+2026-10-30,before,OR,Oregon,96,610,3,0,0,13,0.00492
+2026-10-30,before,PA,Pennsylvania,96,1102,4,0,4,19,0.00363
+2026-10-30,before,RI,Rhode Island,96,93,0,0,0,0,0
+2026-10-30,before,SC,South Carolina,96,748,24,0,11,87,0.03209
+2026-10-30,before,SD,South Dakota,96,150,0,0,0,0,0
+2026-10-30,before,TN,Tennessee,96,636,0,0,0,0,0
+2026-10-30,before,TX,Texas,96,2896,33,0,11,116,0.0114
+2026-10-30,before,UT,Utah,96,297,0,0,0,0,0
+2026-10-30,before,VT,Vermont,96,246,3,0,0,10,0.0122
+2026-10-30,before,VA,Virginia,96,778,5,0,3,16,0.00643
+2026-10-30,before,WA,Washington,96,527,7,0,0,20,0.01328
+2026-10-30,before,WV,West Virginia,96,127,0,0,0,0,0
+2026-10-30,before,WI,Wisconsin,96,397,2,0,0,22,0.00504
+2026-10-30,before,WY,Wyoming,96,167,0,0,0,0,0
+2026-10-31,before,AL,Alabama,96,209,5,0,0,17,0.02392
+2026-10-31,before,AK,Alaska,96,553,3,0,3,6,0.00542
+2026-10-31,before,AZ,Arizona,96,461,2,0,0,10,0.00434
+2026-10-31,before,AR,Arkansas,96,222,6,0,6,21,0.02703
+2026-10-31,before,CA,California,96,2270,8,0,0,36,0.00352
+2026-10-31,before,CO,Colorado,96,360,2,0,1,5,0.00556
+2026-10-31,before,CT,Connecticut,96,193,0,0,0,0,0
+2026-10-31,before,DE,Delaware,96,27,0,0,0,0,0
+2026-10-31,before,DC,District of Columbia,96,2154,11,0,3,28,0.00511
+2026-10-31,before,FL,Florida,96,1319,8,0,0,23,0.00607
+2026-10-31,before,GA,Georgia,96,653,0,0,0,0,0
+2026-10-31,before,HI,Hawaii,96,199,2,0,0,12,0.01005
+2026-10-31,before,ID,Idaho,96,191,0,0,0,0,0
+2026-10-31,before,IL,Illinois,96,687,13,0,1,62,0.01892
+2026-10-31,before,IN,Indiana,96,143,0,0,0,0,0
+2026-10-31,before,IA,Iowa,96,391,13,0,11,40,0.03325
+2026-10-31,before,KS,Kansas,96,338,9,0,0,26,0.02663
+2026-10-31,before,KY,Kentucky,96,166,1,0,0,3,0.00602
+2026-10-31,before,LA,Louisiana,96,254,3,0,1,14,0.01181
+2026-10-31,before,ME,Maine,96,285,3,0,3,13,0.01053
+2026-10-31,before,MD,Maryland,96,221,7,0,7,23,0.03167
+2026-10-31,before,MA,Massachusetts,96,395,5,0,0,13,0.01266
+2026-10-31,before,MI,Michigan,96,826,6,0,5,21,0.00726
+2026-10-31,before,MN,Minnesota,96,432,0,0,0,0,0
+2026-10-31,before,MS,Mississippi,96,169,1,0,1,10,0.00592
+2026-10-31,before,MO,Missouri,96,145,0,0,0,0,0
+2026-10-31,before,MT,Montana,96,178,1,0,0,6,0.00562
+2026-10-31,before,NE,Nebraska,96,91,0,0,0,0,0
+2026-10-31,before,NV,Nevada,96,183,1,0,0,10,0.00546
+2026-10-31,before,NH,New Hampshire,96,111,1,0,0,2,0.00901
+2026-10-31,before,NJ,New Jersey,96,174,0,0,0,0,0
+2026-10-31,before,NM,New Mexico,96,164,0,0,0,0,0
+2026-10-31,before,NY,New York,96,1696,9,0,1,29,0.00531
+2026-10-31,before,NC,North Carolina,96,355,8,0,0,30,0.02254
+2026-10-31,before,ND,North Dakota,96,100,0,0,0,0,0
+2026-10-31,before,OH,Ohio,96,735,3,0,1,13,0.00408
+2026-10-31,before,OK,Oklahoma,96,137,0,0,0,0,0
+2026-10-31,before,OR,Oregon,96,305,0,0,0,0,0
+2026-10-31,before,PA,Pennsylvania,96,613,7,0,1,25,0.01142
+2026-10-31,before,RI,Rhode Island,96,59,0,0,0,0,0
+2026-10-31,before,SC,South Carolina,96,264,2,0,0,8,0.00758
+2026-10-31,before,SD,South Dakota,96,55,0,0,0,0,0
+2026-10-31,before,TN,Tennessee,96,295,4,0,1,14,0.01356
+2026-10-31,before,TX,Texas,96,1611,11,0,4,39,0.00683
+2026-10-31,before,UT,Utah,96,266,3,0,0,12,0.01128
+2026-10-31,before,VT,Vermont,96,100,0,0,0,0,0
+2026-10-31,before,VA,Virginia,96,396,13,0,10,34,0.03283
+2026-10-31,before,WA,Washington,96,296,0,0,0,0,0
+2026-10-31,before,WV,West Virginia,96,117,0,0,0,0,0
+2026-10-31,before,WI,Wisconsin,96,157,1,0,0,2,0.00637
+2026-10-31,before,WY,Wyoming,96,131,0,0,0,0,0
+2026-11-01,before,AL,Alabama,96,161,0,0,0,0,0
+2026-11-01,before,AK,Alaska,96,514,2,0,2,4,0.00389
+2026-11-01,before,AZ,Arizona,96,294,1,1,0,8,0.0034
+2026-11-01,before,AR,Arkansas,96,165,0,0,0,0,0
+2026-11-01,before,CA,California,96,1711,27,1,2,116,0.01578
+2026-11-01,before,CO,Colorado,96,361,0,0,0,0,0
+2026-11-01,before,CT,Connecticut,96,138,0,0,0,0,0
+2026-11-01,before,DE,Delaware,96,98,0,0,0,0,0
+2026-11-01,before,DC,District of Columbia,96,1793,11,0,2,38,0.00613
+2026-11-01,before,FL,Florida,96,1147,6,0,0,10,0.00523
+2026-11-01,before,GA,Georgia,96,369,0,0,0,0,0
+2026-11-01,before,HI,Hawaii,96,201,0,0,0,0,0
+2026-11-01,before,ID,Idaho,96,69,1,0,0,2,0.01449
+2026-11-01,before,IL,Illinois,96,474,3,0,0,8,0.00633
+2026-11-01,before,IN,Indiana,96,124,0,0,0,0,0
+2026-11-01,before,IA,Iowa,96,272,3,0,2,22,0.01103
+2026-11-01,before,KS,Kansas,96,236,7,0,2,30,0.02966
+2026-11-01,before,KY,Kentucky,96,160,0,0,0,0,0
+2026-11-01,before,LA,Louisiana,96,112,0,0,0,0,0
+2026-11-01,before,ME,Maine,96,176,0,0,0,0,0
+2026-11-01,before,MD,Maryland,96,86,0,0,0,0,0
+2026-11-01,before,MA,Massachusetts,96,423,5,0,2,22,0.01182
+2026-11-01,before,MI,Michigan,96,1012,2,0,0,20,0.00198
+2026-11-01,before,MN,Minnesota,96,224,3,0,0,9,0.01339
+2026-11-01,before,MS,Mississippi,96,162,1,0,0,10,0.00617
+2026-11-01,before,MO,Missouri,96,133,0,0,0,0,0
+2026-11-01,before,MT,Montana,96,64,0,0,0,0,0
+2026-11-01,before,NE,Nebraska,96,62,0,0,0,0,0
+2026-11-01,before,NV,Nevada,96,86,0,0,0,0,0
+2026-11-01,before,NH,New Hampshire,96,46,1,0,0,2,0.02174
+2026-11-01,before,NJ,New Jersey,96,99,0,0,0,0,0
+2026-11-01,before,NM,New Mexico,96,150,1,0,0,10,0.00667
+2026-11-01,before,NY,New York,96,1447,11,0,1,29,0.0076
+2026-11-01,before,NC,North Carolina,96,153,0,0,0,0,0
+2026-11-01,before,ND,North Dakota,96,44,0,0,0,0,0
+2026-11-01,before,OH,Ohio,96,401,0,0,0,0,0
+2026-11-01,before,OK,Oklahoma,96,67,0,0,0,0,0
+2026-11-01,before,OR,Oregon,96,112,0,0,0,0,0
+2026-11-01,before,PA,Pennsylvania,96,428,2,0,0,2,0.00467
+2026-11-01,before,RI,Rhode Island,96,39,0,0,0,0,0
+2026-11-01,before,SC,South Carolina,96,215,5,0,4,26,0.02326
+2026-11-01,before,SD,South Dakota,96,43,1,0,1,6,0.02326
+2026-11-01,before,TN,Tennessee,96,145,3,0,3,8,0.02069
+2026-11-01,before,TX,Texas,96,982,6,1,2,21,0.00611
+2026-11-01,before,UT,Utah,96,186,0,0,0,0,0
+2026-11-01,before,VT,Vermont,96,86,0,0,0,0,0
+2026-11-01,before,VA,Virginia,96,311,2,0,0,5,0.00643
+2026-11-01,before,WA,Washington,96,173,0,0,0,0,0
+2026-11-01,before,WV,West Virginia,96,59,0,0,0,0,0
+2026-11-01,before,WI,Wisconsin,96,161,0,0,0,0,0
+2026-11-01,before,WY,Wyoming,96,66,0,0,0,0,0
+2026-11-02,before,AL,Alabama,96,237,2,1,0,18,0.00844
+2026-11-02,before,AK,Alaska,96,690,14,0,10,53,0.02029
+2026-11-02,before,AZ,Arizona,96,615,1,0,1,4,0.00163
+2026-11-02,before,AR,Arkansas,96,280,0,0,0,0,0
+2026-11-02,before,CA,California,96,2417,18,0,8,48,0.00745
+2026-11-02,before,CO,Colorado,96,614,0,0,0,0,0
+2026-11-02,before,CT,Connecticut,96,284,0,0,0,0,0
+2026-11-02,before,DE,Delaware,96,167,0,0,0,0,0
+2026-11-02,before,DC,District of Columbia,96,2860,21,0,4,78,0.00734
+2026-11-02,before,FL,Florida,96,2251,13,0,3,54,0.00578
+2026-11-02,before,GA,Georgia,96,648,1,0,1,4,0.00154
+2026-11-02,before,HI,Hawaii,96,217,1,0,0,2,0.00461
+2026-11-02,before,ID,Idaho,96,214,2,0,0,13,0.00935
+2026-11-02,before,IL,Illinois,96,950,4,0,3,12,0.00421
+2026-11-02,before,IN,Indiana,96,326,1,0,0,10,0.00307
+2026-11-02,before,IA,Iowa,96,704,17,0,9,50,0.02415
+2026-11-02,before,KS,Kansas,96,450,10,0,4,37,0.02222
+2026-11-02,before,KY,Kentucky,96,273,3,0,0,10,0.01099
+2026-11-02,before,LA,Louisiana,96,339,1,0,1,4,0.00295
+2026-11-02,before,ME,Maine,96,340,0,0,0,0,0
+2026-11-02,before,MD,Maryland,96,295,0,0,0,0,0
+2026-11-02,before,MA,Massachusetts,96,708,6,0,1,27,0.00847
+2026-11-02,before,MI,Michigan,96,2233,32,0,14,95,0.01433
+2026-11-02,before,MN,Minnesota,96,452,3,0,3,10,0.00664
+2026-11-02,before,MS,Mississippi,96,175,1,0,0,4,0.00571
+2026-11-02,before,MO,Missouri,96,372,0,0,0,0,0
+2026-11-02,before,MT,Montana,96,197,0,0,0,0,0
+2026-11-02,before,NE,Nebraska,96,184,0,0,0,0,0
+2026-11-02,before,NV,Nevada,96,220,1,1,0,5,0.00455
+2026-11-02,before,NH,New Hampshire,96,126,0,0,0,0,0
+2026-11-02,before,NJ,New Jersey,96,281,0,0,0,0,0
+2026-11-02,before,NM,New Mexico,96,238,13,0,9,48,0.05462
+2026-11-02,before,NY,New York,96,2435,24,2,13,82,0.00986
+2026-11-02,before,NC,North Carolina,96,507,1,0,0,10,0.00197
+2026-11-02,before,ND,North Dakota,96,135,0,0,0,0,0
+2026-11-02,before,OH,Ohio,96,859,5,0,2,25,0.00582
+2026-11-02,before,OK,Oklahoma,96,202,2,0,1,12,0.0099
+2026-11-02,before,OR,Oregon,96,325,1,0,0,2,0.00308
+2026-11-02,before,PA,Pennsylvania,96,882,5,0,2,19,0.00567
+2026-11-02,before,RI,Rhode Island,96,77,0,0,0,0,0
+2026-11-02,before,SC,South Carolina,96,377,2,0,0,26,0.00531
+2026-11-02,before,SD,South Dakota,96,105,0,0,0,0,0
+2026-11-02,before,TN,Tennessee,96,419,0,0,0,0,0
+2026-11-02,before,TX,Texas,96,2121,18,0,3,66,0.00849
+2026-11-02,before,UT,Utah,96,289,3,0,0,10,0.01038
+2026-11-02,before,VT,Vermont,96,130,0,0,0,0,0
+2026-11-02,before,VA,Virginia,96,520,2,0,0,5,0.00385
+2026-11-02,before,WA,Washington,96,361,0,0,0,0,0
+2026-11-02,before,WV,West Virginia,96,80,0,0,0,0,0
+2026-11-02,before,WI,Wisconsin,96,436,1,0,0,8,0.00229
+2026-11-02,before,WY,Wyoming,96,154,0,0,0,0,0
+2026-11-03,during,AL,Alabama,96,435,2,0,0,4,0.0046
+2026-11-03,during,AK,Alaska,96,663,7,0,7,27,0.01056
+2026-11-03,during,AZ,Arizona,96,735,0,0,0,0,0
+2026-11-03,during,AR,Arkansas,96,319,4,0,0,12,0.01254
+2026-11-03,during,CA,California,96,3922,46,5,14,168,0.01173
+2026-11-03,during,CO,Colorado,96,911,0,0,0,0,0
+2026-11-03,during,CT,Connecticut,96,350,1,0,0,4,0.00286
+2026-11-03,during,DE,Delaware,96,141,1,0,0,20,0.00709
+2026-11-03,during,DC,District of Columbia,96,4094,24,2,10,126,0.00586
+2026-11-03,during,FL,Florida,96,2160,8,0,4,43,0.0037
+2026-11-03,during,GA,Georgia,96,1084,5,0,3,13,0.00461
+2026-11-03,during,HI,Hawaii,96,245,0,0,0,0,0
+2026-11-03,during,ID,Idaho,96,278,0,0,0,0,0
+2026-11-03,during,IL,Illinois,96,1245,4,0,2,12,0.00321
+2026-11-03,during,IN,Indiana,96,430,8,0,2,32,0.0186
+2026-11-03,during,IA,Iowa,96,570,14,0,12,44,0.02456
+2026-11-03,during,KS,Kansas,96,530,10,0,3,38,0.01887
+2026-11-03,during,KY,Kentucky,96,361,3,0,3,14,0.00831
+2026-11-03,during,LA,Louisiana,96,413,9,0,9,30,0.02179
+2026-11-03,during,ME,Maine,96,643,4,0,4,12,0.00622
+2026-11-03,during,MD,Maryland,96,409,1,0,0,5,0.00244
+2026-11-03,during,MA,Massachusetts,96,900,8,0,3,40,0.00889
+2026-11-03,during,MI,Michigan,96,1911,16,0,8,57,0.00837
+2026-11-03,during,MN,Minnesota,96,709,4,0,0,15,0.00564
+2026-11-03,during,MS,Mississippi,96,392,5,0,1,32,0.01276
+2026-11-03,during,MO,Missouri,96,454,1,0,1,6,0.0022
+2026-11-03,during,MT,Montana,96,318,0,0,0,0,0
+2026-11-03,during,NE,Nebraska,96,180,0,0,0,0,0
+2026-11-03,during,NV,Nevada,96,285,0,0,0,0,0
+2026-11-03,during,NH,New Hampshire,96,138,0,0,0,0,0
+2026-11-03,during,NJ,New Jersey,96,327,2,0,0,6,0.00612
+2026-11-03,during,NM,New Mexico,96,289,3,0,3,12,0.01038
+2026-11-03,during,NY,New York,96,2941,9,0,3,33,0.00306
+2026-11-03,during,NC,North Carolina,96,706,2,0,1,12,0.00283
+2026-11-03,during,ND,North Dakota,96,180,0,0,0,0,0
+2026-11-03,during,OH,Ohio,96,1206,10,0,7,19,0.00829
+2026-11-03,during,OK,Oklahoma,96,403,0,0,0,0,0
+2026-11-03,during,OR,Oregon,96,450,3,0,0,20,0.00667
+2026-11-03,during,PA,Pennsylvania,96,1160,10,0,6,39,0.00862
+2026-11-03,during,RI,Rhode Island,96,71,0,0,0,0,0
+2026-11-03,during,SC,South Carolina,96,469,6,0,4,26,0.01279
+2026-11-03,during,SD,South Dakota,96,129,0,0,0,0,0
+2026-11-03,during,TN,Tennessee,96,569,2,0,0,7,0.00351
+2026-11-03,during,TX,Texas,96,2700,16,0,8,70,0.00593
+2026-11-03,during,UT,Utah,96,371,0,0,0,0,0
+2026-11-03,during,VT,Vermont,96,202,0,0,0,0,0
+2026-11-03,during,VA,Virginia,96,784,4,0,2,15,0.0051
+2026-11-03,during,WA,Washington,96,362,0,0,0,0,0
+2026-11-03,during,WV,West Virginia,96,174,0,0,0,0,0
+2026-11-03,during,WI,Wisconsin,96,552,0,0,0,0,0
+2026-11-03,during,WY,Wyoming,96,233,0,0,0,0,0
+2026-11-04,during,AL,Alabama,96,465,0,0,0,0,0
+2026-11-04,during,AK,Alaska,96,657,6,0,0,16,0.00913
+2026-11-04,during,AZ,Arizona,96,577,0,0,0,0,0
+2026-11-04,during,AR,Arkansas,96,548,1,0,0,8,0.00182
+2026-11-04,during,CA,California,96,3614,14,0,6,76,0.00387
+2026-11-04,during,CO,Colorado,96,978,1,0,0,10,0.00102
+2026-11-04,during,CT,Connecticut,96,394,4,0,2,15,0.01015
+2026-11-04,during,DE,Delaware,96,163,0,0,0,0,0
+2026-11-04,during,DC,District of Columbia,96,4464,20,6,9,103,0.00448
+2026-11-04,during,FL,Florida,96,2534,6,0,1,26,0.00237
+2026-11-04,during,GA,Georgia,96,1675,19,0,5,63,0.01134
+2026-11-04,during,HI,Hawaii,96,281,0,0,0,0,0
+2026-11-04,during,ID,Idaho,96,389,0,0,0,0,0
+2026-11-04,during,IL,Illinois,96,1365,8,0,6,32,0.00586
+2026-11-04,during,IN,Indiana,96,441,0,0,0,0,0
+2026-11-04,during,IA,Iowa,96,1015,9,0,2,32,0.00887
+2026-11-04,during,KS,Kansas,96,886,8,0,2,33,0.00903
+2026-11-04,during,KY,Kentucky,96,441,0,0,0,0,0
+2026-11-04,during,LA,Louisiana,96,668,1,0,0,4,0.0015
+2026-11-04,during,ME,Maine,96,707,1,0,0,1,0.00141
+2026-11-04,during,MD,Maryland,96,484,2,0,1,6,0.00413
+2026-11-04,during,MA,Massachusetts,96,1022,0,0,0,0,0
+2026-11-04,during,MI,Michigan,96,2221,14,0,5,40,0.0063
+2026-11-04,during,MN,Minnesota,96,1128,2,0,2,10,0.00177
+2026-11-04,during,MS,Mississippi,96,459,2,0,0,12,0.00436
+2026-11-04,during,MO,Missouri,96,570,1,0,0,4,0.00175
+2026-11-04,during,MT,Montana,96,254,7,0,0,27,0.02756
+2026-11-04,during,NE,Nebraska,96,286,0,0,0,0,0
+2026-11-04,during,NV,Nevada,96,301,1,0,1,4,0.00332
+2026-11-04,during,NH,New Hampshire,96,366,2,0,1,5,0.00546
+2026-11-04,during,NJ,New Jersey,96,443,3,3,3,10,0.00677
+2026-11-04,during,NM,New Mexico,96,462,0,0,0,0,0
+2026-11-04,during,NY,New York,96,3271,22,2,7,81,0.00673
+2026-11-04,during,NC,North Carolina,96,1202,3,1,0,25,0.0025
+2026-11-04,during,ND,North Dakota,96,248,0,0,0,0,0
+2026-11-04,during,OH,Ohio,96,1739,8,0,3,35,0.0046
+2026-11-04,during,OK,Oklahoma,96,320,0,0,0,0,0
+2026-11-04,during,OR,Oregon,96,567,1,0,1,2,0.00176
+2026-11-04,during,PA,Pennsylvania,96,1293,1,0,1,4,0.00077
+2026-11-04,during,RI,Rhode Island,96,144,1,0,0,10,0.00694
+2026-11-04,during,SC,South Carolina,96,909,4,0,1,13,0.0044
+2026-11-04,during,SD,South Dakota,96,272,0,0,0,0,0
+2026-11-04,during,TN,Tennessee,96,701,4,0,1,17,0.00571
+2026-11-04,during,TX,Texas,96,3730,30,0,9,126,0.00804
+2026-11-04,during,UT,Utah,96,429,0,0,0,0,0
+2026-11-04,during,VT,Vermont,96,375,0,0,0,0,0
+2026-11-04,during,VA,Virginia,96,1018,12,0,4,56,0.01179
+2026-11-04,during,WA,Washington,96,651,3,0,2,12,0.00461
+2026-11-04,during,WV,West Virginia,96,386,0,0,0,0,0
+2026-11-04,during,WI,Wisconsin,96,851,1,0,0,7,0.00118
+2026-11-04,during,WY,Wyoming,96,284,0,0,0,0,0
+2026-11-05,after,AL,Alabama,96,404,2,0,0,6,0.00495
+2026-11-05,after,AK,Alaska,96,411,1,0,0,2,0.00243
+2026-11-05,after,AZ,Arizona,96,633,2,1,0,6,0.00316
+2026-11-05,after,AR,Arkansas,96,353,0,0,0,0,0
+2026-11-05,after,CA,California,96,3991,15,0,4,53,0.00376
+2026-11-05,after,CO,Colorado,96,800,3,0,0,10,0.00375
+2026-11-05,after,CT,Connecticut,96,307,0,0,0,0,0
+2026-11-05,after,DE,Delaware,96,94,1,0,0,1,0.01064
+2026-11-05,after,DC,District of Columbia,96,4080,31,13,13,198,0.0076
+2026-11-05,after,FL,Florida,96,1969,4,0,1,20,0.00203
+2026-11-05,after,GA,Georgia,96,1001,1,0,1,20,0.001
+2026-11-05,after,HI,Hawaii,96,314,0,0,0,0,0
+2026-11-05,after,ID,Idaho,96,380,1,0,1,4,0.00263
+2026-11-05,after,IL,Illinois,96,1348,4,0,0,11,0.00297
+2026-11-05,after,IN,Indiana,96,455,0,0,0,0,0
+2026-11-05,after,IA,Iowa,96,582,0,0,0,0,0
+2026-11-05,after,KS,Kansas,96,488,6,0,0,12,0.0123
+2026-11-05,after,KY,Kentucky,96,361,2,0,0,8,0.00554
+2026-11-05,after,LA,Louisiana,96,415,0,0,0,0,0
+2026-11-05,after,ME,Maine,96,512,0,0,0,0,0
+2026-11-05,after,MD,Maryland,96,465,2,0,0,34,0.0043
+2026-11-05,after,MA,Massachusetts,96,739,2,0,0,15,0.00271
+2026-11-05,after,MI,Michigan,96,1455,6,0,0,16,0.00412
+2026-11-05,after,MN,Minnesota,96,786,2,0,0,16,0.00254
+2026-11-05,after,MS,Mississippi,96,355,3,0,2,14,0.00845
+2026-11-05,after,MO,Missouri,96,397,1,0,0,5,0.00252
+2026-11-05,after,MT,Montana,96,307,0,0,0,0,0
+2026-11-05,after,NE,Nebraska,96,171,0,0,0,0,0
+2026-11-05,after,NV,Nevada,96,350,1,0,0,8,0.00286
+2026-11-05,after,NH,New Hampshire,96,259,0,0,0,0,0
+2026-11-05,after,NJ,New Jersey,96,336,2,0,2,4,0.00595
+2026-11-05,after,NM,New Mexico,96,406,0,0,0,0,0
+2026-11-05,after,NY,New York,96,2667,17,5,0,58,0.00637
+2026-11-05,after,NC,North Carolina,96,774,4,1,0,20,0.00517
+2026-11-05,after,ND,North Dakota,96,121,0,0,0,0,0
+2026-11-05,after,OH,Ohio,96,1048,1,0,0,8,0.00095
+2026-11-05,after,OK,Oklahoma,96,313,3,2,0,9,0.00958
+2026-11-05,after,OR,Oregon,96,411,4,0,0,15,0.00973
+2026-11-05,after,PA,Pennsylvania,96,1002,1,1,0,6,0.001
+2026-11-05,after,RI,Rhode Island,96,137,1,1,0,10,0.0073
+2026-11-05,after,SC,South Carolina,96,534,4,0,1,22,0.00749
+2026-11-05,after,SD,South Dakota,96,118,0,0,0,0,0
+2026-11-05,after,TN,Tennessee,96,630,4,0,1,9,0.00635
+2026-11-05,after,TX,Texas,96,2989,9,0,2,47,0.00301
+2026-11-05,after,UT,Utah,96,332,0,0,0,0,0
+2026-11-05,after,VT,Vermont,96,248,1,0,1,2,0.00403
+2026-11-05,after,VA,Virginia,96,724,6,0,1,20,0.00829
+2026-11-05,after,WA,Washington,96,441,1,0,0,10,0.00227
+2026-11-05,after,WV,West Virginia,96,213,0,0,0,0,0
+2026-11-05,after,WI,Wisconsin,96,495,1,0,0,8,0.00202
+2026-11-05,after,WY,Wyoming,96,170,2,2,0,10,0.01176
+2026-11-06,after,AL,Alabama,96,332,2,1,0,7,0.00602
+2026-11-06,after,AK,Alaska,96,357,0,0,0,0,0
+2026-11-06,after,AZ,Arizona,96,536,3,0,0,30,0.0056
+2026-11-06,after,AR,Arkansas,96,358,0,0,0,0,0
+2026-11-06,after,CA,California,96,4222,29,0,5,93,0.00687
+2026-11-06,after,CO,Colorado,96,822,5,0,0,23,0.00608
+2026-11-06,after,CT,Connecticut,96,350,3,0,0,7,0.00857
+2026-11-06,after,DE,Delaware,96,96,0,0,0,0,0
+2026-11-06,after,DC,District of Columbia,96,3870,24,2,14,109,0.0062
+2026-11-06,after,FL,Florida,96,2396,11,0,1,40,0.00459
+2026-11-06,after,GA,Georgia,96,820,0,0,0,0,0
+2026-11-06,after,HI,Hawaii,96,304,1,0,0,8,0.00329
+2026-11-06,after,ID,Idaho,96,172,0,0,0,0,0
+2026-11-06,after,IL,Illinois,96,1271,3,0,0,12,0.00236
+2026-11-06,after,IN,Indiana,96,448,1,0,1,3,0.00223
+2026-11-06,after,IA,Iowa,96,741,2,0,1,7,0.0027
+2026-11-06,after,KS,Kansas,96,402,2,0,2,8,0.00498
+2026-11-06,after,KY,Kentucky,96,315,0,0,0,0,0
+2026-11-06,after,LA,Louisiana,96,359,0,0,0,0,0
+2026-11-06,after,ME,Maine,96,561,1,0,0,5,0.00178
+2026-11-06,after,MD,Maryland,96,373,2,0,0,4,0.00536
+2026-11-06,after,MA,Massachusetts,96,922,18,0,1,57,0.01952
+2026-11-06,after,MI,Michigan,96,1071,5,0,4,11,0.00467
+2026-11-06,after,MN,Minnesota,96,659,1,0,0,10,0.00152
+2026-11-06,after,MS,Mississippi,96,327,0,0,0,0,0
+2026-11-06,after,MO,Missouri,96,384,0,0,0,0,0
+2026-11-06,after,MT,Montana,96,221,0,0,0,0,0
+2026-11-06,after,NE,Nebraska,96,212,0,0,0,0,0
+2026-11-06,after,NV,Nevada,96,348,3,0,3,10,0.00862
+2026-11-06,after,NH,New Hampshire,96,239,1,0,0,2,0.00418
+2026-11-06,after,NJ,New Jersey,96,396,8,3,0,26,0.0202
+2026-11-06,after,NM,New Mexico,96,256,0,0,0,0,0
+2026-11-06,after,NY,New York,96,2522,15,0,2,44,0.00595
+2026-11-06,after,NC,North Carolina,96,558,1,0,0,10,0.00179
+2026-11-06,after,ND,North Dakota,96,180,0,0,0,0,0
+2026-11-06,after,OH,Ohio,96,1109,4,0,0,14,0.00361
+2026-11-06,after,OK,Oklahoma,96,281,1,1,0,3,0.00356
+2026-11-06,after,OR,Oregon,96,442,1,0,0,10,0.00226
+2026-11-06,after,PA,Pennsylvania,96,1080,6,0,2,18,0.00556
+2026-11-06,after,RI,Rhode Island,96,139,3,0,0,10,0.02158
+2026-11-06,after,SC,South Carolina,96,541,6,2,0,25,0.01109
+2026-11-06,after,SD,South Dakota,96,168,0,0,0,0,0
+2026-11-06,after,TN,Tennessee,96,561,2,0,0,6,0.00357
+2026-11-06,after,TX,Texas,96,2706,12,0,6,40,0.00443
+2026-11-06,after,UT,Utah,96,258,2,0,0,10,0.00775
+2026-11-06,after,VT,Vermont,96,129,1,0,0,2,0.00775
+2026-11-06,after,VA,Virginia,96,954,5,0,1,15,0.00524
+2026-11-06,after,WA,Washington,96,544,2,0,2,2,0.00368
+2026-11-06,after,WV,West Virginia,96,301,2,0,0,2,0.00664
+2026-11-06,after,WI,Wisconsin,96,525,1,0,1,1,0.0019
+2026-11-06,after,WY,Wyoming,96,174,1,0,0,6,0.00575
+2026-11-07,after,AL,Alabama,92,212,5,0,1,17,0.02358
+2026-11-07,after,AK,Alaska,92,194,1,0,0,6,0.00515
+2026-11-07,after,AZ,Arizona,92,344,1,0,0,5,0.00291
+2026-11-07,after,AR,Arkansas,92,165,4,0,0,4,0.02424
+2026-11-07,after,CA,California,92,2582,23,0,1,85,0.00891
+2026-11-07,after,CO,Colorado,92,459,0,0,0,0,0
+2026-11-07,after,CT,Connecticut,92,193,0,0,0,0,0
+2026-11-07,after,DE,Delaware,92,34,0,0,0,0,0
+2026-11-07,after,DC,District of Columbia,92,2856,18,1,5,56,0.0063
+2026-11-07,after,FL,Florida,92,1287,2,0,1,4,0.00155
+2026-11-07,after,GA,Georgia,92,489,1,0,0,6,0.00204
+2026-11-07,after,HI,Hawaii,92,222,0,0,0,0,0
+2026-11-07,after,ID,Idaho,92,147,0,0,0,0,0
+2026-11-07,after,IL,Illinois,92,533,1,0,0,10,0.00188
+2026-11-07,after,IN,Indiana,92,208,0,0,0,0,0
+2026-11-07,after,IA,Iowa,92,242,0,0,0,0,0
+2026-11-07,after,KS,Kansas,92,252,1,0,0,2,0.00397
+2026-11-07,after,KY,Kentucky,92,178,0,0,0,0,0
+2026-11-07,after,LA,Louisiana,92,189,0,0,0,0,0
+2026-11-07,after,ME,Maine,92,256,0,0,0,0,0
+2026-11-07,after,MD,Maryland,92,195,0,0,0,0,0
+2026-11-07,after,MA,Massachusetts,92,338,0,0,0,0,0
+2026-11-07,after,MI,Michigan,92,559,12,9,0,29,0.02147
+2026-11-07,after,MN,Minnesota,92,386,1,1,0,4,0.00259
+2026-11-07,after,MS,Mississippi,92,303,0,0,0,0,0
+2026-11-07,after,MO,Missouri,92,251,0,0,0,0,0
+2026-11-07,after,MT,Montana,92,121,0,0,0,0,0
+2026-11-07,after,NE,Nebraska,92,112,0,0,0,0,0
+2026-11-07,after,NV,Nevada,92,258,0,0,0,0,0
+2026-11-07,after,NH,New Hampshire,92,80,6,0,0,23,0.075
+2026-11-07,after,NJ,New Jersey,92,200,0,0,0,0,0
+2026-11-07,after,NM,New Mexico,92,213,1,0,0,10,0.00469
+2026-11-07,after,NY,New York,92,1475,7,0,0,27,0.00475
+2026-11-07,after,NC,North Carolina,92,306,0,0,0,0,0
+2026-11-07,after,ND,North Dakota,92,114,0,0,0,0,0
+2026-11-07,after,OH,Ohio,92,562,2,0,0,3,0.00356
+2026-11-07,after,OK,Oklahoma,92,107,0,0,0,0,0
+2026-11-07,after,OR,Oregon,92,258,0,0,0,0,0
+2026-11-07,after,PA,Pennsylvania,92,605,1,0,1,2,0.00165
+2026-11-07,after,RI,Rhode Island,92,34,0,0,0,0,0
+2026-11-07,after,SC,South Carolina,92,367,0,0,0,0,0
+2026-11-07,after,SD,South Dakota,92,65,0,0,0,0,0
+2026-11-07,after,TN,Tennessee,92,231,0,0,0,0,0
+2026-11-07,after,TX,Texas,92,1657,9,0,2,26,0.00543
+2026-11-07,after,UT,Utah,92,230,0,0,0,0,0
+2026-11-07,after,VT,Vermont,92,87,0,0,0,0,0
+2026-11-07,after,VA,Virginia,92,397,0,0,0,0,0
+2026-11-07,after,WA,Washington,92,412,0,0,0,0,0
+2026-11-07,after,WV,West Virginia,92,244,2,0,0,2,0.0082
+2026-11-07,after,WI,Wisconsin,92,363,0,0,0,0,0
+2026-11-07,after,WY,Wyoming,92,175,0,0,0,0,0
