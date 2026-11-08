@@ -91,7 +91,10 @@ def _mines() -> list[dict]:
 
 
 def things(kind: str) -> list[dict]:
-    return _states() if kind == "state" else _mines()
+    """Kept for old callers: the registry (reasoning/things.py) is the one source of things."""
+    from reasoning import things as registry
+
+    return registry.things(kind)
 
 
 # ---------------------------------------------------------------- measures

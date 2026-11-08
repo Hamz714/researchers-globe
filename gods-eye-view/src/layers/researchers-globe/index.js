@@ -170,7 +170,7 @@ function el(html) {
  * Live layers toggle is hidden. `autoRun` (off by default): run the first preset on load.
  */
 /** Answers that are not exposure rankings: a list ("filter") or a live condition screen. */
-const SIMPLE_CHANNELS = new Set(['filter', 'attention', 'edits', 'weather', 'conditions']);
+const SIMPLE_CHANNELS = new Set(['filter', 'attention', 'edits', 'live_edits', 'weather', 'conditions']);
 const isSimple = (q) => !!q && q.channels.length === 1 && SIMPLE_CHANNELS.has(q.channels[0].id);
 
 export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = false }) {
@@ -178,6 +178,16 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
   let currentQuestion = '';
   let selectedId = null;
   let allAssets = [];
+  const assetsByType = {};
+  let liveTimer = null;
+  let streamUp = true; // updated by the ticker from /live/status
+  const assetsFor = async (type) => {
+    if (!assetsByType[type]) assetsByType[type] = await rgApi.assets(type).catch(() => []);
+    return assetsByType[type];
+  };
+  /** Answers that change by themselves (live Wikipedia edits) are re-asked every LIVE_REFRESH_MS. */
+  const LIVE_REFRESH_MS = 15000;
+  const isLive = (q) => !!q && q.channels.some((c) => c.id === 'live_edits' || /live wikimedia/i.test(c.reason));
 
   const panel = el(`
     <section class="rg-panel" aria-label="Researcher's Globe">
@@ -191,6 +201,7 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
         <div class="rg-presets"></div>
         <div class="rg-status" hidden></div>
         <div class="rg-legend"></div>
+        <div class="rg-ticker" aria-live="polite"></div>
         <label class="rg-live" hidden><input type="checkbox"> Live layers <span></span></label>
       </div>
       <div class="rg-body" data-pane="results" hidden></div>
@@ -260,7 +271,20 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
   }
 
   // ---------------------------------------------------------------- query flow
-  async function ask(text) {
+  async function ask(text, { silent = false } = {}) {
+    if (silent) {
+      try {
+        const q = await rgApi.query(text);
+        if (currentQuestion !== text) return; // the user asked something else meanwhile
+        current = q;
+        render(current, false, true);
+      } catch {
+        /* keep showing the last answer */
+      }
+      return;
+    }
+    clearInterval(liveTimer);
+    liveTimer = null;
     status(`Asking: ${text}`);
     $('.rg-ask input').value = text;
     panel.querySelectorAll('.rg-presets button').forEach((b) =>
@@ -271,6 +295,7 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
       currentQuestion = text;
       render(current, true);
       status('');
+      if (isLive(current)) liveTimer = setInterval(() => void ask(text, { silent: true }), LIVE_REFRESH_MS);
     } catch (err) {
       status(`Query failed: ${err.message}`, true);
     }
@@ -283,18 +308,21 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
     globe.setSelected(null);
   }
 
-  function render(q, fly) {
-    closeDetail();
+  function render(q, fly, keepDetail = false) {
+    if (!keepDetail) closeDetail();
     const ranked = [...q.results].sort((a, b) => b.score - a.score);
     const rank = new Map(ranked.map((r, i) => [r.id, i + 1]));
     globe.setResults(q.results, rank);
     const lit = new Set(q.results.map((r) => r.id));
-    globe.setDark(allAssets.filter((a) => !lit.has(a.id)));
+    void assetsFor(q.criteria.asset_type).then((all) => {
+      if (current === q) globe.setDark(all.filter((a) => !lit.has(a.id)));
+    });
     const counts = { high: 0, medium: 0, low: 0 };
     q.results.forEach((r) => counts[r.tier]++);
     const legend = $('.rg-legend');
     legend.innerHTML = `
       <div class="rg-event">${esc(q.criteria.event.name)}</div>
+      ${isLive(q) ? `<div class="rg-livestamp${streamUp ? '' : ' off'}"><i></i>${streamUp ? 'LIVE' : 'SNAPSHOT (stream offline)'} · updates every ${LIVE_REFRESH_MS / 1000}s · last ${new Date().toLocaleTimeString()}</div>` : ''}
       <div class="rg-sub">${isSimple(q) ? esc(q.channels[0].reason) : `${esc(q.criteria.event.date)} · last ${q.criteria.window.recent_days} days vs ${q.criteria.window.baseline_days} before`}</div>
       <div class="rg-channels">${q.channels.map((c) => `<span class="rg-chip small" title="${esc(c.reason)}">${esc(c.id)}</span>`).join('') || '<em>no channels chosen</em>'}</div>
       <div class="rg-tiers">${['high', 'medium', 'low']
@@ -359,6 +387,9 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
     const rank = [...current.results].sort((a, b) => b.score - a.score).findIndex((x) => x.id === r.id) + 1;
     const source = ch === 'filter'
       ? '<a href="https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker" target="_blank" rel="noopener noreferrer">Global Iron Ore Mines Tracker</a> (Global Energy Monitor, CC BY 4.0)'
+      : ch === 'live_edits'
+        ? '<a href="https://stream.wikimedia.org/v2/stream/recentchange" target="_blank" rel="noopener noreferrer">Wikimedia EventStreams</a> (live English Wikipedia edits)' +
+          r.evidence.map((e) => `<br><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join('')
       : ch === 'weather' || ch === 'conditions'
         ? '<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> current weather' +
           r.evidence.map((e) => `<br><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join('')
@@ -369,7 +400,7 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
       <h2>${esc(r.name)}</h2>
       <div class="rg-badges"><span class="rg-tier" style="background:${TIER_COLOR[r.tier]}">${TIER_LABEL[r.tier]} tier</span>
         <span>score <b>${fmt(r.score)}</b> · rank ${rank} of ${current.results.length}</span></div>
-      <p class="rg-hint">${ch === 'filter' ? 'Ranked by design capacity among the matches: a size ranking, not a probability.' : 'Ranked by how strongly the condition holds now: a ranking, not a probability.'}</p>
+      <p class="rg-hint">${ch === 'filter' ? 'Ranked by design capacity among the matches: a size ranking, not a probability.' : ch === 'live_edits' ? 'Ranked by how many edits its Wikipedia page got in the window: a ranking, not a probability.' : 'Ranked by how strongly the condition holds now: a ranking, not a probability.'}</p>
       <h3>${esc(current.criteria.event.name)}</h3>
       <p>${esc(r.reason)}</p>
       <h3>Source</h3><p>${source}</p>`;
@@ -450,9 +481,34 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
   }
 
   // ---------------------------------------------------------------- start
+  // Live ticker: the newest edits to any watched page (mines' owners, ports, countries, states,
+  // companies), polled every 5 s from the backend's single Wikimedia stream connection.
+  const ago = (ts) => {
+    const s = Math.max(0, Math.round(Date.now() / 1000 - ts));
+    return s < 90 ? `${s}s ago` : s < 5400 ? `${Math.round(s / 60)} min ago` : `${Math.round(s / 3600)} h ago`;
+  };
+  async function tick() {
+    const box = $('.rg-ticker');
+    try {
+      const [st, feed] = await Promise.all([rgApi.liveStatus(), rgApi.liveFeed(5)]);
+      streamUp = !!st.connected;
+      const lag = st.last_event_ts ? Date.now() / 1000 - st.last_event_ts : null;
+      const head = st.connected
+        ? `<div class="rg-ticker-head"><i class="on"></i>Wikipedia live edits${lag && lag > 120 ? ` · catching up (${Math.round(lag / 60)} min behind)` : ''}</div>`
+        : `<div class="rg-ticker-head"><i></i>Wikipedia live edits: stream offline${feed.length ? ' (last snapshot)' : ''}</div>`;
+      box.innerHTML = head + feed
+        .map((e) => `<div class="rg-ticker-row"><b>${esc(e.name)}</b> <span>${esc(e.title === e.name ? '' : `'${e.title}' `)}edited ${ago(e.ts)} by ${esc(e.user)}${e.bot ? ' (bot)' : ''}</span></div>`)
+        .join('');
+    } catch {
+      box.innerHTML = '';
+    }
+  }
+  void tick();
+  setInterval(() => void tick(), 5000);
+
   async function init() {
     try {
-      allAssets = await rgApi.assets().catch(() => []);
+      allAssets = await assetsFor('iron_ore_mine');
       const presets = await rgApi.presets();
       const box = $('.rg-presets');
       box.innerHTML = presets

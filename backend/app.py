@@ -44,6 +44,46 @@ EVAL_RESULTS = ROOT / "eval" / "results.json"
 RECENT_MAX = 16  # recent /query results kept in memory so /asset can find their assets
 
 app = FastAPI(title="Researcher's Globe API", version="0.1.0")
+
+
+@app.on_event("startup")
+def _start_live_streams() -> None:
+    """Live Wikipedia edits (pipeline/live_wiki.py): one streaming connection, started with the API.
+    Off with LIVE_WIKI=0 or GLOBE_OFFLINE=1 (then the last snapshot is used)."""
+    if os.environ.get("PYTEST_CURRENT_TEST"):
+        return
+    from pipeline.live_wiki import start_if_enabled
+
+    try:
+        start_if_enabled()
+    except Exception:  # the API must come up even if the stream can't
+        log.exception("live wiki stream failed to start")
+
+
+@app.get("/live/status")
+def live_status() -> dict:
+    """Is the live Wikipedia edit stream connected, how far behind is it, how much has it matched."""
+    from pipeline.live_wiki import LIVE
+
+    return LIVE.status()
+
+
+@app.get("/live/feed")
+def live_feed(limit: int = 20) -> list[dict]:
+    """The newest edits to watched pages (any kind of thing), newest first, for the globe's live ticker."""
+    from pipeline.live_wiki import LIVE
+    from reasoning.things import things
+
+    names = {}
+    for kind in ("mine", "state", "port", "country", "company"):
+        names.update({t["id"]: t for t in things(kind)})
+    out = []
+    for e in LIVE.recent(max(1, min(limit, 100))):
+        ids = [tid for _, tid in e["things"]]
+        first = names.get(ids[0]) if ids else None
+        out.append({**e, "thing_ids": ids, "name": first["name"] if first else e["title"],
+                    "lat": first["lat"] if first else None, "lon": first["lon"] if first else None})
+    return out
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
@@ -91,17 +131,17 @@ def health() -> dict:
 
 # Condition screens ("which <mines | US states> where <condition>?", reasoning/screen.py), shown
 # first in the preset chips. Live data (Wikipedia, Open-Meteo), cached; not precomputed.
-SCREEN_PRESETS = [
+SCREEN_PRESETS = [  # suggestion chips; the first three update live (Wikimedia edit stream)
+    {"id": "screen_live_countries", "label": "LIVE: countries being edited on Wikipedia right now",
+     "query": "Which countries are being edited on Wikipedia right now?", "kind": "other"},
+    {"id": "screen_live_companies", "label": "LIVE: mining companies edited in the last hour",
+     "query": "Which mining companies have been edited on Wikipedia in the last hour?", "kind": "other"},
+    {"id": "screen_live_states", "label": "LIVE: US states edited in the last 30 minutes",
+     "query": "Which US states have been edited on Wikipedia in the last 30 minutes?", "kind": "other"},
+    {"id": "screen_ports_weather", "label": "Export ports in the rain or wind right now",
+     "query": "Which export ports are in the rain or wind right now?", "kind": "other"},
     {"id": "screen_states_views", "label": "US states: spike in Wikipedia views",
      "query": "Which US states have a spike in Wikipedia views?", "kind": "other"},
-    {"id": "screen_states_edits", "label": "US states: spike in Wikipedia edits",
-     "query": "Which US states have a spike in Wikipedia edits?", "kind": "other"},
-    {"id": "screen_states_cold", "label": "US states below 0 °C right now",
-     "query": "Which US states are below 0 degrees right now?", "kind": "other"},
-    {"id": "screen_mines_wind", "label": "Mines where it is windy right now",
-     "query": "Which iron ore mines are windy right now?", "kind": "other"},
-    {"id": "screen_mines_views", "label": "Mines: spike in Wikipedia views",
-     "query": "Which iron ore mines have a spike in Wikipedia views?", "kind": "other"},
 ]
 
 
@@ -141,14 +181,15 @@ def _asset_points() -> list[dict]:
 
 @app.get("/assets", response_model=list[AssetPoint])
 def assets(kind: str = "mine") -> list[dict]:
-    """All assets of a kind (mine: real graph if built, else the 20 mock mines; state: the 50 US
-    states). Not in the plan's contract: added so the globe can draw dark assets as grey dots."""
-    if kind == "state":
-        from reasoning.screen import things
+    """All things of a kind (mine | state | port | country | company, or the answer's asset_type), so the
+    globe can draw the unlit ones as grey dots. Not in the plan's contract."""
+    from reasoning.things import ASSET_TYPE_TO_KIND, KINDS, things
 
-        return [{"id": t["id"], "name": t["name"], "lat": t["lat"], "lon": t["lon"], "country": "US"}
-                for t in things("state")]
-    return _asset_points()
+    kind = ASSET_TYPE_TO_KIND.get(kind, kind)
+    if kind == "mine" or kind not in KINDS:
+        return _asset_points()
+    return [{"id": t["id"], "name": t["name"], "lat": t["lat"], "lon": t["lon"], "country": t["country"]}
+            for t in things(kind)]
 
 
 @app.get("/series/{kind}/{thing_id}")

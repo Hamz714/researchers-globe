@@ -3,12 +3,15 @@
 Every question becomes the same structure, so no kind of question can forget a filter:
 
     plan = {
-      "thing":    "mine" | "state",
+      "thing":    "mine" | "state" | "port" | "country" | "company"   (reasoning/things.py KINDS),
       "include":  {"countries": [ISO2], "owners": [company ids], "states": [state ids]},
       "exclude":  {"countries": [...],  "owners": [...],          "states": [...]},
       "min_capacity_mtpa": float | None, "max_capacity_mtpa": float | None,
       "measures": [ {"kind": "weather", "weather": "rain"|..., "threshold": x|None}
-                  | {"kind": "views"} | {"kind": "edits"} | {"kind": "exposure"} ],
+                  | {"kind": "views"} | {"kind": "edits"}          (daily Wikipedia z, last 7 days vs 60)
+                  | {"kind": "live_edits"}                          (live stream: edited in the last window_minutes)
+                  | {"kind": "exposure"} ],
+      "window_minutes": int,             # for live_edits ("right now" = 60, "last 10 minutes", "today")
       "combine":  "and" | "or",           # how several conditions combine
       "top_n":    int | None,
       "unrecognised": [str],              # place-like words we could not match: reported, never silently dropped
@@ -60,14 +63,14 @@ def empty_plan() -> dict:
     return {"thing": "mine", "include": {"countries": [], "owners": [], "states": []},
             "exclude": {"countries": [], "owners": [], "states": []},
             "min_capacity_mtpa": None, "max_capacity_mtpa": None, "measures": [], "combine": "and",
-            "top_n": None, "unrecognised": [], "source": "rules"}
+            "top_n": None, "unrecognised": [], "source": "rules", "window_minutes": 60}
 
 
 # ------------------------------------------------------------------ rules
 def _vocab() -> list[tuple[str, str, str]]:
     """(lowercase phrase, field, value) for every place/company we know, longest first."""
     from reasoning.listing import REGIONS, _country_names, _owner_terms
-    from reasoning.screen import things
+    from reasoning.things import things
 
     out = [(name, "countries", iso) for name, iso in _country_names().items()]
     out += [(region, "regions", region) for region in REGIONS]
@@ -105,8 +108,9 @@ def rule_plan(text: str) -> dict:
     plan = empty_plan()
     t = " ".join(text.split())
     low = t.lower()
-    mentions_mines = re.search(r"\bmines?\b|\bmining\b", low)
-    plan["thing"] = "state" if re.search(r"\bstates?\b", low) and not mentions_mines else "mine"
+    from reasoning.things import detect_kind
+
+    plan["thing"] = detect_kind(t)
 
     # Places named inside the event ("exposed to the US midterms", "... sanctions on Russia") describe the
     # event, not which mines to look at: only mentions BEFORE the exposure wording are filters.
@@ -168,7 +172,17 @@ def rule_plan(text: str) -> dict:
     if EXPOSURE_CUES.search(t):
         plan["measures"].append({"kind": "exposure"})
     wiki = re.search(r"\bwikipedia\b|\bwiki\b", low)
-    if wiki and re.search(r"\bedit", low):
+    live = re.search(r"\b(?:right now|now|currently|live|at the moment|this hour|past hour|last hour|today|"
+                     r"(?:last|past)\s+\d+\s*(?:min\w*|hours?|hrs?))\b", low)
+    if re.search(r"\bedit", low) and (live or re.search(r"\bbeing edited\b", low)) \
+            and not re.search(r"\b(?:spike|burst|surge|unusual)\b", low):
+        plan["measures"].append({"kind": "live_edits"})
+        m = re.search(r"(?:last|past)\s+(\d+)\s*(min\w*|hours?|hrs?)", low)
+        if m:
+            plan["window_minutes"] = int(m.group(1)) * (1 if m.group(2).startswith("min") else 60)
+        elif re.search(r"\btoday\b|24 hours", low):
+            plan["window_minutes"] = 1440
+    elif wiki and re.search(r"\bedit", low):
         plan["measures"].append({"kind": "edits"})
     elif wiki or re.search(r"\bpage ?views?\b|\battention\b", low):
         plan["measures"].append({"kind": "views"})
@@ -209,7 +223,7 @@ MODEL_SCHEMA = {
     "additionalProperties": False,
     "properties": {
         "kind": {"enum": ["list", "condition", "exposure"]},
-        "thing": {"enum": ["mine", "state"]},
+        "thing": {"enum": ["mine", "state", "port", "country", "company"]},
         "include_countries": {"type": "array", "items": {"type": "string"}},
         "exclude_countries": {"type": "array", "items": {"type": "string"}},
         "include_owners": {"type": "array", "items": {"type": "string"}},
@@ -217,7 +231,8 @@ MODEL_SCHEMA = {
         "include_states": {"type": "array", "items": {"type": "string"}},
         "exclude_states": {"type": "array", "items": {"type": "string"}},
         "conditions": {"type": "array", "items": {"enum": ["rain", "snow", "wind", "storm", "freezing", "cold",
-                                                          "hot", "any_weather", "views", "edits"]}},
+                                                          "hot", "any_weather", "views", "edits", "live_edits"]}},
+        "window_minutes": {"type": ["integer", "null"]},
         "combine": {"enum": ["and", "or"]},
         "min_capacity_mtpa": {"type": ["number", "null"]},
         "max_capacity_mtpa": {"type": ["number", "null"]},
@@ -225,9 +240,11 @@ MODEL_SCHEMA = {
     },
 }
 MODEL_PROMPT = (
-    "Turn this question about iron ore mines or US states into a plan. kind: 'list' (show/filter things, no "
-    "event), 'condition' (things where a live condition holds now: weather, or a spike in Wikipedia views or "
-    "edits), or 'exposure' (things exposed to a named event or policy). Put places and companies the user "
+    "Turn this question into a plan. thing: iron ore mines, US states, export ports, countries or mining "
+    "companies. kind: 'list' (show/filter things, no event), 'condition' (things where a condition holds: "
+    "weather now, a spike in Wikipedia views or edits over the last week ('views'/'edits'), or Wikipedia pages "
+    "being edited right now / in the last N minutes ('live_edits', with window_minutes)), or 'exposure' (things "
+    "exposed to a named event or policy). Put places and companies the user "
     "wants in include_*, and places/companies they want left out ('outside', 'not', 'except') in exclude_*. "
     "Countries as English names or ISO-2 codes; expand regions into countries. Places or companies that are "
     "part of the EVENT itself (e.g. 'US' in 'exposed to the US midterms') are NOT filters. Question: ")
@@ -235,7 +252,7 @@ MODEL_PROMPT = (
 
 def _resolve(names: list[str], field: str, plan: dict) -> list[str]:
     from reasoning.listing import _country_names, _owner_terms
-    from reasoning.screen import things
+    from reasoning.things import things
 
     out = []
     for raw in names or []:
@@ -278,8 +295,12 @@ def model_plan(obj: dict, rules: dict, text: str = "") -> dict:
     measures = []
     if obj.get("kind") == "exposure":
         measures.append({"kind": "exposure"})
+    if obj.get("window_minutes"):
+        plan["window_minutes"] = int(obj["window_minutes"])
+    else:
+        plan["window_minutes"] = rules["window_minutes"]
     for c in obj.get("conditions") or []:
-        if c in ("views", "edits"):
+        if c in ("views", "edits", "live_edits"):
             measures.append({"kind": c})
         else:
             th = next((m.get("threshold") for m in rules["measures"] if m.get("weather") == c), None)
@@ -308,36 +329,39 @@ def make_plan(text: str, backends: list | None = None) -> dict:
 
 # ------------------------------------------------------------------ execution
 def select_things(plan: dict) -> tuple[list[dict], list[dict]]:
-    """(all things of the plan's kind, those passing every filter). Filters are applied here, once."""
-    from reasoning.screen import things
+    """(all things of the plan's kind, those passing every filter). Filters are applied here, once,
+    for every kind: countries (where the thing is / is listed), owners (mines owned by / the company
+    itself), named US states, capacity (mines)."""
+    from reasoning.things import things
 
     all_items = things(plan["thing"])
     inc, exc = plan["include"], plan["exclude"]
-    if plan["thing"] == "state":
-        keep = [s for s in all_items if (not inc["states"] or s["id"] in inc["states"]) and s["id"] not in exc["states"]]
-        return all_items, keep
-    from reasoning.listing import _graph
+    kind = plan["thing"]
 
-    g = _graph()
-    n, e = g.nodes, g.edges
-    mines = n[n["type"] == "mine"]
-    if inc["countries"]:
-        mines = mines[mines["country"].isin(inc["countries"])]
-    if exc["countries"]:
-        mines = mines[~mines["country"].isin(exc["countries"])]
-    owned = e[e["type"] == "OWNED_BY"]
-    if inc["owners"]:
-        mines = mines[mines["id"].isin(set(owned.loc[owned["dst"].isin(inc["owners"]), "src"]))]
-    if exc["owners"]:
-        mines = mines[~mines["id"].isin(set(owned.loc[owned["dst"].isin(exc["owners"]), "src"]))]
-    cap = mines["capacity_mtpa"].astype(float)
-    if plan["min_capacity_mtpa"] is not None:
-        mines = mines[cap >= float(plan["min_capacity_mtpa"])]
-        cap = mines["capacity_mtpa"].astype(float)
-    if plan["max_capacity_mtpa"] is not None:
-        mines = mines[cap <= float(plan["max_capacity_mtpa"])]
-    keep_ids = set(mines["id"])
-    return all_items, [i for i in all_items if i["id"] in keep_ids]
+    def ok(it: dict) -> bool:
+        if inc["countries"] and it["country"] not in inc["countries"]:
+            return False
+        if it["country"] in exc["countries"]:
+            return False
+        if kind in ("mine", "company"):
+            if inc["owners"] and not set(it["owners"]) & set(inc["owners"]):
+                return False
+            if set(it["owners"]) & set(exc["owners"]):
+                return False
+        if kind == "state":
+            if inc["states"] and it["id"] not in inc["states"]:
+                return False
+            if it["id"] in exc["states"]:
+                return False
+        if kind == "mine":
+            cap = it["capacity"]
+            if plan["min_capacity_mtpa"] is not None and (cap is None or cap < float(plan["min_capacity_mtpa"])):
+                return False
+            if plan["max_capacity_mtpa"] is not None and (cap is None or cap > float(plan["max_capacity_mtpa"])):
+                return False
+        return True
+
+    return all_items, [it for it in all_items if ok(it)]
 
 
 def describe(plan: dict) -> str:
@@ -345,7 +369,7 @@ def describe(plan: dict) -> str:
     from reasoning.listing import _graph
 
     names = dict(zip(_graph().nodes["id"], _graph().nodes["name"]))
-    from reasoning.screen import things
+    from reasoning.things import things
 
     names.update({s["id"]: s["name"] for s in things("state")})
     nm = lambda ids, pre: names.get(f"{pre}{ids}", ids)  # noqa: E731
@@ -373,6 +397,8 @@ def _measure_label(m: dict) -> str:
         return "spike in Wikipedia views"
     if m["kind"] == "edits":
         return "spike in Wikipedia edits"
+    if m["kind"] == "live_edits":
+        return "Wikipedia page edited in the last " + _window_words(m.get("window_minutes", 60))
     if m["weather"] == "any":
         return "notable weather"
     label = WEATHER[m["weather"]][4]
@@ -382,10 +408,58 @@ def _measure_label(m: dict) -> str:
     return label
 
 
+def _window_words(minutes: int) -> str:
+    if minutes % 1440 == 0:
+        return "24 hours" if minutes == 1440 else f"{minutes // 1440} days"
+    if minutes % 60 == 0:
+        return "hour" if minutes == 60 else f"{minutes // 60} hours"
+    return f"{minutes} minutes"
+
+
+def _ago(ts: float, now: float) -> str:
+    s = max(0, int(now - ts))
+    return f"{s}s ago" if s < 90 else f"{s // 60} min ago" if s < 5400 else f"{s // 3600} h ago"
+
+
+def _live_edits(m: dict, items: list[dict]) -> dict[str, dict]:
+    """Things whose Wikipedia page was edited in the window, from the live stream (pipeline/live_wiki.py)."""
+    import time
+
+    from pipeline.live_wiki import LIVE
+
+    now = time.time()
+    since = now - 60 * m.get("window_minutes", 60)
+    out = {}
+    for it in items:
+        if not it["wiki_title"]:
+            continue
+        edits = LIVE.edits_for(it["wiki_title"], since)
+        if not edits:
+            continue
+        n = len(edits)
+        humans = [e for e in edits if not e["bot"]]
+        last = edits[-1]
+        comment = f": \u201c{last['comment'][:80]}\u201d" if last["comment"] else ""
+        out[it["id"]] = {
+            "score": round(1.0 - 0.6 ** n, 4), "z": 0.0,
+            "tier": "high" if n >= 5 else "medium" if n >= 2 else "low",
+            "reason": (f"Wikipedia page '{it['wiki_title']}'{it.get('wiki_note', '')} edited {n} time{'s' if n > 1 else ''} "
+                       f"in the last {_window_words(m.get('window_minutes', 60))} ({len(humans)} by people, "
+                       f"{n - len(humans)} by bots); latest {_ago(last['ts'], now)} by {last['user']}"
+                       f"{' (bot)' if last['bot'] else ''}{comment}."),
+            "evidence": [{"title": f"Edit by {e['user']}{' (bot)' if e['bot'] else ''}, {_ago(e['ts'], now)}"
+                                   + (f": {e['comment'][:70]}" if e['comment'] else ""),
+                          "url": e["url"], "date": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime(e["ts"])),
+                          "judge": "relevant", "confidence": 1.0} for e in edits[::-1][:5]]}
+    return out
+
+
 def _evaluate(m: dict, all_items: list[dict], items: list[dict], end: date) -> dict[str, dict]:
     """thing id -> {"score", "tier", "reason", "evidence", "z"} for things meeting one condition."""
     from reasoning import screen as sc
 
+    if m["kind"] == "live_edits":
+        return _live_edits(m, items)
     out: dict[str, dict] = {}
     if m["kind"] in ("views", "edits"):
         what = "views" if m["kind"] == "views" else "edits"
@@ -395,7 +469,7 @@ def _evaluate(m: dict, all_items: list[dict], items: list[dict], end: date) -> d
             tier = sc._tier_z(r["z"]) if r else None
             if not tier:
                 continue
-            via = "" if it["wiki_of"] == it["name"] else f" (via its owner {it['wiki_of']})"
+            via = it.get("wiki_note", "")
             out[it["id"]] = {
                 "score": sc._squash(r["z"], 4.0), "tier": tier, "z": r["z"],
                 "reason": (f"Wikipedia {what} of '{it['wiki_title']}'{via}: {r['recent']:,.0f} in the last "
@@ -452,18 +526,51 @@ def _notes(plan: dict, checked: int, thing_label: str, where: str) -> str:
     return (" ".join(notes) + " ") if notes else ""
 
 
+def _live_status_note() -> str:
+    import time
+
+    from pipeline.live_wiki import LIVE
+
+    st = LIVE.status()
+    if st["connected"]:
+        lag = (st["now"] - st["last_event_ts"]) if st["last_event_ts"] else None
+        catching = f" (catching up: stream is {int(lag // 60)} min behind)" if lag and lag > 120 else ""
+        return (f"Live Wikimedia edit stream connected{catching}; {st['matched_24h']} edits to watched pages in "
+                f"the last 24 h. ")
+    if st["matched_24h"]:
+        newest = max(e["ts"] for e in LIVE.recent(1)) if LIVE.recent(1) else None
+        return (f"Live stream NOT connected: answering from the last snapshot"
+                + (f" (newest edit {_ago(newest, time.time())})" if newest else "") + ". ")
+    return "Live stream NOT connected and no snapshot yet, so nothing can match. "
+
+
 def execute(plan: dict, text: str, end: date | None = None) -> dict:
     from backend.schemas import QueryResult
     from reasoning.screen import BASELINE_DAYS, RECENT_DAYS, WEATHER, ANY_KINDS
+    from reasoning.things import KINDS
 
     end = end or date.today()
+    kind_info = KINDS[plan["thing"]]
     all_items, items = select_things(plan)
-    thing_label = "US states" if plan["thing"] == "state" else "iron ore mines"
+    thing_label = kind_info["label"]
     where = describe(plan)
     filtered = len(items) != len(all_items)
-    conditions = [m for m in plan["measures"] if m["kind"] in ("weather", "views", "edits")]
-    exposure = any(m["kind"] == "exposure" for m in plan["measures"])
+    for m in plan["measures"]:
+        if m["kind"] == "live_edits":
+            m["window_minutes"] = plan.get("window_minutes", 60)
+    # Measures that make no sense for this kind (weather at a company, exposure of a port) are dropped
+    # and SAID so, never silently.
+    unsupported = [m for m in plan["measures"] if m["kind"] not in kind_info["measures"]]
+    measures = [m for m in plan["measures"] if m["kind"] in kind_info["measures"]]
+    conditions = [m for m in measures if m["kind"] in ("weather", "views", "edits", "live_edits")]
+    exposure = any(m["kind"] == "exposure" for m in measures)
     note = _notes(plan, len(items), thing_label, where if filtered else "")
+    if unsupported:
+        note += ("Not available for " + thing_label + ": "
+                 + ", ".join(sorted({"event exposure" if m["kind"] == "exposure" else _measure_label(m) for m in unsupported}))
+                 + " (ignored). ")
+    if any(m["kind"] == "live_edits" for m in conditions):
+        note += _live_status_note()
 
     if exposure and plan["thing"] == "mine":
         from reasoning.run_query import NoEvent, run_query
@@ -491,7 +598,6 @@ def execute(plan: dict, text: str, end: date | None = None) -> dict:
                 if where:
                     out["criteria"]["event"]["name"] += f" ({where})"
             return QueryResult.model_validate(out).model_dump()
-        conditions = conditions  # no event found: fall through to conditions or a list
 
     if conditions:
         hits = _combine([_evaluate(m, all_items, items, end) for m in conditions], plan["combine"])
@@ -505,6 +611,13 @@ def execute(plan: dict, text: str, end: date | None = None) -> dict:
                 channel = {"id": "attention" if what == "views" else "edits",
                            "reason": f"Wikipedia {what} of each thing's article: last {RECENT_DAYS} days vs the "
                                      f"{BASELINE_DAYS} before, robust z" + (", weekday-adjusted." if what == "views" else ".")}
+            elif m["kind"] == "live_edits":
+                lab = _measure_label(m)
+                ev_name = f"{lab[:1].upper()}{lab[1:]}"
+                channel = {"id": "live_edits",
+                           "reason": "Live English Wikipedia edits to each thing's page (Wikimedia EventStreams, one "
+                                     "streaming connection, updated within seconds). 1 edit low, 2-4 medium, 5+ high. "
+                                     "Edits show attention, not importance."}
             else:
                 lab = _measure_label(m)
                 fields = ", ".join(WEATHER[k][4] for k in ANY_KINDS) if m["weather"] == "any" else WEATHER[m["weather"]][0]
@@ -512,27 +625,29 @@ def execute(plan: dict, text: str, end: date | None = None) -> dict:
                 channel = {"id": "weather", "reason": f"Current weather at each thing's coordinates from Open-Meteo "
                                                       f"({fields}). Display only: weather now, not a forecast."}
         else:
-            ev_name = f"{labels[:1].upper()}{labels[1:]} right now"
+            ev_name = f"{labels[:1].upper()}{labels[1:]}" + ("" if any(m["kind"] == "live_edits" for m in conditions) else " right now")
             channel = {"id": "conditions", "reason": f"Each thing must meet {'all' if plan['combine'] == 'and' else 'at least one'} "
-                                                     f"of: {labels}. Weather from Open-Meteo, attention from Wikipedia."}
-        if where:
-            ev_name += f" — {thing_label} {where}"
+                                                     f"of: {labels}. Weather from Open-Meteo, attention and edits from Wikipedia."}
+        ev_name += f" — {thing_label}" + (f" {where}" if where else "")
         channel["reason"] = note + channel["reason"]
         event = {"name": ev_name, "date": end.isoformat(), "terms": [m.get("weather") or m["kind"] for m in conditions]}
     else:
-        from reasoning.listing import list_rows
+        from reasoning.things import list_rows
 
         results = list_rows(plan["thing"], items)
-        desc = ("US states" if plan["thing"] == "state" else "Operating iron ore mines") + (f" {where}" if where else "")
-        ranked = "ranked by design capacity (top third high, middle medium, rest or unknown low)" \
-            if plan["thing"] == "mine" else "listed"
+        desc = ("Operating iron ore mines" if plan["thing"] == "mine" else thing_label[:1].upper() + thing_label[1:]) \
+            + (f" {where}" if where else "")
+        ranked = {"mine": "ranked by design capacity", "port": "ranked by the capacity of mines shipping through",
+                  "country": "ranked by the capacity of mines there", "company": "ranked by the capacity of mines held",
+                  "state": "listed"}[plan["thing"]]
         event = {"name": desc, "date": "", "terms": []}
         channel = {"id": "filter", "reason": note + f"No event or condition in the question, so this is a list: {desc}, "
-                                                    f"{ranked}. Ask about an event ('exposed to …') or a condition "
-                                                    f"('in the rain') for scores."}
+                                                    f"{ranked} (top third high, middle medium, rest low). Ask about an "
+                                                    f"event ('exposed to …') or a condition ('in the rain', 'being "
+                                                    f"edited right now') for scores."}
     if plan["top_n"]:
         results = results[: plan["top_n"]]
-    out = {"criteria": {"asset_type": "us_state" if plan["thing"] == "state" else "iron_ore_mine", "event": event,
+    out = {"criteria": {"asset_type": kind_info["asset_type"], "event": event,
                         "window": {"baseline_days": BASELINE_DAYS, "recent_days": RECENT_DAYS},
                         "status": ["operating"] if plan["thing"] == "mine" else [],
                         "region": "US" if plan["thing"] == "state" else "global"},

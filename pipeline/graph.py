@@ -301,7 +301,7 @@ def load_gem(path: Path, statuses: tuple[str, ...] = ("operating",)) -> tuple[pd
         raise ValueError(f"GEM columns not found: {missing}. Columns: {list(df.columns)}")
     df = df[df[c["status"]].isin(statuses)].copy()
 
-    countries = pd.read_csv(CURATED_DIR / "countries.csv")
+    countries = pd.read_csv(CURATED_DIR / "countries.csv", keep_default_na=False, na_values=[""])  # "NA" is Namibia
     name_to_iso = {**dict(zip(countries["name"], countries["iso2"])), **COUNTRY_ALIASES}
     companies = pd.read_csv(CURATED_DIR / "companies.csv")
     curated = {r.name_in_gem: r for r in companies.itertuples()}
@@ -347,7 +347,7 @@ def build_real_graph(gem_path: Path) -> Graph:
     mines, owners = load_gem(gem_path)
     ports = pd.read_csv(CURATED_DIR / "ports.csv")
     g = build_graph(mines, ports, pd.read_csv(CURATED_DIR / "trade.csv"),
-                    pd.read_csv(CURATED_DIR / "countries.csv"), mines_source_url=GEM_SOURCE_URL)
+                    pd.read_csv(CURATED_DIR / "countries.csv", keep_default_na=False, na_values=[""]), mines_source_url=GEM_SOURCE_URL)
     nodes = {r["id"]: r for r in g.nodes.to_dict("records")}
     edges = g.edges.to_dict("records")
     for o in owners.itertuples():

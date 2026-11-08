@@ -17,7 +17,7 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
 export const api = {
   query: (text: string) => call<QueryResult>("/query", { method: "POST", body: JSON.stringify({ text }) }),
   presets: () => call<Preset[]>("/presets"),
-  assets: (kind: "mine" | "state" = "mine") => call<AssetPoint[]>(`/assets?kind=${kind}`),
+  assets: (kind = "iron_ore_mine") => call<AssetPoint[]>(`/assets?kind=${encodeURIComponent(kind)}`),
   series: (kind: "views" | "edits", id: string) =>
     call<ScreenSeries>(`/series/${kind}/${encodeURIComponent(id)}`),
   asset: (id: string, question?: string) =>

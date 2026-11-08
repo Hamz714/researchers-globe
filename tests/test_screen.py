@@ -39,9 +39,10 @@ def test_weather_rules():
 def test_weather_screen_has_contract_shape(monkeypatch):
     from pipeline import fetch_weather
 
-    items = [{"id": "state_AK", "name": "Alaska", "lat": 65.4, "lon": -151.6, "wiki_title": "Alaska", "wiki_of": "Alaska"},
-             {"id": "state_HI", "name": "Hawaii", "lat": 21.5, "lon": -158.0, "wiki_title": "Hawaii", "wiki_of": "Hawaii"}]
-    monkeypatch.setattr(sc, "things", lambda kind: items)
+    extra = {"country": "US", "wiki_note": "", "owners": [], "capacity": None}
+    items = [{"id": "state_AK", "name": "Alaska", "lat": 65.4, "lon": -151.6, "wiki_title": "Alaska", **extra},
+             {"id": "state_HI", "name": "Hawaii", "lat": 21.5, "lon": -158.0, "wiki_title": "Hawaii", **extra}]
+    monkeypatch.setattr("reasoning.things.things", lambda kind: [dict(i) for i in items])
     monkeypatch.setattr(fetch_weather, "current", lambda pts: {
         "state_AK": {"time": "2026-11-08T04:00", "temperature_2m": -7.1},
         "state_HI": {"time": "2026-11-08T04:00", "temperature_2m": 24.0}})
@@ -53,10 +54,10 @@ def test_weather_screen_has_contract_shape(monkeypatch):
 def test_views_screen_lights_only_spikes(monkeypatch):
     from pipeline import fetch_wiki
 
-    items = [{"id": "state_GA", "name": "Georgia", "lat": 32.6, "lon": -83.4, "wiki_title": "Georgia (U.S. state)",
-              "wiki_of": "Georgia"},
-             {"id": "state_OH", "name": "Ohio", "lat": 40.3, "lon": -82.8, "wiki_title": "Ohio", "wiki_of": "Ohio"}]
-    monkeypatch.setattr(sc, "things", lambda kind: items)
+    extra = {"country": "US", "wiki_note": "", "owners": [], "capacity": None}
+    items = [{"id": "state_GA", "name": "Georgia", "lat": 32.6, "lon": -83.4, "wiki_title": "Georgia (U.S. state)", **extra},
+             {"id": "state_OH", "name": "Ohio", "lat": 40.3, "lon": -82.8, "wiki_title": "Ohio", **extra}]
+    monkeypatch.setattr("reasoning.things.things", lambda kind: [dict(i) for i in items])
     days = pd.date_range("2026-09-02", "2026-11-06", freq="D")
 
     def views(title, start, end):

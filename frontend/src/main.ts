@@ -20,11 +20,16 @@ let currentQuestion = "";
 let selectedId: string | null = null;
 // Condition screens ("which US states / mines where <condition>?") answer with one of these channels.
 // "filter" = a list question with no event ("show all mines in Brazil"), same simple panel.
-const SCREEN_CHANNELS = new Set(["attention", "edits", "weather", "filter", "conditions"]);
+const SCREEN_CHANNELS = new Set(["attention", "edits", "live_edits", "weather", "filter", "conditions"]);
 const isScreen = (q: QueryResult | null) => !!q && q.channels.length === 1 && SCREEN_CHANNELS.has(q.channels[0].id);
-const assetKind = (q: QueryResult) => (q.criteria.asset_type === "us_state" ? "state" : "mine") as "state" | "mine";
-const assetsByKind: Partial<Record<"mine" | "state", AssetPoint[]>> = {};
-async function assetsFor(kind: "mine" | "state"): Promise<AssetPoint[]> {
+// The backend's /assets accepts the answer's asset_type directly (iron_ore_mine, us_state, port, country, company).
+const assetKind = (q: QueryResult) => q.criteria.asset_type || "iron_ore_mine";
+const assetsByKind: Record<string, AssetPoint[]> = {};
+// Live answers (Wikimedia edit stream) are re-asked quietly every 15 s while they are on screen.
+const LIVE_REFRESH_MS = 15000;
+const isLive = (q: QueryResult | null) => !!q && q.channels.some((c) => c.id === "live_edits");
+let liveTimer: number | undefined;
+async function assetsFor(kind: string): Promise<AssetPoint[]> {
   if (!assetsByKind[kind]) assetsByKind[kind] = await api.assets(kind).catch(() => []);
   return assetsByKind[kind]!;
 }
@@ -45,7 +50,23 @@ function fitTo(points: [number, number][], minSpanDeg = 6) {
 }
 
 // ----------------------------------------------------------------- query flow
-async function ask(text: string) {
+async function ask(text: string, silent = false) {
+  if (silent) {
+    try {
+      const q = await api.query(text);
+      if (currentQuestion !== text) return;
+      const keep = selectedId;
+      current = q;
+      render(q, false);
+      const again = keep ? q.results.find((r) => r.id === keep) : undefined;
+      if (again) void selectScreen(again, false); // live answers are screens; keep the camera where the user put it
+    } catch {
+      /* keep the last answer on screen */
+    }
+    return;
+  }
+  window.clearInterval(liveTimer);
+  liveTimer = undefined;
   status(`Asking: ${text}`);
   ($("#question") as HTMLInputElement).value = text;
   document.querySelectorAll<HTMLButtonElement>("#presets button").forEach((b) =>
@@ -55,7 +76,8 @@ async function ask(text: string) {
     current = await api.query(text);
     currentQuestion = text;
     render(current, true);
-    status("");
+    status(isLive(current) ? `● LIVE: refreshing every ${LIVE_REFRESH_MS / 1000}s` : "");
+    if (isLive(current)) liveTimer = window.setInterval(() => void ask(text, true), LIVE_REFRESH_MS);
   } catch (err) {
     status(`Query failed: ${(err as Error).message}`, true);
   }
@@ -233,7 +255,7 @@ function newsChart(d: AssetDetail | null): string {
 }
 
 // ----------------------------------------------------------------- condition-screen panel
-async function selectScreen(r: Result) {
+async function selectScreen(r: Result, fly = true) {
   selectedId = r.id;
   const panel = $("#panel");
   const ch = current!.channels[0].id;
@@ -243,7 +265,7 @@ async function selectScreen(r: Result) {
   bindPanel();
   globe.setSelected(r);
   clearPath();
-  fitTo([[r.lon, r.lat]], r.id.startsWith("state_") ? 14 : 8);
+  if (fly) fitTo([[r.lon, r.lat]], r.id.startsWith("state_") ? 14 : 8);
   if (!kind) return;
   try {
     const s = await api.series(kind, r.id);
@@ -262,6 +284,9 @@ function screenPanelHtml(r: Result, s: ScreenSeries | null, loading: boolean, er
   const rank = [...q.results].sort((a, b) => b.score - a.score).findIndex((x) => x.id === r.id) + 1;
   const source = ch === "filter"
     ? `<a href="https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker" target="_blank" rel="noopener noreferrer">Global Iron Ore Mines Tracker</a> (Global Energy Monitor, CC BY 4.0)`
+    : ch === "live_edits"
+    ? `<a href="https://stream.wikimedia.org/v2/stream/recentchange" target="_blank" rel="noopener noreferrer">Wikimedia EventStreams</a> (live English Wikipedia edits)` +
+      r.evidence.map((e) => `<br><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join("")
     : ch === "weather" || ch === "conditions"
     ? `<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> current weather` +
       r.evidence.map((e) => `<br><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a>`).join("")
@@ -274,7 +299,7 @@ function screenPanelHtml(r: Result, s: ScreenSeries | null, loading: boolean, er
     <p class="score-note">${ch === "filter" ? "Ranked by design capacity among the matches: a size ranking, not a probability." : SCREEN_NOTE}</p>
     <h3>${esc(q.criteria.event.name)}</h3>
     <p>${esc(r.reason)}</p>
-    ${ch === "weather" || ch === "filter" || ch === "conditions" ? "" : `<h3>Wikipedia ${ch === "attention" ? "views" : "edits"} per day</h3>
+    ${ch === "weather" || ch === "filter" || ch === "conditions" || ch === "live_edits" ? "" : `<h3>Wikipedia ${ch === "attention" ? "views" : "edits"} per day</h3>
       ${loading ? `<p class="muted">Loading series…</p>` : s ? seriesChart(s) : `<p class="muted">No series.</p>`}
       <table class="components"><tr><td>Robust z (last ${q.criteria.window.recent_days} days vs ${q.criteria.window.baseline_days} before)</td><td>${fmt(r.components.attention_z, 1)}</td></tr></table>`}
     <h3>Source</h3><p>${source}</p>

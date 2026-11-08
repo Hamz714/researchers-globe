@@ -23,7 +23,9 @@ async function call(path, init) {
 export const rgApi = {
   query: (text) => call('/query', { method: 'POST', body: JSON.stringify({ text }) }),
   presets: () => call('/presets'),
-  assets: () => call('/assets'),
+  assets: (kind = 'mine') => call(`/assets?kind=${encodeURIComponent(kind)}`),
+  liveFeed: (limit = 6) => call(`/live/feed?limit=${limit}`),
+  liveStatus: () => call('/live/status'),
   asset: (id, question) =>
     call(`/asset/${encodeURIComponent(id)}${question ? `?q=${encodeURIComponent(question)}` : ''}`),
   evalReport: () => call('/eval'),

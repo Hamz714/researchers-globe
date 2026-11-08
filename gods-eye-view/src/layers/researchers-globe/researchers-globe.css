@@ -411,3 +411,16 @@
     width: auto;
   }
 }
+
+/* live Wikipedia edits: LIVE stamp on live answers, and a small ticker of the newest watched edits */
+.rg-livestamp { margin: 4px 0 2px; font-size: 11px; letter-spacing: 0.06em; color: #7ee787; }
+.rg-livestamp i, .rg-ticker-head i { display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  margin-right: 6px; background: #6b7280; vertical-align: 1px; }
+.rg-livestamp i, .rg-ticker-head i.on { background: #3fb950; animation: rg-pulse 1.4s ease-in-out infinite; }
+@keyframes rg-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+.rg-ticker { margin-top: 8px; padding-top: 6px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 11px; }
+.rg-ticker-head { color: var(--text-secondary, #9aa3b2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.rg-ticker-row { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.6; }
+.rg-ticker-row span { color: var(--text-secondary, #9aa3b2); }
+.rg-livestamp.off { color: #d29922; }
+.rg-livestamp.off i { background: #d29922; animation: none; }
