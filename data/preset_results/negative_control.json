@@ -1,0 +1,23 @@
+{
+ "criteria": {
+  "asset_type": "iron_ore_mine",
+  "event": {
+   "name": "Premier League title race",
+   "date": "2026-11-07",
+   "terms": [
+    "Premier League"
+   ]
+  },
+  "window": {
+   "baseline_days": 60,
+   "recent_days": 7
+  },
+  "status": [
+   "operating"
+  ],
+  "region": "global"
+ },
+ "channels": [],
+ "results": [],
+ "dark_count": 701
+}

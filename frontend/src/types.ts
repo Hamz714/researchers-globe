@@ -61,6 +61,14 @@ export interface Preset {
   kind: "hero" | "weather" | "labour" | "negative_control" | "other";
 }
 
+export interface AssetPoint {
+  id: string;
+  name: string;
+  lat: number;
+  lon: number;
+  country: string | null;
+}
+
 export interface PathNode {
   id: string;
   type: string;

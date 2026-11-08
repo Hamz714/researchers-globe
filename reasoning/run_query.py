@@ -17,7 +17,7 @@ from pipeline.graph import Graph, default_graph
 from reasoning import exposure as exp
 from reasoning import scoring
 from reasoning.judge import judge_article
-from reasoning.parser import choose_channels, load_channels, parse_question
+from reasoning.parser import choose_channels, choose_touches, load_channels, parse_question
 
 TOP_K = 50          # candidates returned (plan)
 EVIDENCE_K = 25     # candidates we pull GDELT evidence for (rate limit: ~6 s per request)
@@ -84,8 +84,10 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
     chosen = [c["id"] for c in channels]
 
     # 3. exposure (deterministic)
-    touches = (preset or {}).get("touches") or {c: library[c].get("default_touches", []) for c in chosen}
-    g = (graph or default_graph()).with_edges(exp.touches_edges(chosen, touches))
+    base = graph or default_graph()
+    touches = choose_touches(text, criteria, chosen, dict(zip(base.nodes["id"], base.nodes["name"])),
+                             preset, backends=backends)
+    g = base.with_edges(exp.touches_edges(chosen, touches))
     top, dark = exp.propagate(g, {c: library[c]["weight"] for c in chosen}, top_k=TOP_K)
 
     channel_terms = sorted({t for c in chosen for t in library[c]["search_terms"]} | set(criteria["event"]["terms"]))

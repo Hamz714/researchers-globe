@@ -2,7 +2,7 @@ import maplibregl, { type GeoJSONSource, type Map as MLMap } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./style.css";
 import { api } from "./api";
-import type { AssetDetail, EvalReport, QueryResult, Result, Tier } from "./types";
+import type { AssetDetail, AssetPoint, EvalReport, QueryResult, Result, Tier } from "./types";
 
 // ----------------------------------------------------------------- constants
 // TODO(Person C): demotiles is a free, low-detail basemap with no key. Swap for a nicer style if time allows.
@@ -16,6 +16,7 @@ const esc = (s: string) =>
 const fmt = (x: number | null | undefined, d = 2) => (x === null || x === undefined ? "—" : x.toFixed(d));
 
 let current: QueryResult | null = null;
+let allAssets: AssetPoint[] = [];
 
 // ----------------------------------------------------------------- map
 const map: MLMap = new maplibregl.Map({
@@ -32,7 +33,14 @@ const emptyFC = (): GeoJSON.FeatureCollection => ({ type: "FeatureCollection", f
 map.on("style.load", () => {
   map.setProjection({ type: "globe" });
 
+  map.addSource("dark", { type: "geojson", data: emptyFC() });
   map.addSource("assets", { type: "geojson", data: emptyFC() });
+  map.addLayer({
+    id: "dark",
+    type: "circle",
+    source: "dark",
+    paint: { "circle-radius": 2.2, "circle-color": "#6b7280", "circle-opacity": 0.6 },
+  });
   map.addSource("path", { type: "geojson", data: emptyFC() });
 
   map.addLayer({
@@ -111,13 +119,18 @@ function render(q: QueryResult) {
       properties: { id: r.id, name: r.name, tier: r.tier, score: r.score },
     })),
   });
+  const lit = new Set(q.results.map((r) => r.id));
+  (map.getSource("dark") as GeoJSONSource | undefined)?.setData({
+    type: "FeatureCollection",
+    features: allAssets
+      .filter((a) => !lit.has(a.id))
+      .map((a) => ({ type: "Feature", geometry: { type: "Point", coordinates: [a.lon, a.lat] }, properties: { id: a.id } })),
+  });
   (map.getSource("path") as GeoJSONSource | undefined)?.setData(emptyFC());
   $("#panel").hidden = true;
 
   const counts = { high: 0, medium: 0, low: 0 } as Record<Tier, number>;
   q.results.forEach((r) => counts[r.tier]++);
-  // TODO(Person C): draw dark assets as grey dots. The contract only gives dark_count, not their
-  // positions; needs a decision (e.g. a GET /assets endpoint) agreed with B before 03:00.
   $("#legend").innerHTML = `
     <div class="legend-title">${esc(q.criteria.event.name)}</div>
     <div class="channels">${q.channels.map((c) => `<span class="chip small" title="${esc(c.reason)}">${esc(c.id)}</span>`).join("") || "<em>no channels chosen</em>"}</div>
@@ -250,6 +263,7 @@ document.querySelectorAll<HTMLButtonElement>(".tabs button").forEach((b) =>
 
 async function init() {
   try {
+    allAssets = await api.assets().catch(() => []);
     const presets = await api.presets();
     $("#presets").innerHTML = presets
       .map((p) => `<button class="chip ${p.kind}" data-q="${esc(p.query)}">${esc(p.label)}</button>`)

@@ -57,45 +57,43 @@ def parse_question(text: str, backends: list | None = None) -> tuple[dict, dict 
     return criteria, used.get("preset")
 
 
-def channel_schema(library: dict[str, dict]) -> dict:
-    return {
-        "type": "object",
-        "required": ["channels"],
-        "additionalProperties": False,
-        "properties": {
-            "channels": {
-                "type": "array",
-                "maxItems": 4,
-                "items": {
-                    "type": "object",
-                    "required": ["id", "reason"],
-                    "additionalProperties": False,
-                    "properties": {"id": {"enum": sorted(library)}, "reason": {"type": "string", "maxLength": 200}},
-                },
-            }
-        },
-    }
-
-
 def choose_channels(text: str, criteria: dict, preset: dict | None = None,
                     backends: list | None = None) -> list[dict]:
-    """Step 2. The model picks from the fixed library only; anything else is rejected by code."""
+    """Step 2. The model scores each channel in the fixed library (Jev: one yes/no per channel);
+    code keeps those with p >= 0.5, at most 4. Nothing outside the library can come back."""
     library = load_channels()
     if preset is not None:  # parse already fell back to a preset: stay consistent with it
         return preset["channels"]
-    prompt = (
-        f"Question: {text}\nParsed criteria: {json.dumps(criteria)}\n"
-        "Pick the impact channels through which this event could affect these assets. "
-        "Use ONLY these channel ids:\n"
-        + "\n".join(f"- {c['id']}: {c['description']}" for c in library.values())
-        + "\nGive a short reason for each. Pick none if the event is unrelated."
+    picked = decision_model.select(
+        f"Could the event in this question affect {criteria['asset_type'].replace('_', ' ')}s through this channel?",
+        {cid: c["description"] for cid, c in library.items()},
+        {"question": text, "event": criteria["event"]},
+        max_n=4,
+        fallback=lambda: [(c["id"], 1.0) for c in nearest_preset(text)["channels"]],
+        backends=backends,
     )
-    raw = decision_model.parse(prompt, channel_schema(library),
-                               fallback=lambda: {"channels": nearest_preset(text)["channels"]},
-                               backends=backends)
-    out, seen = [], set()
-    for ch in raw["channels"]:
-        if ch["id"] in library and ch["id"] not in seen:  # schema enum already enforces this; belt and braces
-            out.append(Channel.model_validate(ch).model_dump())
-            seen.add(ch["id"])
+    return [Channel(id=cid, reason=f"{library[cid]['description']} (model p={p:.2f})").model_dump()
+            for cid, p in picked if cid in library]
+
+
+def choose_touches(text: str, criteria: dict, channel_ids: list[str], node_names: dict[str, str],
+                   preset: dict | None = None, backends: list | None = None) -> dict[str, list]:
+    """Which nodes each chosen channel touches for THIS event (the TOUCHES edges).
+
+    Presets carry hand-reviewed touches. For free text the model picks, per channel, from
+    the countries in the graph (Jev: one yes/no each); p becomes the edge weight. If the
+    model is unavailable, channels.json `default_touches` are used.
+    """
+    library = load_channels()
+    if preset is not None and preset.get("touches") is not None:
+        return preset["touches"]
+    countries = {nid: name for nid, name in node_names.items() if nid.startswith("country_")}
+    out: dict[str, list] = {}
+    for cid in channel_ids:
+        picked = decision_model.select(
+            f"Through '{library[cid]['name']}', which country would this event act on most directly?",
+            countries, {"question": text, "event": criteria["event"]}, max_n=5,
+            fallback=lambda cid=cid: [tuple(t) for t in library[cid].get("default_touches", [])],
+            backends=backends)
+        out[cid] = [[nid, round(float(p), 3)] for nid, p in picked if nid in node_names]
     return out

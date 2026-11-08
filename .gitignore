@@ -17,8 +17,7 @@ frontend/dist/
 data/raw/*
 !data/raw/.gitkeep
 # data/graph/ is committed so everyone has the real graph
-cache/*
-!cache/.gitkeep
+# cache/ IS committed: it is the shared offline data for the demo (GDELT, Wikipedia, model answers)
 
 # OS / editors
 .DS_Store

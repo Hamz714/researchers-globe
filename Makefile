@@ -6,7 +6,7 @@ ifeq ($(OS),Windows_NT)
 PY     := $(VENV)/Scripts/python.exe
 endif
 
-.PHONY: help setup backend frontend test fetch-sample eval graph pipeline-query
+.PHONY: help setup backend frontend test fetch-sample eval graph pipeline-query presets fetch-plan fetch-run fetch-ingest
 
 help:
 	@echo "setup         create .venv, install Python + frontend deps, copy .env.example"
@@ -15,7 +15,11 @@ help:
 	@echo "test          pytest + frontend type check"
 	@echo "fetch-sample  one cached GDELT call and one Wikipedia call"
 	@echo "eval          compute evaluation tables into eval/results.json"
-	@echo "graph         build the mock entity graph into data/graph/"
+	@echo "graph         rebuild the real entity graph from the GEM file into data/graph/"
+	@echo "presets       precompute all preset results into data/preset_results/ (offline)"
+	@echo "fetch-plan    list GDELT/Wikipedia URLs missing from cache -> data/jobs/jobs.json"
+	@echo "fetch-run     fetch those URLs (throttled; use a phone hotspot if the venue IP is blocked)"
+	@echo "fetch-ingest  load data/jobs/results.json into cache/"
 
 setup:
 	$(PYTHON) -m venv $(VENV)
@@ -42,7 +46,19 @@ eval:
 	GLOBE_OFFLINE=1 $(PY) -m eval.metrics
 
 graph:
-	$(PY) -m pipeline.graph --mock
+	$(PY) -m pipeline.graph --gem data/gem/gem_iron_ore_2026-09.xlsx
+
+presets:
+	GLOBE_OFFLINE=1 $(PY) -m reasoning.precompute
+
+fetch-plan:
+	$(PY) -m pipeline.browser_fetch plan
+
+fetch-run:
+	$(PY) -m pipeline.browser_fetch run
+
+fetch-ingest:
+	$(PY) -m pipeline.browser_fetch ingest data/jobs/results.json
 
 pipeline-query:
 	GLOBE_OFFLINE=1 $(PY) -m reasoning.run_query

@@ -1,0 +1,30 @@
+{
+ "criteria": {
+  "asset_type": "iron_ore_mine",
+  "event": {
+   "name": "TODO: name the strike or protest on the day",
+   "date": "2026-11-07",
+   "terms": [
+    "strike",
+    "protest",
+    "union"
+   ]
+  },
+  "window": {
+   "baseline_days": 60,
+   "recent_days": 7
+  },
+  "status": [
+   "operating"
+  ],
+  "region": "global"
+ },
+ "channels": [
+  {
+   "id": "labour",
+   "reason": "Strikes and blockades stop mines and railways."
+  }
+ ],
+ "results": [],
+ "dark_count": 701
+}

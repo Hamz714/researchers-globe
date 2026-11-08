@@ -22,7 +22,10 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.schemas import AssetDetail, EvalReport, PathNode, Preset, QueryRequest, QueryResult, SignalSeries
+from functools import lru_cache
+
+from backend.schemas import (AssetDetail, AssetPoint, EvalReport, PathNode, Preset, QueryRequest, QueryResult,
+                             SignalSeries)
 
 ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT / ".env")
@@ -89,6 +92,23 @@ def query(req: QueryRequest) -> dict:
 @app.get("/presets", response_model=list[Preset])
 def presets() -> list[dict]:
     return [{k: p[k] for k in ("id", "label", "query", "kind")} for p in _presets()]
+
+
+@lru_cache(maxsize=1)
+def _asset_points() -> list[dict]:
+    from pipeline.graph import default_graph
+
+    n = default_graph().nodes
+    mines = n[n["type"] == "mine"]
+    return [{"id": r.id, "name": r.name, "lat": float(r.lat), "lon": float(r.lon),
+             "country": r.country if isinstance(r.country, str) else None} for r in mines.itertuples()]
+
+
+@app.get("/assets", response_model=list[AssetPoint])
+def assets() -> list[dict]:
+    """All assets (real graph if built, else the 20 mock mines). Not in the plan's contract:
+    added so the globe can draw dark assets as grey dots (decision, 8 Nov)."""
+    return _asset_points()
 
 
 @app.get("/asset/{asset_id}", response_model=AssetDetail)

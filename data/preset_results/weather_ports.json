@@ -1,0 +1,1231 @@
+{
+ "criteria": {
+  "asset_type": "iron_ore_mine",
+  "event": {
+   "name": "Cyclone Murasu",
+   "date": "2026-11-03",
+   "terms": [
+    "Murasu",
+    "cyclone",
+    "Andhra Pradesh"
+   ]
+  },
+  "window": {
+   "baseline_days": 60,
+   "recent_days": 7
+  },
+  "status": [
+   "operating"
+  ],
+  "region": "India"
+ },
+ "channels": [
+  {
+   "id": "weather",
+   "reason": "Severe Cyclonic Storm Murasu made landfall near Ongole, Andhra Pradesh on 3 Nov 2026; ports on that coast handle iron ore exports."
+  }
+ ],
+ "results": [
+  {
+   "id": "mine_P100000128965",
+   "name": "Sri Anjani Pandlimarri Mine",
+   "lat": 14.480641,
+   "lon": 78.590759,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128965",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Sri Anjani Pandlimarri Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129251",
+   "name": "BV Joshi Ganigattu Mine",
+   "lat": 15.560844,
+   "lon": 78.029812,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129251",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via BV Joshi Ganigattu Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129258",
+   "name": "Shree Arya Lakshmi Tavasikonda Mine",
+   "lat": 15.452101,
+   "lon": 78.067099,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129258",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Shree Arya Lakshmi Tavasikonda Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129260",
+   "name": "EV Ranga Reddy Pagadapalli Mine",
+   "lat": 14.450451,
+   "lon": 78.605802,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129260",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via EV Ranga Reddy Pagadapalli Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129261",
+   "name": "D Venkata Subbamma Hanuman Mine",
+   "lat": 15.373824,
+   "lon": 77.963696,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129261",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via D Venkata Subbamma Hanuman Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129262",
+   "name": "B Sanjeev Reddy Seetharamapuram Mine",
+   "lat": 15.012917,
+   "lon": 79.116783,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129262",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via B Sanjeev Reddy Seetharamapuram Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129263",
+   "name": "Dhigvijay Minerals Gutupalli Mine",
+   "lat": 15.440541,
+   "lon": 78.065379,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129263",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Dhigvijay Minerals Gutupalli Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129264",
+   "name": "IBC Gaganapalli Mine",
+   "lat": 14.413547,
+   "lon": 78.708353,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129264",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via IBC Gaganapalli Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129265",
+   "name": "K Rajamohan Reddy Chabali Mine",
+   "lat": 14.479929,
+   "lon": 78.597433,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129265",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via K Rajamohan Reddy Chabali Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129266",
+   "name": "Benita Industries Chabali Mine",
+   "lat": 14.483575,
+   "lon": 78.590186,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129266",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Benita Industries Chabali Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129268",
+   "name": "Sri Padmavathi Veldurthi Mine",
+   "lat": 14.140672,
+   "lon": 80.003746,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129268",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Sri Padmavathi Veldurthi Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129269",
+   "name": "Lakshmi Enterprises Gandrai Mine",
+   "lat": 16.961078,
+   "lon": 80.099978,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129269",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Lakshmi Enterprises Gandrai Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129403",
+   "name": "Gutupalli Mining Company Gutupalli Mine",
+   "lat": 15.441722,
+   "lon": 78.033291,
+   "tier": "low",
+   "score": 0.2666,
+   "components": {
+    "exposure": 0.8,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129403",
+     "port_krishnapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Gutupalli Mining Company Gutupalli Mine → Krishnapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128117",
+   "name": "NMDC Bailadila-Kirandul Deposit 14 NMZ Mine",
+   "lat": 18.615358,
+   "lon": 81.229663,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128117",
+     "port_gangavaram",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via NMDC Bailadila-Kirandul Deposit 14 NMZ Mine → Gangavaram → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128475",
+   "name": "SAIL Dalli Mine",
+   "lat": 20.570856,
+   "lon": 81.021508,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128475",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via SAIL Dalli Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128483",
+   "name": "NMDC Bailadila-Kirandul Deposit 11C Mine",
+   "lat": 18.633643,
+   "lon": 81.238373,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128483",
+     "port_gangavaram",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via NMDC Bailadila-Kirandul Deposit 11C Mine → Gangavaram → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128495",
+   "name": "SAIL Rajhara Mine",
+   "lat": 20.56984,
+   "lon": 81.095046,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128495",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via SAIL Rajhara Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128516",
+   "name": "NMDC Bailadila-Bacheli Deposit 5 Mine",
+   "lat": 18.676037,
+   "lon": 81.187778,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128516",
+     "port_gangavaram",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via NMDC Bailadila-Bacheli Deposit 5 Mine → Gangavaram → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128532",
+   "name": "SAIL Mahamaya-Dulki Mine",
+   "lat": 20.485727,
+   "lon": 80.988404,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128532",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via SAIL Mahamaya-Dulki Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128533",
+   "name": "SAIL Rowghat Mine",
+   "lat": 19.747479,
+   "lon": 81.139969,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128533",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via SAIL Rowghat Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128777",
+   "name": "NMDC Bailadila-Bacheli Deposit 10 Mine",
+   "lat": 18.702536,
+   "lon": 81.223817,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128777",
+     "port_gangavaram",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via NMDC Bailadila-Bacheli Deposit 10 Mine → Gangavaram → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128896",
+   "name": "LMEL Surjagarh Mine",
+   "lat": 19.625395,
+   "lon": 80.365504,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128896",
+     "port_gangavaram",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via LMEL Surjagarh Mine → Gangavaram → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128910",
+   "name": "Kedia Lohakana Mine",
+   "lat": 27.479277,
+   "lon": 76.097649,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128910",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Kedia Lohakana Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128912",
+   "name": "DRG Preetampuri Mine",
+   "lat": 27.584184,
+   "lon": 75.747543,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128912",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via DRG Preetampuri Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128913",
+   "name": "Prateek Minerals Narda Mine",
+   "lat": 27.732337,
+   "lon": 75.941181,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128913",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Prateek Minerals Narda Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128918",
+   "name": "SAIL Jharan Dalli Mine",
+   "lat": 20.563854,
+   "lon": 81.046262,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128918",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via SAIL Jharan Dalli Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128960",
+   "name": "MSMCL Khursipar Mine",
+   "lat": 21.380701,
+   "lon": 80.292516,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128960",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via MSMCL Khursipar Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128963",
+   "name": "Anand Mining Pratappur Mine",
+   "lat": 23.392031,
+   "lon": 80.195154,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128963",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Anand Mining Pratappur Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128971",
+   "name": "NMDC Bailadila-Kirandul Deposit 11B Mine",
+   "lat": 18.658576,
+   "lon": 81.230241,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128971",
+     "port_gangavaram",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via NMDC Bailadila-Kirandul Deposit 11B Mine → Gangavaram → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128972",
+   "name": "NMDC Bailadila-Kirandul Deposit 14 Mine",
+   "lat": 18.606222,
+   "lon": 81.226097,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128972",
+     "port_gangavaram",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via NMDC Bailadila-Kirandul Deposit 14 Mine → Gangavaram → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128973",
+   "name": "NMDC Bailadila-Bacheli Deposit 11A Mine",
+   "lat": 18.682085,
+   "lon": 81.22311,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128973",
+     "port_gangavaram",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via NMDC Bailadila-Bacheli Deposit 11A Mine → Gangavaram → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128993",
+   "name": "SBPIL Hahaladdi Mine",
+   "lat": 20.193026,
+   "lon": 80.903165,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128993",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via SBPIL Hahaladdi Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128994",
+   "name": "JISPL Hahaladdi Mine",
+   "lat": 20.225361,
+   "lon": 80.893287,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128994",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via JISPL Hahaladdi Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128995",
+   "name": "GPIL Kachche Aridongri Mine",
+   "lat": 20.408833,
+   "lon": 81.063648,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128995",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via GPIL Kachche Aridongri Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128996",
+   "name": "Mivan Steels Hahaladdi Mine",
+   "lat": 20.224586,
+   "lon": 80.893838,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128996",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Mivan Steels Hahaladdi Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128997",
+   "name": "GPIL Boria Tibbu Mine",
+   "lat": 20.461058,
+   "lon": 80.928432,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128997",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via GPIL Boria Tibbu Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128998",
+   "name": "Jayaswal Neco Metabodeli Mine",
+   "lat": 20.044037,
+   "lon": 80.979994,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128998",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Jayaswal Neco Metabodeli Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000128999",
+   "name": "CMDC Aridongri Mine",
+   "lat": 20.397681,
+   "lon": 81.067107,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128999",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via CMDC Aridongri Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129000",
+   "name": "Jayaswal Neco cMine",
+   "lat": 19.439193,
+   "lon": 81.289811,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129000",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Jayaswal Neco cMine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129001",
+   "name": "Sarda Dongarbor Mine",
+   "lat": 20.442795,
+   "lon": 80.920334,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129001",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Sarda Dongarbor Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129002",
+   "name": "Sankalp Agrawal Bijaiya Mine",
+   "lat": 23.357921,
+   "lon": 80.189089,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129002",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Sankalp Agrawal Bijaiya Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129003",
+   "name": "Anand Mining Ghugharikala Mine",
+   "lat": 23.377701,
+   "lon": 80.177424,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129003",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Anand Mining Ghugharikala Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129004",
+   "name": "Khatri Minerals Jhansi Mine",
+   "lat": 23.367923,
+   "lon": 80.082637,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129004",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Khatri Minerals Jhansi Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129005",
+   "name": "Nirmala Minerals Ghugharikala Mine",
+   "lat": 23.376416,
+   "lon": 80.170973,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129005",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Nirmala Minerals Ghugharikala Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129006",
+   "name": "Shrikant Pandey Hrideyanagar Mine",
+   "lat": 23.376409,
+   "lon": 80.026251,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129006",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Shrikant Pandey Hrideyanagar Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129009",
+   "name": "Shikha Modi Kharoti Dhaniya Mine",
+   "lat": 27.724012,
+   "lon": 75.695799,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129009",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Shikha Modi Kharoti Dhaniya Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129010",
+   "name": "Nandlal Agrawal Morija Mine",
+   "lat": 27.165095,
+   "lon": 75.769256,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129010",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Nandlal Agrawal Morija Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129011",
+   "name": "Nilkanth Concast Bhagoli Mine",
+   "lat": 27.757783,
+   "lon": 75.695179,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129011",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Nilkanth Concast Bhagoli Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129012",
+   "name": "Deepak Singh Papra Kala Mine",
+   "lat": 27.751512,
+   "lon": 75.709789,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129012",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Deepak Singh Papra Kala Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
+   "id": "mine_P100000129287",
+   "name": "Madhup Joshi Bagawas Mine",
+   "lat": 27.411617,
+   "lon": 76.050091,
+   "tier": "low",
+   "score": 0.1599,
+   "components": {
+    "exposure": 0.48,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": 0.0,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000129287",
+     "port_visakhapatnam",
+     "channel_weather"
+    ]
+   ],
+   "reason": "Exposed via Madhup Joshi Bagawas Mine → Visakhapatnam → weather. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "evidence": []
+  }
+ ],
+ "dark_count": 651
+}

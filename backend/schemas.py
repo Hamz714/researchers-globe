@@ -106,6 +106,15 @@ class Preset(BaseModel):
     kind: Literal["hero", "weather", "labour", "negative_control", "other"] = "other"
 
 
+class AssetPoint(BaseModel):
+    """GET /assets: every asset on the globe, so dark ones can be drawn as grey dots."""
+    id: str
+    name: str
+    lat: float
+    lon: float
+    country: str | None = None
+
+
 class PathNode(BaseModel):
     id: str
     type: str

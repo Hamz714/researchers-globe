@@ -21,7 +21,7 @@ class Fake:
 
 @pytest.fixture(autouse=True)
 def tmp_cache(tmp_path, monkeypatch):
-    monkeypatch.setattr(dm, "CACHE_DIR", tmp_path)
+    monkeypatch.setenv("GLOBE_CACHE_DIR", str(tmp_path))
 
 
 def test_judge_validates_and_caches():
@@ -57,10 +57,39 @@ def test_parser_falls_back_to_nearest_preset():
 
 
 def test_channel_choice_rejects_ids_outside_library():
-    b = Fake("x", '{"channels": [{"id": "aliens", "reason": "?"}]}')
+    b = Fake("x", '{"aliens": 0.99, "tariffs": 0.9, "weather": 0.1}')
     crit, _ = parse_question("iron ore mines exposed to the US midterms", backends=[])
-    out = choose_channels("anything", crit, None, backends=[b])  # invalid -> preset fallback
-    assert all(c["id"] in {"tariffs", "infrastructure", "permits"} for c in out)
+    out = choose_channels("anything", crit, None, backends=[b])
+    assert [c["id"] for c in out] == ["tariffs"]
+
+
+def test_channel_choice_falls_back_to_preset():
+    crit, _ = parse_question("iron ore mines exposed to the US midterms", backends=[])
+    out = choose_channels("iron ore mines exposed to the US midterms", crit, None, backends=[Fake("x", "nonsense")])
+    assert {c["id"] for c in out} == {"tariffs", "infrastructure", "permits"}
+
+
+class FakeJev(Fake):
+    def judge_native(self, question, options, context):
+        self.calls += 1
+        return {"choice": "relevant", "confidence": 0.77}
+
+    def select_native(self, question, options, context):
+        self.calls += 1
+        return [(k, 0.9 if k == "labour" else 0.1) for k in options]
+
+
+def test_jev_native_paths_are_used():
+    j = FakeJev("jev", "")
+    assert dm.judge("q?", ["relevant", "not_relevant"], {}, backends=[j]) == {"choice": "relevant", "confidence": 0.77}
+    assert dm.select("q?", {"labour": "x", "weather": "y"}, {}, backends=[j]) == [("labour", 0.9)]
+
+
+def test_jev_cannot_parse_so_parse_falls_through():
+    j = FakeJev("jev", "")
+    j.complete = lambda s, u: (_ for _ in ()).throw(dm.NotSupported("no text"))
+    g = Fake("fallback", '{"a": 1}')
+    assert dm.parse("t", {"type": "object"}, backends=[j, g]) == {"a": 1}
 
 
 def test_keyword_judge_needs_asset_and_channel_terms():

@@ -18,7 +18,6 @@ HERO = "Which iron ore mines are exposed to the 2026 US midterms?"
 def isolated(tmp_path, monkeypatch):
     monkeypatch.setenv("GLOBE_CACHE_DIR", str(tmp_path))
     from reasoning import decision_model as dm
-    monkeypatch.setattr(dm, "CACHE_DIR", tmp_path / "llm")
     monkeypatch.setattr(dm, "default_backends", lambda: [])
 
 
@@ -52,6 +51,8 @@ def test_api_endpoints():
     assert a["path_nodes"] and a["series"]["news_volume"]
     assert client.get("/asset/nope").status_code == 404
     assert "judge" in client.get("/eval").json()
+    pts = client.get("/assets").json()
+    assert len(pts) >= 20 and {"id", "name", "lat", "lon"} <= set(pts[0])
 
 
 def test_api_rejects_empty_query():
