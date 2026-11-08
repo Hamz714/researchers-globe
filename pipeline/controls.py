@@ -69,7 +69,7 @@ def control_terms(criteria: dict, chosen: list[str], library: dict, end: date) -
         glob = fetch_gdelt.timeline(terms, None, start, end, "timelinevolraw")
         with_ev = fetch_gdelt.timeline(ev["terms"], terms, start, end, "timelinevolraw")
         scores[cid] = None if not len(glob) else (
-            robust_z(glob, win["baseline_days"], win["recent_days"]),
-            robust_z(with_ev, win["baseline_days"], win["recent_days"]) if len(with_ev) else 0.0)
+            robust_z(glob, win["baseline_days"], win["recent_days"], end),
+            robust_z(with_ev, win["baseline_days"], win["recent_days"], end) if len(with_ev) else 0.0)
     cid, why = pick(scores, cands)
     return {"channel": cid, "terms": library[cid]["search_terms"] if cid else DEFAULT_CONTROL, "why": why}

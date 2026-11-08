@@ -151,7 +151,10 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
                   + f". News volume z={sig['news_z']:.1f}, attention z={sig['attention_z']:.1f}, "
                   f"{len(relevant)} relevant article(s)."
                   + (f" The placebo control ({control['channel'] or 'copper'} news) spiked too, so the news spike was discounted."
-                     if sig["placebo_flag"] else ""))
+                     if sig["placebo_flag"] else "")
+                  + (" GDELT outage days excluded." if sig.get("gap_days_dropped") else "")
+                  + (f" Insufficient data for {', '.join(sig['insufficient'])} (too few valid recent days)."
+                     if sig.get("insufficient") else ""))
         # TODO(Person B): one-sentence grounded summary via the decision model, citing only `relevant`.
         results.append({
             "id": ex.asset_id, "name": node["name"], "lat": float(node["lat"]), "lon": float(node["lon"]),

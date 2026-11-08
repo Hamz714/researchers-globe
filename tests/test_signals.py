@@ -73,3 +73,61 @@ def test_asset_signals_applies_placebo():
 def test_empty_series_give_zero():
     out = sg.asset_signals(pd.Series(dtype=float))
     assert out.news_z == 0 and out.tone_shift == 0 and out.attention_z == 0
+
+
+# ---------------------------------------------------------------- GDELT outage gaps (NaN days)
+def with_gap(values, gap):
+    """values with positions in `gap` (a range) set to NaN, as parse_timeline does for outage days."""
+    v = list(values)
+    for i in gap:
+        v[i] = np.nan
+    return series(v)
+
+
+def test_gap_does_not_create_negative_z():
+    # steady 20/day; GDELT outage covers 5 of the 7 recent days: must not read as a drop
+    s = with_gap([20.0] * 67, range(60, 65))
+    assert sg.robust_z(s) == pytest.approx(0.0)
+    zeros = series([20.0] * 60 + [0.0] * 5 + [20.0] * 2)  # the old behaviour: outage counted as zeros
+    assert sg.robust_z(zeros) < -5
+
+
+def test_post_gap_spike_still_detected():
+    s = with_gap([5.0] * 60 + [0.0] * 5 + [15.0] * 2, range(60, 65))
+    assert sg.robust_z(s) == pytest.approx(10.0)
+
+
+def test_gap_in_baseline_is_dropped():
+    s = with_gap([5.0] * 60 + [15.0] * 7, range(20, 32))
+    b, r = sg.split_windows(s)
+    assert len(b) == 48 and len(r) == 7 and sg.robust_z(s) == pytest.approx(10.0)
+
+
+def test_insufficient_recent_days_gives_zero_and_flag():
+    s = with_gap([5.0] * 60 + [50.0] * 7, range(60, 66))  # only 1 valid recent day
+    assert sg.robust_z(s) == 0.0 and not sg.sufficient(s)
+    out = sg.asset_signals(s, tone=s, views=series([10.0] * 67))
+    assert out.news_z == 0.0 and out.insufficient == ["news", "tone"] and out.attention_z == pytest.approx(0.0)
+
+
+def test_windows_are_calendar_based():
+    # series stops 2 days before `end` (unpublished days): recent = (end-7, end] has only 5 valid days
+    s = series([5.0] * 60 + [15.0] * 5)  # 2026-09-01 .. 2026-11-04
+    end = s.index.max() + pd.Timedelta(days=2)
+    b, r = sg.split_windows(s, end=end)
+    assert len(r) == 5 and r.index.max() == s.index.max()
+    assert len(b) == 60 and b.index.max() < r.index.min()
+
+
+def test_parse_timeline_marks_doc_gaps_missing(monkeypatch):
+    import json
+
+    from pipeline import fetch_gdelt
+
+    monkeypatch.setenv("GDELT_DOC_GAPS", "2026-10-03:2026-10-05")
+    data = [{"date": f"202610{d:02d}T000000Z", "value": 0 if 3 <= d <= 5 else 9} for d in range(1, 8)]
+    s = fetch_gdelt.parse_timeline(json.dumps({"timeline": [{"data": data}]}), "timelinevolraw")
+    assert s.isna().sum() == 3 and s.loc["2026-10-02"] == 9 and s.loc["2026-10-06"] == 9
+    assert fetch_gdelt.gap_days_in(pd.Timestamp("2026-10-01").date(), pd.Timestamp("2026-10-31").date()) == 3
+    monkeypatch.setenv("GDELT_DOC_GAPS", "")
+    assert fetch_gdelt.parse_timeline(json.dumps({"timeline": [{"data": data}]}), "timelinevolraw").isna().sum() == 0
