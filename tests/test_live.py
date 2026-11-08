@@ -114,6 +114,7 @@ def test_stream_parser(monkeypatch):
     class Resp:
         def __enter__(self): return self
         def __exit__(self, *a): return False
+        status_code = 200
         def raise_for_status(self): pass
         def iter_lines(self, decode_unicode=True):
             yield from lines
@@ -122,3 +123,27 @@ def test_stream_parser(monkeypatch):
     monkeypatch.setattr(requests, "get", lambda *a, **k: Resp())
     w._run()
     assert [e["title"] for e in w.edits] == ["China"] and w._last_id == '[{"offset":1}]' and w.events_seen == 2
+
+
+def test_sse_http_error_is_reported(monkeypatch):
+    """A refused connection (e.g. 403 for the User-Agent) must show up in /live/status, not be silent."""
+    import io
+
+    import requests
+
+    from pipeline.live_wiki import LiveWiki
+
+    w = LiveWiki()
+
+    class Resp:
+        status_code = 403
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+        @property
+        def raw(self):
+            w._stop.set()
+            return type("R", (), {"read": lambda self, n, decode_content=True: b"Please set a user-agent"})()
+
+    monkeypatch.setattr(requests, "get", lambda *a, **k: Resp())
+    w._run()
+    assert w.last_error.startswith("RuntimeError: HTTP 403") and "user-agent" in w.last_error and not w.connected

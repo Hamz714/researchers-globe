@@ -495,7 +495,8 @@ export function mountResearchersGlobe({ viewer, dataManager = null, autoRun = fa
       const lag = st.last_event_ts ? Date.now() / 1000 - st.last_event_ts : null;
       const head = st.connected
         ? `<div class="rg-ticker-head"><i class="on"></i>Wikipedia live edits${lag && lag > 120 ? ` · catching up (${Math.round(lag / 60)} min behind)` : ''}</div>`
-        : `<div class="rg-ticker-head"><i></i>Wikipedia live edits: stream offline${feed.length ? ' (last snapshot)' : ''}</div>`;
+        : `<div class="rg-ticker-head"><i></i>Wikipedia live edits: stream offline${feed.length ? ' (last snapshot)' : ''}</div>` +
+          `<div class="rg-ticker-row" title="${esc(st.disabled_reason || st.last_error || '')}"><span>${esc(st.disabled_reason || st.last_error || (st.running ? 'connecting…' : 'not started'))}</span></div>`;
       box.innerHTML = head + feed
         .map((e) => `<div class="rg-ticker-row"><b>${esc(e.name)}</b> <span>${esc(e.title === e.name ? '' : `'${e.title}' `)}edited ${ago(e.ts)} by ${esc(e.user)}${e.bot ? ' (bot)' : ''}</span></div>`)
         .join('');

@@ -6,7 +6,7 @@ ifeq ($(OS),Windows_NT)
 PY     := $(VENV)/Scripts/python.exe
 endif
 
-.PHONY: gev gev-apply help setup backend frontend test fetch-sample eval graph pipeline-query presets fetch-plan fetch-run fetch-ingest fetch-all
+.PHONY: live-check gev gev-apply help setup backend frontend test fetch-sample eval graph pipeline-query presets fetch-plan fetch-run fetch-ingest fetch-all
 
 help:
 	@echo "setup         create .venv, install Python + frontend deps, copy .env.example"
@@ -30,6 +30,9 @@ setup:
 	$(PY) -m pip install -r requirements.txt
 	cd frontend && npm ci
 	@test -f .env || cp .env.example .env
+
+live-check:  ## connect to the Wikipedia live edit stream for 20 s and say exactly what happens
+	$(PY) -m pipeline.live_wiki 20
 
 backend:
 	$(PY) -m uvicorn backend.app:app --reload --port 8000

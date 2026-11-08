@@ -28,7 +28,10 @@ from pathlib import Path
 log = logging.getLogger(__name__)
 ROOT = Path(__file__).resolve().parents[1]
 STREAM_URL = "https://stream.wikimedia.org/v2/stream/recentchange"
-USER_AGENT = os.environ.get("WIKI_USER_AGENT", "ResearchersGlobe/0.1 (HackTheBurgh 2026 student project)")
+# Wikimedia's User-Agent policy wants a way to contact the client (URL or email); without one, requests
+# can be refused with 403. The shared WIKI_USER_AGENT in old .env files has no contact, so it isn't used here.
+USER_AGENT = os.environ.get("LIVE_WIKI_USER_AGENT") or \
+    "ResearchersGlobe/0.2 (https://github.com/Hamz714/researchers-globe; HackTheBurgh 2026) python-requests"
 KEEP_S = 24 * 3600
 
 
@@ -49,6 +52,7 @@ class LiveWiki:
         self.last_error: str | None = None
         self._last_id: str | None = None
         self._thread: threading.Thread | None = None
+        self.disabled_reason: str | None = None
         self._stop = threading.Event()
 
     # ---------------------------------------------------------------- matching (pure, unit-tested)
@@ -96,7 +100,7 @@ class LiveWiki:
         return {"running": bool(self._thread and self._thread.is_alive()), "connected": self.connected,
                 "connected_since": self.connected_since, "events_seen": self.events_seen,
                 "matched_24h": n, "watching_titles": len(self.watch), "last_event_ts": self.last_event_ts,
-                "last_error": self.last_error, "now": time.time()}
+                "last_error": self.last_error, "disabled_reason": self.disabled_reason, "now": time.time()}
 
     # ---------------------------------------------------------------- snapshot
     def load_snapshot(self) -> None:
@@ -154,7 +158,9 @@ class LiveWiki:
                 params["since"] = since.strftime("%Y-%m-%dT%H:%M:%SZ")
             try:
                 with requests.get(STREAM_URL, params=params, headers=headers, stream=True, timeout=(10, 60)) as r:
-                    r.raise_for_status()
+                    if r.status_code != 200:
+                        body = r.raw.read(300, decode_content=True).decode("utf-8", "replace")
+                        raise RuntimeError(f"HTTP {r.status_code} from Wikimedia: {' '.join(body.split())[:200]}")
                     self.connected, self.connected_since, self.last_error = True, time.time(), None
                     backoff = 2.0
                     data, ev_id = [], None
@@ -191,9 +197,54 @@ LIVE = LiveWiki()
 def start_if_enabled() -> bool:
     """Start the stream (backend startup). Returns True if it was started."""
     if os.environ.get("LIVE_WIKI", "1") == "0" or os.environ.get("GLOBE_OFFLINE", "0") == "1":
+        LIVE.disabled_reason = "LIVE_WIKI=0 in .env" if os.environ.get("LIVE_WIKI", "1") == "0" else \
+            "GLOBE_OFFLINE=1 in .env (set it to 0 for the live stream)"
+        log.warning("live wiki stream NOT started: %s", LIVE.disabled_reason)
         LIVE.load_snapshot()  # still answer from the last snapshot, labelled with its age
         return False
     from reasoning.things import all_wiki_titles
 
     LIVE.start(all_wiki_titles())
     return True
+
+
+def check(seconds: float = 20.0) -> int:
+    """`python -m pipeline.live_wiki`: connect the way the backend does and say exactly what happens."""
+    from dotenv import load_dotenv
+
+    load_dotenv(ROOT / ".env")
+    print(f"LIVE_WIKI={os.environ.get('LIVE_WIKI', '(unset = on)')}  GLOBE_OFFLINE={os.environ.get('GLOBE_OFFLINE', '(unset = 0)')}")
+    if os.environ.get("LIVE_WIKI", "1") == "0" or os.environ.get("GLOBE_OFFLINE", "0") == "1":
+        print("-> the backend will NOT start the stream with these settings. Set GLOBE_OFFLINE=0 and LIVE_WIKI=1 in .env.")
+    for k in ("HTTPS_PROXY", "HTTP_PROXY", "https_proxy", "http_proxy"):
+        if os.environ.get(k):
+            print(f"{k}={os.environ[k]} (requests will use it)")
+    print(f"User-Agent: {USER_AGENT}")
+    from reasoning.things import all_wiki_titles
+
+    lw = LiveWiki()
+    watch = all_wiki_titles()
+    print(f"watching {len(watch)} Wikipedia titles; connecting to {STREAM_URL} (replaying 30 min) ...")
+    lw.start(watch)
+    t0 = time.time()
+    while time.time() - t0 < seconds:
+        time.sleep(2)
+        st = lw.status()
+        lag = f"{(time.time() - st['last_event_ts']) / 60:.0f} min behind" if st["last_event_ts"] else "no events yet"
+        print(f"  {time.time() - t0:4.0f}s connected={st['connected']} events={st['events_seen']} "
+              f"matched={len(lw.edits)} ({lag}) error={st['last_error']}")
+    lw.stop()
+    ok = lw.events_seen > 0
+    print("OK: the stream works from this machine. If the globe still says offline, restart the backend "
+          "and check GET /live/status." if ok else
+          "FAILED: no events. Paste the error lines above to the tech lead.")
+    for e in list(lw.edits)[-5:]:
+        print(f"  matched: {e['title']} by {e['user']}")
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    import sys
+
+    logging.basicConfig(level=logging.INFO)
+    sys.exit(check(float(sys.argv[1]) if len(sys.argv) > 1 else 20.0))
