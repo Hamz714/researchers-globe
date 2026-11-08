@@ -6,7 +6,7 @@ ifeq ($(OS),Windows_NT)
 PY     := $(VENV)/Scripts/python.exe
 endif
 
-.PHONY: help setup backend frontend test fetch-sample eval graph pipeline-query presets fetch-plan fetch-run fetch-ingest fetch-all
+.PHONY: gev gev-apply help setup backend frontend test fetch-sample eval graph pipeline-query presets fetch-plan fetch-run fetch-ingest fetch-all
 
 help:
 	@echo "setup         create .venv, install Python + frontend deps, copy .env.example"
@@ -21,6 +21,8 @@ help:
 	@echo "fetch-run     fetch those URLs (throttled; use a phone hotspot if the venue IP is blocked)"
 	@echo "fetch-ingest  load data/jobs/results.json into cache/"
 	@echo "fetch-all     plan+run+ingest in rounds until nothing is missing, then presets (~30-40 min)"
+	@echo "gev           God's Eye View demo globe on http://localhost:4173 (needs \`make backend\` too)"
+	@echo "gev-apply     (re)build .gev/: upstream gods-eye-view @$(GEV_COMMIT) + our overlay + patch"
 
 setup:
 	$(PYTHON) -m venv $(VENV)
@@ -67,3 +69,23 @@ fetch-ingest:
 
 pipeline-query:
 	GLOBE_OFFLINE=1 $(PY) -m reasoning.run_query
+
+# God's Eye View demo globe. .gev/ is a throwaway upstream checkout (gitignored): only our overlay
+# (gods-eye-view/) and the patch are committed. gev-apply resets .gev/ to the pinned commit every
+# time, so local edits inside .gev/ are discarded: edit gods-eye-view/ instead.
+GEV_REPO   := https://github.com/bilawalsidhu/gods-eye-view.git
+GEV_COMMIT := 52187c9
+GEV_DIRS   := server src tools public output
+
+gev-apply:
+	@test -d .gev/.git || git clone $(GEV_REPO) .gev
+	cd .gev && git checkout -q $(GEV_COMMIT) && git reset -q --hard $(GEV_COMMIT) \
+	  && git clean -fdq -e node_modules -e .env -e .gev-cache
+	for d in $(GEV_DIRS); do [ -d gods-eye-view/$$d ] && cp -R gods-eye-view/$$d .gev/; done; true
+	cd .gev && git apply ../gods-eye-view/gods-eye-view-integration.patch
+	@# GEV reads provider keys from its own .env (Vite loadEnv): pass on the AIS key only.
+	@grep -E '^AISSTREAM_API_KEY=' .env > .gev/.env 2>/dev/null || touch .gev/.env
+	cd .gev && (test -d node_modules || npm ci)
+
+gev: gev-apply
+	cd .gev && npm run dev

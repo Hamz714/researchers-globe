@@ -264,19 +264,23 @@ def _offline():
 
 
 def _cached_series(doc: dict, asset_id: str) -> tuple[SignalSeries | None, str]:
-    """The asset's daily GDELT volume/tone for (asset terms AND channel terms), from cache only.
+    """The asset's daily series from cache only, on one date axis (start..end of the query window):
 
-    Uses the same terms and window as reasoning.run_query step 4. The cache key contains the
-    end date, so the last few days are tried (presets are precomputed on an earlier day)."""
+    * news_volume / tone: GDELT for (asset terms AND the asset's evidence terms), as in
+      reasoning.run_query step 4 (empty if the asset got no evidence pull);
+    * pageviews: Wikipedia views of the mine's and its owner's articles, summed. It starts at
+      dates[0] and stops at the last published day (Wikipedia lags 1-2 days), so it can be
+      shorter than `dates`.
+
+    The cache key contains the end date, so the last few days are tried (presets are
+    precomputed on an earlier day)."""
     try:
-        from pipeline import fetch_gdelt
+        from pipeline import fetch_gdelt, fetch_wiki
         from pipeline.graph import default_graph
         from reasoning.run_query import _asset_context, asset_evidence_terms
 
         crit = doc["criteria"]
         channel_terms = asset_evidence_terms(doc, asset_id, _channel_library())
-        if channel_terms is None:
-            return None, "No news series: this mine got no evidence pull for this question."
         ctx = _asset_context(default_graph(), asset_id)
         terms = ctx["terms"] + ctx["owner_terms"]
         win = crit["window"]
@@ -285,18 +289,37 @@ def _cached_series(doc: dict, asset_id: str) -> tuple[SignalSeries | None, str]:
             for back in range(0, 8):
                 end = date.today() - timedelta(days=back)
                 start = end - timedelta(days=days)
-                vol = fetch_gdelt.timeline(terms, channel_terms, start, end, "timelinevolraw")
+                vol = fetch_gdelt.timeline(terms, channel_terms, start, end, "timelinevolraw") if channel_terms else []
+                views = None
+                for title in ctx["wiki_titles"]:
+                    pv = fetch_wiki.pageviews(title, start, end)
+                    if len(pv):
+                        views = pv if views is None else views.add(pv, fill_value=0)
+                if not len(vol) and views is None:
+                    continue
+                idx = [(start + timedelta(days=i)).isoformat() for i in range(days + 1)]
+                notes = []
+                news, tone_list = [], []
                 if len(vol):
                     tone = fetch_gdelt.timeline(terms, channel_terms, start, end, "timelinetone")
-                    idx = [(start + timedelta(days=i)).isoformat() for i in range(days + 1)]
                     v = {d.date().isoformat(): float(x) for d, x in vol.items()}
                     t = {d.date().isoformat(): float(x) for d, x in tone.items()} if len(tone) else {}
-                    return SignalSeries(dates=idx, news_volume=[v.get(d, 0.0) for d in idx],
-                                        tone=[t.get(d, 0.0) for d in idx] if t else [],
-                                        recent_days=win["recent_days"]), (
-                        f"GDELT articles per day mentioning this mine or its owner AND the event/channel terms; "
-                        f"the last {win['recent_days']} days are compared with the {win['baseline_days']} before.")
-        return None, "No cached GDELT news series for this mine yet."
+                    news = [v.get(d, 0.0) for d in idx]
+                    tone_list = [t.get(d, 0.0) for d in idx] if t else []
+                    notes.append("News: GDELT articles per day mentioning this mine or its owner AND the "
+                                 "event/channel terms.")
+                pageviews = []
+                if views is not None:
+                    pv = {d.date().isoformat(): float(x) for d, x in views.items()}
+                    last = max(pv)
+                    pageviews = [pv.get(d, 0.0) for d in idx if d <= last]
+                    notes.append(f"Attention: Wikipedia views of {' + '.join(ctx['wiki_titles'])}, "
+                                 f"published up to {last}.")
+                notes.append(f"The last {win['recent_days']} days are compared with the "
+                             f"{win['baseline_days']} before.")
+                return SignalSeries(dates=idx, news_volume=news, tone=tone_list, pageviews=pageviews,
+                                    recent_days=win["recent_days"]), " ".join(notes)
+        return None, "No cached news or Wikipedia series for this mine yet."
     except Exception as e:  # the panel must open even if the cache or a helper misbehaves
         log.warning("series for %s failed: %s", asset_id, e)
         return None, "News series unavailable."

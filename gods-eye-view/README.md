@@ -1,4 +1,28 @@
-# God's Eye View add-on: GDELT news sentiment and protest timeline
+# God's Eye View: our demo globe (Researcher's Globe HUD) + GDELT add-ons
+
+## Researcher's Globe in God's Eye View (the demo)
+
+```bash
+make backend   # terminal 1: our FastAPI on :8000
+make gev       # terminal 2: clones upstream @52187c9 into .gev/, applies this folder + the patch,
+               # npm ci, then serves http://localhost:4173 (Node 24.x or 26.x)
+```
+
+- **HUD** (`src/layers/researchers-globe/`): question bar, the 4 preset chips, tiers coloured on the
+  globe (high pulses), unlit mines as grey dots, legend with tier counts + dark count and the chosen
+  channels; click a mine for score, components, path in words, 60-day news chart (last 7 days marked),
+  evidence links and exposure arcs mine → port → destination; a Results tab (`/eval`).
+- **Proxy** (`server/providers/researchersGlobe.js`): `/api/rg/*` → `http://127.0.0.1:8000/*`
+  (override with `RG_BACKEND_URL`).
+- **Demo mode** (in the patch to `src/main.js`): a fresh load opens on the whole globe with keyless
+  Esri imagery, no GEV data layers (CCTV, submarine cables, flood scene off; no Google 3D tiles), the
+  HUD open and the hero preset running. Ships, earthquakes and cyclones are behind the HUD's
+  **Live layers** toggle: display only, never used in scoring. Ships need `AISSTREAM_API_KEY` in the
+  repo `.env` (`make gev` copies it to `.gev/.env`, which GEV reads).
+- Edit files here, not in `.gev/`: `make gev-apply` resets `.gev/` to upstream every time.
+- License: `LICENSE-UPSTREAM.md` (upstream MIT notice, kept as required).
+
+## Earlier add-on: GDELT news sentiment and protest timeline
 
 Work done on top of [bilawalsidhu/gods-eye-view](https://github.com/bilawalsidhu/gods-eye-view)
 (the open-source Cesium 3D globe) at upstream commit `52187c9`. This folder holds only what we
@@ -39,8 +63,8 @@ git apply ../researchers-globe/gods-eye-view/gods-eye-view-integration.patch
 npm ci && npm run dev           # Node 24.x or 26.x; open http://localhost:4173
 ```
 
-The patch is two small edits: `server/providers/local.js` registers the `/api/sentiment` endpoint,
-and `src/main.js` mounts the panel once the globe is ready.
+The patch is two small edits: `server/providers/local.js` registers the `/api/sentiment` and `/api/rg`
+endpoints, and `src/main.js` sets the demo view and mounts both panels once the globe is ready.
 
 - **Sentiment:** click **NEWS SENTIMENT** (top right), then Search.
 - **Protest timeline:** Authoring → IMPORT →

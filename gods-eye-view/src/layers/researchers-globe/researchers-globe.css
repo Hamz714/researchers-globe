@@ -1,0 +1,413 @@
+/* Researcher's Globe HUD (src/layers/researchers-globe), in God's Eye View's glass style. */
+.rg-panel,
+.rg-detail {
+  position: fixed;
+  z-index: 61;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+  background: rgba(10, 12, 18, 0.9);
+  backdrop-filter: blur(16px);
+  color: var(--text-primary, #e8eaed);
+  font: 12px/1.45 var(--font-sans, sans-serif);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+.rg-panel[hidden],
+.rg-detail[hidden],
+.rg-reopen[hidden],
+.rg-tip[hidden],
+.rg-body[hidden] {
+  display: none;
+}
+.rg-panel {
+  top: var(--rg-top, 96px);
+  left: var(--rg-left, 212px);
+  width: 360px;
+  max-height: calc(100vh - var(--rg-top, 96px) - 110px);
+}
+.rg-detail {
+  display: block; /* not a flex column: flex items with no intrinsic height (the SVG charts) shrink to 0 */
+  top: 116px;
+  /* Left of GEV's right-hand panel rail (DISPLAY / CCTV / STREET LEVEL / CONTEXT, ~150px wide). */
+  right: calc(var(--right-rail-x, 54px) + 162px);
+  width: 380px;
+  max-height: calc(100vh - 230px);
+  overflow-y: auto;
+  padding: 14px 16px 16px;
+}
+.rg-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.rg-head strong {
+  display: block;
+  font: 600 12px var(--font-mono, monospace);
+  letter-spacing: 0.14em;
+  color: var(--accent, #00d4ff);
+}
+.rg-head span {
+  font-size: 11px;
+  color: var(--text-secondary, #9aa3b2);
+}
+.rg-collapse,
+.rg-close {
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary, #9aa3b2);
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+}
+.rg-close {
+  float: right;
+}
+.rg-reopen {
+  position: fixed;
+  top: var(--rg-top, 96px);
+  left: var(--rg-left, 212px);
+  z-index: 61;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 212, 255, 0.55);
+  background: var(--glass-bg, rgba(12, 12, 20, 0.72));
+  color: var(--accent, #00d4ff);
+  font: 600 11px/1 var(--font-mono, monospace);
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+.rg-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 8px 14px 0;
+}
+.rg-tabs button {
+  flex: 1;
+  padding: 5px 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary, #9aa3b2);
+  font: 600 10px var(--font-mono, monospace);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.rg-tabs button.is-active {
+  border-color: rgba(0, 212, 255, 0.5);
+  color: #fff;
+  background: rgba(0, 212, 255, 0.12);
+}
+.rg-body {
+  overflow-y: auto;
+  padding: 10px 14px 12px;
+}
+.rg-ask {
+  display: flex;
+  gap: 6px;
+}
+.rg-ask input {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  font: inherit;
+}
+.rg-ask button {
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 212, 255, 0.55);
+  background: rgba(0, 212, 255, 0.16);
+  color: #fff;
+  font: 600 11px var(--font-mono, monospace);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.rg-panel :focus-visible,
+.rg-detail :focus-visible,
+.rg-reopen:focus-visible {
+  outline: 2px solid var(--accent, #00d4ff);
+  outline-offset: 2px;
+}
+.rg-presets,
+.rg-channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 8px 0 4px;
+}
+.rg-chip {
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary, #e8eaed);
+  font-size: 11px;
+  cursor: pointer;
+}
+.rg-chip.small {
+  cursor: default;
+  font: 600 10px var(--font-mono, monospace);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent, #00d4ff);
+  border-color: rgba(0, 212, 255, 0.35);
+}
+.rg-chip.hero {
+  border-color: rgba(255, 77, 79, 0.55);
+}
+.rg-chip.negative_control {
+  border-style: dashed;
+}
+.rg-chip.is-active {
+  background: rgba(0, 212, 255, 0.18);
+  border-color: rgba(0, 212, 255, 0.7);
+  color: #fff;
+}
+.rg-status {
+  margin: 6px 0;
+  color: var(--text-secondary, #9aa3b2);
+}
+.rg-status.is-error,
+.rg-error {
+  color: #ff8a80;
+}
+.rg-event {
+  margin-top: 8px;
+  font-weight: 600;
+  font-size: 13px;
+}
+.rg-sub,
+.rg-muted,
+.rg-hint {
+  color: var(--text-secondary, #9aa3b2);
+}
+.rg-hint {
+  font-size: 10.5px;
+  margin: 8px 0 0;
+}
+.rg-small {
+  font-size: 10.5px;
+}
+.rg-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0;
+}
+.rg-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 5px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  vertical-align: -1px;
+}
+.rg-dot.dark {
+  background: #9aa3b2;
+  opacity: 0.6;
+}
+.rg-top-title {
+  margin-top: 6px;
+  font: 600 10px var(--font-mono, monospace);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary, #9aa3b2);
+}
+.rg-top {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rg-top button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.rg-top button:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.rg-top .nm {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.rg-top .sc {
+  font-family: var(--font-mono, monospace);
+  color: var(--text-secondary, #9aa3b2);
+}
+.rg-live {
+  display: block;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+}
+.rg-live span {
+  color: var(--text-secondary, #9aa3b2);
+  font-size: 10.5px;
+}
+.rg-credits {
+  padding: 8px 14px 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 10px;
+  color: var(--text-secondary, #9aa3b2);
+}
+.rg-credits a,
+.rg-detail a,
+.rg-tip a {
+  color: #8fd8ff;
+}
+.rg-detail h2 {
+  margin: 0 24px 6px 0;
+  font-size: 15px;
+}
+.rg-detail h3,
+.rg-panel h3 {
+  margin: 14px 0 6px;
+  font: 600 10px var(--font-mono, monospace);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent, #00d4ff);
+}
+.rg-badges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rg-tier {
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #111;
+  font-weight: 600;
+  font-size: 11px;
+}
+.rg-paths,
+.rg-evidence {
+  margin: 0;
+  padding-left: 16px;
+}
+.rg-paths li,
+.rg-evidence li {
+  margin-bottom: 5px;
+}
+.rg-evidence small {
+  display: block;
+  color: var(--text-secondary, #9aa3b2);
+}
+.rg-judge.relevant {
+  color: #95de64;
+}
+.rg-judge.not_relevant {
+  color: #ff8a80;
+}
+.rg-components,
+.rg-panel table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.rg-components td,
+.rg-panel td,
+.rg-panel th {
+  padding: 3px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+}
+.rg-components td:last-child {
+  text-align: right;
+  font-family: var(--font-mono, monospace);
+}
+.rg-callout {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 169, 64, 0.35);
+  background: rgba(255, 169, 64, 0.08);
+}
+.rg-news {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 340 / 92;
+  flex-shrink: 0;
+}
+.rg-news rect.b {
+  fill: rgba(143, 216, 255, 0.55);
+}
+.rg-news rect.r {
+  fill: #ff4d4f;
+}
+.rg-news .recent-bg {
+  fill: rgba(255, 77, 79, 0.1);
+}
+.rg-news .median {
+  stroke: #e8eaed;
+  stroke-dasharray: 3 3;
+  stroke-width: 1;
+}
+.rg-news .lbl {
+  fill: #9aa3b2;
+  font-size: 9px;
+}
+.rg-news .lbl.hot {
+  fill: #ff8a80;
+}
+.rg-news.is-attention rect.b {
+  fill: rgba(179, 146, 255, 0.55);
+}
+.rg-news.is-attention rect.r {
+  fill: #b392ff;
+}
+.rg-news.is-attention .recent-bg {
+  fill: rgba(179, 146, 255, 0.12);
+}
+.rg-news.is-attention .lbl.hot {
+  fill: #cdb8ff;
+}
+.rg-detail h4 {
+  margin: 8px 0 2px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary, #e8eaed);
+}
+.rg-tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: rgba(10, 12, 18, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e8eaed;
+  font: 12px/1.35 var(--font-sans, sans-serif);
+  pointer-events: none;
+}
+@media (max-width: 900px) {
+  .rg-panel {
+    left: 12px;
+    right: 12px;
+    width: auto;
+  }
+  .rg-detail {
+    left: 12px;
+    right: 12px;
+    width: auto;
+  }
+}
