@@ -1,0 +1,65 @@
+diff --git a/server/providers/local.js b/server/providers/local.js
+index 41b0fd3..135af1d 100644
+--- a/server/providers/local.js
++++ b/server/providers/local.js
+@@ -33,6 +33,7 @@ import { inaturalistProxy } from './inaturalist/observations.js';
+ import { acartiaProxy } from './acartia.js';
+ import { cycloneProxy } from './cyclones.js';
+ import { windProxy } from './wind.js';
++import { sentimentProxy } from './sentiment.js';
+ 
+ /**
+  * Construct the local provider plugins in their established order.
+@@ -85,6 +86,7 @@ function localProviderPlugins({
+     droneAirspaceProxy(),
+     inaturalistProxy(),
+     acartiaProxy(),
++    sentimentProxy(),
+     keySetupEndpoint(),
+   ];
+ }
+diff --git a/src/main.js b/src/main.js
+index 545cc80..98ada96 100644
+--- a/src/main.js
++++ b/src/main.js
+@@ -1,6 +1,7 @@
+ import { createStandaloneApplication } from './standalone/application.js';
+ import { describeError } from './standalone/errors.js';
+ import { t } from './i18n/index.js';
++import { mountSentimentExplorer } from './layers/sentiment/index.js';
+ 
+ // The Vite boundary exposes only undefined, null, or a validated URL.
+ const photonSetting = import.meta.env.PHOTON_URL;
+@@ -13,13 +14,25 @@ const application = createStandaloneApplication({
+   allowQaRegistration: import.meta.env.DEV,
+ });
+ 
+-application.start().catch((error) => {
+-  console.error("God's Eye View initialization failed:", error);
+-  const loaderStatus = document.querySelector('#loading-screen .loader-status');
+-  loaderStatus.textContent = t('Error: {message}', {
+-    message: describeError(error),
++application
++  .start()
++  .then((components) => {
++    // News sentiment explorer (GDELT): mounts once the globe is ready.
++    try {
++      mountSentimentExplorer({ viewer: components.scene.viewer });
++    } catch (error) {
++      console.error('News sentiment explorer failed to mount:', error);
++    }
++  })
++  .catch((error) => {
++    console.error("God's Eye View initialization failed:", error);
++    const loaderStatus = document.querySelector(
++      '#loading-screen .loader-status',
++    );
++    loaderStatus.textContent = t('Error: {message}', {
++      message: describeError(error),
++    });
++    loaderStatus.style.color = '#ff4444';
+   });
+-  loaderStatus.style.color = '#ff4444';
+-});
+ 
+ export { application };

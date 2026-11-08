@@ -1,0 +1,413 @@
+{
+ "version": 6,
+ "scenes": [
+  {
+   "id": "us-midterms-week",
+   "title": "US midterms 2026 \u00b7 election-linked protest reports, day by day",
+   "dataPacks": [
+    {
+     "id": "00-intro",
+     "version": 1,
+     "format": "image",
+     "source": {
+      "adapter": "assets",
+      "path": "us-midterms-2026-week/00-intro.png"
+     },
+     "attribution": {
+      "text": "GDELT Project 2.0 Events, aggregated by state and day; boundaries: Natural Earth",
+      "license": "GDELT Terms of Use: free use with citation and link; Natural Earth public domain",
+      "url": "https://www.gdeltproject.org/about.html"
+     },
+     "placement": {
+      "bounds": [
+       -128.0,
+       17.0,
+       -62.0,
+       54.0
+      ],
+      "height": 5000,
+      "altitudeReference": "ellipsoid"
+     },
+     "byteLength": 478802,
+     "sha256": "2114d6f678d2a44c3ce5441622c1cbd0c03c50d6f8fad7b371fbd6ef302c1794"
+    },
+    {
+     "id": "01-2026-10-31",
+     "version": 1,
+     "format": "image",
+     "source": {
+      "adapter": "assets",
+      "path": "us-midterms-2026-week/01-2026-10-31.png"
+     },
+     "attribution": {
+      "text": "GDELT Project 2.0 Events, aggregated by state and day; boundaries: Natural Earth",
+      "license": "GDELT Terms of Use: free use with citation and link; Natural Earth public domain",
+      "url": "https://www.gdeltproject.org/about.html"
+     },
+     "placement": {
+      "bounds": [
+       -128.0,
+       17.0,
+       -62.0,
+       54.0
+      ],
+      "height": 5000,
+      "altitudeReference": "ellipsoid"
+     },
+     "byteLength": 487834,
+     "sha256": "4f7e3de7f57bbd1b9e80fe21c60fea454b58086ed6e87da95385ea10700e14e5"
+    },
+    {
+     "id": "02-2026-11-01",
+     "version": 1,
+     "format": "image",
+     "source": {
+      "adapter": "assets",
+      "path": "us-midterms-2026-week/02-2026-11-01.png"
+     },
+     "attribution": {
+      "text": "GDELT Project 2.0 Events, aggregated by state and day; boundaries: Natural Earth",
+      "license": "GDELT Terms of Use: free use with citation and link; Natural Earth public domain",
+      "url": "https://www.gdeltproject.org/about.html"
+     },
+     "placement": {
+      "bounds": [
+       -128.0,
+       17.0,
+       -62.0,
+       54.0
+      ],
+      "height": 5000,
+      "altitudeReference": "ellipsoid"
+     },
+     "byteLength": 481359,
+     "sha256": "22593f669eddc9d996b2b79a321332ba27d3b5ac0d93cd6f96dd29168e8f2502"
+    },
+    {
+     "id": "03-2026-11-02",
+     "version": 1,
+     "format": "image",
+     "source": {
+      "adapter": "assets",
+      "path": "us-midterms-2026-week/03-2026-11-02.png"
+     },
+     "attribution": {
+      "text": "GDELT Project 2.0 Events, aggregated by state and day; boundaries: Natural Earth",
+      "license": "GDELT Terms of Use: free use with citation and link; Natural Earth public domain",
+      "url": "https://www.gdeltproject.org/about.html"
+     },
+     "placement": {
+      "bounds": [
+       -128.0,
+       17.0,
+       -62.0,
+       54.0
+      ],
+      "height": 5000,
+      "altitudeReference": "ellipsoid"
+     },
+     "byteLength": 501766,
+     "sha256": "3f8ebfaf8a525075bb57e5a42e1671e0d7dde7b2bf5acc2bedf2d60eb6af5dbb"
+    },
+    {
+     "id": "04-2026-11-03",
+     "version": 1,
+     "format": "image",
+     "source": {
+      "adapter": "assets",
+      "path": "us-midterms-2026-week/04-2026-11-03.png"
+     },
+     "attribution": {
+      "text": "GDELT Project 2.0 Events, aggregated by state and day; boundaries: Natural Earth",
+      "license": "GDELT Terms of Use: free use with citation and link; Natural Earth public domain",
+      "url": "https://www.gdeltproject.org/about.html"
+     },
+     "placement": {
+      "bounds": [
+       -128.0,
+       17.0,
+       -62.0,
+       54.0
+      ],
+      "height": 5000,
+      "altitudeReference": "ellipsoid"
+     },
+     "byteLength": 492822,
+     "sha256": "5f5602f18e079c111ef2411809f797b811bc9437a49b04f5266772820111b339"
+    },
+    {
+     "id": "05-2026-11-04",
+     "version": 1,
+     "format": "image",
+     "source": {
+      "adapter": "assets",
+      "path": "us-midterms-2026-week/05-2026-11-04.png"
+     },
+     "attribution": {
+      "text": "GDELT Project 2.0 Events, aggregated by state and day; boundaries: Natural Earth",
+      "license": "GDELT Terms of Use: free use with citation and link; Natural Earth public domain",
+      "url": "https://www.gdeltproject.org/about.html"
+     },
+     "placement": {
+      "bounds": [
+       -128.0,
+       17.0,
+       -62.0,
+       54.0
+      ],
+      "height": 5000,
+      "altitudeReference": "ellipsoid"
+     },
+     "byteLength": 507046,
+     "sha256": "a73a116d8063a808a1ca8e470b8b1bf1b4bd884b39dbb9bccaeed19b8d782d61"
+    },
+    {
+     "id": "06-2026-11-05",
+     "version": 1,
+     "format": "image",
+     "source": {
+      "adapter": "assets",
+      "path": "us-midterms-2026-week/06-2026-11-05.png"
+     },
+     "attribution": {
+      "text": "GDELT Project 2.0 Events, aggregated by state and day; boundaries: Natural Earth",
+      "license": "GDELT Terms of Use: free use with citation and link; Natural Earth public domain",
+      "url": "https://www.gdeltproject.org/about.html"
+     },
+     "placement": {
+      "bounds": [
+       -128.0,
+       17.0,
+       -62.0,
+       54.0
+      ],
+      "height": 5000,
+      "altitudeReference": "ellipsoid"
+     },
+     "byteLength": 499205,
+     "sha256": "639da075365dad53fe5cb47b82370f71239dc6c7ab06961de7735ce9af1c6b86"
+    },
+    {
+     "id": "07-2026-11-06",
+     "version": 1,
+     "format": "image",
+     "source": {
+      "adapter": "assets",
+      "path": "us-midterms-2026-week/07-2026-11-06.png"
+     },
+     "attribution": {
+      "text": "GDELT Project 2.0 Events, aggregated by state and day; boundaries: Natural Earth",
+      "license": "GDELT Terms of Use: free use with citation and link; Natural Earth public domain",
+      "url": "https://www.gdeltproject.org/about.html"
+     },
+     "placement": {
+      "bounds": [
+       -128.0,
+       17.0,
+       -62.0,
+       54.0
+      ],
+      "height": 5000,
+      "altitudeReference": "ellipsoid"
+     },
+     "byteLength": 507548,
+     "sha256": "e48e3546a6d55a55faa5bb51afb41150e9618d4e05441bf39cc569e227719311"
+    }
+   ],
+   "shots": [
+    {
+     "id": "intro",
+     "title": "Election-linked protest reports \u00b7 7 days",
+     "durationSec": 3,
+     "holdSec": 3.5,
+     "camera": {
+      "lat": 35.0,
+      "lon": -95.0,
+      "alt": 6400000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0
+     },
+     "visual": {
+      "style": "normal",
+      "hud": {
+       "visible": false,
+       "variant": "minimal"
+      }
+     },
+     "dataPackIds": [
+      "00-intro"
+     ]
+    },
+    {
+     "id": "day-2026-10-31",
+     "title": "SAT 31 OCT \u00b7 3 days before election day \u00b7 60 reports",
+     "durationSec": 0.2,
+     "holdSec": 2.6,
+     "camera": {
+      "lat": 35.0,
+      "lon": -95.0,
+      "alt": 6400000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0
+     },
+     "visual": {
+      "style": "normal",
+      "hud": {
+       "visible": false,
+       "variant": "minimal"
+      }
+     },
+     "dataPackIds": [
+      "01-2026-10-31"
+     ]
+    },
+    {
+     "id": "day-2026-11-01",
+     "title": "SUN 1 NOV \u00b7 2 days before election day \u00b7 23 reports",
+     "durationSec": 0.2,
+     "holdSec": 2.6,
+     "camera": {
+      "lat": 35.0,
+      "lon": -95.0,
+      "alt": 6400000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0
+     },
+     "visual": {
+      "style": "normal",
+      "hud": {
+       "visible": false,
+       "variant": "minimal"
+      }
+     },
+     "dataPackIds": [
+      "02-2026-11-01"
+     ]
+    },
+    {
+     "id": "day-2026-11-02",
+     "title": "MON 2 NOV \u00b7 1 day before election day \u00b7 92 reports",
+     "durationSec": 0.2,
+     "holdSec": 2.6,
+     "camera": {
+      "lat": 35.0,
+      "lon": -95.0,
+      "alt": 6400000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0
+     },
+     "visual": {
+      "style": "normal",
+      "hud": {
+       "visible": false,
+       "variant": "minimal"
+      }
+     },
+     "dataPackIds": [
+      "03-2026-11-02"
+     ]
+    },
+    {
+     "id": "day-2026-11-03",
+     "title": "TUE 3 NOV \u00b7 election day \u00b7 120 reports",
+     "durationSec": 0.2,
+     "holdSec": 4.0,
+     "camera": {
+      "lat": 35.0,
+      "lon": -95.0,
+      "alt": 6400000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0
+     },
+     "visual": {
+      "style": "normal",
+      "hud": {
+       "visible": false,
+       "variant": "minimal"
+      }
+     },
+     "dataPackIds": [
+      "04-2026-11-03"
+     ]
+    },
+    {
+     "id": "day-2026-11-04",
+     "title": "WED 4 NOV \u00b7 1 day after election day \u00b7 75 reports",
+     "durationSec": 0.2,
+     "holdSec": 2.6,
+     "camera": {
+      "lat": 35.0,
+      "lon": -95.0,
+      "alt": 6400000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0
+     },
+     "visual": {
+      "style": "normal",
+      "hud": {
+       "visible": false,
+       "variant": "minimal"
+      }
+     },
+     "dataPackIds": [
+      "05-2026-11-04"
+     ]
+    },
+    {
+     "id": "day-2026-11-05",
+     "title": "THU 5 NOV \u00b7 2 days after election day \u00b7 30 reports",
+     "durationSec": 0.2,
+     "holdSec": 2.6,
+     "camera": {
+      "lat": 35.0,
+      "lon": -95.0,
+      "alt": 6400000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0
+     },
+     "visual": {
+      "style": "normal",
+      "hud": {
+       "visible": false,
+       "variant": "minimal"
+      }
+     },
+     "dataPackIds": [
+      "06-2026-11-05"
+     ]
+    },
+    {
+     "id": "day-2026-11-06",
+     "title": "FRI 6 NOV \u00b7 3 days after election day \u00b7 46 reports",
+     "durationSec": 0.2,
+     "holdSec": 2.6,
+     "camera": {
+      "lat": 35.0,
+      "lon": -95.0,
+      "alt": 6400000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0
+     },
+     "visual": {
+      "style": "normal",
+      "hud": {
+       "visible": false,
+       "variant": "minimal"
+      }
+     },
+     "dataPackIds": [
+      "07-2026-11-06"
+     ]
+    }
+   ]
+  }
+ ]
+}
