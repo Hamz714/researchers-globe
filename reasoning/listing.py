@@ -116,6 +116,43 @@ def _states(names_in_text: str) -> list[dict]:
     return named or states
 
 
+def has_filters(filters: dict) -> bool:
+    return bool(filters.get("countries") or filters.get("owners") or filters.get("min_capacity_mtpa") is not None)
+
+
+def matching_mine_ids(filters: dict) -> set[str]:
+    """Ids of mines passing the country / owner / capacity filters (top_n is applied by the caller,
+    after its own ranking)."""
+    g = _graph()
+    n, e = g.nodes, g.edges
+    mines = n[n["type"] == "mine"]
+    if filters.get("countries"):
+        mines = mines[mines["country"].isin(filters["countries"])]
+    if filters.get("owners"):
+        want = set(filters["owners"])
+        owned = set(e.loc[(e["type"] == "OWNED_BY") & e["dst"].isin(want), "src"])
+        mines = mines[mines["id"].isin(owned)]
+    if filters.get("min_capacity_mtpa") is not None:
+        mines = mines[mines["capacity_mtpa"].astype(float) >= float(filters["min_capacity_mtpa"])]
+    return set(mines["id"])
+
+
+def describe_filters(filters: dict, with_top: bool = True) -> str:
+    """'in China; owned by Vale SA; ≥ 10 Mtpa' ('' when there are no filters)."""
+    names = dict(zip(_graph().nodes["id"], _graph().nodes["name"]))
+    parts = []
+    if filters.get("countries"):
+        parts.append("in " + ", ".join(names.get(f"country_{c}", c) for c in filters["countries"][:8])
+                     + ("…" if len(filters["countries"]) > 8 else ""))
+    if filters.get("owners"):
+        parts.append("owned by " + ", ".join(names.get(o, o) for o in filters["owners"]))
+    if filters.get("min_capacity_mtpa") is not None:
+        parts.append(f"≥ {filters['min_capacity_mtpa']:g} Mtpa")
+    if with_top and filters.get("top_n"):
+        parts.append(f"top {filters['top_n']}")
+    return "; ".join(parts)
+
+
 def list_assets(filters: dict, text: str = "") -> dict:
     from backend.schemas import QueryResult
 
@@ -135,14 +172,7 @@ def list_assets(filters: dict, text: str = "") -> dict:
         own = e[e["type"] == "OWNED_BY"].sort_values("weight", ascending=False)
         owners_of = own.groupby("src")["dst"].apply(list).to_dict()
         share = {(r.src, r.dst): r.weight for r in own.itertuples()}
-        if filters.get("countries"):
-            mines = mines[mines["country"].isin(filters["countries"])]
-        if filters.get("owners"):
-            want = set(filters["owners"])
-            mines = mines[mines["id"].map(lambda m: bool(want & set(owners_of.get(m, []))))]
-        cap = mines["capacity_mtpa"].astype(float)
-        if filters.get("min_capacity_mtpa") is not None:
-            mines = mines[cap >= float(filters["min_capacity_mtpa"])]
+        mines = mines[mines["id"].isin(matching_mine_ids(filters))]
         mines = mines.assign(cap_sort=mines["capacity_mtpa"].astype(float).fillna(-1.0)).sort_values(
             ["cap_sort", "name"], ascending=[False, True])
         if filters.get("top_n"):
@@ -169,17 +199,9 @@ def list_assets(filters: dict, text: str = "") -> dict:
                 "evidence": [],
             })
         total = int((n["type"] == "mine").sum())
-        parts = []
-        if filters.get("countries"):
-            parts.append("in " + ", ".join(names.get(f"country_{c}", c) for c in filters["countries"][:8])
-                         + ("…" if len(filters["countries"]) > 8 else ""))
-        if filters.get("owners"):
-            parts.append("owned by " + ", ".join(names.get(o, o) for o in filters["owners"]))
-        if filters.get("min_capacity_mtpa") is not None:
-            parts.append(f"≥ {filters['min_capacity_mtpa']:g} Mtpa")
-        if filters.get("top_n"):
-            parts.append(f"top {filters['top_n']} by capacity")
-        desc = "Operating iron ore mines" + (" " + "; ".join(parts) if parts else "")
+        where = describe_filters({**filters, "top_n": None})
+        desc = "Operating iron ore mines" + (" " + where if where else "") + (
+            f"; top {filters['top_n']} by capacity" if filters.get("top_n") else "")
         ranked = "ranked by design capacity (top third high, middle medium, rest or unknown low)"
     out = {
         "criteria": {"asset_type": "us_state" if filters.get("thing") == "state" else "iron_ore_mine",

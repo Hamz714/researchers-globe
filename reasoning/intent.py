@@ -70,10 +70,12 @@ def _to_filters(obj: dict, text: str) -> dict:
 def _condition_spec(obj: dict, text: str) -> dict | None:
     c = obj.get("condition")
     thing = obj.get("thing") or parse_filters(text)["thing"]
+    filters = _to_filters(obj, text)
     if c in ("views", "edits"):
-        return {"thing": thing, "condition": c}
+        return {"thing": thing, "condition": c, "filters": filters}
     if c in WEATHER or c == "any_weather":
-        return {"thing": thing, "condition": "weather", "weather": "any" if c == "any_weather" else c}
+        return {"thing": thing, "condition": "weather", "weather": "any" if c == "any_weather" else c,
+                "filters": filters}
     return None
 
 

@@ -56,3 +56,28 @@ def test_api_never_503s_on_plain_questions():
         r = c.post("/query", json={"text": q})
         assert r.status_code == 200, (q, r.text[:200])
     assert len(c.post("/query", json={"text": "show all mines"}).json()["results"]) == 701
+
+
+def test_condition_respects_filters(monkeypatch):
+    """'mines in China in the rain' checks only Chinese mines (bug: it returned rainy mines everywhere)."""
+    from pipeline import fetch_weather
+    from reasoning.intent import route
+    from reasoning.listing import matching_mine_ids
+    from reasoning.screen import screen
+
+    rain = {"time": "2026-11-08T05:00", "temperature_2m": 12.0, "precipitation": 1.0, "rain": 1.0,
+            "snowfall": 0.0, "wind_speed_10m": 5.0, "weather_code": 61}
+    monkeypatch.setattr(fetch_weather, "current", lambda pts: {pid: rain for pid, _, _ in pts})
+    q = "show all mines in china which are in rainy conditions"
+    kind, spec = route(q, backends=[])
+    assert kind == "condition"
+    out = screen(q, spec)
+    cn = matching_mine_ids({"countries": ["CN"]})
+    assert out["results"] and {r["id"] for r in out["results"]} == cn
+    assert out["dark_count"] == 701 - len(cn)
+    assert "China" in out["criteria"]["event"]["name"]
+    # no filter: every mine is checked
+    assert len(screen("show all mines in the rain")["results"]) == 701
+    # owner filter and top N
+    bhp = screen("top 3 BHP mines in the rain")
+    assert len(bhp["results"]) == 3 and set(r["id"] for r in bhp["results"]) <= matching_mine_ids({"owners": ["company_bhp"]})

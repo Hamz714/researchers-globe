@@ -171,7 +171,20 @@ def screen(text: str, spec: dict | None = None, end: date | None = None) -> dict
     if spec is None:
         raise ValueError("not a condition screen")
     end = end or date.today()
-    items = things(spec["thing"])
+    from reasoning.listing import describe_filters, has_filters, matching_mine_ids, parse_filters
+
+    all_items = things(spec["thing"])
+    # Filters in the same question ("mines in China in the rain", "BHP mines with a Wikipedia spike",
+    # "rain in Texas") restrict which things are checked; the rest stay dark.
+    filters = spec.get("filters") or parse_filters(text)
+    items, where = all_items, ""
+    if spec["thing"] == "mine" and has_filters(filters):
+        keep = matching_mine_ids(filters)
+        items, where = [i for i in all_items if i["id"] in keep], describe_filters({**filters, "top_n": None})
+    elif spec["thing"] == "state":
+        named = [i for i in all_items if re.search(r"\b" + re.escape(i["name"].lower()) + r"\b", text.lower())]
+        if named:
+            items, where = named, "in " + ", ".join(i["name"] for i in named)
     thing_label = "US states" if spec["thing"] == "state" else "iron ore mines"
     results = []
 
@@ -205,7 +218,9 @@ def screen(text: str, spec: dict | None = None, end: date | None = None) -> dict
         from pipeline import fetch_weather
 
         kind, th = spec["weather"], spec.get("threshold")
-        cur = fetch_weather.current([(it["id"], it["lat"], it["lon"]) for it in items])
+        # Always ask for ALL things: the weather cache is keyed by the full point set, so a filtered
+        # subset would miss it (and cost extra API calls). Filtering happens below.
+        cur = fetch_weather.current([(it["id"], it["lat"], it["lon"]) for it in all_items])
         if kind == "any":
             label, measured_fields = "notable weather", ", ".join(f"{WEATHER[k][4]}" for k in ANY_KINDS)
         else:
@@ -230,13 +245,18 @@ def screen(text: str, spec: dict | None = None, end: date | None = None) -> dict
             })
 
     results.sort(key=lambda r: (-r["score"], r["name"]))
+    if filters.get("top_n"):
+        results = results[: int(filters["top_n"])]
+    if where:
+        event = {**event, "name": f"{event['name']} — {thing_label} {where}"}
+        channel = {**channel, "reason": f"Checked only {len(items)} {thing_label} {where}. " + channel["reason"]}
     out = {
         "criteria": {"asset_type": "us_state" if spec["thing"] == "state" else "iron_ore_mine", "event": event,
                      "window": {"baseline_days": BASELINE_DAYS, "recent_days": RECENT_DAYS},
                      "status": ["operating"] if spec["thing"] == "mine" else [], "region": "US" if spec["thing"] == "state" else "global"},
         "channels": [channel],
         "results": results,
-        "dark_count": len(items) - len(results),
+        "dark_count": len(all_items) - len(results),
     }
     return QueryResult.model_validate(out).model_dump()
 
