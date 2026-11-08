@@ -96,3 +96,19 @@ def test_keyword_judge_needs_asset_and_channel_terms():
     art = {"title": "Steel tariff fight hits Hibbing"}
     assert keyword_judge(art, ["Hibbing"], ["tariff"])["choice"] == "relevant"
     assert keyword_judge(art, ["Hibbing"], ["strike"])["choice"] == "not_relevant"
+
+
+def test_preset_question_skips_the_model():
+    from reasoning.parser import load_presets
+
+    hero = load_presets()[0]
+    b = Fake("x", '{"never": "called"}')
+    crit, preset = parse_question("  " + hero["query"].upper() + " ", backends=[b])
+    assert preset["id"] == hero["id"] and b.calls == 0
+
+
+def test_blank_env_values_fall_back_to_defaults(monkeypatch):
+    monkeypatch.setenv("JEV_MODEL", "")
+    monkeypatch.setenv("JEV_BASE_URL", "")
+    j = dm.JevBackend()
+    assert j.model == "typesafe/jev-1.14" and j.base_url.endswith("/decisions")

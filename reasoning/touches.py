@@ -12,8 +12,9 @@ port names). Then
 
     touch weight(node) = titles naming node / titles naming the most-named node
 
-keeping nodes named in at least MIN_TITLES titles and at least MIN_SHARE of the
-coverage, top MAX_TOUCHES. Example: midterms + tariffs coverage names the US most,
+keeping nodes named in at least MIN_TITLES titles from at least MIN_DOMAINS different
+sites and at least MIN_SHARE of the coverage, top MAX_TOUCHES. Site names are cut off
+the end of titles first ("... - Thailand Business News"), so an outlet's name never counts. Example: midterms + tariffs coverage names the US most,
 so US = 1.0, and China, Canada... get weights in proportion to how often they appear.
 
 This is one cached GDELT request per (query, channel), it is reproducible, and the UI
@@ -30,6 +31,7 @@ from pipeline.graph import Graph
 
 MAX_ARTICLES = 250
 MIN_TITLES = 2
+MIN_DOMAINS = 2
 MIN_SHARE = 0.03
 MAX_TOUCHES = 8
 
@@ -71,12 +73,31 @@ def _patterns(graph: Graph, node_types: set[str]) -> dict[str, re.Pattern]:
     return out
 
 
-def count_mentions(titles: list[str], patterns: dict[str, re.Pattern]) -> dict[str, int]:
-    return {nid: c for nid, p in patterns.items() if (c := sum(1 for t in titles if p.search(t)))}
+_SITE_SUFFIX = re.compile(r"\s+(?:-|\||–|—|::)\s+[^-|–—:]{2,60}$")
 
 
-def weights_from_counts(counts: dict[str, int], n_titles: int) -> list[list]:
+def clean_title(title: str) -> str:
+    """Drop a trailing ' - Site Name' / ' | Site Name' (GDELT titles often carry the outlet's name)."""
+    title = title.strip()
+    cut = _SITE_SUFFIX.sub("", title)
+    return cut if len(cut.split()) >= 3 else title  # keep short titles whole ("Rio Tinto - BHP merger talk")
+
+
+def count_mentions(articles: list[dict], patterns: dict[str, re.Pattern]) -> dict[str, tuple[int, int]]:
+    """node_id -> (titles naming it, distinct domains among those). Articles: dicts with title, domain."""
+    out = {}
+    for nid, p in patterns.items():
+        hits = [a for a in articles if p.search(clean_title(a.get("title", "")))]
+        if hits:
+            out[nid] = (len(hits), len({a.get("domain", "") for a in hits}))
+    return out
+
+
+def weights_from_counts(counts: dict[str, tuple[int, int]], n_titles: int) -> list[list]:
     if not counts or n_titles == 0:
+        return []
+    counts = {nid: c for nid, (c, d) in counts.items() if d >= MIN_DOMAINS}
+    if not counts:
         return []
     top = max(counts.values())
     keep = [(nid, c) for nid, c in counts.items() if c >= MIN_TITLES and c / n_titles >= MIN_SHARE]
@@ -93,6 +114,5 @@ def measured_touches(criteria: dict, channel: dict, graph: Graph, end: date) -> 
         start = end - timedelta(days=criteria["window"]["recent_days"])
     start = max(start, end - timedelta(days=85))  # GDELT DOC covers ~3 months
     arts = fetch_gdelt.articles(ev["terms"], channel["search_terms"], start, end, max_records=MAX_ARTICLES)
-    titles = [a.get("title", "") for a in arts]
-    counts = count_mentions(titles, _patterns(graph, set(channel["touches"])))
-    return weights_from_counts(counts, len(titles)), len(titles)
+    counts = count_mentions(arts, _patterns(graph, set(channel["touches"])))
+    return weights_from_counts(counts, len(arts)), len(arts)

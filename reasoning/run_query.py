@@ -23,7 +23,7 @@ TOP_K = 50          # candidates returned (plan)
 EVIDENCE_K = 10     # candidates we pull GDELT evidence for (rate limit: ~6 s per request, 3-4 requests each)
 PLACEBO_K = 10      # candidates that also get the placebo control query
 MAX_ARTICLES = 20
-CONTROL_TERMS = ["copper"]  # placebo term (plan); TODO(Person A): pick a better control per query
+CONTROL_TERMS = ["copper"]  # last-resort placebo term; the real one is chosen per query (pipeline/controls.py)
 
 
 def _terms(node: dict) -> list[str]:
@@ -70,7 +70,7 @@ def _asset_context(graph: Graph, asset_id: str) -> dict:
 
 
 def _gather(asset: dict, channel_terms: list[str], criteria: dict, end: date,
-            with_control: bool = True) -> tuple[dict, list[dict]]:
+            with_control: bool = True, control: list[str] | None = None) -> tuple[dict, list[dict]]:
     """Step 4: signals + recent articles for one asset. Imported lazily so tests stay offline."""
     from pipeline import fetch_gdelt
     from pipeline.signals import signals
@@ -79,7 +79,7 @@ def _gather(asset: dict, channel_terms: list[str], criteria: dict, end: date,
     win = criteria["window"]
     sig = signals(asset["name"], {
         "asset_terms": asset_terms, "channel_terms": channel_terms,
-        "control_terms": CONTROL_TERMS if with_control else [],
+        "control_terms": (control or CONTROL_TERMS) if with_control else [],
         "wiki_titles": asset["wiki_titles"],
         "baseline_days": win["baseline_days"], "recent_days": win["recent_days"], "end": end,
     })
@@ -105,6 +105,9 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
     g = base.with_edges(exp.touches_edges(chosen, touches))
     top, dark = exp.propagate(g, {c: library[c]["weight"] for c in chosen}, top_k=TOP_K)
 
+    from pipeline.controls import control_terms
+
+    control = control_terms(criteria, chosen, library, end)  # per-query placebo (Person A's rule)
     results = []
     zero = {"news_z": 0.0, "tone_shift": 0.0, "attention_z": 0.0, "placebo_flag": False}
     for rank, ex in enumerate(top):
@@ -116,7 +119,7 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
         # 4. evidence (cached fetches); beyond EVIDENCE_K the asset is scored on exposure alone
         if rank < EVIDENCE_K:
             sig, articles = _gather(asset, evidence_terms(criteria, best_channel), criteria, end,
-                                    with_control=rank < PLACEBO_K)
+                                    with_control=rank < PLACEBO_K, control=control["terms"])
         else:
             sig, articles = dict(zero), []
 
@@ -147,7 +150,8 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
                   + (f" (+{len(ex.paths) - 1} more paths)" if len(ex.paths) > 1 else "")
                   + f". News volume z={sig['news_z']:.1f}, attention z={sig['attention_z']:.1f}, "
                   f"{len(relevant)} relevant article(s)."
-                  + (" Control term spiked too, so the news spike was discounted." if sig["placebo_flag"] else ""))
+                  + (f" The placebo control ({control['channel'] or 'copper'} news) spiked too, so the news spike was discounted."
+                     if sig["placebo_flag"] else ""))
         # TODO(Person B): one-sentence grounded summary via the decision model, citing only `relevant`.
         results.append({
             "id": ex.asset_id, "name": node["name"], "lat": float(node["lat"]), "lon": float(node["lon"]),

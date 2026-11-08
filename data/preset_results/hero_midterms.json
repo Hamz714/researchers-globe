@@ -35,17 +35,63 @@
  ],
  "results": [
   {
+   "id": "mine_P100000128691",
+   "name": "Hibbing Taconite Mine",
+   "lat": 47.477477,
+   "lon": -92.965529,
+   "tier": "low",
+   "score": 0.3307,
+   "components": {
+    "exposure": 0.9926,
+    "news_z": 0.0,
+    "tone_shift": 0.0,
+    "attention_z": -0.951,
+    "relevant_articles": 0
+   },
+   "paths": [
+    [
+     "mine_P100000128691",
+     "country_US",
+     "channel_tariffs"
+    ],
+    [
+     "mine_P100000128691",
+     "port_duluth",
+     "country_US",
+     "channel_tariffs"
+    ],
+    [
+     "mine_P100000128691",
+     "company_cleveland_cliffs",
+     "country_US",
+     "channel_tariffs"
+    ],
+    [
+     "mine_P100000128691",
+     "country_US",
+     "channel_infrastructure"
+    ],
+    [
+     "mine_P100000128691",
+     "country_US",
+     "channel_permits"
+    ]
+   ],
+   "reason": "Exposed via Hibbing Taconite Mine → United States → tariffs (United States is named in 56 of 250 2026 US midterm elections articles on tariffs) (+11 more paths). News volume z=0.0, attention z=-1.0, 0 relevant article(s).",
+   "evidence": []
+  },
+  {
    "id": "mine_P100000128693",
    "name": "US Steel Keetac Mine",
    "lat": 47.42003,
    "lon": -93.075038,
    "tier": "low",
-   "score": 0.3324,
+   "score": 0.3307,
    "components": {
-    "exposure": 0.9977,
+    "exposure": 0.9926,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -1.925,
     "relevant_articles": 0
    },
    "paths": [
@@ -77,7 +123,7 @@
      "channel_infrastructure"
     ]
    ],
-   "reason": "Exposed via US Steel Keetac Mine → United States → tariffs (+10 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via US Steel Keetac Mine → United States → tariffs (United States is named in 56 of 250 2026 US midterm elections articles on tariffs) (+7 more paths). News volume z=0.0, attention z=-1.9, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -86,12 +132,12 @@
    "lat": 47.544885,
    "lon": -92.631421,
    "tier": "low",
-   "score": 0.3324,
+   "score": 0.3307,
    "components": {
-    "exposure": 0.9977,
+    "exposure": 0.9926,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -1.925,
     "relevant_articles": 0
    },
    "paths": [
@@ -123,53 +169,7 @@
      "channel_infrastructure"
     ]
    ],
-   "reason": "Exposed via US Steel Minntac Mine → United States → tariffs (+10 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128691",
-   "name": "Hibbing Taconite Mine",
-   "lat": 47.477477,
-   "lon": -92.965529,
-   "tier": "low",
-   "score": 0.3317,
-   "components": {
-    "exposure": 0.9954,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128691",
-     "country_US",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128691",
-     "port_duluth",
-     "country_US",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128691",
-     "company_cleveland_cliffs",
-     "country_US",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128691",
-     "country_US",
-     "channel_infrastructure"
-    ],
-    [
-     "mine_P100000128691",
-     "country_US",
-     "channel_permits"
-    ]
-   ],
-   "reason": "Exposed via Hibbing Taconite Mine → United States → tariffs (+15 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via US Steel Minntac Mine → United States → tariffs (United States is named in 56 of 250 2026 US midterm elections articles on tariffs) (+7 more paths). News volume z=0.0, attention z=-1.9, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -178,12 +178,12 @@
    "lat": 47.660443,
    "lon": -91.925224,
    "tier": "low",
-   "score": 0.3315,
+   "score": 0.3307,
    "components": {
-    "exposure": 0.995,
+    "exposure": 0.9926,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -0.951,
     "relevant_articles": 0
    },
    "paths": [
@@ -215,7 +215,7 @@
      "channel_permits"
     ]
    ],
-   "reason": "Exposed via Cleveland-Cliffs Northshore Mine → United States → tariffs (+14 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via Cleveland-Cliffs Northshore Mine → United States → tariffs (United States is named in 56 of 250 2026 US midterm elections articles on tariffs) (+11 more paths). News volume z=0.0, attention z=-1.0, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -224,12 +224,12 @@
    "lat": 46.447038,
    "lon": -87.636562,
    "tier": "low",
-   "score": 0.3315,
+   "score": 0.3307,
    "components": {
-    "exposure": 0.995,
+    "exposure": 0.9926,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -0.951,
     "relevant_articles": 0
    },
    "paths": [
@@ -261,7 +261,7 @@
      "channel_permits"
     ]
    ],
-   "reason": "Exposed via Cleveland-Cliffs Tilden Mine → United States → tariffs (+14 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via Cleveland-Cliffs Tilden Mine → United States → tariffs (United States is named in 56 of 250 2026 US midterm elections articles on tariffs) (+11 more paths). News volume z=0.0, attention z=-1.0, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -270,12 +270,12 @@
    "lat": 47.481496,
    "lon": -92.548602,
    "tier": "low",
-   "score": 0.3315,
+   "score": 0.3307,
    "components": {
-    "exposure": 0.995,
+    "exposure": 0.9926,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -0.951,
     "relevant_articles": 0
    },
    "paths": [
@@ -307,7 +307,7 @@
      "channel_permits"
     ]
    ],
-   "reason": "Exposed via Cleveland-Cliffs United Taconite Mine → United States → tariffs (+14 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via Cleveland-Cliffs United Taconite Mine → United States → tariffs (United States is named in 56 of 250 2026 US midterm elections articles on tariffs) (+11 more paths). News volume z=0.0, attention z=-1.0, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -316,9 +316,9 @@
    "lat": 35.0533,
    "lon": -116.3047,
    "tier": "low",
-   "score": 0.3315,
+   "score": 0.3307,
    "components": {
-    "exposure": 0.995,
+    "exposure": 0.9926,
     "news_z": 0.0,
     "tone_shift": 0.0,
     "attention_z": 0.0,
@@ -353,57 +353,7 @@
      "channel_infrastructure"
     ]
    ],
-   "reason": "Exposed via CalPortland Baxter Mine → United States → tariffs (+9 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128201",
-   "name": "Quebec Iron Bloom Lake Mine",
-   "lat": 52.853242,
-   "lon": -67.265418,
-   "tier": "low",
-   "score": 0.2169,
-   "components": {
-    "exposure": 0.6509,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128201",
-     "country_CA",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128201",
-     "port_sept_iles",
-     "country_CA",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128201",
-     "company_champion_iron",
-     "country_AU",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128201",
-     "country_CA",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128201",
-     "port_sept_iles",
-     "country_CA",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Quebec Iron Bloom Lake Mine → Canada → tariffs (+10 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via CalPortland Baxter Mine → United States → tariffs (United States is named in 56 of 250 2026 US midterm elections articles on tariffs) (+7 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -412,12 +362,12 @@
    "lat": 52.3542,
    "lon": -67.36447,
    "tier": "low",
-   "score": 0.1822,
+   "score": 0.092,
    "components": {
-    "exposure": 0.5467,
+    "exposure": 0.276,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -3.368,
     "relevant_articles": 0
    },
    "paths": [
@@ -435,24 +385,24 @@
     [
      "mine_P100000128152",
      "country_CA",
-     "country_CN",
+     "country_US",
      "channel_tariffs"
     ],
     [
      "mine_P100000128152",
      "port_sept_iles",
      "country_CA",
-     "country_CN",
+     "country_US",
      "channel_tariffs"
     ],
     [
      "mine_P100000128152",
      "country_CA",
      "country_US",
-     "channel_tariffs"
+     "channel_infrastructure"
     ]
    ],
-   "reason": "Exposed via ArcelorMittal Fire Lake Mine → Canada → tariffs (+9 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via ArcelorMittal Fire Lake Mine → Canada → tariffs (Canada is named in 13 of 250 2026 US midterm elections articles on tariffs) (+7 more paths). News volume z=0.0, attention z=-3.4, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -461,12 +411,12 @@
    "lat": 53.039303,
    "lon": -66.958579,
    "tier": "low",
-   "score": 0.1822,
+   "score": 0.092,
    "components": {
-    "exposure": 0.5467,
+    "exposure": 0.276,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -0.757,
     "relevant_articles": 0
    },
    "paths": [
@@ -484,24 +434,24 @@
     [
      "mine_P100000128153",
      "country_CA",
-     "country_CN",
+     "country_US",
      "channel_tariffs"
     ],
     [
      "mine_P100000128153",
      "port_sept_iles",
      "country_CA",
-     "country_CN",
+     "country_US",
      "channel_tariffs"
     ],
     [
      "mine_P100000128153",
      "country_CA",
      "country_US",
-     "channel_tariffs"
+     "channel_infrastructure"
     ]
    ],
-   "reason": "Exposed via IOC Carol Lake Mine → Canada → tariffs (+9 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via IOC Carol Lake Mine → Canada → tariffs (Canada is named in 13 of 250 2026 US midterm elections articles on tariffs) (+7 more paths). News volume z=0.0, attention z=-0.8, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -510,12 +460,12 @@
    "lat": 52.355125,
    "lon": -67.364579,
    "tier": "low",
-   "score": 0.1822,
+   "score": 0.092,
    "components": {
-    "exposure": 0.5467,
+    "exposure": 0.276,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -3.368,
     "relevant_articles": 0
    },
    "paths": [
@@ -533,24 +483,24 @@
     [
      "mine_P100000128188",
      "country_CA",
-     "country_CN",
+     "country_US",
      "channel_tariffs"
     ],
     [
      "mine_P100000128188",
      "port_sept_iles",
      "country_CA",
-     "country_CN",
+     "country_US",
      "channel_tariffs"
     ],
     [
      "mine_P100000128188",
      "country_CA",
      "country_US",
-     "channel_tariffs"
+     "channel_infrastructure"
     ]
    ],
-   "reason": "Exposed via ArcelorMittal Mont Wright Mine → Canada → tariffs (+9 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via ArcelorMittal Mont Wright Mine → Canada → tariffs (Canada is named in 13 of 250 2026 US midterm elections articles on tariffs) (+7 more paths). News volume z=0.0, attention z=-3.4, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -559,9 +509,9 @@
    "lat": 71.336994,
    "lon": -79.228748,
    "tier": "low",
-   "score": 0.1822,
+   "score": 0.092,
    "components": {
-    "exposure": 0.5467,
+    "exposure": 0.276,
     "news_z": 0.0,
     "tone_shift": 0.0,
     "attention_z": 0.0,
@@ -582,24 +532,24 @@
     [
      "mine_P100000128193",
      "country_CA",
-     "country_CN",
+     "country_US",
      "channel_tariffs"
     ],
     [
      "mine_P100000128193",
      "port_milne_inlet",
      "country_CA",
-     "country_CN",
+     "country_US",
      "channel_tariffs"
     ],
     [
      "mine_P100000128193",
      "country_CA",
      "country_US",
-     "channel_tariffs"
+     "channel_infrastructure"
     ]
    ],
-   "reason": "Exposed via Baffinland Mary River Mine → Canada → tariffs (+9 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via Baffinland Mary River Mine → Canada → tariffs (Canada is named in 13 of 250 2026 US midterm elections articles on tariffs) (+7 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -608,9 +558,9 @@
    "lat": 52.905338,
    "lon": -66.927868,
    "tier": "low",
-   "score": 0.1822,
+   "score": 0.092,
    "components": {
-    "exposure": 0.5467,
+    "exposure": 0.276,
     "news_z": 0.0,
     "tone_shift": 0.0,
     "attention_z": 0.0,
@@ -626,19 +576,6 @@
      "mine_P100000128196",
      "port_sept_iles",
      "country_CA",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128196",
-     "country_CA",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128196",
-     "port_sept_iles",
-     "country_CA",
-     "country_CN",
      "channel_tariffs"
     ],
     [
@@ -646,20 +583,33 @@
      "country_CA",
      "country_US",
      "channel_tariffs"
+    ],
+    [
+     "mine_P100000128196",
+     "port_sept_iles",
+     "country_CA",
+     "country_US",
+     "channel_tariffs"
+    ],
+    [
+     "mine_P100000128196",
+     "country_CA",
+     "country_US",
+     "channel_infrastructure"
     ]
    ],
-   "reason": "Exposed via Tacora Resources Scully Mine → Canada → tariffs (+9 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via Tacora Resources Scully Mine → Canada → tariffs (Canada is named in 13 of 250 2026 US midterm elections articles on tariffs) (+7 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
    "evidence": []
   },
   {
-   "id": "mine_P100000128008",
-   "name": "Vale Serra Sul Complex Mine",
-   "lat": -6.40331,
-   "lon": -50.324008,
+   "id": "mine_P100000128201",
+   "name": "Quebec Iron Bloom Lake Mine",
+   "lat": 52.853242,
+   "lon": -67.265418,
    "tier": "low",
-   "score": 0.175,
+   "score": 0.092,
    "components": {
-    "exposure": 0.5252,
+    "exposure": 0.276,
     "news_z": 0.0,
     "tone_shift": 0.0,
     "attention_z": 0.0,
@@ -667,1635 +617,39 @@
    },
    "paths": [
     [
-     "mine_P100000128008",
-     "country_BR",
+     "mine_P100000128201",
+     "country_CA",
      "channel_tariffs"
     ],
     [
-     "mine_P100000128008",
-     "port_ponta_da_madeira",
-     "country_BR",
+     "mine_P100000128201",
+     "port_sept_iles",
+     "country_CA",
      "channel_tariffs"
     ],
     [
-     "mine_P100000128008",
-     "company_vale",
-     "country_BR",
+     "mine_P100000128201",
+     "country_CA",
+     "country_US",
      "channel_tariffs"
     ],
     [
-     "mine_P100000128008",
-     "country_BR",
-     "country_CN",
+     "mine_P100000128201",
+     "port_sept_iles",
+     "country_CA",
+     "country_US",
      "channel_tariffs"
     ],
     [
-     "mine_P100000128008",
-     "port_ponta_da_madeira",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
+     "mine_P100000128201",
+     "country_CA",
+     "country_US",
+     "channel_infrastructure"
     ]
    ],
-   "reason": "Exposed via Vale Serra Sul Complex Mine → Brazil → tariffs (+5 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128039",
-   "name": "ArcelorMittal Serra Azul Mine",
-   "lat": -20.129178,
-   "lon": -44.399451,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128039",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128039",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128039",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128039",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via ArcelorMittal Serra Azul Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128136",
-   "name": "Vale Itabira Complex Mine",
-   "lat": -19.651946,
-   "lon": -43.258657,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128136",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128136",
-     "port_ubu",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128136",
-     "company_vale",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128136",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128136",
-     "port_ubu",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vale Itabira Complex Mine → Brazil → tariffs (+5 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128137",
-   "name": "Vale Mariana Complex Mine",
-   "lat": -20.171388,
-   "lon": -43.487119,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128137",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128137",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128137",
-     "company_vale",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128137",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128137",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vale Mariana Complex Mine → Brazil → tariffs (+5 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128140",
-   "name": "Usiminas East (Mineração Usiminas Mining Complex) Mine",
-   "lat": -20.122682,
-   "lon": -44.367421,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128140",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128140",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128140",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128140",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Usiminas East (Mineração Usiminas Mining Complex) Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128141",
-   "name": "Usiminas West (Mineração Usiminas Mining Complex) Mine",
-   "lat": -20.158317,
-   "lon": -44.456791,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128141",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128141",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128141",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128141",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Usiminas West (Mineração Usiminas Mining Complex) Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128143",
-   "name": "Vetria Laís Mine",
-   "lat": -19.195064,
-   "lon": -57.619056,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128143",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128143",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128143",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128143",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vetria Laís Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128145",
-   "name": "Anglo American Minas-Rio Mine",
-   "lat": -18.893909,
-   "lon": -43.419568,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128145",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128145",
-     "port_ubu",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128145",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128145",
-     "port_ubu",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128145",
-     "company_vale",
-     "country_BR",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Anglo American Minas-Rio Mine → Brazil → tariffs (+5 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128146",
-   "name": "Vetria Monjolinho Mine",
-   "lat": -19.25871,
-   "lon": -57.530441,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128146",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128146",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128146",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128146",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vetria Monjolinho Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128148",
-   "name": "Vallourec Pau Branco Mine",
-   "lat": -20.149601,
-   "lon": -43.978282,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128148",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128148",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128148",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128148",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vallourec Pau Branco Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128149",
-   "name": "BAMIN Pedra de Ferro Mine",
-   "lat": -14.361357,
-   "lon": -42.537808,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128149",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128149",
-     "port_tubarao",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128149",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128149",
-     "port_tubarao",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via BAMIN Pedra de Ferro Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128154",
-   "name": "Vale Paraopeba Complex Mine",
-   "lat": -20.052878,
-   "lon": -43.963779,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128154",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128154",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128154",
-     "company_vale",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128154",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128154",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vale Paraopeba Complex Mine → Brazil → tariffs (+5 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128156",
-   "name": "Vale Minas Centrais Complex Mine",
-   "lat": -19.929584,
-   "lon": -43.230107,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128156",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128156",
-     "port_ubu",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128156",
-     "company_vale",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128156",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128156",
-     "port_ubu",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vale Minas Centrais Complex Mine → Brazil → tariffs (+5 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128161",
-   "name": "ArcelorMittal Andrade Mine",
-   "lat": -19.788335,
-   "lon": -43.182768,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128161",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128161",
-     "port_ubu",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128161",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128161",
-     "port_ubu",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via ArcelorMittal Andrade Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128163",
-   "name": "Gerdau Várzea do Lopes Mine",
-   "lat": -20.287618,
-   "lon": -43.939659,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128163",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128163",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128163",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128163",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Gerdau Várzea do Lopes Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128174",
-   "name": "Cedro Mina do Gama Project Mine",
-   "lat": -20.115947,
-   "lon": -43.90606,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128174",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128174",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128174",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128174",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Cedro Mina do Gama Project Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128175",
-   "name": "Herculano Itabirito Mine",
-   "lat": -20.250236,
-   "lon": -43.926911,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128175",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128175",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128175",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128175",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Herculano Itabirito Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128179",
-   "name": "JMN Morro dos Coelhos Mine",
-   "lat": -20.615637,
-   "lon": -44.338004,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128179",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128179",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128179",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128179",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via JMN Morro dos Coelhos Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128180",
-   "name": "Minerita Lagoa das Flores Mine",
-   "lat": -20.138202,
-   "lon": -44.383176,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128180",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128180",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128180",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128180",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Minerita Lagoa das Flores Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128181",
-   "name": "Comisa Igarape Mine",
-   "lat": -20.115494,
-   "lon": -44.319135,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128181",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128181",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128181",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128181",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Comisa Igarape Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128182",
-   "name": "Tombador Mine",
-   "lat": -9.852373,
-   "lon": -42.056227,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128182",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128182",
-     "port_ponta_da_madeira",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128182",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128182",
-     "port_ponta_da_madeira",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Tombador Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128183",
-   "name": "AVG Santanense Mine",
-   "lat": -20.151845,
-   "lon": -44.427442,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128183",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128183",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128183",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128183",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via AVG Santanense Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128206",
-   "name": "Vale Serra Norte Complex Mine",
-   "lat": -6.086089,
-   "lon": -50.186944,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128206",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128206",
-     "port_ponta_da_madeira",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128206",
-     "company_vale",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128206",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128206",
-     "port_ponta_da_madeira",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vale Serra Norte Complex Mine → Brazil → tariffs (+5 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128207",
-   "name": "Vale Serra Leste Complex Mine",
-   "lat": -5.974806,
-   "lon": -49.628999,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128207",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128207",
-     "port_ponta_da_madeira",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128207",
-     "company_vale",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128207",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128207",
-     "port_ponta_da_madeira",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vale Serra Leste Complex Mine → Brazil → tariffs (+5 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128209",
-   "name": "Vale Vargem Grande Complex Mine",
-   "lat": -20.188261,
-   "lon": -43.862791,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128209",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128209",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128209",
-     "company_vale",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128209",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128209",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Vale Vargem Grande Complex Mine → Brazil → tariffs (+5 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128295",
-   "name": "Usiminas Central (Mineração Usiminas Mining Complex) Mine",
-   "lat": -20.139024,
-   "lon": -44.410261,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128295",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128295",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128295",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128295",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Usiminas Central (Mineração Usiminas Mining Complex) Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128376",
-   "name": "AVG Esperança Mine",
-   "lat": -20.110936,
-   "lon": -44.225151,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128376",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128376",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128376",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128376",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via AVG Esperança Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128681",
-   "name": "Marsil Antônio Dias Mine",
-   "lat": -19.547949,
-   "lon": -43.018538,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128681",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128681",
-     "port_ubu",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128681",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128681",
-     "port_ubu",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Marsil Antônio Dias Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128682",
-   "name": "BEMISA Baratinha Mine",
-   "lat": -19.564705,
-   "lon": -42.738902,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128682",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128682",
-     "port_ubu",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128682",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128682",
-     "port_ubu",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via BEMISA Baratinha Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128683",
-   "name": "FLAPA Barra Mine",
-   "lat": -20.027693,
-   "lon": -43.591602,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128683",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128683",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128683",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128683",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via FLAPA Barra Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128684",
-   "name": "MR Bau Mine",
-   "lat": -20.01137,
-   "lon": -43.572823,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128684",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128684",
-     "port_ubu",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128684",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128684",
-     "port_ubu",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via MR Bau Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128715",
-   "name": "Gerdau Miguel Burnier Mine",
-   "lat": -20.442239,
-   "lon": -43.784064,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128715",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128715",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128715",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128715",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Gerdau Miguel Burnier Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128830",
-   "name": "CSN Casa de Pedra Mine",
-   "lat": -20.462721,
-   "lon": -43.923006,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128830",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128830",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128830",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128830",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via CSN Casa de Pedra Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128834",
-   "name": "Cedro Mariana Mine",
-   "lat": -20.311482,
-   "lon": -43.424438,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128834",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128834",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128834",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128834",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Cedro Mariana Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128839",
-   "name": "CSN Engenho Mine",
-   "lat": -20.461941,
-   "lon": -43.918612,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128839",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128839",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128839",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128839",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via CSN Engenho Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128852",
-   "name": "Samarco Germano Alegria Complex Mine",
-   "lat": -20.202277,
-   "lon": -43.507056,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128852",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128852",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128852",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128852",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via Samarco Germano Alegria Complex Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
-   "evidence": []
-  },
-  {
-   "id": "mine_P100000128855",
-   "name": "MMI Ipê Mine",
-   "lat": -20.116098,
-   "lon": -44.308706,
-   "tier": "low",
-   "score": 0.175,
-   "components": {
-    "exposure": 0.5252,
-    "news_z": 0.0,
-    "tone_shift": 0.0,
-    "attention_z": 0.0,
-    "relevant_articles": 0
-   },
-   "paths": [
-    [
-     "mine_P100000128855",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128855",
-     "port_itaguai",
-     "country_BR",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128855",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ],
-    [
-     "mine_P100000128855",
-     "port_itaguai",
-     "country_BR",
-     "country_CN",
-     "channel_tariffs"
-    ]
-   ],
-   "reason": "Exposed via MMI Ipê Mine → Brazil → tariffs (+3 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via Quebec Iron Bloom Lake Mine → Canada → tariffs (Canada is named in 13 of 250 2026 US midterm elections articles on tariffs) (+7 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
    "evidence": []
   }
  ],
- "dark_count": 651
+ "dark_count": 688
 }

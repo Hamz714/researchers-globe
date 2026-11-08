@@ -63,9 +63,10 @@ class JevBackend:
     name = "jev"
 
     def __init__(self) -> None:
-        self.base_url = os.environ.get("JEV_BASE_URL", "https://openrouter.ai/api/alpha/decisions")
-        self.api_key = os.environ.get("JEV_API_KEY", "")
-        self.model = os.environ.get("JEV_MODEL", "typesafe/jev-1.14")
+        # `or`: a blank line in .env (JEV_MODEL=) must fall back to the default, not to ""
+        self.base_url = os.environ.get("JEV_BASE_URL") or "https://openrouter.ai/api/alpha/decisions"
+        self.api_key = os.environ.get("JEV_API_KEY") or ""
+        self.model = os.environ.get("JEV_MODEL") or "typesafe/jev-1.14"
 
     def configured(self) -> bool:
         return bool(self.base_url and self.api_key)
@@ -121,9 +122,9 @@ def default_backends() -> list:
         JevBackend(),
         OpenAICompatibleBackend(
             "fallback",
-            os.environ.get("FALLBACK_LLM_BASE_URL", "https://openrouter.ai/api/v1"),
+            os.environ.get("FALLBACK_LLM_BASE_URL") or "https://openrouter.ai/api/v1",
             os.environ.get("FALLBACK_LLM_API_KEY"),
-            os.environ.get("FALLBACK_LLM_MODEL", "anthropic/claude-haiku-5.5"),
+            os.environ.get("FALLBACK_LLM_MODEL") or "anthropic/claude-haiku-5.5",
         ),
     ]
 

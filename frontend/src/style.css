@@ -117,14 +117,14 @@ svg.news .recent-bg { fill: rgba(255, 77, 79, 0.12); }
 svg.news .median { stroke: rgba(230, 236, 245, 0.55); stroke-dasharray: 3 3; }
 svg.news .lbl { fill: var(--muted); font-size: 9px; }
 svg.news .lbl.hot { fill: #ff8a7a; font-weight: 600; }
-.node-label {
-  padding: 2px 7px; border-radius: 6px; background: rgba(14, 20, 34, 0.88); border: 1px solid #2d4266;
-  color: var(--text); font-size: 11px; white-space: nowrap; pointer-events: none;
+.globe-tip {
+  position: absolute; left: 0; top: 0; z-index: 7; pointer-events: none; max-width: 280px;
+  padding: 6px 9px; border-radius: 8px; background: var(--panel); border: 1px solid var(--line);
+  color: var(--text); font-size: 12px; line-height: 1.4;
 }
-.node-label.port { border-color: #69b1ff; }
-.node-label.country { color: #c9d6ea; border-style: dashed; }
-.hover-pop .maplibregl-popup-content { background: var(--panel); color: var(--text); font-size: 12px; padding: 6px 9px; border: 1px solid var(--line); }
-.hover-pop .maplibregl-popup-tip { display: none; }
+/* Cesium positions its credits with inline styles; move them off the legend, above our footer. */
+#map .cesium-viewer-bottom { left: auto !important; right: 16px !important; bottom: 24px !important; }
+#map .cesium-widget-credits { font-size: 10px; opacity: 0.75; }
 
 #results {
   position: absolute; inset: 120px 16px 16px 16px; z-index: 9; overflow-y: auto;

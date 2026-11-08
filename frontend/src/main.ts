@@ -1,13 +1,9 @@
-import maplibregl, { type GeoJSONSource, type Map as MLMap } from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
 import "./style.css";
 import { api } from "./api";
+import { createGlobe, TIER_COLOR, type Arc, type Located } from "./globe";
 import type { AssetDetail, AssetPoint, EvalReport, PathEdge, PathNode, QueryResult, Result, Tier } from "./types";
 
 // ----------------------------------------------------------------- constants
-// TODO(Person C): demotiles is a free, low-detail basemap with no key. Swap for a nicer style if time allows.
-const STYLE_URL = "https://demotiles.maplibre.org/style.json";
-const TIER_COLOR: Record<Tier, string> = { high: "#ff4d4f", medium: "#ffa940", low: "#ffe7a3" };
 const TIER_LABEL: Record<Tier, string> = { high: "High", medium: "Medium", low: "Low" };
 const SCORE_NOTE = "Scores rank assets by exposure plus current evidence. A score is a ranking, not a probability.";
 const TOP_LIST = 8;
@@ -22,139 +18,20 @@ let current: QueryResult | null = null;
 let currentQuestion = "";
 let selectedId: string | null = null;
 let allAssets: AssetPoint[] = [];
-let nodeMarkers: maplibregl.Marker[] = [];
 
-// ----------------------------------------------------------------- map
-const map: MLMap = new maplibregl.Map({
-  container: "map",
-  style: STYLE_URL,
-  center: [10, 20],
-  zoom: 1.4,
-  attributionControl: { compact: true },
-});
-map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
-const hoverPopup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10, className: "hover-pop" });
-
-const emptyFC = (): GeoJSON.FeatureCollection => ({ type: "FeatureCollection", features: [] });
-
-map.on("style.load", () => {
-  map.setProjection({ type: "globe" });
-
-  map.addSource("dark", { type: "geojson", data: emptyFC() });
-  map.addSource("assets", { type: "geojson", data: emptyFC() });
-  map.addSource("path", { type: "geojson", data: emptyFC() });
-  map.addSource("selected", { type: "geojson", data: emptyFC() });
-  map.addLayer({
-    id: "dark",
-    type: "circle",
-    source: "dark",
-    paint: { "circle-radius": 2.2, "circle-color": "#6b7280", "circle-opacity": 0.55 },
-  });
-  // Exposure path arcs: trade hops (mine → port → destination) solid, location/ownership hops dashed.
-  map.addLayer({
-    id: "path-line-context",
-    type: "line",
-    source: "path",
-    filter: ["all", ["==", ["geometry-type"], "LineString"], ["!=", ["get", "kind"], "trade"]],
-    layout: { "line-cap": "round" },
-    paint: { "line-color": "#9fb6d9", "line-width": 1.6, "line-opacity": 0.8, "line-dasharray": [2, 2] },
-  });
-  map.addLayer({
-    id: "path-line",
-    type: "line",
-    source: "path",
-    filter: ["all", ["==", ["geometry-type"], "LineString"], ["==", ["get", "kind"], "trade"]],
-    layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-color": "#69b1ff", "line-width": 2.6, "line-opacity": 0.95 },
-  });
-  map.addLayer({
-    id: "assets-pulse",
-    type: "circle",
-    source: "assets",
-    filter: ["==", ["get", "tier"], "high"],
-    paint: { "circle-radius": 10, "circle-color": TIER_COLOR.high, "circle-opacity": 0.35 },
-  });
-  map.addLayer({
-    id: "assets",
-    type: "circle",
-    source: "assets",
-    paint: {
-      "circle-radius": ["match", ["get", "tier"], "high", 7, "medium", 6, 4.5],
-      "circle-color": ["match", ["get", "tier"], "high", TIER_COLOR.high, "medium", TIER_COLOR.medium, TIER_COLOR.low],
-      "circle-opacity": ["match", ["get", "tier"], "low", 0.85, 1],
-      "circle-stroke-color": "#111",
-      "circle-stroke-width": 1,
-    },
-  });
-  map.addLayer({
-    id: "selected",
-    type: "circle",
-    source: "selected",
-    paint: { "circle-radius": 11, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#ffffff", "circle-stroke-width": 2.5 },
-  });
-
-  map.on("click", "assets", (e) => {
-    const id = e.features?.[0]?.properties?.id as string | undefined;
+// ----------------------------------------------------------------- globe (Cesium, see globe.ts)
+const globe = createGlobe(
+  "map",
+  (id) => {
     const r = current?.results.find((x) => x.id === id);
     if (r) void select(r);
-  });
-  map.on("mousemove", "assets", (e) => {
-    map.getCanvas().style.cursor = "pointer";
-    const p = e.features?.[0]?.properties as { name: string; tier: Tier; score: number; rank: number } | undefined;
-    if (!p) return;
-    hoverPopup
-      .setLngLat(e.lngLat)
-      .setHTML(`<b>#${p.rank} ${esc(p.name)}</b><br>${TIER_LABEL[p.tier]} tier · score ${fmt(p.score)}`)
-      .addTo(map);
-  });
-  map.on("mouseleave", "assets", () => {
-    map.getCanvas().style.cursor = "";
-    hoverPopup.remove();
-  });
+  },
+  (p) => `<b>#${p.rank} ${esc(p.name)}</b><br>${TIER_LABEL[p.tier]} tier · score ${fmt(p.score)}`,
+);
 
-  pulse();
-  if (current) render(current, false);
-});
-
-function pulse() {
-  const t = performance.now() / 1000;
-  if (map.getLayer("assets-pulse")) {
-    map.setPaintProperty("assets-pulse", "circle-radius", 9 + 6 * (0.5 + 0.5 * Math.sin(t * 3)));
-  }
-  requestAnimationFrame(pulse);
-}
-
-/** Pan/zoom so the given points are in view, leaving room for the side panel when it is open. */
-function fitTo(points: [number, number][], maxZoom = 4) {
-  if (!points.length) return;
-  const lons = unwrap(points.map((p) => p[0]));
-  const lats = points.map((p) => p[1]);
-  const bounds: [[number, number], [number, number]] = [
-    [Math.min(...lons), Math.min(...lats)],
-    [Math.max(...lons), Math.max(...lats)],
-  ];
-  const panelOpen = !$("#panel").hidden;
-  map.fitBounds(bounds, {
-    padding: { top: 150, bottom: 60, left: 320, right: panelOpen ? 480 : 60 },
-    maxZoom,
-    duration: 1400,
-  });
-}
-
-/** Make a list of longitudes continuous (no ±180 jump), so bounds and lines do not wrap the wrong way. */
-function unwrap(lons: number[]): number[] {
-  const out: number[] = [];
-  for (const lon of lons) {
-    if (!out.length) out.push(lon);
-    else {
-      let x = lon;
-      const prev = out[out.length - 1];
-      while (x - prev > 180) x -= 360;
-      while (x - prev < -180) x += 360;
-      out.push(x);
-    }
-  }
-  return out;
+/** Fly so the given points are in view, leaving room for the side panel when it is open. */
+function fitTo(points: [number, number][], minSpanDeg = 6) {
+  globe.fitTo(points, { panelOpen: !$("#panel").hidden, minSpanDeg });
 }
 
 // ----------------------------------------------------------------- query flow
@@ -178,24 +55,12 @@ function render(q: QueryResult, fly: boolean) {
   clearPath();
   selectedId = null;
   $("#panel").hidden = true;
-  (map.getSource("selected") as GeoJSONSource | undefined)?.setData(emptyFC());
+  globe.setSelected(null);
   const ranked = [...q.results].sort((a, b) => b.score - a.score);
   const rank = new Map(ranked.map((r, i) => [r.id, i + 1]));
-  (map.getSource("assets") as GeoJSONSource | undefined)?.setData({
-    type: "FeatureCollection",
-    features: q.results.map((r) => ({
-      type: "Feature",
-      geometry: { type: "Point", coordinates: [r.lon, r.lat] },
-      properties: { id: r.id, name: r.name, tier: r.tier, score: r.score, rank: rank.get(r.id) },
-    })),
-  });
+  globe.setResults(q.results, rank);
   const lit = new Set(q.results.map((r) => r.id));
-  (map.getSource("dark") as GeoJSONSource | undefined)?.setData({
-    type: "FeatureCollection",
-    features: allAssets
-      .filter((a) => !lit.has(a.id))
-      .map((a) => ({ type: "Feature", geometry: { type: "Point", coordinates: [a.lon, a.lat] }, properties: { id: a.id } })),
-  });
+  globe.setDark(allAssets.filter((a) => !lit.has(a.id)));
 
   const counts = { high: 0, medium: 0, low: 0 } as Record<Tier, number>;
   q.results.forEach((r) => counts[r.tier]++);
@@ -219,7 +84,7 @@ function render(q: QueryResult, fly: boolean) {
   );
   if (fly) {
     if (q.results.length) fitTo(q.results.map((r) => [r.lon, r.lat]));
-    else map.flyTo({ center: [10, 20], zoom: 1.4, duration: 1200 });
+    else globe.home();
   }
 }
 
@@ -230,10 +95,7 @@ async function select(r: Result) {
   panel.hidden = false;
   panel.innerHTML = panelHtml(r, null, true);
   bindPanel();
-  (map.getSource("selected") as GeoJSONSource | undefined)?.setData({
-    type: "FeatureCollection",
-    features: [{ type: "Feature", geometry: { type: "Point", coordinates: [r.lon, r.lat] }, properties: {} }],
-  });
+  globe.setSelected(r);
   clearPath();
   try {
     const detail = await api.asset(r.id, currentQuestion);
@@ -241,12 +103,12 @@ async function select(r: Result) {
     panel.innerHTML = panelHtml(r, detail, false);
     bindPanel();
     const pts = drawPath(r, detail);
-    fitTo(pts.length > 1 ? pts : [[r.lon, r.lat]], pts.length > 1 ? 5 : 4.5);
+    fitTo(pts.length > 1 ? pts : [[r.lon, r.lat]], pts.length > 1 ? 4 : 8);
   } catch (err) {
     if (selectedId !== r.id) return;
     panel.innerHTML = panelHtml(r, null, false, (err as Error).message);
     bindPanel();
-    fitTo([[r.lon, r.lat]], 4.5);
+    fitTo([[r.lon, r.lat]], 8);
   }
 }
 
@@ -255,7 +117,7 @@ function bindPanel() {
     $("#panel").hidden = true;
     selectedId = null;
     clearPath();
-    (map.getSource("selected") as GeoJSONSource | undefined)?.setData(emptyFC());
+    globe.setSelected(null);
   });
 }
 
@@ -354,33 +216,8 @@ function newsChart(d: AssetDetail | null): string {
 }
 
 // ----------------------------------------------------------------- exposure path on the globe
-/** Points along the great circle from a to b ([lon, lat] in degrees), longitudes kept continuous. */
-export function greatCircle(a: [number, number], b: [number, number], steps = 64): [number, number][] {
-  const rad = Math.PI / 180;
-  const toVec = ([lon, lat]: [number, number]) => [
-    Math.cos(lat * rad) * Math.cos(lon * rad),
-    Math.cos(lat * rad) * Math.sin(lon * rad),
-    Math.sin(lat * rad),
-  ];
-  const p = toVec(a), q = toVec(b);
-  const dot = Math.min(1, Math.max(-1, p[0] * q[0] + p[1] * q[1] + p[2] * q[2]));
-  const omega = Math.acos(dot);
-  if (omega < 1e-6) return [a, b];
-  const pts: [number, number][] = [];
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps;
-    const k1 = Math.sin((1 - t) * omega) / Math.sin(omega), k2 = Math.sin(t * omega) / Math.sin(omega);
-    const x = k1 * p[0] + k2 * q[0], y = k1 * p[1] + k2 * q[1], z = k1 * p[2] + k2 * q[2];
-    pts.push([Math.atan2(y, x) / rad, Math.atan2(z, Math.hypot(x, y)) / rad]);
-  }
-  const lons = unwrap(pts.map((pt) => pt[0]));
-  return pts.map((pt, i) => [lons[i], pt[1]]);
-}
-
 function clearPath() {
-  (map.getSource("path") as GeoJSONSource | undefined)?.setData(emptyFC());
-  nodeMarkers.forEach((m) => m.remove());
-  nodeMarkers = [];
+  globe.setPath([], []);
 }
 
 /**
@@ -391,7 +228,6 @@ function clearPath() {
  * Returns the drawn points for framing.
  */
 function drawPath(r: Result, d: AssetDetail): [number, number][] {
-  clearPath();
   const byId = new Map<string, PathNode>(d.path_nodes.map((n) => [n.id, n]));
   byId.set(r.id, { id: r.id, type: "mine", name: r.name, lat: r.lat, lon: r.lon });
   const edgeType = new Map(d.path_edges.map((e) => [`${e.src}>${e.dst}`, e.type]));
@@ -399,21 +235,17 @@ function drawPath(r: Result, d: AssetDetail): [number, number][] {
     const n = byId.get(id);
     return n && n.lat !== null && n.lon !== null ? (n as PathNode & { lat: number; lon: number }) : null;
   };
-  const features: GeoJSON.Feature[] = [];
+  const arcs: Arc[] = [];
   const seen = new Set<string>();
   const used = new Map<string, PathNode & { lat: number; lon: number }>();
-  const arc = (a: PathNode & { lat: number; lon: number }, b: PathNode & { lat: number; lon: number }, type: string) => {
+  const arc = (a: PathNode & { lat: number; lon: number }, b: PathNode & { lat: number; lon: number }) => {
     if (a.id === b.id || seen.has(`${a.id}>${b.id}`)) return;
     seen.add(`${a.id}>${b.id}`);
     used.set(a.id, a);
     used.set(b.id, b);
-    features.push({
-      type: "Feature",
-      geometry: { type: "LineString", coordinates: greatCircle([a.lon, a.lat], [b.lon, b.lat]) },
-      properties: { kind: "trade", type },
-    });
+    arcs.push({ from: a, to: b });
   };
-  const pending: [PathNode & { lat: number; lon: number }, PathNode & { lat: number; lon: number }, string][] = [];
+  const pending: [PathNode & { lat: number; lon: number }, PathNode & { lat: number; lon: number }][] = [];
   for (const p of d.paths) {
     let lastPhysical = located(p[0]); // the mine, then the port it ships through
     for (let i = 1; i < p.length; i++) {
@@ -422,25 +254,18 @@ function drawPath(r: Result, d: AssetDetail): [number, number][] {
       const b = located(p[i]);
       if (!b) continue;
       if (type === "EXPORTS_VIA" && lastPhysical) {
-        arc(lastPhysical, b, type);
+        arc(lastPhysical, b);
         lastPhysical = b;
       } else if (type === "EXPORTS_TO") {
         const from = lastPhysical ?? located(p[i - 1]);
-        if (from) pending.push([from, b, type]);
+        if (from) pending.push([from, b]);
       }
     }
   }
   // A destination reached through a port is drawn from the port only, not also straight from the mine.
   const viaPort = new Set(pending.filter(([a]) => a.type === "port").map(([, b]) => b.id));
-  for (const [a, b, type] of pending) if (a.type === "port" || !viaPort.has(b.id)) arc(a, b, type);
-  (map.getSource("path") as GeoJSONSource | undefined)?.setData({ type: "FeatureCollection", features });
-  for (const n of used.values()) {
-    if (n.id === r.id) continue;
-    const el = document.createElement("div");
-    el.className = `node-label ${n.type}`;
-    el.textContent = `${n.type === "port" ? "⚓ " : n.type === "country" ? "→ " : ""}${n.name}`;
-    nodeMarkers.push(new maplibregl.Marker({ element: el, anchor: "left", offset: [6, 0] }).setLngLat([n.lon, n.lat]).addTo(map));
-  }
+  for (const [a, b] of pending) if (a.type === "port" || !viaPort.has(b.id)) arc(a, b);
+  globe.setPath(arcs, [...used.values()].filter((n): n is Located & PathNode & { lat: number; lon: number } => n.id !== r.id));
   return [[r.lon, r.lat], ...[...used.values()].filter((n) => n.id !== r.id).map((n) => [n.lon, n.lat] as [number, number])];
 }
 
@@ -514,7 +339,7 @@ async function init() {
 // Dev-only hook for headless QA (select a mine by id without clicking a pixel).
 if (import.meta.env.DEV) {
   (window as unknown as { __globe: unknown }).__globe = {
-    map,
+    viewer: globe.viewer,
     selectById: (id: string) => {
       const r = current?.results.find((x) => x.id === id);
       if (r) void select(r);

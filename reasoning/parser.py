@@ -45,7 +45,15 @@ CRITERIA_SCHEMA = Criteria.model_json_schema()
 
 
 def parse_question(text: str, backends: list | None = None) -> tuple[dict, dict | None]:
-    """Step 1. Returns (criteria, preset_used_or_None)."""
+    """Step 1. Returns (criteria, preset_used_or_None).
+
+    A preset's exact question uses the preset's reviewed criteria and channels without calling
+    the model, so preset results (and their cached GDELT queries) never drift between runs.
+    """
+    norm = " ".join(text.lower().split())
+    for p in load_presets():
+        if " ".join(p["query"].lower().split()) == norm:
+            return Criteria.model_validate(p["criteria"]).model_dump(), p
     used: dict = {}
 
     def fallback() -> dict:
