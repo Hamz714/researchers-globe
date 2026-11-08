@@ -143,8 +143,11 @@ Each preset lists its sources. TOUCHES weights are measured from coverage at que
 3. **Exposure no longer saturates:** edges are walked in their own direction, so a Chinese mine isn't
    exposed to Brazil just because China imports Brazilian ore. Only the strongest path per
    (touched node, channel) counts in the noisy-OR. All paths are still shown.
-4. **Rate-limit budget:** all 50 candidates are returned. GDELT evidence is pulled for the top 25
-   (`EVIDENCE_K`), and the placebo for the top 10 (`PLACEBO_K`).
+4. **Rate-limit budget:** all 50 candidates are returned. GDELT evidence is pulled for the top 10
+   (`EVIDENCE_K`, was 25), and the placebo for the top 10 (`PLACEBO_K`).
+5. **Short GDELT queries:** an asset's queries AND its names with the event terms plus the terms of the
+   channel on its strongest path only (`evidence_terms()` in `run_query.py`, also used by `GET /asset/{id}`).
+   ANDing all chosen channels' terms made ~300-character queries that GDELT rejects ("too short or too long").
 
 ## Hand-set numbers (record every change here)
 
@@ -155,7 +158,7 @@ Each preset lists its sources. TOUCHES weights are measured from coverage at que
 | `reasoning/touches.py` | ≥2 titles, ≥3% share, top 8 touched nodes | keeps one-off mentions out |
 | `data/presets.json` | `fallback_touches` | only used offline with an empty cache |
 | `pipeline/signals.py` | tone std floor 0.25, placebo threshold z≥2 | the plan gives none |
-| `reasoning/run_query.py` | EVIDENCE_K=25, PLACEBO_K=10, control term "copper" | GDELT rate limit |
+| `reasoning/run_query.py` | EVIDENCE_K=10 (was 25), PLACEBO_K=10, control term "copper" | GDELT rate limit: ~120 requests for all presets instead of ~250 |
 | `eval/metrics.py` | negative control passes if ≤10% lit | first guess |
 
 ## Still open

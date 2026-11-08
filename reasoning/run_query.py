@@ -20,7 +20,7 @@ from reasoning.judge import judge_article
 from reasoning.parser import choose_channels, choose_touches, load_channels, parse_question
 
 TOP_K = 50          # candidates returned (plan)
-EVIDENCE_K = 25     # candidates we pull GDELT evidence for (rate limit: ~6 s per request)
+EVIDENCE_K = 10     # candidates we pull GDELT evidence for (rate limit: ~6 s per request, 3-4 requests each)
 PLACEBO_K = 10      # candidates that also get the placebo control query
 MAX_ARTICLES = 20
 CONTROL_TERMS = ["copper"]  # placebo term (plan); TODO(Person A): pick a better control per query
@@ -28,6 +28,22 @@ CONTROL_TERMS = ["copper"]  # placebo term (plan); TODO(Person A): pick a better
 
 def _terms(node: dict) -> list[str]:
     return [t for t in str(node.get("search_terms") or node["name"]).split("|") if t]
+
+
+def evidence_terms(criteria: dict, channel: dict) -> list[str]:
+    """Terms ANDed with an asset's names in its GDELT queries: the event terms plus the terms of the
+    channel on the asset's strongest path. Not every chosen channel: 15 OR'd terms made queries of
+    ~300 chars, which GDELT rejects ("Your query was too short or too long"); this keeps them short."""
+    return list(dict.fromkeys(list(criteria["event"]["terms"]) + list(channel["search_terms"])))
+
+
+def asset_evidence_terms(doc: dict, asset_id: str, library: dict) -> list[str] | None:
+    """evidence_terms() for an asset in a finished result doc (its strongest path's channel), or None."""
+    for r in doc.get("results", []):
+        if r["id"] == asset_id and r.get("paths"):
+            cid = r["paths"][0][-1].removeprefix("channel_")
+            return evidence_terms(doc["criteria"], library[cid]) if cid in library else None
+    return None
 
 
 def _path_words(graph: Graph, path: list[str]) -> str:
@@ -89,21 +105,22 @@ def run_query(text: str, graph: Graph | None = None, end: date | None = None,
     g = base.with_edges(exp.touches_edges(chosen, touches))
     top, dark = exp.propagate(g, {c: library[c]["weight"] for c in chosen}, top_k=TOP_K)
 
-    channel_terms = sorted({t for c in chosen for t in library[c]["search_terms"]} | set(criteria["event"]["terms"]))
     results = []
     zero = {"news_z": 0.0, "tone_shift": 0.0, "attention_z": 0.0, "placebo_flag": False}
     for rank, ex in enumerate(top):
         node = g.node(ex.asset_id)
         asset = _asset_context(g, ex.asset_id)
 
+        best_channel = library[ex.paths[0][-1].removeprefix("channel_")]
+
         # 4. evidence (cached fetches); beyond EVIDENCE_K the asset is scored on exposure alone
         if rank < EVIDENCE_K:
-            sig, articles = _gather(asset, channel_terms, criteria, end, with_control=rank < PLACEBO_K)
+            sig, articles = _gather(asset, evidence_terms(criteria, best_channel), criteria, end,
+                                    with_control=rank < PLACEBO_K)
         else:
             sig, articles = dict(zero), []
 
         # 5. judge each article against the channel on its strongest path
-        best_channel = library[ex.paths[0][-1].removeprefix("channel_")]
         evidence = []
         for a in articles[:MAX_ARTICLES]:
             art = {"title": a.get("title", ""), "url": a.get("url", ""), "date": str(a.get("seendate", ""))[:10],

@@ -55,13 +55,11 @@ def test_cached_series_is_used(tmp_path):
     from pipeline import fetch_gdelt
     from pipeline.graph import default_graph
     from reasoning.parser import load_channels
-    from reasoning.run_query import _asset_context
+    from reasoning.run_query import _asset_context, asset_evidence_terms
 
     row = _hero_row()
     doc = json.loads((ROOT / "data" / "preset_results" / "hero_midterms.json").read_text())
-    lib = load_channels()
-    chosen = [c["id"] for c in doc["channels"]]
-    channel_terms = sorted({t for c in chosen for t in lib[c]["search_terms"]} | set(doc["criteria"]["event"]["terms"]))
+    channel_terms = asset_evidence_terms(doc, row["id"], load_channels())
     ctx = _asset_context(default_graph(), row["id"])
     terms = ctx["terms"] + ctx["owner_terms"]
     end = date.today() - timedelta(days=1)  # precomputed yesterday

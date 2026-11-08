@@ -61,7 +61,7 @@ def preset_report(preset_id: str) -> None:
     from pipeline.graph import default_graph
     from reasoning import exposure as exp
     from reasoning.parser import choose_touches, load_channels, load_presets
-    from reasoning.run_query import EVIDENCE_K, _asset_context, _gather
+    from reasoning.run_query import EVIDENCE_K, _asset_context, _gather, evidence_terms
 
     p = next(x for x in load_presets() if x["id"] == preset_id)
     crit, chosen, end = p["criteria"], [c["id"] for c in p["channels"]], date.today()
@@ -75,13 +75,13 @@ def preset_report(preset_id: str) -> None:
             print(f"      {w:5.2f}  {g0.node(nid)['name']}  (named in {pv.get('named', {}).get(nid, '-')})")
     g = g0.with_edges(exp.touches_edges(chosen, touches))
     top, dark = exp.propagate(g, {c: lib[c]["weight"] for c in chosen}, top_k=50)
-    terms = sorted({t for c in chosen for t in lib[c]["search_terms"]} | set(crit["event"]["terms"]))
     print(f"  {len(top)} candidates, {dark} dark; evidence for top {EVIDENCE_K}")
     print(f"  {'exposure':>8} {'news_z':>7} {'tone':>6} {'attn_z':>7} plc arts  name")
     flags = Counter()
     for rank, ex in enumerate(top[:EVIDENCE_K]):
         a = _asset_context(g, ex.asset_id)
-        sig, arts = _gather(a, terms, crit, end, with_control=rank < 10)
+        best = lib[ex.paths[0][-1].removeprefix("channel_")]
+        sig, arts = _gather(a, evidence_terms(crit, best), crit, end, with_control=rank < 10)
         note = []
         if all(sig[k] == 0 for k in ("news_z", "tone_shift", "attention_z")):
             note.append("all-zero")

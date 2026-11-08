@@ -228,12 +228,12 @@ def _cached_series(doc: dict, asset_id: str) -> tuple[SignalSeries | None, str]:
     try:
         from pipeline import fetch_gdelt
         from pipeline.graph import default_graph
-        from reasoning.run_query import _asset_context
+        from reasoning.run_query import _asset_context, asset_evidence_terms
 
         crit = doc["criteria"]
-        library = _channel_library()
-        chosen = [c["id"] for c in doc.get("channels", []) if c["id"] in library]
-        channel_terms = sorted({t for c in chosen for t in library[c]["search_terms"]} | set(crit["event"]["terms"]))
+        channel_terms = asset_evidence_terms(doc, asset_id, _channel_library())
+        if channel_terms is None:
+            return None, "No news series: this mine got no evidence pull for this question."
         ctx = _asset_context(default_graph(), asset_id)
         terms = ctx["terms"] + ctx["owner_terms"]
         win = crit["window"]
