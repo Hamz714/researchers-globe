@@ -17,7 +17,9 @@ from __future__ import annotations
 
 import csv
 import json
+import random
 from collections import defaultdict
+from datetime import date, timedelta
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -109,22 +111,73 @@ def backtests() -> list[dict]:
 
 
 # ------------------------------------------------------------------ 3. negative controls
+HERO = "Which iron ore mines are exposed to the 2026 US midterms?"
 NEGATIVE_CONTROL_QUERIES = [
     "Which iron ore mines are exposed to the Premier League title race?",
-    # TODO(Person B): same hero query with the event moved to a random earlier date.
 ]
+# Shifted-date control (plan, Evaluation 3): the hero question with the event moved to a random
+# earlier date. The whole run moves with it (end = shifted date + the real end-event offset), so
+# the windows and the measured TOUCHES coverage are those of a day when nothing happened.
+SHIFT_SEED = 2026
+GDELT_DOC_START = date(2026, 8, 10)  # GDELT DOC keeps ~3 months (plan); our cache starts 2 Sep
+MIN_VALID_RECENT = 5                 # shifted recent window must have >= 5 non-outage days
+SHIFT_PASS_RATIO = 0.5               # HAND-SET: passes if mean score <= 50% of the real date's
 
 
-def negative_controls() -> list[dict]:
+def shifted_event_date(real_event: date, real_end: date, recent_days: int = 7, baseline_days: int = 60,
+                       seed: int = SHIFT_SEED) -> date | None:
+    """A seeded random earlier event date whose shifted windows lie inside the data and avoid
+    the GDELT DOC outages, and whose recent window does not overlap the real one."""
+    from pipeline.fetch_gdelt import in_gap
+
+    offset = real_end - real_event
+    ok = []
+    d = real_event - timedelta(days=1)
+    while d - timedelta(days=baseline_days + recent_days) + offset >= GDELT_DOC_START:
+        end = d + offset
+        recent = [end - timedelta(days=i) for i in range(recent_days)]
+        if (end < real_end - timedelta(days=recent_days)
+                and sum(not in_gap(x) for x in recent) >= MIN_VALID_RECENT):
+            ok.append(d)
+        d -= timedelta(days=1)
+    return random.Random(seed).choice(sorted(ok)) if ok else None
+
+
+def _lit_and_mean(out: dict) -> tuple[int, int, float]:
+    lit = sum(r["tier"] in ("high", "medium") for r in out["results"])
+    total = len(out["results"]) + out["dark_count"]
+    mean = sum(r["score"] for r in out["results"]) / len(out["results"]) if out["results"] else 0.0
+    return lit, total, mean
+
+
+def negative_controls(end: date | None = None, backends: list | None = None) -> list[dict]:
+    from reasoning.parser import parse_question
     from reasoning.run_query import run_query
 
+    end = end or date.today()
     rows = []
     for q in NEGATIVE_CONTROL_QUERIES:
-        out = run_query(q)
-        lit = sum(r["tier"] in ("high", "medium") for r in out["results"])
-        total = len(out["results"]) + out["dark_count"]
+        out = run_query(q, end=end, backends=backends)
+        lit, total, _ = _lit_and_mean(out)
         rows.append({"query": q, "lit": lit, "dark": total - lit,
                      "passed": total == 0 or lit / total <= NEGATIVE_CONTROL_MAX_LIT_FRACTION})
+
+    crit, _ = parse_question(HERO, backends=[])
+    real_event = date.fromisoformat(crit["event"]["date"])
+    shifted = shifted_event_date(real_event, end, crit["window"]["recent_days"], crit["window"]["baseline_days"])
+    if shifted is not None:
+        real = run_query(HERO, end=end, backends=backends)
+        fake = run_query(HERO, end=shifted + (end - real_event), backends=backends,
+                         criteria_override={"event": {"date": shifted.isoformat()}})
+        r_lit, _, r_mean = _lit_and_mean(real)
+        f_lit, f_total, f_mean = _lit_and_mean(fake)
+        rows.append({
+            # the EvalReport row has no score fields, so the comparison is spelled out in the label
+            "query": (f"Hero with the event moved to {shifted} (seed {SHIFT_SEED}): mean score {f_mean:.3f} "
+                      f"vs {r_mean:.3f} on the real date, lit {f_lit} vs {r_lit}"),
+            "lit": f_lit, "dark": f_total - f_lit,
+            "passed": r_mean > 0 and f_mean <= SHIFT_PASS_RATIO * r_mean,
+        })
     return rows
 
 

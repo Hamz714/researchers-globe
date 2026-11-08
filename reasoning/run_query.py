@@ -9,6 +9,7 @@ empty cache every asset gets zero signals and no articles, i.e. exposure-only sc
 """
 from __future__ import annotations
 
+import copy
 import os
 from datetime import date, timedelta
 
@@ -88,14 +89,25 @@ def _gather(asset: dict, channel_terms: list[str], criteria: dict, end: date,
     return sig.to_dict(), arts
 
 
+def _merge(base: dict, override: dict) -> dict:
+    out = copy.deepcopy(base)
+    for k, v in override.items():
+        out[k] = _merge(out[k], v) if isinstance(v, dict) and isinstance(out.get(k), dict) else copy.deepcopy(v)
+    return out
+
+
 def run_query(text: str, graph: Graph | None = None, end: date | None = None,
-              backends: list | None = None) -> dict:
+              backends: list | None = None, criteria_override: dict | None = None) -> dict:
+    """criteria_override: deep-merged into the parsed criteria, e.g. {"event": {"date": "2026-10-18"}}
+    for the shifted-date negative control (eval/metrics.py). Pass `end` with it to move the windows."""
     os.environ.setdefault("GLOBE_OFFLINE", "1")
     end = end or date.today()
     library = load_channels()
 
     # 1-2. parse and choose channels (decision model, validated)
     criteria, preset = parse_question(text, backends=backends)
+    if criteria_override:
+        criteria = _merge(criteria, criteria_override)
     channels = choose_channels(text, criteria, preset, backends=backends)
     chosen = [c["id"] for c in channels]
 
