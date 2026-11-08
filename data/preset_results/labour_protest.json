@@ -38,7 +38,7 @@
     "exposure": 0.8848,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -4.195,
     "relevant_articles": 0
    },
    "paths": [
@@ -53,7 +53,7 @@
      "channel_labour"
     ]
    ],
-   "reason": "Exposed via BHP Mount Newman Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via BHP Mount Newman Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=-4.2, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -67,7 +67,7 @@
     "exposure": 0.8848,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -4.517,
     "relevant_articles": 0
    },
    "paths": [
@@ -82,7 +82,7 @@
      "channel_labour"
     ]
    ],
-   "reason": "Exposed via BHP South Flank Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via BHP South Flank Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=-4.5, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -96,7 +96,7 @@
     "exposure": 0.8848,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -4.479,
     "relevant_articles": 0
    },
    "paths": [
@@ -111,7 +111,7 @@
      "channel_labour"
     ]
    ],
-   "reason": "Exposed via BHP Yandi Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via BHP Yandi Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=-4.5, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -125,7 +125,7 @@
     "exposure": 0.8848,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -4.713,
     "relevant_articles": 0
    },
    "paths": [
@@ -140,7 +140,7 @@
      "channel_labour"
     ]
    ],
-   "reason": "Exposed via BHP Area C Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via BHP Area C Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=-4.7, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -154,7 +154,7 @@
     "exposure": 0.8848,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -4.209,
     "relevant_articles": 0
    },
    "paths": [
@@ -169,7 +169,7 @@
      "channel_labour"
     ]
    ],
-   "reason": "Exposed via BHP Jimblebar Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via BHP Jimblebar Mine → BHP Group Ltd → labour (+1 more paths). News volume z=0.0, attention z=-4.2, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -183,7 +183,7 @@
     "exposure": 0.64,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -1.098,
     "relevant_articles": 0
    },
    "paths": [
@@ -193,7 +193,7 @@
      "channel_labour"
     ]
    ],
-   "reason": "Exposed via Fortescue Christmas Creek (Chichester Hub) Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via Fortescue Christmas Creek (Chichester Hub) Mine → Port Hedland → labour. News volume z=0.0, attention z=-1.1, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -231,7 +231,7 @@
     "exposure": 0.64,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -0.757,
     "relevant_articles": 0
    },
    "paths": [
@@ -241,7 +241,7 @@
      "channel_labour"
     ]
    ],
-   "reason": "Exposed via Rio Tinto Gudai-Darri (Hamersley) Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via Rio Tinto Gudai-Darri (Hamersley) Mine → Port Hedland → labour. News volume z=0.0, attention z=-0.8, 0 relevant article(s).",
    "evidence": []
   },
   {
@@ -255,7 +255,7 @@
     "exposure": 0.64,
     "news_z": 0.0,
     "tone_shift": 0.0,
-    "attention_z": 0.0,
+    "attention_z": -0.157,
     "relevant_articles": 0
    },
    "paths": [
@@ -265,7 +265,7 @@
      "channel_labour"
     ]
    ],
-   "reason": "Exposed via MinRes Iron Valley (Pilbara Hub) Mine → Port Hedland → labour. News volume z=0.0, attention z=0.0, 0 relevant article(s).",
+   "reason": "Exposed via MinRes Iron Valley (Pilbara Hub) Mine → Port Hedland → labour. News volume z=0.0, attention z=-0.2, 0 relevant article(s).",
    "evidence": []
   },
   {
