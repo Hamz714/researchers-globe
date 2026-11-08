@@ -8,6 +8,8 @@ venv/
 
 # Node
 node_modules/
+# God's Eye View upstream checkout (make gev); only gods-eye-view/ is ours
+.gev/
 frontend/dist/
 
 # Secrets

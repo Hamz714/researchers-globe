@@ -1,36 +1,54 @@
 diff --git a/server/providers/local.js b/server/providers/local.js
-index 41b0fd3..135af1d 100644
+index 41b0fd3a..d72d0e0a 100644
 --- a/server/providers/local.js
 +++ b/server/providers/local.js
-@@ -33,6 +33,7 @@ import { inaturalistProxy } from './inaturalist/observations.js';
+@@ -33,6 +33,8 @@ import { inaturalistProxy } from './inaturalist/observations.js';
  import { acartiaProxy } from './acartia.js';
  import { cycloneProxy } from './cyclones.js';
  import { windProxy } from './wind.js';
 +import { sentimentProxy } from './sentiment.js';
++import { researchersGlobeProxy } from './researchersGlobe.js';
  
  /**
   * Construct the local provider plugins in their established order.
-@@ -85,6 +86,7 @@ function localProviderPlugins({
+@@ -85,6 +87,8 @@ function localProviderPlugins({
      droneAirspaceProxy(),
      inaturalistProxy(),
      acartiaProxy(),
 +    sentimentProxy(),
++    researchersGlobeProxy(),
      keySetupEndpoint(),
    ];
  }
 diff --git a/src/main.js b/src/main.js
-index 545cc80..98ada96 100644
+index 545cc800..47858d80 100644
 --- a/src/main.js
 +++ b/src/main.js
-@@ -1,6 +1,7 @@
+@@ -1,6 +1,23 @@
  import { createStandaloneApplication } from './standalone/application.js';
  import { describeError } from './standalone/errors.js';
  import { t } from './i18n/index.js';
 +import { mountSentimentExplorer } from './layers/sentiment/index.js';
++import { mountResearchersGlobe } from './layers/researchers-globe/index.js';
++
++// Researcher's Globe demo mode: a fresh load (no share link) opens on the whole
++// globe with keyless Esri imagery (no Google 3D tiles), no GEV data layers
++// (CCTV, submarine cables, flood scene all off) and the scope/detection
++// overlays off. A share link or an existing hash is left alone.
++const RG_DEMO_VIEW =
++  'v=2&lat=20&lon=10&alt=22000000&heading=0&pitch=-90&roll=0&style=normal' +
++  '&bloom=0&map=esri-imagery&l=&dm=OFF&sc=0&cr=0';
++if (!window.location.hash && !window.location.pathname.startsWith('/share/')) {
++  history.replaceState(
++    null,
++    '',
++    `${window.location.pathname}${window.location.search}#${RG_DEMO_VIEW}`,
++  );
++}
  
  // The Vite boundary exposes only undefined, null, or a validated URL.
  const photonSetting = import.meta.env.PHOTON_URL;
-@@ -13,13 +14,25 @@ const application = createStandaloneApplication({
+@@ -13,13 +30,34 @@ const application = createStandaloneApplication({
    allowQaRegistration: import.meta.env.DEV,
  });
  
@@ -42,6 +60,15 @@ index 545cc80..98ada96 100644
 +application
 +  .start()
 +  .then((components) => {
++    // Researcher's Globe HUD (our question flow): open, and runs the hero preset.
++    try {
++      mountResearchersGlobe({
++        viewer: components.scene.viewer,
++        dataManager: components.data?.dataManager ?? null,
++      });
++    } catch (error) {
++      console.error("Researcher's Globe failed to mount:", error);
++    }
 +    // News sentiment explorer (GDELT): mounts once the globe is ready.
 +    try {
 +      mountSentimentExplorer({ viewer: components.scene.viewer });
