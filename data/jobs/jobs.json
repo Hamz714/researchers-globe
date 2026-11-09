@@ -1,145 +1,61 @@
 {
-"created": "2026-11-08T03:35:15",
+"created": "2026-11-08T20:12:58",
 "end": "2026-11-08",
 "jobs": [
 {
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28midterm+OR+midterms+OR+Congress%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Minntac+OR+%22US+Steel+Minntac%22+OR+%22Nippon+Steel%22%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hibbing+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Hibbing+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Keetac+OR+%22US+Steel+Keetac%22+OR+%22Nippon+Steel%22%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Tilden+OR+%22Cleveland-Cliffs+Tilden%22+OR+%22Cleveland-Cliffs%22%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Minntac+OR+%22US+Steel+Minntac%22+OR+%22Nippon+Steel%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22United+Taconite%22+OR+%22Cleveland-Cliffs+United+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Minntac+OR+%22US+Steel+Minntac%22+OR+%22Nippon+Steel%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Keetac+OR+%22US+Steel+Keetac%22+OR+%22Nippon+Steel%22%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Minntac+OR+%22US+Steel+Minntac%22+OR+%22Nippon+Steel%22%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Northshore+OR+%22Cleveland-Cliffs+Northshore%22+OR+%22Cleveland-Cliffs%22%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Minntac+OR+%22US+Steel+Minntac%22+OR+%22Nippon+Steel%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22CalPortland+Baxter%22+OR+%22Taiheiyo+Cement%22%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Northshore+OR+%22Cleveland-Cliffs+Northshore%22+OR+%22Cleveland-Cliffs%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Northshore+OR+%22Cleveland-Cliffs+Northshore%22+OR+%22Cleveland-Cliffs%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Northshore+OR+%22Cleveland-Cliffs+Northshore%22+OR+%22Cleveland-Cliffs%22%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Northshore+OR+%22Cleveland-Cliffs+Northshore%22+OR+%22Cleveland-Cliffs%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Tilden+OR+%22Cleveland-Cliffs+Tilden%22+OR+%22Cleveland-Cliffs%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Tilden+OR+%22Cleveland-Cliffs+Tilden%22+OR+%22Cleveland-Cliffs%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Tilden+OR+%22Cleveland-Cliffs+Tilden%22+OR+%22Cleveland-Cliffs%22%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28Tilden+OR+%22Cleveland-Cliffs+Tilden%22+OR+%22Cleveland-Cliffs%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22United+Taconite%22+OR+%22Cleveland-Cliffs+United+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22United+Taconite%22+OR+%22Cleveland-Cliffs+United+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22United+Taconite%22+OR+%22Cleveland-Cliffs+United+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22United+Taconite%22+OR+%22Cleveland-Cliffs+United+Taconite%22+OR+%22Cleveland-Cliffs%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22CalPortland+Baxter%22+OR+%22Taiheiyo+Cement%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22CalPortland+Baxter%22+OR+%22Taiheiyo+Cement%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22CalPortland+Baxter%22+OR+%22Taiheiyo+Cement%22%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22CalPortland+Baxter%22+OR+%22Taiheiyo+Cement%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Fire+Lake%22+OR+%22ArcelorMittal+Fire+Lake%22+OR+ArcelorMittal%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Fire+Lake%22+OR+%22ArcelorMittal+Fire+Lake%22+OR+ArcelorMittal%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Fire+Lake%22+OR+%22ArcelorMittal+Fire+Lake%22+OR+ArcelorMittal%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Fire+Lake%22+OR+%22ArcelorMittal+Fire+Lake%22+OR+ArcelorMittal%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Carol+Lake%22+OR+%22IOC+Carol+Lake%22+OR+%22Rio+Tinto%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Carol+Lake%22+OR+%22IOC+Carol+Lake%22+OR+%22Rio+Tinto%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Carol+Lake%22+OR+%22IOC+Carol+Lake%22+OR+%22Rio+Tinto%22%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Carol+Lake%22+OR+%22IOC+Carol+Lake%22+OR+%22Rio+Tinto%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mont+Wright%22+OR+%22ArcelorMittal+Mont+Wright%22+OR+ArcelorMittal%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mont+Wright%22+OR+%22ArcelorMittal+Mont+Wright%22+OR+ArcelorMittal%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
-"kind": "gdelt"
-},
-{
-"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mont+Wright%22+OR+%22ArcelorMittal+Mont+Wright%22+OR+ArcelorMittal%29+%28sanctions+OR+%22export+ban%22+OR+blacklist+OR+OFAC%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mont+Wright%22+OR+%22ArcelorMittal+Mont+Wright%22+OR+ArcelorMittal%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
 "kind": "gdelt"
 },
 {
 "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Mont+Wright%22+OR+%22ArcelorMittal+Mont+Wright%22+OR+ArcelorMittal%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Carol+Lake%22+OR+%22IOC+Carol+Lake%22+OR+%22Rio+Tinto%22%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bloom+Lake%22+OR+%22Quebec+Iron+Bloom+Lake%22+OR+%22Champion+Iron%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bloom+Lake%22+OR+%22Quebec+Iron+Bloom+Lake%22+OR+%22Champion+Iron%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=timelinetone&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bloom+Lake%22+OR+%22Quebec+Iron+Bloom+Lake%22+OR+%22Champion+Iron%22%29+%28strike+OR+protest+OR+union+OR+blockade+OR+walkout%29&mode=timelinevolraw&format=json&startdatetime=20260902000000&enddatetime=20261109000000",
+"kind": "gdelt"
+},
+{
+"url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22Bloom+Lake%22+OR+%22Quebec+Iron+Bloom+Lake%22+OR+%22Champion+Iron%22%29+%28midterm+OR+midterms+OR+Congress+OR+tariff+OR+tariffs+OR+%22steel+tariff%22+OR+%22Section+232%22+OR+%22trade+war%22%29&mode=artlist&format=json&startdatetime=20261101000000&enddatetime=20261109000000&maxrecords=20&sort=hybridrel",
 "kind": "gdelt"
 }
 ]
